@@ -100,6 +100,7 @@
 {
   background-color: var(--text-color);
   color: var(--lightpurple);
+  /**/
 }
 
 @keyframes dropdownA
