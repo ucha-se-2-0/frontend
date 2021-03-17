@@ -1,0 +1,16 @@
+/*Define colors` names here*/
+
+:root
+{
+  --lightpurple: #aa77dd;
+  --purple: #8866aa;
+  --darkpurple: #665088;
+
+  --yellow: #ffcc30;
+
+  --lightcyan: #77ffff;
+  --cyan: #00e0e0;
+  --darkcyan: #00bbbb;
+
+  --text-color: var(--cyan);
+}

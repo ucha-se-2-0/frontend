@@ -1,0 +1,121 @@
+@import "../Colors.css";
+
+.header
+{
+  width: 100%;
+  height: 53px;
+  padding: 0 5px 0 0;
+  display: inline-block;
+
+  background-color: var(--purple);
+
+  z-index: 100;
+}
+
+.header *:first-child
+{
+  margin: 5px 20px 5px 10px;
+}
+
+.header *:not(i)
+{
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  text-decoration: none;
+  color: var(--text-color); 
+  margin: 4px;
+  padding: 5px 0.5%;
+}
+
+.header .button
+{
+  float: right;
+  cursor: pointer;
+  background-color: var(--purple);
+  border-radius: 10px;
+}
+
+.header .button:hover
+{
+  background-color: var(--cyan);
+  color: var(--purple);
+}
+
+.header .dropdown
+{
+  width: auto;
+  margin: 5px 0 0 0;
+  padding: 0;
+  float: left;
+}
+
+.header .dropdown i
+{
+  padding: 6px;
+  font-size: 27px;
+  margin-bottom: 0;
+
+  transform: rotate(0deg);
+  transition: transform 0.5s;
+}
+
+.header .dropdown i:hover
+{
+  transform: rotate(180deg);
+  transition: transform 0.5s;
+}
+
+.header #dropdown-content
+{
+  display: none;
+
+  position: absolute;
+  left: 0;
+  min-width: 20%;
+  border-bottom-right-radius: 5px;
+  margin: 0;
+  padding: 0 10px 0 0;
+  z-index: -1;/*doesn't work with more than -1*/
+
+  /* background-color: var(--lightpurple); */
+  list-style-type: none;
+}
+
+.header #dropdown-content li
+{
+  transform-origin: top center;
+  transform: rotateX(90deg);
+  cursor: pointer;
+  background-color: var(--lightpurple);
+  color: var(--text-color);
+
+  width: 100%;
+  display: block;
+  margin: 0;
+  padding: 5px;
+  z-index: 1;
+}
+
+.header #dropdown-content li:hover
+{
+  background-color: var(--text-color);
+  color: var(--lightpurple);
+}
+
+@keyframes dropdownA
+{
+  0%
+  {
+    opacity: 0.3;
+    transform: rotateX(90deg);
+  }
+  80%
+  {
+    transform: rotateX(10deg);
+  }
+  100%
+  {
+    opacity: 1;
+    transform: rotateX(0deg);
+  }
+}
