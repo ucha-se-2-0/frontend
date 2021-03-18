@@ -68,24 +68,24 @@
 .navbar #dropdown-content
 {
   display: none;
+  
   overflow: hidden;
-
+  transition: height 0.5s;
   height: 0px;
   position: absolute;
   left: 0;
-  min-width: 20%;
+  min-width: 250px;
   border-bottom-right-radius: 5px;
   margin: 0;
   padding: 0 10px 0 0;
-  z-index: -1;/*doesn't work with more than -1*/
+  z-index: -1;
 
-  background-color: var(--lightpurple);
-  list-style-type: none; 
+  list-style-type: none;
 }
 
 .navbar #dropdown-content li
 {
-  transform-origin: top center;
+  overflow: hidden;
   cursor: pointer;
   background-color: var(--lightpurple);
   color: var(--text-color);
@@ -101,40 +101,4 @@
 {
   background-color: var(--text-color);
   color: var(--lightpurple);
-}
-
-@keyframes showDropdownA
-{
-  0%
-  {
-    opacity: 0.3;
-    transform: rotateX(90deg);
-  }
-  80%
-  {
-    transform: rotateX(10deg);
-  }
-  100%
-  {
-    opacity: 1;
-    transform: rotateX(0deg);
-  }
-}
-
-@keyframes hideDropdownA
-{
-  0%
-  {
-    opacity: 1;
-    transform: rotateX(0deg);
-  }
-  20%
-  {
-    transform: rotateX(10deg);
-  }
-  100%
-  {
-    opacity: 0;
-    transform: rotateX(90deg);
-  }
 }

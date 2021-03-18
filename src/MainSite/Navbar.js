@@ -2,12 +2,19 @@ import React from 'react';
 import './Navbar.css';
 
 class DropdownElement extends React.Component 
-{
-  static defaultProps = {timeOffset: 0};
-  
+{  
   render() {
-    return <li style = {{animation: "showDropdownA 300ms " + (300 - this.props.timeOffset) + "ms" + " ease-in-out " + "both"}}>{this.props.name}</li>
+    if(this.props.roundCorner)
+    {
+      return <li style = {{borderBottomRightRadius: "10px"}}>{this.props.name}</li>
+    }
+    else
+    {
+      return <li>{this.props.name}</li>
+    }
   }
+
+  static defaultProps = {roundCorner: false};
 }
 
 
@@ -17,15 +24,13 @@ function MouseClicked(navbar)
 {
   if(!navbar.state.hover && !navbar.state.hidden)
   {
-    //will maybe replace with react stuff
-    document.querySelectorAll("#dropdown-content li").forEach((element) => {
-      element.style.animationName = "hideDropdownA";
-      element.style.animationDelay = (300 - Number(element.style.animationDelay.slice(0, -2))) + "ms";
-    });
+    var style = document.getElementById("dropdown-content").style;
+
+    style.height = "0px";
 
     setTimeout(() => {
       document.getElementById("dropdown-content").style.display = "none";
-    }, 600);
+    }, 500);
 
     navbar.setState({hidden: true});
   }
@@ -36,7 +41,7 @@ class Navbar extends React.Component
   constructor(props)
   {
     super(props);
-    this.state = {height: "130px", hidden: true, hover: false};
+    this.state = {hidden: true, hover: false};
     navbar = this;
   }
   
@@ -54,12 +59,12 @@ class Navbar extends React.Component
           <i className="fa fa-bars" id="dropdown-button" onClick={this.OnDropdownButton}></i>
           <ul id="dropdown-content">
           <DropdownElement name = "aaa"/>
-          <DropdownElement name = "aaa" timeOffset = {50}/>
-          <DropdownElement name = "aaa" timeOffset = {100}/>
-          <DropdownElement name = "aaa" timeOffset = {150}/>
-          <DropdownElement name = "aaa" timeOffset = {200}/>
-          <DropdownElement name = "aaa" timeOffset = {250}/>
-          <DropdownElement name = "aaa" timeOffset = {300}/>
+          <DropdownElement name = "aaa"/>
+          <DropdownElement name = "aaa"/>
+          <DropdownElement name = "aaa"/>
+          <DropdownElement name = "aaa"/>
+          <DropdownElement name = "aaa"/>
+          <DropdownElement name = "aaa" roundCorner = {true}/>
           </ul>
         </div>
         <img style={{ fontSize: "13px", width: "80px", float: "left" }} alt="Тук може да е логото"></img>
@@ -73,23 +78,15 @@ class Navbar extends React.Component
     {
       style.display = "block";
 
-      document.querySelectorAll("#dropdown-content li").forEach((element) => {
-        element.style.animationName = "showDropdownA";
-        element.style.animationDelay = (300 - Number(element.style.animationDelay.slice(0, -2))) + "ms";
-      });
-
+      setTimeout(()=>{style.height = 47 * 7 + 4 + "px"});
     }
     else 
     {
-      //will maybe replace with react stuff
-      document.querySelectorAll("#dropdown-content li").forEach((element) => {
-        element.style.animationName = "hideDropdownA";
-        element.style.animationDelay = (300 - Number(element.style.animationDelay.slice(0, -2))) + "ms";
-      });
+      style.height = "0px";
 
       setTimeout(() => {
         style.display = "none";
-      }, 600);
+      }, 500);
     }
 
     this.setState({hidden: !this.state.hidden});
