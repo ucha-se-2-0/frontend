@@ -1,0 +1,43 @@
+@import "../Colors.css";
+
+.content
+{
+    margin-left: 20%;
+    margin-right: 10%;
+}
+
+.subject
+{
+    display: inline-flex;
+    position: relative;
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    background-color: var(--lightpurple);
+    color: var(--yellow);
+    border-radius: 20px;
+    z-index: -2;
+}
+
+.subject a
+{
+    position: absolute;
+    bottom: 10px;
+    display: block;
+    width: 100%;
+    font-size: 30px;
+}
+
+.subject img
+{
+    position: absolute;
+    margin-left: 30px;
+    top: 10px;
+    width: 140px;
+    height: 140px;
+    display: block;
+    border-radius: 20px;
+}

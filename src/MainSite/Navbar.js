@@ -1,13 +1,8 @@
 import React from 'react';
-import './Header.css';
+import './Navbar.css';
 
 class DropdownElement extends React.Component 
 {
-  constructor(props)
-  {
-    super(props);
-  }
-
   static defaultProps = {timeOffset: 0};
   
   render() {
@@ -15,11 +10,12 @@ class DropdownElement extends React.Component
   }
 }
 
-var header;
 
-function MouseClicked(header)
+var navbar;
+
+function MouseClicked(navbar)
 {
-  if(!header.state.hover && !header.state.hidden)
+  if(!navbar.state.hover && !navbar.state.hidden)
   {
     //will maybe replace with react stuff
     document.querySelectorAll("#dropdown-content li").forEach((element) => {
@@ -31,23 +27,23 @@ function MouseClicked(header)
       document.getElementById("dropdown-content").style.display = "none";
     }, 600);
 
-    header.setState({hidden: true});
+    navbar.setState({hidden: true});
   }
 }
 
-class Header extends React.Component 
+class Navbar extends React.Component 
 {
   constructor(props)
   {
     super(props);
     this.state = {height: "130px", hidden: true, hover: false};
-    header = this;
+    navbar = this;
   }
   
   render() 
   {
     return (
-      <div className="header">
+      <div className="navbar">
         <a className="button sign-up" href="">
           Регистрация
       </a>
@@ -102,7 +98,7 @@ class Header extends React.Component
 
 window.onclick = function()
 {
-  MouseClicked(header);
+  MouseClicked(navbar);
 }
 
-export default Header;
+export default Navbar;

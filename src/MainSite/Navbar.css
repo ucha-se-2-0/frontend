@@ -1,6 +1,6 @@
 @import "../Colors.css";
 
-.header
+.navbar
 {
   width: 100%;
   height: 53px;
@@ -12,12 +12,12 @@
   z-index: 100;
 }
 
-.header *:first-child
+.navbar *:first-child
 {
   margin: 5px 20px 5px 10px;
 }
 
-.header *:not(i)
+.navbar *:not(i)
 {
   font-size: 30px;
   font-family: 'Courier New', Courier, monospace;
@@ -27,7 +27,7 @@
   padding: 5px 0.5%;
 }
 
-.header .button
+.navbar .button
 {
   float: right;
   cursor: pointer;
@@ -35,13 +35,13 @@
   border-radius: 10px;
 }
 
-.header .button:hover
+.navbar .button:hover
 {
   background-color: var(--cyan);
   color: var(--purple);
 }
 
-.header .dropdown
+.navbar .dropdown
 {
   width: auto;
   margin: 5px 0 0 0;
@@ -49,7 +49,7 @@
   float: left;
 }
 
-.header .dropdown i
+.navbar .dropdown i
 {
   padding: 6px;
   font-size: 27px;
@@ -59,13 +59,13 @@
   transition: transform 0.5s;
 }
 
-.header .dropdown i:hover
+.navbar .dropdown i:hover
 {
   transform: rotate(180deg);
   transition: transform 0.5s;
 }
 
-.header #dropdown-content
+.navbar #dropdown-content
 {
   display: none;
 
@@ -81,7 +81,7 @@
   list-style-type: none;
 }
 
-.header #dropdown-content li
+.navbar #dropdown-content li
 {
 
   transform-origin: top center;
@@ -97,7 +97,7 @@
   z-index: 1;
 }
 
-.header #dropdown-content li:hover
+.navbar #dropdown-content li:hover
 {
   background-color: var(--text-color);
   color: var(--lightpurple);
