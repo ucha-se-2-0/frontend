@@ -83,6 +83,7 @@
 
 .header #dropdown-content li
 {
+
   transform-origin: top center;
   transform: rotateX(90deg);
   cursor: pointer;
@@ -100,10 +101,9 @@
 {
   background-color: var(--text-color);
   color: var(--lightpurple);
-  /**/
 }
 
-@keyframes dropdownA
+@keyframes showDropdownA
 {
   0%
   {
@@ -118,5 +118,23 @@
   {
     opacity: 1;
     transform: rotateX(0deg);
+  }
+}
+
+@keyframes hideDropdownA
+{
+  0%
+  {
+    opacity: 1;
+    transform: rotateX(0deg);
+  }
+  20%
+  {
+    transform: rotateX(10deg);
+  }
+  100%
+  {
+    opacity: 0;
+    transform: rotateX(90deg);
   }
 }
