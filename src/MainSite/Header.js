@@ -15,12 +15,33 @@ class DropdownElement extends React.Component
   }
 }
 
+var header;
+
+function MouseClicked(header)
+{
+  if(!header.state.hover && !header.state.hidden)
+  {
+    //will maybe replace with react stuff
+    document.querySelectorAll("#dropdown-content li").forEach((element) => {
+      element.style.animationName = "hideDropdownA";
+      element.style.animationDelay = (300 - Number(element.style.animationDelay.slice(0, -2))) + "ms";
+    });
+
+    setTimeout(() => {
+      document.getElementById("dropdown-content").style.display = "none";
+    }, 600);
+
+    header.setState({hidden: true});
+  }
+}
+
 class Header extends React.Component 
 {
   constructor(props)
   {
     super(props);
-    this.state = {height: "130px", hidden: true};
+    this.state = {height: "130px", hidden: true, hover: false};
+    header = this;
   }
   
   render() 
@@ -33,7 +54,7 @@ class Header extends React.Component
         <a className="button" href="">
           Вход
       </a>
-        <div className="dropdown">
+        <div className="dropdown" onMouseEnter = {()=>{this.setState({hover: true})}} onMouseLeave = {()=>{this.setState({hover: false})}}>
           <i className="fa fa-bars" id="dropdown-button" onClick={this.OnDropdownButton}></i>
           <ul id="dropdown-content">
           <DropdownElement name = "aaa"/>
@@ -74,9 +95,14 @@ class Header extends React.Component
         style.display = "none";
       }, 600);
     }
+
     this.setState({hidden: !this.state.hidden});
   }
+}
 
+window.onclick = function()
+{
+  MouseClicked(header);
 }
 
 export default Header;
