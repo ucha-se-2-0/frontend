@@ -68,7 +68,9 @@
 .header #dropdown-content
 {
   display: none;
+  overflow: hidden;
 
+  height: 0px;
   position: absolute;
   left: 0;
   min-width: 20%;
@@ -77,14 +79,14 @@
   padding: 0 10px 0 0;
   z-index: -1;/*doesn't work with more than -1*/
 
-  /* background-color: var(--lightpurple); */
-  list-style-type: none;
+  background-color: var(--lightpurple);
+  list-style-type: none; 
 }
 
 .header #dropdown-content li
 {
+  overflow: hidden;
   transform-origin: top center;
-  transform: rotateX(90deg);
   cursor: pointer;
   background-color: var(--lightpurple);
   color: var(--text-color);
@@ -100,22 +102,4 @@
 {
   background-color: var(--text-color);
   color: var(--lightpurple);
-}
-
-@keyframes dropdownA
-{
-  0%
-  {
-    opacity: 0.3;
-    transform: rotateX(90deg);
-  }
-  80%
-  {
-    transform: rotateX(10deg);
-  }
-  100%
-  {
-    opacity: 1;
-    transform: rotateX(0deg);
-  }
 }
