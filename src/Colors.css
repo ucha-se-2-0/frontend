@@ -2,15 +2,15 @@
 
 :root
 {
-  --lightpurple: #aa77dd;
-  --purple: #8866aa;
-  --darkpurple: #665088;
+  --lightpurple: rgb(220, 25, 255);
+  --purple: rgb(185, 8, 224);
+  --darkpurple: rgb(150, 0, 140);
 
   --yellow: #ffcc30;
 
-  --lightcyan: #77ffff;
-  --cyan: #00e0e0;
-  --darkcyan: #00bbbb;
+  --lightcyan: rgb(60, 255, 190);
+  --cyan: rgb(48, 227, 175);
+  --darkcyan: rgb(35, 200, 155);
 
-  --text-color: var(--yellow);
+  --text-color: white;
 }

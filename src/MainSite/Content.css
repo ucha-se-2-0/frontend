@@ -2,14 +2,40 @@
 
 .content
 {
+    display: block;
     pointer-events: none;
-    position: absolute;
+    position: relative;
     margin-left: 20%;
-    margin-right: 10%;
+    margin-right: 20%;
     z-index: -100;
 }
 
-.subject
+.content *
+{
+    margin-top: 10px;
+}
+
+.content video
+{
+    width: 100%;
+    border: dashed 1px black;
+}
+
+.content .about-header
+{
+    margin: 0;
+    text-align: center;
+    font-size: 100px;
+    color: var(--cyan);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.content .text-about-us
+{
+    font-size: 30px;
+}
+
+/* .subject
 {
     pointer-events: visible;
     position: relative;
@@ -47,4 +73,4 @@
     height: 250px;
     display: block;
     border-radius: 20px;
-}
+} */

@@ -1,0 +1,11 @@
+@import "../Colors.css";
+
+.footer
+{
+    margin-top: 100px;
+    position: static;
+    bottom: 0px;
+    width: 100%;
+    height: 400px;
+    background-color: var(--purple);
+}

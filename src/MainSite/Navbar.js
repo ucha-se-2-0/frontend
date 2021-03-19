@@ -1,88 +1,71 @@
 import React from 'react';
 import './Navbar.css';
 
-class DropdownElement extends React.Component {
-  render() {
-    if (this.props.roundCorner) {
-      return <li style={{ borderBottomRightRadius: "10px" }}>{this.props.name}</li>
-    }
-    else {
-      return <li>{this.props.name}</li>
-    }
-  }
-
-  static defaultProps = { roundCorner: false };
-}
-
-
-var navbar;
-
-function MouseClicked(navbar) {
-  if (!navbar.state.hover && !navbar.state.hidden) {
-    var style = document.getElementById("dropdown-content").style;
-
-    style.height = "0px";
-
-    setTimeout(() => {
-      document.getElementById("dropdown-content").style.display = "none";
-    }, 500);
-
-    navbar.setState({ hidden: true });
-  }
-}
-
 class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hidden: true, hover: false };
-    navbar = this;
-  }
-
   render() {
     return (
       <div className="navbar">
-        <a className="button sign-up" href="">
-          Регистрация
-        </a>
-        <a className="button" href="">
-          Вход
-        </a>
-        <div className="dropdown" onMouseEnter={() => { this.setState({ hover: true }) }} onMouseLeave={() => { this.setState({ hover: false }) }}>
-          <i className="fa fa-bars" onClick={this.OnDropdownButton}></i>
-          <ul id="dropdown-content">
-            <DropdownElement name="Тук" />
-            <DropdownElement name="ще" />
-            <DropdownElement name="има" />
-            <DropdownElement name="някакви" />
-            <DropdownElement name="линкове" roundCorner={true}/>
+        <div className="dropdown">
+          <a className="button" href="">Предмети</a>
+          <ul className="dropdown-content">
+            <li>Анатомия</li>
+            <li>Физиология</li>
+            <li>Цитология</li>
+            <li>Генетика</li>
+            <li>Биохимия</li>
           </ul>
         </div>
-        <img style={{ fontSize: "13px", width: "80px", float: "left" }} alt="Тук може да е логото"></img>
-      </div>);
-  }
 
-  OnDropdownButton = () => {
-    var style = document.getElementById("dropdown-content").style;
+        <a className="button" href="">Вход</a>
 
-    if (this.state.hidden) {
-      style.display = "block";
-
-      setTimeout(() => { style.height = 47 * 7 + 4 + "px" });
-    }
-    else {
-      style.height = "0px";
-
-      setTimeout(() => {
-        style.display = "none";
-      }, 500);
-    }
-
-    this.setState({ hidden: !this.state.hidden });
+        <a id="unis" className="button" href="">Университети</a>
+      </div>
+    );
   }
 }
 
-window.onclick = function () {
-  MouseClicked(navbar);
+function Response() {
+  if (window.innerWidth < 1100) 
+  {
+    document.querySelectorAll(".navbar>*").forEach((element) => { element.style.minWidth = "20%"; });
+    
+        if (window.innerWidth < 700) 
+        {
+          document.querySelectorAll(".navbar *").forEach((element) => { element.style.minWidth = "5%"; });
+          
+                if (window.innerWidth < 650) 
+                {
+                  document.querySelectorAll(".navbar *").forEach((element) => { element.style.fontSize = "20px"; });
+          
+                  var unis = document.getElementById("unis");
+                  if (window.innerWidth < 450) 
+                  {
+                    unis.innerHTML = "";
+                    unis.classList.add("fa");
+                    unis.classList.add("fa-university");
+                  }
+                  else 
+                  {
+                    unis.innerHTML = "Университети";
+                    unis.classList.remove("fa");
+                    unis.classList.remove("fa-university");
+                  }
+                }
+                else 
+                {
+                  document.querySelectorAll(".navbar *").forEach((element) => { element.style.fontSize = "30px"; });
+                }
+        }
+        else 
+        {
+          document.querySelectorAll(".navbar>*").forEach((element) => { element.style.minWidth = "20%"; });
+        }
+  }
+  else {
+    document.querySelectorAll(".navbar>*").forEach((element) => { element.style.minWidth = "29%"; });
+  }
+
+
 }
 
-export default Navbar;
+export { Navbar, Response };

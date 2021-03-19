@@ -1,19 +1,14 @@
 import React from "react"
 import "./Header.css"
 
-class Header extends React.Component
-{
-    render()
-    {
-        return(
-        <header >
-            <p className = "header">
-                Julemy
-            </p>
-            <p className = "motto">
-                Together in meds
-            </p>
-        </header>
+class Header extends React.Component {
+    render() {
+        return (
+            <div className = "header">
+                <img src="Images/logo.png" id = "logo" alt = "JULEMY">
+
+                </img>
+            </div>
         );
     }
 }
