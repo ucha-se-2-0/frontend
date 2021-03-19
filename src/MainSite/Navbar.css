@@ -8,18 +8,19 @@
   height: 55px;
   padding: 0 2%;
   border-radius: 10px;
-  display: inline-block;
+  display: flex;
 
   background-color: var(--purple);
 }
 
 .navbar>*
 {
+  height: 60%;
   min-width: 20%;
   font-size: 30px;
   text-decoration: none;
   color: var(--text-color); 
-  margin: 5px 1%;
+  margin: auto unset !important;
   padding: 5px 1% !important;
 }
 
@@ -42,15 +43,16 @@
   text-align: center;
 }
 
-.navbar .fa
-{
-  /* display: none; */
-}
-
 .navbar .button:hover
 {
   background-color: var(--cyan);
   color: var(--purple);
+}
+
+#unis
+{
+  margin: auto;
+  margin-top: 5px;
 }
 
 

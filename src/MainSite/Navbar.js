@@ -16,56 +16,21 @@ class Navbar extends React.Component {
           </ul>
         </div>
 
-        <a className="button" href="">Вход</a>
-
         <a id="unis" className="button" href="">Университети</a>
+
+        <a className="button" href="" style = {{float: "left"}}>Вход</a>
       </div>
     );
   }
 }
 
-function Response() {
-  if (window.innerWidth < 1100) 
-  {
-    document.querySelectorAll(".navbar>*").forEach((element) => { element.style.minWidth = "20%"; });
-    
-        if (window.innerWidth < 700) 
-        {
-          document.querySelectorAll(".navbar *").forEach((element) => { element.style.minWidth = "5%"; });
-          
-                if (window.innerWidth < 650) 
-                {
-                  document.querySelectorAll(".navbar *").forEach((element) => { element.style.fontSize = "20px"; });
-          
-                  var unis = document.getElementById("unis");
-                  if (window.innerWidth < 450) 
-                  {
-                    unis.innerHTML = "";
-                    unis.classList.add("fa");
-                    unis.classList.add("fa-university");
-                  }
-                  else 
-                  {
-                    unis.innerHTML = "Университети";
-                    unis.classList.remove("fa");
-                    unis.classList.remove("fa-university");
-                  }
-                }
-                else 
-                {
-                  document.querySelectorAll(".navbar *").forEach((element) => { element.style.fontSize = "30px"; });
-                }
-        }
-        else 
-        {
-          document.querySelectorAll(".navbar>*").forEach((element) => { element.style.minWidth = "20%"; });
-        }
-  }
-  else {
-    document.querySelectorAll(".navbar>*").forEach((element) => { element.style.minWidth = "29%"; });
-  }
-
-
+function Resize() {
+  var navbarList = document.querySelectorAll(".navbar>*");
+  navbarList[0].parentElement.style.height = Math.pow(window.innerWidth, 0.5) * 2 + "px";
+  navbarList.forEach((element) => { 
+    element.style.minWidth = window.innerWidth / 70.0 + "%";
+    element.style.fontSize = Math.pow(window.innerWidth, 0.5) + "px"; 
+  });
 }
 
-export { Navbar, Response };
+export { Navbar, Resize };
