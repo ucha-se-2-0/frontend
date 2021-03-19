@@ -1,29 +1,24 @@
 import React from 'react';
 import './Navbar.css';
 
-class DropdownElement extends React.Component 
-{  
+class DropdownElement extends React.Component {
   render() {
-    if(this.props.roundCorner)
-    {
-      return <li style = {{borderBottomRightRadius: "10px"}}>{this.props.name}</li>
+    if (this.props.roundCorner) {
+      return <li style={{ borderBottomRightRadius: "10px" }}>{this.props.name}</li>
     }
-    else
-    {
+    else {
       return <li>{this.props.name}</li>
     }
   }
 
-  static defaultProps = {roundCorner: false};
+  static defaultProps = { roundCorner: false };
 }
 
 
 var navbar;
 
-function MouseClicked(navbar)
-{
-  if(!navbar.state.hover && !navbar.state.hidden)
-  {
+function MouseClicked(navbar) {
+  if (!navbar.state.hover && !navbar.state.hidden) {
     var style = document.getElementById("dropdown-content").style;
 
     style.height = "0px";
@@ -32,39 +27,34 @@ function MouseClicked(navbar)
       document.getElementById("dropdown-content").style.display = "none";
     }, 500);
 
-    navbar.setState({hidden: true});
+    navbar.setState({ hidden: true });
   }
 }
 
-class Navbar extends React.Component 
-{
-  constructor(props)
-  {
+class Navbar extends React.Component {
+  constructor(props) {
     super(props);
-    this.state = {hidden: true, hover: false};
+    this.state = { hidden: true, hover: false };
     navbar = this;
   }
-  
-  render() 
-  {
+
+  render() {
     return (
       <div className="navbar">
         <a className="button sign-up" href="">
           Регистрация
-      </a>
+        </a>
         <a className="button" href="">
           Вход
-      </a>
-        <div className="dropdown" onMouseEnter = {()=>{this.setState({hover: true})}} onMouseLeave = {()=>{this.setState({hover: false})}}>
-          <i className="fa fa-bars" id="dropdown-button" onClick={this.OnDropdownButton}></i>
+        </a>
+        <div className="dropdown" onMouseEnter={() => { this.setState({ hover: true }) }} onMouseLeave={() => { this.setState({ hover: false }) }}>
+          <i className="fa fa-bars" onClick={this.OnDropdownButton}></i>
           <ul id="dropdown-content">
-          <DropdownElement name = "aaa"/>
-          <DropdownElement name = "aaa"/>
-          <DropdownElement name = "aaa"/>
-          <DropdownElement name = "aaa"/>
-          <DropdownElement name = "aaa"/>
-          <DropdownElement name = "aaa"/>
-          <DropdownElement name = "aaa" roundCorner = {true}/>
+            <DropdownElement name="Тук" />
+            <DropdownElement name="ще" />
+            <DropdownElement name="има" />
+            <DropdownElement name="някакви" />
+            <DropdownElement name="линкове" roundCorner={true}/>
           </ul>
         </div>
         <img style={{ fontSize: "13px", width: "80px", float: "left" }} alt="Тук може да е логото"></img>
@@ -74,14 +64,12 @@ class Navbar extends React.Component
   OnDropdownButton = () => {
     var style = document.getElementById("dropdown-content").style;
 
-    if (this.state.hidden) 
-    {
+    if (this.state.hidden) {
       style.display = "block";
 
-      setTimeout(()=>{style.height = 47 * 7 + 4 + "px"});
+      setTimeout(() => { style.height = 47 * 7 + 4 + "px" });
     }
-    else 
-    {
+    else {
       style.height = "0px";
 
       setTimeout(() => {
@@ -89,12 +77,11 @@ class Navbar extends React.Component
       }, 500);
     }
 
-    this.setState({hidden: !this.state.hidden});
+    this.setState({ hidden: !this.state.hidden });
   }
 }
 
-window.onclick = function()
-{
+window.onclick = function () {
   MouseClicked(navbar);
 }
 

@@ -20,12 +20,13 @@ class Content extends React.Component
     {
         return(
             <div className = "content">
-                <Topic name = "Topic1" />
-                <Topic name = "Topic2" />
-                <Topic name = "Topic3" />
-                <Topic name = "Topic4" />
-                <Topic name = "Topic5" />
-                <Topic name = "Topic6" />
+                <Topic name = "Ботаника" />
+                <Topic name = "Зоология" />
+                <Topic name = "Анатомия" image = "Images/Anatomy.png"/>
+                <Topic name = "Физиология" />
+                <Topic name = "Математика" image = "Images/Pi.gif"/>
+                <Topic name = "Химия" image = "Images/Chem.png"/>
+                <Topic name = "Още не знам си какво" />
             </div>
         );
     }
