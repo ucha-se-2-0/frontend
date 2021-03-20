@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../Components'
 import './Navbar.css';
 
 class Navbar extends React.Component {
@@ -6,19 +7,19 @@ class Navbar extends React.Component {
     return (
       <div className="navbar">
         <div className="dropdown">
-          <a className="button" href="">Предмети</a>
+          <Button name = "Предмети"/>
           <ul className="dropdown-content">
-            <li>Анатомия</li>
-            <li>Физиология</li>
-            <li>Цитология</li>
-            <li>Генетика</li>
-            <li>Биохимия</li>
+            <li><Button name = "Анатомия"/></li>
+            <li><Button name = "Физиология"/></li>
+            <li><Button name = "Цитология"/></li>
+            <li><Button name = "Генетика"/></li>
+            <li><Button name = "Биохимия"/></li>
           </ul>
         </div>
 
-        <a id="unis" className="button" href="">Университети</a>
+        <Button id = "unis" name = "Университети"/>
 
-        <a className="button" href="" style = {{float: "left"}}>Вход</a>
+        <Button name = "Вход"/>
       </div>
     );
   }

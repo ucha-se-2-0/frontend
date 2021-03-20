@@ -1,0 +1,52 @@
+@import "./Colors.css";
+
+.button
+{
+    overflow: hidden;
+    display: inline-flex;
+    position: relative;
+    border-radius: 10px;
+    background-color: var(--purple);
+    text-decoration: none;
+}
+
+.button *
+{
+    margin: auto;
+}
+
+.button-text
+{
+    display: inline-block;
+    color: white;
+    position: relative;
+    z-index: 10;
+    transition: color 0.5s;
+}
+
+.button:hover .button-text
+{
+    color: var(--darkpurple);
+}
+
+.button-background
+{
+    position: absolute;
+    display: inline-block;
+    margin: auto;
+    padding: 0;
+    height: 100%;
+
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    transition: width 0.25s, left 0.25s;
+    background-color: var(--cyan);
+    border-radius: 10px;
+}
+
+.button:hover .button-background
+{
+    left: 0;
+    width: 100%;
+}

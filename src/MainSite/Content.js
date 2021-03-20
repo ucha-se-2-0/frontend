@@ -1,4 +1,5 @@
 import React from "react"
+import Button from "../Components"
 import "./Content.css"
 
 class Content extends React.Component {
@@ -9,6 +10,7 @@ class Content extends React.Component {
                 <video>
                     <source src="AboutUs.format" type="video/format"></source>
                 </video>
+                <Button name = "button" width = "100px" height = "30px" link = "#"/>
             </div>
         );
     }

@@ -2,15 +2,14 @@
 
 .content
 {
-    display: block;
-    pointer-events: none;
     position: relative;
     margin-left: 20%;
     margin-right: 20%;
-    z-index: -100;
+    display: block;
+    z-index: -1;
 }
 
-.content *
+.content>*
 {
     margin-top: 10px;
 }
