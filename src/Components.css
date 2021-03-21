@@ -1,5 +1,7 @@
 @import "./Colors.css";
 
+/*BUTTON*/
+
 .button
 {
     overflow: hidden;
@@ -15,7 +17,7 @@
     margin: auto;
 }
 
-.button-text
+.button-content
 {
     display: inline-block;
     color: white;
@@ -24,7 +26,7 @@
     transition: color 0.5s;
 }
 
-.button:hover .button-text
+.button:hover .button-content
 {
     color: var(--darkpurple);
 }
@@ -49,4 +51,65 @@
 {
     left: 0;
     width: 100%;
+}
+
+
+/*SEARCH FIELD*/
+
+.search
+{
+    display: inline-block;
+    top: 5px;
+    position: absolute;
+    width: 10px;
+    transition: width 0.5s !important;
+    z-index: 100;
+}
+
+.search:hover
+{
+    width: 95%;
+}
+
+.search .button-content
+{
+    display: inline-flex;
+    height: 100%;
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.search .button-content *
+{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.search .button-content input
+{
+    display: inline-block;
+    width: 0;
+    border: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.search:hover .button-content input
+{
+    width: 100%;
+    border: 0;
+    padding: 0;
+}
+
+.search .button-background
+{
+    width: 100%;
+    background-color: transparent;
+    transition: background-color 0.5s !important;
+    left: 0%;
+}
+
+.search:hover .button-background
+{
+    background-color: white;
 }
