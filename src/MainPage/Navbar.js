@@ -10,6 +10,8 @@ class Navbar extends React.Component {
   render() {
     return (
       <div className="navbar">
+        <SearchField height = "50%" search = {Search}/>
+
         <div className="dropdown">
           <Button name = "Предмети"/>
           <ul className="dropdown-content">
@@ -25,20 +27,26 @@ class Navbar extends React.Component {
 
         <Button name = "Вход"/>
 
-        <SearchField />
       </div>
     );
   }
 }
 
+function Search(request)
+{
+  console.log("Couldn't find anything that matches '", request, "'");
+}
+
 function OnResizeOrLoad()
 {
   //Navbar
-  var navbarList = document.querySelectorAll(".navbar>*");
-  navbarList[0].parentElement.style.height = Math.pow(window.innerWidth, 0.5) * 2 + "px";
-  navbarList.forEach((element) => { 
-    element.style.minWidth = Math.pow(window.innerWidth, 0.8) / 40.0 + "%";
+  var navbarElements = document.querySelectorAll(".navbar>*");
+  navbarElements.forEach((element) => { 
     element.style.fontSize = Math.pow(window.innerWidth, 0.5) * 0.8 + "px"; 
+  });
+
+  document.querySelectorAll(".navbar>*.dropdown").forEach(element => {
+    element.style.width = Number(window.getComputedStyle(element.querySelector(".dropdown-content li")).width.slice(0, -2)) + 20 + "px";
   });
 
 

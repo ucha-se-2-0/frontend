@@ -2,10 +2,13 @@
 
 .navbar
 {
-  width: 96%;
-  padding: 0 2%;
+  height: auto;
+  width: 91%;
+  padding: 10px 2% 10px 110px;
   border-radius: 10px;
-  display: inline-flex;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
   font-weight: 550;
 
   background-color: var(--purple);
@@ -13,34 +16,59 @@
 
 .navbar>*
 {
-  min-width: 20%;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  min-width: 5%;
   font-size: 30px;
   text-decoration: none;
   color: var(--text-color); 
   font-family: 'Courier New', Courier, monospace;
 }
 
-.navbar>*:first-child
-{
-  margin-left: auto !important;
-}
-
-
 .navbar .button
 {
   height: 80%;
   cursor: pointer;
   margin: auto 10px;
+  padding: 7px 10px;
+}
+
+.navbar>*:first-child
+{
+  /* margin-left: auto; */
 }
 
 
+.home
+{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 50px;
+  width: 100px;
+  z-index: 10;
+  background-color: var(--yellow);
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 25px;
+  transition: all 0.35s;
+}
+
+.home:hover
+{
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+}
+
 .dropdown
 {
+  margin-top: auto;
+  margin-bottom: auto;
   cursor: default !important;
-  height: 100%;
-  margin-top: 0.5%;
-  padding: 0 !important;
-  float: right;
+  height: auto;
+  padding: 0;
 }
 
 .dropdown .button
@@ -48,38 +76,41 @@
   width: 100%;
   z-index: 1;
   margin: auto;
-  padding-right: 0;
+  padding: 7px 0;
+}
+
+.dropdown-content .button
+{
+  padding: 10px 0;
 }
 
 .dropdown-content
 {
   overflow: hidden;
+  min-width: 150px;
   height: 0px;
   transition: height 0.5s;
   margin: 0;
-  clear: both;
-  padding: 0 10px 0 0;
+  padding: 0 20px 0 0;
   text-decoration: none;
   list-style-type: none;
+  position: absolute;
 }
 
 .dropdown:hover .dropdown-content
 {
-  height: 300px;
-  transition: height 0.5s;
-  position: relative;
-  display: block;
+  height: 500px;
+  display: flexbox;
   z-index: 0;
 }
 
 .dropdown-content li
 {
   cursor: pointer;
-  overflow: hidden;
   text-align: center;
   width: 100%;
-  padding: 5px;
-  margin: 0 !important;
+  padding: 0 10px;
+  margin: 0;
   background-color: var(--purple);
 }
 
@@ -87,6 +118,7 @@
 {
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+  padding-bottom: 10px;
 }
 
 .dropdown-content li .button

@@ -30,13 +30,18 @@ export class SearchField extends React.Component {
       <Button class="search" name={
         <>
           <i className="fa fa-search"></i>
-          {/* <input type = "text"></input> */}
+          <input type = "text" onKeyUp = { event=>{
+              if(event.key === "Enter") 
+                if(this.props.search !== undefined) 
+                  this.props.search(event.target.value); 
+                else
+                  console.log("Search function not given! Set it using 'search' property of 'SearchField'");
+              }
+              }></input>
         </>
-      } />
+      } height = {this.props.height}/>
     );
   }
 }
-
-
 
 export default { Button, SearchField };

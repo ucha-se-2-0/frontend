@@ -2,6 +2,8 @@
 
 .navbar
 {
+  width: 97%;
   position: sticky;
   top: 0px;
+  padding-left: 1%;
 }

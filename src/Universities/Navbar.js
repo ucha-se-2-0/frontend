@@ -13,6 +13,10 @@ class Navbar extends React.Component
         return(
             <div className = "navbar">
                 <Button name = "Вход"/>
+                
+                <a href = "/">
+                    <img src = "Images/logo.png" alt = "HOME" className = "home"></img>
+                </a>
             </div>
         );
     }

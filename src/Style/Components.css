@@ -58,17 +58,19 @@
 
 .search
 {
+    min-width: 40px;
     display: inline-block;
-    top: 5px;
+    left: 10px;
+    top: 15%;
     position: absolute;
     width: 10px;
-    transition: width 0.5s !important;
+    transition: width 0.5s;
     z-index: 100;
 }
 
 .search:hover
 {
-    width: 95%;
+    width: 94%;
 }
 
 .search .button-content
@@ -87,16 +89,19 @@
 
 .search .button-content input
 {
-    display: inline-block;
-    width: 0;
+    font-size: 20px;
+    display: none;
+    width: 1000px;
     border: 0;
     padding: 0;
     height: 100%;
+    outline: none;
+    margin-left: 10px;
 }
 
 .search:hover .button-content input
 {
-    width: 100%;
+    display: inline-block;
     border: 0;
     padding: 0;
 }
@@ -105,7 +110,7 @@
 {
     width: 100%;
     background-color: transparent;
-    transition: background-color 0.5s !important;
+    transition: background-color 0.5s;
     left: 0%;
 }
 
