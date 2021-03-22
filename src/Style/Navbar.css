@@ -1,0 +1,95 @@
+@import "../Colors.css";
+
+.navbar
+{
+  width: 96%;
+  padding: 0 2%;
+  border-radius: 10px;
+  display: inline-flex;
+  font-weight: 550;
+
+  background-color: var(--purple);
+}
+
+.navbar>*
+{
+  min-width: 20%;
+  font-size: 30px;
+  text-decoration: none;
+  color: var(--text-color); 
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.navbar>*:first-child
+{
+  margin-left: auto !important;
+}
+
+
+.navbar .button
+{
+  height: 80%;
+  cursor: pointer;
+  margin: auto 10px;
+}
+
+
+.dropdown
+{
+  cursor: default !important;
+  height: 100%;
+  margin-top: 0.5%;
+  padding: 0 !important;
+  float: right;
+}
+
+.dropdown .button
+{
+  width: 100%;
+  z-index: 1;
+  margin: auto;
+  padding-right: 0;
+}
+
+.dropdown-content
+{
+  overflow: hidden;
+  height: 0px;
+  transition: height 0.5s;
+  margin: 0;
+  clear: both;
+  padding: 0 10px 0 0;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.dropdown:hover .dropdown-content
+{
+  height: 300px;
+  transition: height 0.5s;
+  position: relative;
+  display: block;
+  z-index: 0;
+}
+
+.dropdown-content li
+{
+  cursor: pointer;
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+  margin: 0 !important;
+  background-color: var(--purple);
+}
+
+.dropdown-content li:last-child
+{
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.dropdown-content li .button
+{
+  border-radius: 0px;
+}

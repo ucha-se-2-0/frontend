@@ -1,7 +1,10 @@
 import React from 'react';
-import { useLocation } from 'react-router';
 import {Button, SearchField} from '../Components'
-import './Navbar.css';
+
+switch(window.location.pathname)
+{
+  case "/": import('./Navbar.css'); break;
+}
 
 class Navbar extends React.Component {
   render() {
@@ -18,7 +21,7 @@ class Navbar extends React.Component {
           </ul>
         </div>
 
-        <Button id = "unis" name = "Университети" link = "/univerities"/>
+        <Button id = "unis" name = "Университети" link = "/universities"/>
 
         <Button name = "Вход"/>
 
@@ -35,7 +38,7 @@ function OnResizeOrLoad()
   navbarList[0].parentElement.style.height = Math.pow(window.innerWidth, 0.5) * 2 + "px";
   navbarList.forEach((element) => { 
     element.style.minWidth = Math.pow(window.innerWidth, 0.8) / 40.0 + "%";
-    element.style.fontSize = Math.pow(window.innerWidth, 0.5) * 1.0 + "px"; 
+    element.style.fontSize = Math.pow(window.innerWidth, 0.5) * 0.8 + "px"; 
   });
 
 
@@ -57,7 +60,7 @@ window.addEventListener('load', ()=>{
         OnResizeOrLoad();
       });
       break;
-  }
+    }
 });
 
 window.addEventListener('close', ()=>{

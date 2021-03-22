@@ -1,5 +1,9 @@
 import React from "react"
-import "./Header.css"
+
+switch(window.location.pathname)
+{
+  case "/": import('./Header.css'); break;
+}
 
 class Header extends React.Component {
     render() {

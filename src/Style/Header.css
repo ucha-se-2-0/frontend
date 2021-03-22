@@ -1,0 +1,14 @@
+@import "../Colors.css";
+
+.header
+{
+    background-color: var(--yellow);
+    display: block;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    z-index: -3;
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+}

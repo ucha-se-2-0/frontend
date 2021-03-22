@@ -1,6 +1,10 @@
 import React from "react"
 import {Button} from "../Components"
-import "./Content.css"
+
+switch(window.location.pathname)
+{
+  case "/": import('./Content.css'); break;
+}
 
 class Content extends React.Component {
     render() {

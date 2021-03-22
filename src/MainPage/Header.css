@@ -1,17 +1,5 @@
 @import "../Colors.css";
 
-div.header
-{
-    background-color: var(--yellow);
-    display: block;
-    width: 100%;
-    position: relative;
-    top: 0;
-    text-align: center;
-    z-index: -3;
-    margin: 0;
-}
-
 .header img
 {
     height: 4px;
