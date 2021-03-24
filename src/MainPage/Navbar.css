@@ -1,9 +1,14 @@
-@import "../Colors.css";
+@import "../Style/Colors.css";
 
 .navbar
 {
-  width: 97%;
+  width: 99%;
   position: sticky;
-  top: 0px;
   padding-left: 1%;
+  flex-flow:row nowrap;
+}
+
+.navbar>*:last-child
+{
+  margin-right: 50px;
 }

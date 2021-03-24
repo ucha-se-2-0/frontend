@@ -1,4 +1,10 @@
-@import "../Colors.css";
+@import "../Style/Colors.css";
+
+.header
+{
+    padding: 0;
+    margin-top: 0;
+}
 
 .header img
 {

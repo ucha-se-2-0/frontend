@@ -1,4 +1,4 @@
-@import "../Colors.css";
+@import "../Style/Colors.css";
 
 /*BUTTON*/
 
@@ -10,6 +10,7 @@
     border-radius: 10px;
     background-color: var(--purple);
     text-decoration: none;
+    text-align: center;
 }
 
 .button *
@@ -60,7 +61,7 @@
 {
     min-width: 40px;
     display: inline-block;
-    left: 10px;
+    left: 0px;
     top: 15%;
     position: absolute;
     width: 10px;
@@ -70,15 +71,22 @@
 
 .search:hover
 {
-    width: 94%;
+    width: 96%;
+}
+
+@media (max-width: 600px)
+{
+    .search:hover
+    {
+        width: 90%;
+    }
 }
 
 .search .button-content
 {
     display: inline-flex;
     height: 100%;
-    margin-left: 10px;
-    margin-right: 0;
+    float: left;
 }
 
 .search .button-content *
@@ -87,11 +95,11 @@
     margin-bottom: auto;
 }
 
-.search .button-content input
+.search input
 {
     font-size: 20px;
     display: none;
-    width: 1000px;
+    width: 1200px;
     border: 0;
     padding: 0;
     height: 100%;
@@ -99,11 +107,9 @@
     margin-left: 10px;
 }
 
-.search:hover .button-content input
+.search:hover input
 {
     display: inline-block;
-    border: 0;
-    padding: 0;
 }
 
 .search .button-background
@@ -117,4 +123,16 @@
 .search:hover .button-background
 {
     background-color: white;
+}
+
+/*FOOTER*/
+
+.footer
+{
+    margin-top: 100px;
+    position: static;
+    bottom: 0px;
+    width: 100%;
+    height: 400px;
+    background-color: var(--purple);
 }

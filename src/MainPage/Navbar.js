@@ -1,35 +1,28 @@
 import React from 'react';
 import {Button, SearchField} from '../Components'
 
-switch(window.location.pathname)
-{
-  case "/": import('./Navbar.css'); break;
-}
-
-class Navbar extends React.Component {
-  render() {
+function Navbar () {
     return (
       <div className="navbar">
-        <SearchField height = "50%" search = {Search}/>
-
         <div className="dropdown">
           <Button name = "Предмети"/>
           <ul className="dropdown-content">
-            <li><Button name = "Анатомия"/></li>
-            <li><Button name = "Физиология"/></li>
-            <li><Button name = "Цитология"/></li>
-            <li><Button name = "Генетика"/></li>
-            <li><Button name = "Биохимия"/></li>
+            <li><Button name = {<>Анатомия <br/> и физиология</>}   link = "/subjects/anatomy_and_physiology" style = {{}}/></li>
+            <li><Button name = "Клетка"  link = "/subjects/cytology"/></li>
+            <li><Button name = "Вируси"   link = "/subjects/viruses"/></li>
+            <li><Button name = "Генетика"   link = "/subjects/genetics"/></li>
+            <li><Button name = "Екология"   link = "/subjects/ecology"/></li>
+            <li><Button name = "Химия"   link = "/subjects/chemistry"/></li>
           </ul>
         </div>
 
-        <Button id = "unis" name = "Университети" link = "/universities"/>
+        <Button id = "unis" name = "Университети" link = "/universities" class = "important"/>
 
-        <Button name = "Вход"/>
+        <SearchField height = "50%" search = {Search} class = "important"/>
 
+        <Button name = "Вход" class = "important"/>
       </div>
     );
-  }
 }
 
 function Search(request)

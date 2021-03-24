@@ -1,5 +1,9 @@
+//Here are complex and often-used components that 
+//can be imported and simply used
+
 import React from "react"
 import "./Style/Components.css"
+
 
 export class Button extends React.Component {
 
@@ -14,7 +18,7 @@ export class Button extends React.Component {
   render() {
     const style = { width: this.props.width, height: this.props.height, cursor: this.state.cursor };
     return (
-      <a id={this.props.id} className={"button " + this.props.class} href={this.props.link} style={style}>
+      <a id={this.props.id} className={"button " + this.props.class} href={this.props.link} style={style} onClick = {this.props.onClick}>
         <div className="button-content" style={{ cursor: this.state.cursor }}>
           {this.props.name}
         </div>
@@ -27,7 +31,7 @@ export class Button extends React.Component {
 export class SearchField extends React.Component {
   render() {
     return (
-      <Button class="search" name={
+      <Button class={"search " + this.props.class} name={
         <>
           <i className="fa fa-search"></i>
           <input type = "text" onKeyUp = { event=>{
@@ -44,4 +48,16 @@ export class SearchField extends React.Component {
   }
 }
 
-export default { Button, SearchField };
+export class Footer extends React.Component
+{
+  render()
+  {
+    return(
+      <div className = "footer">
+        {/*TO DO*/}
+      </div>
+    );
+  }
+}
+
+export default { Button, SearchField, Footer };

@@ -1,17 +1,23 @@
-@import "../Colors.css";
+@import "../Style/Colors.css";
 
 .content
 {
     margin-top: 100px;
     position: relative;
-    margin-left: 20%;
-    margin-right: 20%;
-    display: block;
+    margin-left: 15%;
+    margin-right: 15%;
     z-index: -1;
+    box-shadow: 0px 10px 50px 0px #555555;
+    padding: 10px;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
 }
 
 .content>*
 {
+    align-self:center;
     margin-top: 10px;
 }
 
@@ -19,18 +25,4 @@
 {
     width: 100%;
     border: dashed 1px black;
-}
-
-.content .content-header
-{
-    margin: 0;
-    text-align: center;
-    font-size: 100px;
-    color: var(--cyan);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-
-.content .text-about-us
-{
-    font-size: 30px;
 }

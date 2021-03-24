@@ -1,1 +1,53 @@
-@import "../Colors.css";
+@import "../Style/Colors.css";
+
+.content
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.content-title
+{
+    width: 100%;
+    margin: 50px 0 10px 0 !important;
+    text-align: center;
+    font-size: 80px;
+    color: var(--cyan);
+}
+
+@media (max-width: 700px)
+{
+    .content-title
+    {
+        font-size: 55px;
+    }
+}
+
+.content .text
+{
+    font-size: 30px;
+}
+
+.content>.button
+{
+    display: inline !important;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.subjects
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.subjects .button
+{
+    width: 200px;
+    height: 200px;
+    margin: 50px;
+
+}

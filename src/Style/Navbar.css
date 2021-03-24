@@ -1,14 +1,15 @@
-@import "../Colors.css";
+@import "../Style/Colors.css";
 
 .navbar
 {
-  height: auto;
-  width: 91%;
-  padding: 10px 2% 10px 110px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 0;
   border-radius: 10px;
   display: flex;
+  flex-flow: row wrap;
   justify-content: flex-end;
-  flex-direction: row;
   font-weight: 550;
 
   background-color: var(--purple);
@@ -23,7 +24,19 @@
   font-size: 30px;
   text-decoration: none;
   color: var(--text-color); 
-  font-family: 'Courier New', Courier, monospace;
+}
+
+@media (max-width: 800px)
+{
+  .navbar>*:not(.important)
+  {
+    display: none;
+  }
+}
+
+.navbar>*:first-child
+{
+  margin-left: 50px !important;
 }
 
 .navbar .button
@@ -32,11 +45,6 @@
   cursor: pointer;
   margin: auto 10px;
   padding: 7px 10px;
-}
-
-.navbar>*:first-child
-{
-  /* margin-left: auto; */
 }
 
 
@@ -84,6 +92,11 @@
   padding: 10px 0;
 }
 
+.dropdown-content li:first-child
+{
+  padding-top: 20px;
+}
+
 .dropdown-content
 {
   overflow: hidden;
@@ -94,7 +107,7 @@
   padding: 0 20px 0 0;
   text-decoration: none;
   list-style-type: none;
-  position: absolute;
+  position:absolute;
 }
 
 .dropdown:hover .dropdown-content

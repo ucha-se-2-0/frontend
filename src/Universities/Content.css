@@ -1,6 +1,13 @@
-@import '../Colors.css';
+@import '../Style/Colors.css';
 
 .uni
 {
     margin: 10px;
+}
+
+.content
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }

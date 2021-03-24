@@ -7,7 +7,7 @@ function Navbar() {
             <Button name="Вход" />
 
             <a href="/">
-                <img src="Images/logo.png" alt="HOME" className="home"></img>
+                <img src="/Images/logo.png" alt="HOME" className="home"></img>
             </a>
         </div>
     );

@@ -1,8 +1,3 @@
-switch(window.location.pathname)
-{
-  case "/": import('./Footer.css'); break;
-}
-
 function Footer()
 {
     return(

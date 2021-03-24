@@ -1,0 +1,53 @@
+.subjects-nav-content .button
+{
+    font-size: 20px;
+    height: 100px;
+    margin: 10px;
+    width: 150px;
+}
+
+.subject-content 
+{
+    display: block !important;
+}
+
+.subject-content .button
+{
+    width: 98%;
+    padding: 10px 1%;
+}
+
+.subject-content .topic
+{
+    margin: 10px;
+    width: 100%;
+}
+
+.subject-content .button img
+{
+    display: none;
+}
+
+.subject-content .button:hover img
+{
+    display: block;
+}
+
+.subject-content .button-content
+{
+    margin: 0;
+}
+
+.subject-content .topic .topic
+{
+    margin: 0;
+    display: none;
+    margin-left: 50px;
+    transition: max-height 0.5s, margin 0.5s;
+}
+
+.topic>.button i
+{
+    transform: rotateZ(0deg);
+    transition: transform 0.25s;
+}

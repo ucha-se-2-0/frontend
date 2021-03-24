@@ -3,6 +3,12 @@ import Content  from './Content'
 import Navbar   from './Navbar'
 import Header   from './Header'
 
+if(window.location.pathname == "/universities")
+{
+    import('./Navbar.css');
+    import('./Content.css');
+}
+
 function Universities() {
     return (
         <React.StrictMode>
