@@ -4,7 +4,7 @@ import Content  from './Content'
 import Footer   from './Footer'
 import Header   from './Header'
 
-if(window.location.pathname == "/")
+if(window.location.pathname === "/")
 {
     import('./Navbar.css');
     import('./Header.css');

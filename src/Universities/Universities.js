@@ -1,7 +1,7 @@
 import React    from "react"
 import Content  from './Content'
-import Navbar   from './Navbar'
 import Header   from './Header'
+import {DefaultNavbar as Navbar, Footer}   from '../Components'
 
 if(window.location.pathname == "/universities")
 {
@@ -15,6 +15,7 @@ function Universities() {
             <Header />
             <Navbar />
             <Content />
+            <Footer />
         </React.StrictMode>
     );
 }

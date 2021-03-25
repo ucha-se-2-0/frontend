@@ -69,24 +69,16 @@
     z-index: 100;
 }
 
-.search:hover
-{
-    width: 96%;
-}
-
-@media (max-width: 600px)
-{
-    .search:hover
-    {
-        width: 90%;
-    }
-}
-
 .search .button-content
 {
     display: inline-flex;
     height: 100%;
     float: left;
+}
+
+.search:hover .button-content
+{
+    color: unset;
 }
 
 .search .button-content *
@@ -109,7 +101,7 @@
 
 .search:hover input
 {
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 .search .button-background
@@ -122,7 +114,7 @@
 
 .search:hover .button-background
 {
-    background-color: white;
+    /* background-color: white; */
 }
 
 /*FOOTER*/
