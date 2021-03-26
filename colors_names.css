@@ -1,0 +1,108 @@
+body{
+    background-color:white;
+}
+*{
+    box-sizing: border-box;
+    font-family:serif;
+    color:black;
+}
+.container{
+    background-color:whitesmoke;
+    width: 45%;
+    height: 500px;
+    border:2px solid;
+    box-shadow:10px 10px 30px grey;
+    margin:150px 100px 200px 300px;
+    padding:10px;
+    border-radius: 7px;
+}
+h4{
+    color:rgb(14, 13, 13);
+    width: 75%;
+    margin:50px 100px 5px 60px;
+    border-bottom:2px solid grey;
+    line-height: 0.1em;
+    text-align: center;
+}
+h4 span{
+    background-color: whitesmoke;
+    border-radius: 5px;;
+    padding:0px 10px;
+}
+.input{
+    width: 70%;
+    height: 50px;
+    margin:0px 90px 5px 70px;
+}
+input[type=text]{
+    border-color:var(--border_color);
+    border-radius: 5px;
+    margin:10px 100px 30px 0px;
+    height: 40px;
+    box-sizing:border-box;
+    font-size:medium;
+    width:100%;
+    padding:10px;
+}
+.button{
+    width: 70%;
+    height: 50px;
+    margin:30px 90px 0px 70px;
+}
+input[type=submit]{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    font-size:x-large;
+    background-color: rgb(180, 79, 180);
+    color:black;
+    border-color: var(--border_color);
+    border-radius: 3px;
+}
+input[type=button]{
+    border-color: var(--border_color);
+}
+/*
+a:link,a:visited{
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    color:var(--darkpurple);
+    letter-spacing: 3px;
+    text-shadow: 1px 1px black;
+    background-color:rgb(235, 235, 100);
+    border:2px solid black;
+    padding:30px 100px 30px 100px;
+    text-align: center;
+    margin:auto;
+    margin-left:95px;
+}
+a:hover,a:active{
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    color:var(--darkpurple);
+    letter-spacing: 3px;
+    text-shadow: 1px 1px black;
+    background-color:rgb(235, 235, 31);
+    border:2px solid black;
+    padding:30px 100px 30px 100px;
+    margin:auto;
+    margin-left:95px;
+}
+*/
+:root
+{
+  --lightpurple: rgb(220, 25, 255);
+  --purple: rgb(185, 8, 224);
+  --darkpurple: rgb(150, 0, 140);
+
+  --yellow: #ffcc30;
+
+  --lightcyan: rgb(60, 255, 190);
+  --cyan: rgb(48, 227, 175);
+  --darkcyan: rgb(35, 200, 155);
+
+  --text-color: white;
+  --border_color: black;
+}
