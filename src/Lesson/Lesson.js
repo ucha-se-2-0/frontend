@@ -1,16 +1,16 @@
-import React, { StrictMode } from 'react'
+import React from 'react'
 
 import Header from'./Header'
-import {Footer, DefaultNavbar as Navbar} from '../Components'
+import {Footer, DefaultNavbar as Navbar, Button} from '../Components'
 
 function Lesson()
 {
     return(
-        <StrictMode>
+        <>
             <Header />
-            <Navbar />
+            <Navbar content = {<Button name = "Тест" link = {window.location.pathname.replace("lessons", "tests")} />} />
             <Footer />
-        </StrictMode>
+        </>
     );
 }
 

@@ -4,6 +4,7 @@
 
 .button
 {
+    padding: 0 10px; 
     overflow: hidden;
     display: inline-flex;
     position: relative;
@@ -99,11 +100,6 @@
     margin-left: 10px;
 }
 
-.search:hover input
-{
-    /* display: inline-block; */
-}
-
 .search .button-background
 {
     width: 100%;
@@ -112,10 +108,6 @@
     left: 0%;
 }
 
-.search:hover .button-background
-{
-    /* background-color: white; */
-}
 
 /*FOOTER*/
 
@@ -127,4 +119,35 @@
     width: 100%;
     height: 400px;
     background-color: var(--purple);
+}
+
+/*DEFAULT NAVBAR*/
+
+.home
+{
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  left: 10px;
+  height: 50px;
+  width: 100px;
+  z-index: 10;
+  background-color: var(--yellow);
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 25px;
+  transition: all 0.35s;
+}
+
+.home img
+{
+  height: 50px;
+  width: 100px;
+}
+
+.home:hover
+{
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
 }

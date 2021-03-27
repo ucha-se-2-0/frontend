@@ -1,44 +1,36 @@
-.subjects-nav-content .button
-{
-    font-size: 20px;
-    height: 100px;
-    margin: 10px;
-    width: 150px;
-}
-
-.subject-content 
+.content 
 {
     display: block !important;
 }
 
-.subject-content .button
+.content .button
 {
     width: 98%;
     padding: 10px 1%;
 }
 
-.subject-content .topic
+.content .topic
 {
     margin: 10px;
     width: 100%;
 }
 
-.subject-content .button img
+.content .button img
 {
     display: none;
 }
 
-.subject-content .button:hover img
+.content .button:hover img
 {
     display: block;
 }
 
-.subject-content .button-content
+.content .button-content
 {
     margin: 0;
 }
 
-.subject-content .topic .topic
+.content .topic .topic
 {
     margin: 0;
     display: none;

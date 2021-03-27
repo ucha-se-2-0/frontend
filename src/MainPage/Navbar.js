@@ -7,12 +7,12 @@ function Navbar () {
         <div className="dropdown">
           <Button name = "Предмети"/>
           <ul className="dropdown-content">
-            <li><Button name = {<>Анатомия <br/> и физиология</>}   link = "/subjects/anatomy_and_physiology" style = {{}}/></li>
-            <li><Button name = "Клетка"  link = "/subjects/cytology"/></li>
-            <li><Button name = "Вируси"   link = "/subjects/viruses"/></li>
-            <li><Button name = "Генетика"   link = "/subjects/genetics"/></li>
-            <li><Button name = "Екология"   link = "/subjects/ecology"/></li>
-            <li><Button name = "Химия"   link = "/subjects/chemistry"/></li>
+            <li><Button name = {<>Анатомия <br/> и физиология</>}   link = "/topics/anatomy_and_physiology" style = {{}}/></li>
+            <li><Button name = "Клетка"  link = "/topics/cytology"/></li>
+            <li><Button name = "Вируси"   link = "/topics/viruses"/></li>
+            <li><Button name = "Генетика"   link = "/topics/genetics"/></li>
+            <li><Button name = "Екология"   link = "/topics/ecology"/></li>
+            <li><Button name = "Химия"   link = "/topics/chemistry"/></li>
           </ul>
         </div>
 
@@ -20,7 +20,7 @@ function Navbar () {
 
         <SearchField height = "50%" search = {Search} class = "important"/>
 
-        <Button name = "Вход" class = "important"/>
+        <Button name = "Вход" class = "important" link = "/signin"/>
       </div>
     );
 }

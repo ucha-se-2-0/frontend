@@ -1,0 +1,60 @@
+@import '../Style/Colors.css';
+
+.question
+{
+    width: 100%;
+}
+
+.question h2
+{
+    margin-left: 50px;
+}
+
+
+.option
+{
+    min-height: 50px;
+    position: relative;
+    margin: 10px auto;
+    display: flex;
+    width: 90%;
+    border: 1px transparent dashed;
+    border-radius: 7px;
+    transition: background-color 0.5s;
+}
+
+.option:hover
+{
+    border: 1px #555555 dashed;
+    background-color: #aaaaaa;
+}
+
+.option h3
+{
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.option *
+{
+    display: inline-block;
+}
+
+.checkbox
+{
+    overflow: hidden;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    display: flex;
+    margin: auto 10px;
+}
+
+.checkbox div
+{
+    background-color: var(--darkpurple);
+    width: 15px;
+    height: 15px;
+    align-self: center;
+}

@@ -29,12 +29,12 @@
 
 .electrons :nth-child(1)
 {
-    animation: elec1 1.5s linear infinite;
+    animation: elec1 1.5s 0.95s linear infinite;
 }
 
 .electrons :nth-child(2)
 {
-    animation: elec2 1.5s linear infinite;
+    animation: elec2 1.5s 0.15s linear infinite;
 }
 
 .electrons :nth-child(3)

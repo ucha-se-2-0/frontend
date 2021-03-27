@@ -1,9 +1,8 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { Button } from '../Components'
 
-import './Content.css'
+import {GetUrl} from '../LessonsRelUrl'
 
 function onDropdownClick(component) {
     component.childNodes.forEach(element => {
@@ -47,7 +46,7 @@ class LessonLink extends React.Component {
                             (<i className="fa fa-caret-down" style={{ display: "inline-block", width: "10px", margin: "0 10px", fontSize: "20px" }} />)}
                         <h3 style={{ display: "inline", marginLeft: "10px" }}>{this.props.title}</h3>
                     </>
-                } link={this.props.link} onClick={this.props.subtopics === undefined ? null : () => onDropdownClick(this.DOMnode.current)} />
+                } link={GetUrl(this.props.title) === undefined ? undefined : ("/lessons/" + GetUrl(this.props.title))} onClick={this.props.subtopics === undefined ? null : () => onDropdownClick(this.DOMnode.current)} />
 
                 {this.props.subtopics}
             </div>
@@ -58,7 +57,7 @@ class LessonLink extends React.Component {
 function Content() {
     return (
         <Router>
-            <Route path="/subjects" exact>
+            <Route path="/topics" exact>
                 <div className="content subjects-nav-content">
                     <Button name="Анатомия" link="/subjects/anatomy" />
                     <Button name="Физиология" link="/subjects/physiology" />
@@ -68,20 +67,20 @@ function Content() {
                 </div>
             </Route>
 
-            <Route path="/subjects/*" exact>
-                <div className="content subject-content">
+            <Route path="/topics/*" exact>
+                <div className="content">
                     <div style={{ width: "80%" }}>
-                        <Route path="/subjects/anatomy_and_physiology">
+                        <Route path="/topics/anatomy_and_physiology">
                             <LessonLink title="Тъкани" subtopics={
                                 <>
-                                    <LessonLink title="Епителна и съединителна тъкани" link="/lessons/epithelial_and_connective_tissues" />
-                                    <LessonLink title="Мускулна и нервна тъкани" link="/lessons/muscle_and_nervous_tissue" />
+                                    <LessonLink title="Епителна и съединителна тъкани"/>
+                                    <LessonLink title="Мускулна и нервна тъкани"/>
                                 </>} />
-                            <LessonLink title="Кожа" link="/lessons/skin" />
+                            <LessonLink title="Кожа"/>
                             <LessonLink title="Опорно-двигателна система" subtopics={
                                 <>
-                                    <LessonLink title="Мускули. Устройство. Видове" link="/lessons/muscle_anatomy" />
-                                    <LessonLink title="Физиология на мускулите" link="/lessons/muscle_physiology" />
+                                    <LessonLink title="Мускули. Устройство. Видове"/>
+                                    <LessonLink title="Физиология на мускулите"/>
                                 </>} />
                             <LessonLink title="Сърдечно съдова система" subtopics={
                                 <>
@@ -92,24 +91,24 @@ function Content() {
                                 </>} />
                             <LessonLink title="Храносмилане" subtopics={
                                 <>
-                                    <LessonLink title="В устната кухина" link="/lessons/digestion_in_oral_cavity" />
-                                    <LessonLink title="В червата и стомаха" link="/lessons/digestion_in_intestines_and_stomach" />
+                                    <LessonLink title="Храносмилане в устната кухина" link="/lessons/digestion_in_oral_cavity" />
+                                    <LessonLink title="Храносмилане в червата и стомаха" link="/lessons/digestion_in_intestines_and_stomach" />
                                 </>} />
                             <LessonLink title="Отделителна система" subtopics={
                                 <>
-                                    <LessonLink title="Органи" link="/lessons/excretory_organs" />
-                                    <LessonLink title="Хигиена" link="/lessons/hygienics_of_excretory_system" />
+                                    <LessonLink title="Органи на отделителна система" link="/lessons/excretory_organs" />
+                                    <LessonLink title="Хигиена на отделителна система" link="/lessons/hygienics_of_excretory_system" />
                                 </>} />
                             <LessonLink title="Дихателна система" subtopics={
                                 <>
-                                    <LessonLink title="Органи" link="/lessons/respiratory_organs" />
+                                    <LessonLink title="Органи на дихателна система" link="/lessons/respiratory_organs" />
                                     <LessonLink title="Дишане" link="/lessons/respiration" />
                                 </>} />
                             <LessonLink title="Полова система" subtopics={
                                 <>
                                     <LessonLink title="Мъжка" link="/lessons/male_reproductive_system" />
                                     <LessonLink title="Женска" link="/lessons/female_reproductive_system" />
-                                    <LessonLink title="Хигиена" link="/lessons/hygienics_of_reproductive_system" />
+                                    <LessonLink title="Хигиена на полова система" link="/lessons/hygienics_of_reproductive_system" />
                                 </>} />
                             <LessonLink title="Нервна система" subtopics={
                                 <>
@@ -121,7 +120,7 @@ function Content() {
                             <LessonLink title="Сетивни системи" subtopics={
                                 <>
                                     <LessonLink title="Зрителна система" link="/lessons/visual_system" />
-                                    <LessonLink title="Зрителна система. Хигиена" link="/lessons/hygienics_of_visual_system" />
+                                    <LessonLink title="Хигиена на зрителна система" link="/lessons/hygienics_of_visual_system" />
                                     <LessonLink title="Слухова система. Равновесие" link="/lessons/auditory_system_and_balance" />
                                     <LessonLink title="Вкусова система" link="/lessons/gustatory_system" />
                                     <LessonLink title="Обонятелна система" link="/lessons/olfactory_system" />
@@ -138,34 +137,11 @@ function Content() {
                                             <LessonLink title="Надбъбречни жлези" link="/lessons/adrenal_glands" />
                                             <LessonLink title="Околощитовидни жлези" link="/lessons/parathyroid_glands" />
                                         </>} />
-                                    <LessonLink title="Здравни познания" link="/lessons/hygienics_of_endocrine_system" />
+                                    <LessonLink title="Здравни познания за ендокринна система" link="/lessons/hygienics_of_endocrine_system" />
                                 </>} />
                         </Route>
 
-                        {/* Нуклеотиди. Полинуклеотиди. Вериги
-ДНК. Структура.
-РНК. Структура
-РНК. Видове 
-Белтъци 
-Белтъци. 
-Равнища на организация
- Ензими. Свойства. Действие. Скорост. Регулация.
-Клетъчни органели. 
-Мембрана
-Мембрана. Транспорт
-Рибозоми
-Рибозоми. Белтъци производство 
-Клетъчни органели. 
-Ендоплазмена мрежа
-. Митохондрии 
-. Цитоплазмени органели
-пероксизоми
-тръбички
-центриоли 
-реснички 
-камшичета
-*/}
-                        <Route path="/subjects/cytology">
+                        <Route path="/topics/cytology">
                             <LessonLink title="Нуклеотиди. Полинуклеотидни вериги" link="#" />
                             <LessonLink title="ДНК. Структура" link="#" />
                             <LessonLink title="РНК. Видове" link="#" />
@@ -183,7 +159,7 @@ function Content() {
                             } />
                         </Route>
 
-                        <Route path="/subjects/ecology">
+                        <Route path="/topics/ecology">
                             <LessonLink title="Урок1" link="#" />
                             <LessonLink title="Урок2" link="#" />
                             <LessonLink title="Урок3" link="#" />
@@ -191,7 +167,7 @@ function Content() {
                             <LessonLink title="Урок5" link="#" />
                         </Route>
 
-                        <Route path="/subjects/genetics">
+                        <Route path="/topics/genetics">
                             <LessonLink title="Урок1" link="#" />
                             <LessonLink title="Урок2" link="#" />
                             <LessonLink title="Урок3" link="#" />
@@ -199,7 +175,7 @@ function Content() {
                             <LessonLink title="Урок5" link="#" />
                         </Route>
 
-                        <Route path="/subjects/chemistry">
+                        <Route path="/topics/chemistry">
                             <LessonLink title="Урок1" link="#" />
                             <LessonLink title="Урок2" link="#" />
                             <LessonLink title="Урок3" link="#" />
@@ -207,7 +183,7 @@ function Content() {
                             <LessonLink title="Урок5" link="#" />
                         </Route>
 
-                        <Route path="/subjects/viruses">
+                        <Route path="/topics/viruses">
                             <LessonLink title="Урок1" link="#" />
                             <LessonLink title="Урок2" link="#" />
                             <LessonLink title="Урок3" link="#" />

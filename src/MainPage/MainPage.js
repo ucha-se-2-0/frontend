@@ -1,7 +1,7 @@
 import React    from "react"
 import Navbar   from './Navbar'
 import Content  from './Content'
-import Footer   from './Footer'
+import {Footer}   from '../Components'
 import Header   from './Header'
 
 if(window.location.pathname === "/")
@@ -13,12 +13,12 @@ if(window.location.pathname === "/")
 
 function MainPage() {
     return (
-        <React.StrictMode>
+        <>
             <Header />
             <Navbar />
             <Content />
             <Footer />
-        </React.StrictMode>
+        </>
     );
 }
 

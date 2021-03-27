@@ -4,8 +4,7 @@
 import React from "react"
 import "./Style/Components.css"
 
-
-export class Button extends React.Component {
+class Button extends React.Component {
 
   constructor(props) {
     super(props);
@@ -28,7 +27,7 @@ export class Button extends React.Component {
   }
 }
 
-export class SearchField extends React.Component {
+class SearchField extends React.Component {
   constructor(props) {
     super(props);
     this.DOMnode = React.createRef();
@@ -95,7 +94,7 @@ export class SearchField extends React.Component {
   }
 }
 
-export class Footer extends React.Component {
+class Footer extends React.Component {
   render() {
     return (
       <div className="footer">
@@ -105,19 +104,30 @@ export class Footer extends React.Component {
   }
 }
 
-export class DefaultNavbar extends React.Component {
+class DefaultNavbar extends React.Component {
   render() {
     return (
       <div className="navbar">
-        <Button name="Вход" />
-
         {this.props.content}
-        <a href="/">
-          <img src="/Images/logo.png" alt="HOME" className="home"></img>
+        
+        <Button name="Вход" class = "important" />
+
+        <a href="/" className="home important">
+          <img src="/Images/logo.png" alt="HOME"></img>
         </a>
       </div>
     );
   }
 }
 
-export default { Button, SearchField, Footer, DefaultNavbar };
+class Header extends React.Component {
+  render() {
+    return (
+      <div className="header">
+        {this.props.content}
+      </div>
+    );
+  }
+}
+
+export { Button, SearchField, Footer, DefaultNavbar, Header };

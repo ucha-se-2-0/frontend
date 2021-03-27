@@ -1,7 +1,6 @@
 import React    from "react"
 import Content  from './Content'
-import Header   from './Header'
-import {DefaultNavbar as Navbar, Footer}   from '../Components'
+import {DefaultNavbar as Navbar, Footer, Header}   from '../Components'
 
 if(window.location.pathname == "/universities")
 {
@@ -12,7 +11,7 @@ if(window.location.pathname == "/universities")
 function Universities() {
     return (
         <React.StrictMode>
-            <Header />
+            <Header content = "Julemy ще Ви помогне да изберете най-подходящ университет (или нещо такова)"/>
             <Navbar />
             <Content />
             <Footer />
