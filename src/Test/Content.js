@@ -38,7 +38,7 @@ class Question extends React.Component {
         }
 
         return (
-            <div className="question" value={JSON.stringify(this.state.selected)}>
+            <div className="question" givenAnswer={JSON.stringify(this.state.selected)}>
                 <h2>{this.props.question}</h2>
                 {options}
             </div>
@@ -84,7 +84,9 @@ function CheckAnswers() {
     console.log(correctAnswers);
 
     let content = document.getElementsByClassName("content")[0];
-    content.removeChild(document.getElementById("checkAnswers"));
+    document.getElementById("checkAnswers").style.display = "none";
+    document.getElementById("tryAgain").style.display = "inline-flex";
+    document.getElementById("toLesson").style.display = "inline-flex";
 
     let mistake = false;
 
@@ -93,38 +95,38 @@ function CheckAnswers() {
 
         mistake = false;
 
-        let options = questions[q].getElementsByClassName("option");
+        let answerOptions = questions[q].getElementsByClassName("option");
 
-        let answer = JSON.parse(questions[q].getAttribute("value"));
+        let givenAnswer = JSON.parse(questions[q].getAttribute("givenAnswer"));
 
         if (correctAnswers[q] instanceof Array) {
 
             for (let op = 0; op < correctAnswers[q].length; op++) {
 
-                if (answer[op]) {
+                if (givenAnswer[op]) {
                     if (correctAnswers[q][op]) 
                     {
-                        options[op].style.backgroundColor = "#77ff55";
+                        answerOptions[op].style.backgroundColor = "#77ff55";
                     }
                     else
                     {
-                        options[op].style.backgroundColor = "#ee9090";
+                        answerOptions[op].style.backgroundColor = "#ee9090";
                         mistake = true;
                     }
                 }
                 else if (correctAnswers[q][op]) {
-                    options[op].style.backgroundColor = "#77ff55";
+                    answerOptions[op].style.backgroundColor = "#77ff55";
                     mistake = true;
                 }
             }
         }
         else {
-            options[correctAnswers[q]].style.backgroundColor = "#77ff55";
+            answerOptions[correctAnswers[q]].style.backgroundColor = "#77ff55";
 
-            if(answer !== correctAnswers[q])
+            if(givenAnswer !== correctAnswers[q])
             {
-                console.log(options, answer);
-                options[answer].style.backgroundColor = "#ee7070";
+                console.log(answerOptions, givenAnswer);
+                answerOptions[givenAnswer].style.backgroundColor = "#ee7070";
                 mistake = true;
             }
         }
@@ -133,7 +135,6 @@ function CheckAnswers() {
             questions[q].style.backgroundColor = "#ffcccc";
         }
     }
-
 }
 
 function Content() {
@@ -147,6 +148,8 @@ function Content() {
                     </>
                 } />
                 <Button id="checkAnswers" name="Провери отговорите" height="50px" onClick={CheckAnswers} />
+                <Button id="tryAgain" name="Пробвай отново" height="50px" link = {window.location.pathname}/>
+                <Button id="toLesson" name="Назад към урока" height="50px" link = {window.location.pathname.replace("tests", "lessons")}/>
             </Router>
         </div>
     );
