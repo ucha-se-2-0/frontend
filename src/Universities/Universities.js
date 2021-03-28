@@ -2,7 +2,7 @@ import React    from "react"
 import Content  from './Content'
 import {DefaultNavbar as Navbar, Footer, Header}   from '../Components'
 
-if(window.location.pathname == "/universities")
+if(window.location.pathname === "/universities")
 {
     import('./Navbar.css');
     import('./Content.css');

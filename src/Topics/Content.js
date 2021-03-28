@@ -7,7 +7,7 @@ import {GetUrl} from '../LessonsRelUrl'
 function onDropdownClick(component) {
     component.childNodes.forEach(element => {
         if (element.classList[0] === "topic") {
-            if (element.style.display === "none" || element.style.display == "") {
+            if (element.style.display === "none" || element.style.display === "") {
                 element.style.display = "block";
                 element.style.margin = "10px";
                 element.style.marginLeft = "10%";
@@ -41,7 +41,7 @@ class LessonLink extends React.Component {
             <div className="topic" ref={this.DOMnode}>
                 <Button name={
                     <>
-                        <img src={this.props.preview}></img>
+                        <img src={this.props.preview} alt = "preview"></img>
                         {this.props.subtopics === undefined ? null :
                             (<i className="fa fa-caret-down" style={{ display: "inline-block", width: "10px", margin: "0 10px", fontSize: "20px" }} />)}
                         <h3 style={{ display: "inline", marginLeft: "10px" }}>{this.props.title}</h3>

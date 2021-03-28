@@ -1,13 +1,24 @@
 @import '../Style/Colors.css';
 
+.content
+{
+    flex-direction: column;
+}
+
 .question
 {
     width: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
+
 
 .question h2
 {
-    margin-left: 50px;
+    margin: 10px auto;
+    display: inline;
 }
 
 
@@ -57,4 +68,45 @@
     width: 15px;
     height: 15px;
     align-self: center;
+}
+
+
+#toLesson
+{
+    display: none;
+}
+
+#toNextLesson
+{
+    display: none;
+}
+
+#result
+{
+    font-size: 50px;
+    margin: 50px;
+}
+
+.question input
+{
+    border-radius: 5px;
+    font-size: large;
+    resize: none;
+    margin-left: 5%;
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-bottom: 1px solid black;
+    width: calc(90% - 10px);
+}
+
+.free-answer .correctAnswer
+{
+    background-color: #77ff55;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px auto;
+    width: 87%;
+    display: none;
 }
