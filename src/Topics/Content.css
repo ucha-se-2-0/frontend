@@ -22,7 +22,7 @@
 
 .content .button:hover img
 {
-    display: block;
+    /* display: block; */
 }
 
 .content .button-content

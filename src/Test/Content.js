@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { Button } from '../Components'
-import { GetUrl, GetHeader, lessonsUrls, GetNext } from '../LessonsRelUrl'
+import { GetNext } from '../LessonsRelUrl'
 
 var correctAnswers = []
 var turnedIn = false;
@@ -81,12 +81,8 @@ class Question extends React.Component {
 }
 
 class FreeAnswerQuestion extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
-        if (this.props.number !== undefined) {
+        if (typeof this.props.correct === "number") {
             if (this.props.precision !== undefined) {
                 correctAnswers.push({
                     answer: Math.round(this.props.correct * Math.pow(10, this.props.precision)) / Math.pow(10, this.props.precision),
@@ -100,7 +96,8 @@ class FreeAnswerQuestion extends React.Component {
                 });
             }
         }
-        else {
+        else
+        {
             correctAnswers.push(this.props.correct.toLowerCase());
         }
     }
@@ -109,8 +106,8 @@ class FreeAnswerQuestion extends React.Component {
         return (
             <div className="question free-answer">
                 <h2>{this.props.question}</h2>
-                <input placeholder="Въведете отговора си" type={this.props.number === undefined ? "text" : "number"}></input>
-                <div className = "correctAnswer"></div>
+                <input placeholder="Въведете отговора си" type={typeof this.props.correct === "number" ? "number" : "text"}></input>
+                <div className="correctAnswer"></div>
             </div>
         );
     }
@@ -146,52 +143,59 @@ function CheckAnswers() {
             //Free answer questions
             maxResult += 3;
             let input = questions[q].getElementsByTagName("input")[0];
-            let mistake = 0;
+            input.setAttribute("readonly", true);
+
             let dRes = 0;
 
             console.log(input.value, correctAnswers[q]);
 
             if (input.type === "number") {
                 if (Math.round(input.value * Math.pow(10, correctAnswers[q].precision)) / Math.pow(10, correctAnswers[q].precision) === correctAnswers[q].answer)
-                    dRes = 1;
-                else {
-                    dRes = 0;
-                    mistake = 2;
-                }
+                    dRes = 3;
             }
             else {
-                dRes = 3;
-                let offset = 0;
                 let value = input.value.toLowerCase();
-                for (let i = 0; i < value.length && i < correctAnswers[q].length; i++) {
-                    if (value[i + offset] !== correctAnswers[q][i]) {
-                        dRes -= 1.5;
-                        mistake = 1;
-                        if (dRes === 0) {
-                            mistake = 2;
-                            break;
+
+                if (Math.abs(value.length - correctAnswers[q].length) < 2) {
+                    dRes = 3;
+                    if (Math.abs(value.length - correctAnswers[q].length) === 1) {
+                        dRes = 1.5;
+                    }
+                    let offset = 0;
+                    for (let i = 0; i + offset < value.length && i < correctAnswers[q].length; i++) {
+                        if (value[i + offset] !== correctAnswers[q][i]) {
+                            if (value[i + 1] === correctAnswers[q][i]) {
+                                offset = 1;
+                            }
+                            if (i + 1 < correctAnswers[q].length && value[i] === correctAnswers[q][i + 1]) {
+                                offset = -1;
+                            }
+                            dRes -= 1.5;
+                            if (dRes === 0) {
+                                break;
+                            }
                         }
                     }
                 }
-
             }
             result += dRes;
-            if (mistake === 0)
-            {
+            if (dRes === 3) {
                 questions[q].style.backgroundColor = "#ddffbb";
                 questions[q].getElementsByTagName("input")[0].style.backgroundColor = "#77ff55";
             }
-            if (mistake === 1) {
+            else {
+                let correctAnswerField = questions[q].getElementsByClassName("correctAnswer")[0];
+                correctAnswerField.style.display = "block";
+
                 questions[q].style.backgroundColor = "#ffe0c0";
-                let correctAnswerField = questions[q].getElementsByClassName("correctAnswer")[0];
-                correctAnswerField.innerHTML = "Правописна грешка. Правилен отговор: " + correctAnswers[q];
-                correctAnswerField.style.display = "block";
-            }
-            if (mistake === 2) {
-                questions[q].style.backgroundColor = "#ee7070";
-                let correctAnswerField = questions[q].getElementsByClassName("correctAnswer")[0];
-                correctAnswerField.innerHTML = correctAnswers[q];
-                correctAnswerField.style.display = "block";
+                if(input.type === "number")
+                {
+                    correctAnswerField.innerHTML = correctAnswers[q].answer;
+                }
+                else
+                {
+                    correctAnswerField.innerHTML = correctAnswers[q];
+                }
             }
         }
         else {
@@ -252,8 +256,7 @@ function CheckAnswers() {
             if (mistake) {
                 questions[q].style.backgroundColor = "#ffcccc";
             }
-            else
-            {
+            else {
                 questions[q].style.backgroundColor = "#ddffbb";
             }
         }
@@ -271,10 +274,11 @@ function Content() {
                     <>
                         <Question question="What?" options={["dk", "that", "something"]} correct={[2, 0]} />
                         <Question question="How?" options={["somehow", "no", "cucumber"]} correct={2} />
-                        <FreeAnswerQuestion question="Explain" correct="Because" />
+                        <FreeAnswerQuestion question="Explain" correct={"Because"}/>
+                        <FreeAnswerQuestion question="3 / 2 ?" correct={1.5} precision = {3}/>
                     </>
                 } />
-                <h2 id="result" style={{ width: "100%", textAlign: "center" }}></h2>
+                <h1 id="result"></h1>
                 <Button id="checkAnswers" name="Провери отговорите" height="50px" onClick={CheckAnswers} />
                 <Button id="toLesson" name="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} />
                 <Button id="toNextLesson" height="50px" link="#" />
