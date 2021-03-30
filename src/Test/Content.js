@@ -34,7 +34,7 @@ class Question extends React.Component {
         for (let i = 0; i < this.props.options.length; i++) {
             options.push(
                 <div className="option" key={i} onClick={() => { this.OnClick(i) }}>
-                    <div className="checkbox" checked={false}>
+                    <div className="checkbox" checked={false} style = {{borderRadius: this.props.correct instanceof Array ? "2px": "50%"}}>
                         <div style={this.GetOptionStyle(i)} />
                     </div>
                     <h3>{this.props.options[i]}</h3>

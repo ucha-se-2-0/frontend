@@ -3,10 +3,11 @@ import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Content from './Content'
 import { Footer } from '../Components'
-import { DefaultNavbar as Navbar, Header } from '../Components'
+import { DefaultNavbar as Navbar, Header, SearchField } from '../Components'
 
 if (window.location.pathname.match("/topics/")) {
     import('./Content.css');
+    import('./Navbar.css');
 }
 
 function Subjects() {
@@ -39,7 +40,7 @@ function Subjects() {
                 }} />
             </Router>
 
-            <Navbar />
+            <Navbar content = { <SearchField search = {()=>{}} class = "important" />}/>
             <Content />
             <Footer />
         </>

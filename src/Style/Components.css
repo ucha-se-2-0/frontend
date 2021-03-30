@@ -60,6 +60,7 @@
 
 .search
 {
+    height: auto !important;
     min-width: 40px;
     display: inline-block;
     left: 0px;
