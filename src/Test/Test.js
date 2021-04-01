@@ -1,6 +1,6 @@
 import React from 'react'
 import {Footer, DefaultNavbar as Navbar, Header} from '../Components'
-import { GetHeader } from '../LessonsRelUrl';
+import { GetTitle } from '../LessonsRelUrl';
 
 import {Content} from './Content'
 
@@ -14,7 +14,7 @@ function Test()
     return(
         <>
             <Navbar/>
-            <Header content = {"Тест по тема \"" + GetHeader(window.location.pathname) + '"'}/>
+            <Header content = {"Тест по тема \"" + GetTitle(window.location.pathname) + '"'}/>
             <Content />
             <Footer/>
         </>

@@ -36,17 +36,17 @@ const lessonsUrls = [
     ["Здравни познания за ендокринна система", "hygienics_of_endocrine_system"]
 ]
 
-function GetUrl(lessonHeader) {
+function GetUrl(lessonTitle) {
     for(let pair in lessonsUrls)
     {
-        if(lessonsUrls[pair][0] === lessonHeader)
+        if(lessonsUrls[pair][0] === lessonTitle)
         {
             return lessonsUrls[pair][1];
         }
     }
 }
 
-function GetHeader(url) {
+function GetTitle(url) {
     var res = url.match(/\/[^/]+/g);
     res = res[res.length - 1].slice(1);
     for (let pair in lessonsUrls) {
@@ -65,4 +65,24 @@ function GetNext(url)
     }
 }
 
-export { GetUrl, GetHeader, GetNext, lessonsUrls }
+function GetIdByUrl(url)
+{
+    var res = url.match(/\/[^/]+/g);
+    res = res[res.length - 1].slice(1);
+    for (let i = 0; i < lessonsUrls.length - 1; i++) {
+        if(lessonsUrls[i][1] === res)
+            return i;
+    }
+}
+
+function GetIdByTitle(url)
+{
+    var res = url.match(/\/[^/]+/g);
+    res = res[res.length - 1].slice(1);
+    for (let i = 0; i < lessonsUrls.length - 1; i++) {
+        if(lessonsUrls[i][1] === res)
+            return i;
+    }
+}
+
+export { GetUrl, GetTitle, GetNext, GetIdByUrl, GetIdByTitle }

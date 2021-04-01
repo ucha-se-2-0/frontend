@@ -1,0 +1,97 @@
+.content
+{
+    flex-direction: column;
+}
+
+.likesAndDislikesWrapper
+{
+    margin-left: auto;
+    width: auto;
+    display: block;
+}
+
+#likes,
+#dislikes
+{
+    display: inline-block;
+    margin: 10px;
+    font-size: calc(1vw + 30px);
+}
+
+#likes i, #dislikes i
+{
+    display: inline-block;
+    font-family: 'Material Icons';
+    font-size: 1em;
+    margin-right: 10px;
+    margin-top: 10px;
+    color: #666666;
+    cursor: default;
+}
+
+#likes div,
+#dislikes div
+{
+    display: inline-block;
+    font-size: 40px;
+}
+
+#likes i:hover
+{
+    color: black;
+}
+
+#dislikes i:hover
+{
+    color: black;
+}
+
+
+#comments
+{
+    font-size: 20px;
+    width: 90%;
+    display: block;
+}
+
+#comments a:visited
+{
+    color: black;
+} 
+
+#comments>*
+{
+    margin-left: 0px;
+}
+
+#comments>*>*.comment
+{
+    margin-left: 40px;
+}
+
+.comment
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.comment img
+{
+    width: 30px;
+    border-radius: 50%;
+}
+
+.comment .text
+{
+    display: inline-block;
+    margin: auto 10px !important;
+}
+
+.comment>div:first-child
+{
+    display: flex;
+    /* margin: auto 10px !important; */
+}
