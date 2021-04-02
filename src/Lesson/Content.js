@@ -4,17 +4,7 @@ import { GetIdByUrl } from '../LessonsRelUrl'
 
 const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';//wtf is this
 
-const lesson_id = GetIdByUrl(window.location.pathname);
-
-class Comment extends React.Component {
-    render() {
-        return (
-            <div key={this.props.id}>
-
-            </div>
-        );
-    }
-}
+// const lesson_id = GetIdByUrl(window.location.pathname);
 
 class Content extends React.Component {
     constructor(props) {
@@ -39,6 +29,16 @@ class Content extends React.Component {
                     </div>
                 </div>
 
+                <div id="compose-comment">
+                    <div>
+                        <img src="/Images/favicon.ico" />
+                        <div className="input-wrapper">
+                            <textarea placeholder="Оставете коментар" onInput={event => event.target.parentNode.dataset.myValue = event.target.value}></textarea>
+                        </div>
+                    </div>
+                    <Button name="Публикувай" onClick={this.postComment} />
+                </div>
+
                 <div id="comments">{this.state.comments}</div>
 
             </div>
@@ -49,6 +49,7 @@ class Content extends React.Component {
         this.loadVideo();
         this.loadComments();
     }
+
 
     likeVideo() {
         var request = new XMLHttpRequest();
@@ -67,6 +68,16 @@ class Content extends React.Component {
         }
         request.send();
     }
+
+    postComment() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "/");
+        request.onload = function () {
+            this.loadDislikes();
+        }
+        request.send();
+    }
+
 
     loadVideo() {
         var videoNode = document.getElementById("video");
@@ -115,7 +126,7 @@ class Content extends React.Component {
         request.onload = function () {
             // let comments = request.response;
             let comments = [
-                { content: "0", comment_id: 0 },
+                { content: "weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaather is very beautiful today", comment_id: 0 },
                 {
                     content: "1", comment_id: 1, replies: [
                         {
@@ -141,7 +152,14 @@ function getCommentsNode(comments) {
             <div className="comment" key={i} id={comments[i].comment_id}>
                 <div>
                     <img src="/Images/favicon.ico"></img>
-                    <div className="text"> {comments[i].content} </div>
+                    <div>
+                        <div className="author-name">name</div>
+                        <div className="text"> {comments[i].content} </div>
+                        <div className = "comment-like-dislike">
+                            <i className="material-icons like-comment">thumb_up</i>
+                            <i className="material-icons dislike-comment">thumb_down</i>
+                        </div>
+                    </div>
                 </div>
                 {comments[i].replies ? getCommentsNode(comments[i].replies) : <></>}
             </div>)
