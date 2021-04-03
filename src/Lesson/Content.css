@@ -145,9 +145,14 @@
     margin-left: 0px;
 }
 
-#comments>*>*.comment
+.replies
 {
     margin-left: 40px;
+}
+
+.replies .replies
+{
+    margin-left: 0px;
 }
 
 .comment
@@ -241,4 +246,30 @@
 .comment-dislikes
 {
     min-width: 10px;
+}
+
+.collapse-replies,
+.show-replies
+{
+    font-size: 15px;
+    color: grey;
+    margin-left: 40px;
+    margin-top: -10px;
+}
+
+.collapse-replies i,
+.show-replies i
+{
+    font-family: 'Font Awesome 5 Free';
+    margin-right: 10px;
+}
+
+.collapse-replies
+{
+    display: none;
+}
+
+.replies
+{
+    display: none;
 }

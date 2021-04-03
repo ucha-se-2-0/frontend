@@ -16,6 +16,39 @@ var video_disliked = false;/*TO DO*/
 
 class Comment extends React.Component {
     render() {
+        let replies = <></>;
+        if (this.props.comment.replies) {
+            if (!this.props.is_reply) {
+                replies =
+                    <div>
+                        <div className="collapse-replies" onClick={event => {
+                            event.target.style.display = "none";
+                            event.target.parentNode.querySelector(".show-replies").style.display = "block";
+                            event.target.parentNode.querySelector(".replies").style.display = "none";
+                        }}>
+                            <i className="fas fa-caret-up"></i>
+                            Скрий отговорите
+                        </div>
+
+                        <div className="show-replies" onClick={event => {
+                            event.target.style.display = "none";
+                            event.target.parentNode.querySelector(".collapse-replies").style.display = "block";
+                            event.target.parentNode.querySelector(".replies").style.display = "block";
+                        }}>
+                            <i className="fas fa-caret-down"></i>
+                            Покажи отговорите
+                        </div>
+
+                        <div className="replies">
+                            {_getCommentsNode(this.props.comment.replies, true)}
+                        </div>
+                    </div>
+            }
+            else {
+                replies = _getCommentsNode(this.props.comment.replies, true);
+            }
+        }
+
         return (
             <div className="comment" id={this.props.comment.comment_id}>
                 <div>
@@ -24,7 +57,7 @@ class Comment extends React.Component {
                         <div /*TO DO*/ className="author-name">name</div>
                         <div className="text"> {this.props.comment.content} </div>
                         <div className="comment-like-dislike">
-                            <i /*TO DO*/  color="grey" className="material-icons like-comment" onClick={
+                            <i /*TO DO*/ color="grey" className="material-icons like-comment" onClick={
                                 event => {
                                     this.likeComment(event.target.parentNode);
                                 }}>thumb_up</i>
@@ -37,7 +70,9 @@ class Comment extends React.Component {
                         </div>
                     </div>
                 </div>
-                {this.props.comment.replies ? getCommentsNode(this.props.comment.replies) : <></>}
+
+
+                {replies}
             </div>
         )
     }
@@ -148,7 +183,7 @@ class Content extends React.Component {
                             <textarea placeholder="Оставете коментар" onInput={event => event.target.parentNode.dataset.myValue = event.target.value}></textarea>
                         </div>
                     </div>
-                    <Button name="Публикувай" onClick={this.postComment} />
+                    <Button name="Публикувай" onClick={event=>{this.postComment(document.querySelector("textarea").value)}} />
                 </div>
 
                 <div id="comments">{this.state.comments}</div>
@@ -175,16 +210,13 @@ class Content extends React.Component {
         }
         request.send({ video_id: lesson_id });
 
-        if(video_liked)
-        {
-            this.likes.innerHTML = Number(this.likes.innerHTML) - 1; 
+        if (video_liked) {
+            this.likes.innerHTML = Number(this.likes.innerHTML) - 1;
         }
-        else
-        {
+        else {
             this.likes.innerHTML = Number(this.likes.innerHTML) + 1;
-            if(video_disliked)
-            {
-                this.dislikes.innerHTML = Number(this.dislikes.innerHTML) - 1; 
+            if (video_disliked) {
+                this.dislikes.innerHTML = Number(this.dislikes.innerHTML) - 1;
                 video_disliked = false;
             }
         }
@@ -200,29 +232,25 @@ class Content extends React.Component {
         }
         request.send();
 
-        if(video_disliked)
-        {
-            this.dislikes.innerHTML = Number(this.dislikes.innerHTML) - 1; 
+        if (video_disliked) {
+            this.dislikes.innerHTML = Number(this.dislikes.innerHTML) - 1;
         }
-        else
-        {
-            this.dislikes.innerHTML = Number(this.dislikes.innerHTML) + 1; 
-            if(video_liked)
-            {
-                this.likes.innerHTML = Number(this.likes.innerHTML) - 1; 
+        else {
+            this.dislikes.innerHTML = Number(this.dislikes.innerHTML) + 1;
+            if (video_liked) {
+                this.likes.innerHTML = Number(this.likes.innerHTML) - 1;
                 video_liked = false;
             }
         }
         video_disliked = !video_disliked;
     }
 
-    postComment(comment_id) {
+    postComment(content) {
         var request = new XMLHttpRequest();
         request.open("POST", "/");
         request.onload = function () {
-            this.loadDislikes();
         }
-        request.send({ comment_id: comment_id, video_id: lesson_id });
+        request.send({ video_id: lesson_id, content: content });
     }
 
 
@@ -282,7 +310,9 @@ class Content extends React.Component {
                                 { content: "1.1.1", comment_id: 4, parent_id: 2 }]
                         },
                         { content: "1.1", comment_id: 5, parent_id: 1 }]
-                }];
+                },
+                { content: "yes", comment_id: 6, likes: 2, dislikes: 1 },
+            ];
 
             comp.setState({ comments: getCommentsNode(comments) });
         }
@@ -291,11 +321,14 @@ class Content extends React.Component {
     }
 
 }
-function getCommentsNode(comments) {
+
+let getCommentsNode = comments => _getCommentsNode(comments, false);
+
+function _getCommentsNode(comments, is_reply) {
     let commentsNodes = [];
     for (let i = 0; i < comments.length; i++) {
         commentsNodes.push(
-            <Comment key={i} comment={comments[i]} />
+            <Comment key={i} comment={comments[i]} is_reply={is_reply} />
         )
     };
     return commentsNodes;
