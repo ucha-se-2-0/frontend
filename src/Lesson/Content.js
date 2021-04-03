@@ -4,7 +4,119 @@ import { GetIdByUrl } from '../LessonsRelUrl'
 
 const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';//wtf is this
 
-// const lesson_id = GetIdByUrl(window.location.pathname);
+var lesson_id;
+if (window.location.pathname.indexOf("/lessons/") !== -1)
+    lesson_id = GetIdByUrl(window.location.pathname);
+
+var liked = [];
+var disliked = [];
+
+var video_liked = false;/*TO DO*/
+var video_disliked = false;/*TO DO*/
+
+class Comment extends React.Component {
+    render() {
+        return (
+            <div className="comment" id={this.props.comment.comment_id}>
+                <div>
+                    <img /*TO DO*/ src="/Images/favicon.ico"></img>
+                    <div>
+                        <div /*TO DO*/ className="author-name">name</div>
+                        <div className="text"> {this.props.comment.content} </div>
+                        <div className="comment-like-dislike">
+                            <i /*TO DO*/  color="grey" className="material-icons like-comment" onClick={
+                                event => {
+                                    this.likeComment(event.target.parentNode);
+                                }}>thumb_up</i>
+                            <div className="comment-likes">{this.props.comment.likes}</div>
+                            <i /*TO DO*/ color="grey" className="material-icons dislike-comment" onClick={
+                                event => {
+                                    this.dislikeComment(event.target.parentNode);
+                                }}>thumb_down</i>
+                            <div className="comment-dislikes">{this.props.comment.dislikes}</div>
+                        </div>
+                    </div>
+                </div>
+                {this.props.comment.replies ? getCommentsNode(this.props.comment.replies) : <></>}
+            </div>
+        )
+    }
+
+
+    likeComment(likes_and_dislikes) {
+        let comment_id = this.props.comment.comment_id;
+        let likes = likes_and_dislikes.getElementsByClassName("comment-likes")[0]
+        var request = new XMLHttpRequest();
+        request.open("POST", "/comments/like");
+        request.onload = function () {
+        }
+        request.send({ comment_id: comment_id, user_id: sessionStorage.getItem('userID') });
+
+        let was_liked = false;
+        for (let i = 0; i < liked.length; i++) {
+            if (liked[i] === comment_id) {
+                was_liked = true;
+                liked.splice(i, 1);
+                break;
+            }
+        }
+        if (was_liked) {
+            likes.innerHTML = Number(likes.innerHTML) - 1;
+            likes_and_dislikes.getElementsByClassName("like-comment")[0].setAttribute("color", "grey");
+        }
+        else {
+            for (let i = 0; i < disliked.length; i++) {
+                if (disliked[i] === comment_id) {
+                    likes_and_dislikes.getElementsByClassName("dislike-comment")[0].setAttribute("color", "grey");
+                    let commentsDislikes = likes_and_dislikes.getElementsByClassName("comment-dislikes")[0];
+                    commentsDislikes.innerHTML = commentsDislikes.innerHTML - 1;
+                    disliked.splice(i, 1);
+                    break;
+                }
+            }
+            likes_and_dislikes.getElementsByClassName("like-comment")[0].setAttribute("color", "black");
+            likes.innerHTML = Number(likes.innerHTML) + 1;
+            liked.push(comment_id);
+        }
+    }
+
+    dislikeComment(likes_and_dislikes) {
+        let comment_id = this.props.comment.comment_id;
+        let dislikes = likes_and_dislikes.getElementsByClassName("comment-dislikes")[0]
+        var request = new XMLHttpRequest();
+        request.open("POST", "/comments/dislike");
+        request.onload = function () {
+        }
+        request.send({ comment_id: comment_id, user_id: sessionStorage.getItem('userID') });
+
+        let was_disliked = false;
+        for (let i = 0; i < disliked.length; i++) {
+            if (disliked[i] === comment_id) {
+                was_disliked = true;
+                disliked.splice(i, 1);
+                break;
+            }
+        }
+        if (was_disliked) {
+            dislikes.innerHTML = Number(dislikes.innerHTML) - 1;
+            likes_and_dislikes.getElementsByClassName("dislike-comment")[0].setAttribute("color", "grey");
+        }
+        else {
+            for (let i = 0; i < liked.length; i++) {
+                if (liked[i] === comment_id) {
+                    likes_and_dislikes.getElementsByClassName("like-comment")[0].setAttribute("color", "grey");
+                    let commentsLikes = likes_and_dislikes.getElementsByClassName("comment-likes")[0];
+                    commentsLikes.innerHTML = commentsLikes.innerHTML - 1;
+                    liked.splice(i, 1);
+                    break;
+                }
+            }
+            likes_and_dislikes.getElementsByClassName("dislike-comment")[0].setAttribute("color", "black");
+            dislikes.innerHTML = Number(dislikes.innerHTML) + 1;
+            disliked.push(comment_id);
+        }
+    }
+}
 
 class Content extends React.Component {
     constructor(props) {
@@ -20,12 +132,12 @@ class Content extends React.Component {
 
                 <div className="likesAndDislikesWrapper">
                     <div id="likes">
-                        <i className="material-icons" onClick={this.likeVideo}>thumb_up</i>
-                        <div>0</div>
+                        <i className="material-icons" onClick={this.likeVideo.bind(this)}>thumb_up</i>
+                        <div>{/*TO DO*/}0</div>
                     </div>
                     <div id="dislikes">
-                        <i className="material-icons" onClick={this.dislikeVideo}>thumb_down</i>
-                        <div>0</div>
+                        <i className="material-icons" onClick={this.dislikeVideo.bind(this)}>thumb_down</i>
+                        <div>{/*TO DO*/}0</div>
                     </div>
                 </div>
 
@@ -48,34 +160,69 @@ class Content extends React.Component {
     componentDidMount() {
         this.loadVideo();
         this.loadComments();
+
+        this.likes = document.getElementById("likes").childNodes[1];
+        this.dislikes = document.getElementById("dislikes").childNodes[1];
     }
 
 
     likeVideo() {
         var request = new XMLHttpRequest();
         request.open("POST", "/");
+        let content = this;
         request.onload = function () {
-            this.loadLikes();
+            content.loadLikes();
         }
-        request.send();
+        request.send({ video_id: lesson_id });
+
+        if(video_liked)
+        {
+            this.likes.innerHTML = Number(this.likes.innerHTML) - 1; 
+        }
+        else
+        {
+            this.likes.innerHTML = Number(this.likes.innerHTML) + 1;
+            if(video_disliked)
+            {
+                this.dislikes.innerHTML = Number(this.dislikes.innerHTML) - 1; 
+                video_disliked = false;
+            }
+        }
+        video_liked = !video_liked;
     }
 
     dislikeVideo() {
         var request = new XMLHttpRequest();
         request.open("POST", "/");
+        let content = this;
         request.onload = function () {
-            this.loadDislikes();
+            content.loadDislikes();
         }
         request.send();
+
+        if(video_disliked)
+        {
+            this.dislikes.innerHTML = Number(this.dislikes.innerHTML) - 1; 
+        }
+        else
+        {
+            this.dislikes.innerHTML = Number(this.dislikes.innerHTML) + 1; 
+            if(video_liked)
+            {
+                this.likes.innerHTML = Number(this.likes.innerHTML) - 1; 
+                video_liked = false;
+            }
+        }
+        video_disliked = !video_disliked;
     }
 
-    postComment() {
+    postComment(comment_id) {
         var request = new XMLHttpRequest();
         request.open("POST", "/");
         request.onload = function () {
             this.loadDislikes();
         }
-        request.send();
+        request.send({ comment_id: comment_id, video_id: lesson_id });
     }
 
 
@@ -101,7 +248,7 @@ class Content extends React.Component {
         request.open("GET", "/like");
 
         request.onload = function () {
-            document.querySelector("#likes>div").innerHTML = request.response;
+            // document.querySelector("#likes>div").innerHTML = request.response;
         }
 
         request.send();
@@ -112,7 +259,7 @@ class Content extends React.Component {
         request.open("GET", "/dislike");
 
         request.onload = function () {
-            document.querySelector("#dislikes>div").innerHTML = request.response;
+            // document.querySelector("#dislikes>div").innerHTML = request.response;
         }
 
         request.send();
@@ -126,15 +273,15 @@ class Content extends React.Component {
         request.onload = function () {
             // let comments = request.response;
             let comments = [
-                { content: "weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaather is very beautiful today", comment_id: 0 },
+                { content: "weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaather is very beautiful today", comment_id: 0, likes: 2, dislikes: 1 },
                 {
                     content: "1", comment_id: 1, replies: [
                         {
                             content: "1.0", comment_id: 2, parent_id: 1, replies: [
-                                { content: "1.1.0", parent_id: 2 },
-                                { content: "1.1.1", parent_id: 2 }]
+                                { content: "1.1.0", comment_id: 3, parent_id: 2 },
+                                { content: "1.1.1", comment_id: 4, parent_id: 2 }]
                         },
-                        { content: "1.1", parent_id: 1 }]
+                        { content: "1.1", comment_id: 5, parent_id: 1 }]
                 }];
 
             comp.setState({ comments: getCommentsNode(comments) });
@@ -144,26 +291,12 @@ class Content extends React.Component {
     }
 
 }
-
 function getCommentsNode(comments) {
     let commentsNodes = [];
     for (let i = 0; i < comments.length; i++) {
         commentsNodes.push(
-            <div className="comment" key={i} id={comments[i].comment_id}>
-                <div>
-                    <img src="/Images/favicon.ico"></img>
-                    <div>
-                        <div className="author-name">name</div>
-                        <div className="text"> {comments[i].content} </div>
-                        <div className = "comment-like-dislike">
-                            <i className="material-icons like-comment">thumb_up</i>
-                            <i className="material-icons dislike-comment">thumb_down</i>
-                        </div>
-                    </div>
-                </div>
-                {comments[i].replies ? getCommentsNode(comments[i].replies) : <></>}
-            </div>)
-
+            <Comment key={i} comment={comments[i]} />
+        )
     };
     return commentsNodes;
 }

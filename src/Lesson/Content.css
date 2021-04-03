@@ -12,26 +12,25 @@
 
 .likesAndDislikesWrapper
 {
-    margin: 0 10% 20px auto;
+    margin: 10px 10% 20px auto;
     width: auto;
-    display: block;
 }
 
 #likes,
 #dislikes
 {
-    display: inline-block;
+    display: inline-flex;
     margin: 0 10px;
     font-size: calc(1vw + 30px);
+    align-content: center;
 }
 
 #likes i, #dislikes i
 {
-    display: inline-block;
+    display: block;
     font-family: 'Material Icons';
-    font-size: 1em;
-    margin-right: 10px;
-    margin-top: 10px;
+    font-size: calc(2vw + 15px);
+    margin: auto 10px auto 0;
     color: #666666;
     cursor: default;
 }
@@ -39,8 +38,12 @@
 #likes div,
 #dislikes div
 {
-    display: inline-block;
-    font-size: 40px;
+    display: block;
+    font-size: calc(2vw + 15px);
+    color: grey;
+    height: calc(2vw + 12px);
+    margin: auto 10px auto 0;
+    min-width: calc(1vw + 15px);
 }
 
 #likes i:hover,
@@ -52,7 +55,9 @@
 
 #compose-comment
 {
-    width: 90%;
+    width: calc(87%);
+    align-self: flex-start;
+    margin-left: 5%;
 }
 
 #compose-comment .button
@@ -72,10 +77,10 @@
 {
     overflow: hidden;
     resize: none;
-    padding: 0;
-    border: none;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
     outline: none;
-    border-bottom: 1px solid grey;
+    /* border-bottom: 1px solid grey; */
     margin-left: 20px;
     word-wrap: break-word;
     width: 300px;
@@ -91,10 +96,11 @@
 #compose-comment textarea,
 #compose-comment .input-wrapper::after
 {
+    padding: 5px;
     grid-area: 1 / 1 / 2 / 2;
     font-size: 20px;
     word-wrap: break-word;
-    width: 70vw;
+    width: calc(80vw - 100px);
 }
 
 .input-wrapper
@@ -105,9 +111,21 @@
 
 #compose-comment textarea:focus
 {
-    border-bottom: 2px solid black;
+    border-color: black;
 }
 
+.input-wrapper>div
+{
+    background-color: grey;
+    width: 96%;
+    height: 1px;
+    margin: 0 auto;
+}
+
+.input-wrapper textarea:focus+div
+{
+    background-color: black;
+}
 
 #comments
 {
@@ -135,7 +153,7 @@
 .comment
 {
     display: flex;
-    width: 100%;
+    width: 90%;
     flex-direction: column;
 }
 
@@ -167,8 +185,7 @@
 .comment>div:first-of-type
 {
     display: flex;
-    margin-top: 30px;
-    margin-bottom: 30px; 
+    margin: 15px 0;
 }
 
 .comment>div:first-of-type>div
@@ -180,18 +197,48 @@
 
 .comment-like-dislike
 {
-    margin-left: 30px !important;
+    display: flex;
+    margin-left: 30px;
+    margin-top: 15px;
     color: grey;
+    font-size: 15px;
+    cursor: default;
 }
 
+.dislike-comment,
 .like-comment
 {
-    margin-right: 20px;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.dislike-comment[color = black],
+.like-comment[color = black]
+{
+    color: black;
+}
+
+.dislike-comment[color = grey],
+.like-comment[color = grey]
+{
+    color: grey;
 }
 
 .like-comment:hover,
 .dislike-comment:hover
 {
+
     cursor: default;
     color: black;
+}
+
+.comment-likes
+{
+    margin-right: 20px;
+}
+
+.comment-likes,
+.comment-dislikes
+{
+    min-width: 10px;
 }

@@ -68,6 +68,7 @@ function GetNext(url)
 function GetIdByUrl(url)
 {
     var res = url.match(/\/[^/]+/g);
+    console.log(res, url);
     res = res[res.length - 1].slice(1);
     for (let i = 0; i < lessonsUrls.length - 1; i++) {
         if(lessonsUrls[i][1] === res)
