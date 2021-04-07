@@ -17,11 +17,11 @@ function Content(){
                     <Button class="enter_button" name="вход"/>
                 </div>
 
+                <div className="link_contain"><a href="/">Забравена парола?</a></div>
+
                 <div className="separate"/>
                 <div className="inside"><h3>или</h3></div>
                 <div className="separate"/>
-
-                <div className="link_contain" onClick={()=>{console.log("dkasjka")}}><a href="/">Забравена парола?</a></div>
 
             </div>
 
