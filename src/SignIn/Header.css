@@ -1,0 +1,5 @@
+@import "../Style/Colors.css";
+
+.header{
+    border:10px solid red;
+}

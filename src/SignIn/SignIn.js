@@ -1,11 +1,20 @@
 import React, { StrictMode } from 'react'
-import {Button} from '../Components'
+import Content from './content'
+import {Footer} from '../Components'
+import Header from './Header'
+
+if(window.location.pathname==="/signin"){
+    import('./Content.css');
+    import('./Header');
+}
 
 function SignIn() {
     return (
-        <StrictMode>
-            <Button width = "100px" height = "100px" name = "MyButton"/>
-        </StrictMode>
+        <>
+            <Header />
+            <Content/>
+            <Footer/>
+        </>
     );
 }
 
