@@ -183,7 +183,7 @@ class Content extends React.Component {
                             <textarea placeholder="Оставете коментар" onInput={event => event.target.parentNode.dataset.myValue = event.target.value}></textarea>
                         </div>
                     </div>
-                    <Button name="Публикувай" onClick={event=>{this.postComment(document.querySelector("textarea").value)}} />
+                    <Button name="Публикувай" onClick={event => { this.postComment(document.querySelector("textarea").value) }} />
                 </div>
 
                 <div id="comments">{this.state.comments}</div>
@@ -303,7 +303,7 @@ class Content extends React.Component {
             let comments = [
                 { content: "weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaather is very beautiful today", comment_id: 0, likes: 2, dislikes: 1 },
                 {
-                    content: "1", comment_id: 1, replies: [
+                    content: "1", comment_id: 1, likes: 5, replies: [
                         {
                             content: "1.0", comment_id: 2, parent_id: 1, replies: [
                                 { content: "1.1.0", comment_id: 3, parent_id: 2 },
@@ -311,7 +311,7 @@ class Content extends React.Component {
                         },
                         { content: "1.1", comment_id: 5, parent_id: 1 }]
                 },
-                { content: "yes", comment_id: 6, likes: 2, dislikes: 1 },
+                { content: "yes", comment_id: 6, likes: 3, dislikes: 1 },
             ];
 
             comp.setState({ comments: getCommentsNode(comments) });
@@ -325,6 +325,23 @@ class Content extends React.Component {
 let getCommentsNode = comments => _getCommentsNode(comments, false);
 
 function _getCommentsNode(comments, is_reply) {
+    if (!is_reply) {
+        let c1i = 0, c2i = 0;
+        for (let i = 0; i < comments.length; i++) {
+            if (comments[i].likes >= comments[c1i].likes) {
+                c1i = i;
+            }
+            else if (comments[i].likes >= comments[c2i].likes) {
+                c2i = i;
+            }
+        }
+
+        let c1 = comments.splice(c1i, 1);
+        let c2 = comments.splice(c1i < c2i ? c2i - 1 : c2i, 1);
+        comments.unshift(c2[0]);
+        comments.unshift(c1[0]);
+    }
+
     let commentsNodes = [];
     for (let i = 0; i < comments.length; i++) {
         commentsNodes.push(
