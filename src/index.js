@@ -7,7 +7,7 @@ import MainPage from './MainPage/MainPage'
 import Universities from './Universities/Universities'
 import Subjects from './Topics/Topics'
 import Lesson from './Lesson/Lesson'
-import SignIn from './SignIn/SignIn'
+import LogIn from './LogIn/LogIn'
 import Test from './Test/Test'
 
 import './Style/Navbar.css'
@@ -24,7 +24,7 @@ ReactDOM.render(
       <Route path = "/universities" exact component = {Universities} />
       <Route path = "/topics/*"   exact component = {Subjects } />
       <Route path = "/lessons/*"    exact component = {Lesson} />
-      <Route path = "/signin"       exact component = {SignIn} />
+      <Route path = "/Login"       exact component = {LogIn} />
       <Route path = "/tests/*"       exact component = {Test}/>
     </Router>
   </StrictMode>,

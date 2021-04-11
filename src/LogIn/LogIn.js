@@ -3,12 +3,12 @@ import Content from './content'
 import {Footer} from '../Components'
 import Header from './Header'
 
-if(window.location.pathname==="/signin"){
+if(window.location.pathname==="/Login"){
     import('./Content.css');
     import('./Header');
 }
 
-function SignIn() {
+function LogIn() {
     return (
         <>
             <Header />
@@ -18,4 +18,4 @@ function SignIn() {
     );
 }
 
-export default SignIn;
+export default LogIn;

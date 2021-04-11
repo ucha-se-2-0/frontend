@@ -35,7 +35,7 @@
 }
 .user_box{
     margin:10px 50px 5px 50px;
-    width: 100%;
+    width: 75%;
 
 }
 .inside{
@@ -51,7 +51,7 @@
     background-color: black;
     border:0.05em solid black;
 }
-input[type="text"]{
+input[type="text"],[type="password"]{
     height: 40px;
     width: 100%;
     text-align: center;
