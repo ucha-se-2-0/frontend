@@ -6,6 +6,7 @@ import Header from './Header'
 if(window.location.pathname==="/Login"){
     import('./Content.css');
     import('./Header');
+    import('./Header.css')
 }
 
 function LogIn() {

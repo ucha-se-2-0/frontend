@@ -1,6 +1,8 @@
 @import "../Style/Colors.css";
 
 .header{
-    border:10px solid red;
+    width: 100%;
+    height: 50px;
+    margin-top:0px;
 }
 

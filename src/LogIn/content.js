@@ -20,7 +20,7 @@ function Content(){
 
                 </form>
 
-                <div className="link_contain"><a href="/">Забравена парола?</a></div>
+                <div className="link_contain"><a href="/PopUp">Забравена парола?</a></div>
 
                 <div className="separate"/>
                 <div className="inside"><h3>или</h3></div>
@@ -39,7 +39,9 @@ function Content(){
 
     );
 }
-const submit = document.getElementById('sbm');
+var submit;
+window.addEventListener('load',() => {submit = document.getElementById('sbm');
+submit.addEventListener('click',getData)});
 
 const getData = () => {
     const xhr = new XMLHttpRequest();
@@ -51,6 +53,5 @@ const getData = () => {
     xhr.send();
 };
 
-submit.addEventListener('click',getData);
 
 export default Content;
