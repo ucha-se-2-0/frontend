@@ -14,7 +14,7 @@ function Content(){
                     </div>
 
                     <div className="button_box">
-                        <Button id="sbm" type = "submit" class="enter_button" name="вход"/>
+                        <Button id="sbm" type = "submit" class="enter_button" onClick = {getData} name="вход" />
                     </div>
 
 
@@ -39,11 +39,10 @@ function Content(){
 
     );
 }
-var submit;
-window.addEventListener('load',() => {submit = document.getElementById('sbm');
-submit.addEventListener('click',getData)});
 
+var submit;
 const getData = () => {
+    console.log("dadlad");
     const xhr = new XMLHttpRequest();
     xhr.open("POST","http://localhost:3000/Login");
 
