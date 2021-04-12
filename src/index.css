@@ -16,4 +16,5 @@ code {
 *
 {
   font-family: 'Comfortaa';
+  user-select: none;
 }
