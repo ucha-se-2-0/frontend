@@ -1,12 +1,12 @@
 import React from 'react'
-import { GetHeader } from '../LessonsRelUrl';
+import { GetTitle } from '../LessonsRelUrl';
 
 
 
 function Header() {
     return (
         <div className="header">
-            {GetHeader(window.location.pathname)}
+            {GetTitle(window.location.pathname)}
             {/* <Router>
                 <Route path="/lessons/epithelial_and_connective_tissues" exact render={() => <>Епителна и съединителни тъкани</>} />
                 <Route path="/lessons/muscle_and_nervous_tissue" exact render={() => <>Мускулна и нервна тъкани</>} />

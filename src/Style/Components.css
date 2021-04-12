@@ -5,7 +5,7 @@
 .button
 {
     padding: 0 10px; 
-    overflow: hidden;
+    /* overflow: hidden; */
     display: inline-flex;
     position: relative;
     border-radius: 10px;
@@ -60,6 +60,8 @@
 
 .search
 {
+    overflow: hidden;
+    height: auto !important;
     min-width: 40px;
     display: inline-block;
     left: 0px;
