@@ -20,7 +20,7 @@ function Navbar () {
 
         <SearchField height = "50%" search = {Search} class = "important"/>
 
-        <Button name = "Вход" class = "important" link = "/signin"/>
+        <Button name = "Вход" class = "important" link = "/Login"/>
       </div>
     );
 }

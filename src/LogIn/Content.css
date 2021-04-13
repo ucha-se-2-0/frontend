@@ -1,0 +1,82 @@
+@import "../Style/Colors.css";
+
+*{
+    text-align:center;
+}
+.content{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 50%;
+    margin:10px 100px 100px 350px;
+    box-shadow: none;
+    align-self: center;
+}
+.register{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding:10px;
+    width: 100%;
+    margin:20px 95px 10px 15px;
+    box-shadow: 0px 10px 50px 0px #555555;
+}
+.register_text{
+    font-size:large;
+
+}
+.main{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding:10px;
+    margin:100px 440px 10px 360px;
+    box-shadow: 0px 10px 50px 0px #555555;
+}
+.user_box{
+    margin:10px 50px 5px 50px;
+    width: 75%;
+
+}
+.inside{
+    margin:10px 0px 0px 0px;
+    width:10%;
+    text-align:center;
+}
+.separate{
+    margin:35px 0px 0px 0px;
+    width: 33%;
+    height: 1px;
+    padding:1px;
+    background-color: black;
+    border:0.05em solid black;
+}
+input[type="text"],[type="password"]{
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    font-size:medium;
+}
+.button_box{
+    margin:20px 180px 5px 80px;
+}
+.enter_button{
+    margin:5px 100px 0px 40px;
+    height: 45px;
+    width: 100%;
+    font-size:large;
+    font-weight: 600;
+}
+.link_contain{
+    width: 100%;
+    margin-top:10px;
+    margin-left:10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+a:link,a:visited{
+    color:var(--darkcyan);
+}
+a:hover{
+    color:var(--darkpurple);
+}
