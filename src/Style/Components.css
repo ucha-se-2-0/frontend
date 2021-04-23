@@ -9,7 +9,7 @@
     display: inline-flex;
     position: relative;
     border-radius: 10px;
-    background-color: var(--purple);
+    background-color: var(--button-d);
     text-decoration: none;
     text-align: center;
 }
@@ -22,7 +22,7 @@
 .button-content
 {
     display: inline-block;
-    color: white;
+    color: var(--text-d);
     position: relative;
     z-index: 10;
     transition: color 0.5s;
@@ -30,7 +30,7 @@
 
 .button:hover .button-content
 {
-    color: var(--darkpurple);
+    /* color: var(--text-d); */
 }
 
 .button-background
@@ -110,6 +110,9 @@
     left: 0%;
 }
 
+.search i{
+    color: var(--text-d);
+}
 
 /*FOOTER*/
 
@@ -120,7 +123,7 @@
     bottom: 0px;
     width: 100%;
     height: 400px;
-    background-color: var(--purple);
+    background-color: var(--footer-d);
 }
 
 /*DEFAULT NAVBAR*/

@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetTitle } from '../LessonsRelUrl';
+import { GetTitle } from '../LessonsUrl';
 
 
 

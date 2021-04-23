@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { Button } from '../Components'
-import { GetNext } from '../LessonsRelUrl'
+import { GetNext } from '../LessonsUrl'
 
 var correctAnswers = []
 var turnedIn = false;

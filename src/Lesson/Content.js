@@ -1,6 +1,6 @@
 import React from "react"
 import { Button } from '../Components'
-import { GetIdByUrl } from '../LessonsRelUrl'
+import { GetIdByUrl } from '../LessonsUrl'
 
 const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';//wtf is this
 

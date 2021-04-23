@@ -12,7 +12,7 @@
   justify-content: flex-end;
   font-weight: 550;
 
-  background-color: var(--purple);
+  background-color: var(--navbar-d);
 }
 
 .navbar>*
@@ -102,7 +102,7 @@
   width: 100%;
   padding: 0 10px;
   margin: 0;
-  background-color: var(--purple);
+  background-color: var(--button-d);
 }
 
 .dropdown-content li:last-child

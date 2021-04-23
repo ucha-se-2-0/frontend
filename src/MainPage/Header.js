@@ -3,7 +3,8 @@ import React from "react"
 function Header() {
     return (
         <div className="header">
-            <img src="Images/logoWithoutOrbits.png" id="logo" alt="JULEMY" />
+            <img src = "Images/LogoDark.jpg" id = "logo"></img>
+            {/* <img src="Images/logoWithoutOrbits.png" id="logo" alt="JULEMY" />
 
             <img src="Images/orbits1.png" id="logoOrbits" alt="JULEMY" style={{ position: "absolute", left: "31.5%", top: "11.5%", zIndex: "-1" }} />
 
@@ -12,7 +13,7 @@ function Header() {
                 <div></div>
                 <div></div>
                 <div></div>
-            </div>
+            </div> */}
         </div>
 
     );

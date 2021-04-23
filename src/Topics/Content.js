@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { Button } from '../Components'
 
-import {GetUrl} from '../LessonsRelUrl'
+import {GetUrl} from '../LessonsUrl'
 
 function onDropdownClick(component) {
     component.childNodes.forEach(element => {

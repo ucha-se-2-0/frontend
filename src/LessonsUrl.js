@@ -85,4 +85,4 @@ function GetIdByTitle(url)
     }
 }
 
-export { GetUrl, GetTitle, GetNext, GetIdByUrl, GetIdByTitle }
+export { GetUrl, GetTitle, GetNext, GetIdByUrl, GetIdByTitle, lessonsUrls }

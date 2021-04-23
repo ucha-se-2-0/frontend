@@ -50,7 +50,7 @@ class SearchField extends React.Component {
           style: {
             buttonBackground: { backgroundColor: "transparent" },
             input: { display: "none" },
-            buttonContent: { color: "white" },
+            buttonContent: { color: "var(--text-d)" },
             search: { width: "0%" }
           }
         });
@@ -78,7 +78,7 @@ class SearchField extends React.Component {
           style: {
             buttonBackground: { backgroundColor: "white" },
             input: { display: "inline-block" },
-            buttonContent: { color: "var(--darkpurple)" },
+            buttonContent: { color: "var(--text-d)" },
             search: { width: window.innerWidth - Number(window.getComputedStyle(document.getElementsByClassName("search")[0]).marginLeft.match(/\d+/)[0]) - 60 + "px" }
           }
         });
