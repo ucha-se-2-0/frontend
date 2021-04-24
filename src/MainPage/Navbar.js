@@ -1,19 +1,34 @@
 import React from 'react';
 import {Button, SearchField} from '../Components'
 import {lessonsUrls} from '../LessonsUrl'
+import {theme, colors} from '../Colors'
 
-function Navbar () {
+class DropdownElement extends React.Component
+{
+  render()
+  {
+    return(
+      <li style = {{backgroundColor: theme === "dark" ? colors.notSoDark : colors.notSoLight}}>
+        <Button name = {this.props.name} link = {this.props.name}/>
+      </li>
+    );
+  }
+}
+
+class Navbar extends React.Component {
+  render()
+  {
     return (
-      <div className="navbar">
+      <div className="navbar" style = {{backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light}}>
         <div className="dropdown">
           <Button name = "Предмети"/>
           <ul className="dropdown-content">
-            <li><Button name = {<>Анатомия <br/> и физиология</>}   link = "/topics/anatomy_and_physiology" style = {{}}/></li>
-            <li><Button name = "Клетка"  link = "/topics/cytology"/></li>
-            <li><Button name = "Вируси"   link = "/topics/viruses"/></li>
-            <li><Button name = "Генетика"   link = "/topics/genetics"/></li>
-            <li><Button name = "Екология"   link = "/topics/ecology"/></li>
-            <li><Button name = "Химия"   link = "/topics/chemistry"/></li>
+            <DropdownElement name = {<>Анатомия <br/> и физиология</>} link = "/topics/anatomy_and_physiology"/>
+            <DropdownElement name = "Клетка"  link = "/topics/cytology"/>
+            <DropdownElement name = "Вируси"   link = "/topics/viruses"/>
+            <DropdownElement name = "Генетика"   link = "/topics/genetics"/>
+            <DropdownElement name = "Екология"   link = "/topics/ecology"/>
+            <DropdownElement name = "Химия"   link = "/topics/chemistry"/>
           </ul>
         </div>
 
@@ -24,6 +39,7 @@ function Navbar () {
         <Button name = "Вход" class = "important" link = "/Login"/>
       </div>
     );
+  }
 }
 
 

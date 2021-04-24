@@ -2,6 +2,7 @@
 //can be imported and simply used
 
 import React from "react"
+import {colors, theme} from './Colors'
 import "./Style/Components.css"
 
 class Button extends React.Component {
@@ -15,7 +16,12 @@ class Button extends React.Component {
   }
 
   render() {
-    const style = { width: this.props.width, height: this.props.height, cursor: this.state.cursor };
+    const style = { 
+      width: this.props.width, 
+      height: this.props.height, 
+      cursor: this.state.cursor,
+      backgroundColor: theme === "dark" ? colors.button.dark : colors.button.light,
+      color: theme === "dark" ? colors.text.dark : colors.text.light };
     return (
       <a id={this.props.id} className={"button " + this.props.class} href={this.props.link} style={style} onClick={this.props.onClick}>
         <div className="button-content" style={{ cursor: this.state.cursor }}>
@@ -34,7 +40,7 @@ class SearchField extends React.Component {
       style: {
         buttonBackground: { backgroundColor: "transparent" },
         input: { display: "none" },
-        buttonContent: { color: "white" },
+        buttonContent: { color: colors.text.dark },
         search: { width: "0%" }
       }
     }
@@ -42,7 +48,6 @@ class SearchField extends React.Component {
 
   componentDidMount() {
     window.addEventListener('click', event => {
-      console.log(this.state.pressed);
       if (!this.state.pressed) {
         this.setState({
           visible: false,
@@ -50,7 +55,7 @@ class SearchField extends React.Component {
           style: {
             buttonBackground: { backgroundColor: "transparent" },
             input: { display: "none" },
-            buttonContent: { color: "var(--text-d)" },
+            buttonContent: { color: colors.text.dark },
             search: { width: "0%" }
           }
         });
@@ -78,7 +83,7 @@ class SearchField extends React.Component {
           style: {
             buttonBackground: { backgroundColor: "white" },
             input: { display: "inline-block" },
-            buttonContent: { color: "var(--text-d)" },
+            buttonContent: { color: colors.text.light },
             search: { width: window.innerWidth - Number(window.getComputedStyle(document.getElementsByClassName("search")[0]).marginLeft.match(/\d+/)[0]) - 60 + "px" }
           }
         });
@@ -149,4 +154,15 @@ class Header extends React.Component {
   }
 }
 
-export { Button, SearchField, Footer, DefaultNavbar, Header };
+class Title extends React.Component
+{
+  render()
+  {
+    return(
+    <div className="content-title" style = {{color: theme === "dark" ? colors.title.dark : colors.title.light}}>
+      {this.props.name}
+    </div>)
+  }
+}
+
+export { Button, SearchField, Footer, DefaultNavbar, Header, Title };

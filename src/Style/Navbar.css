@@ -63,6 +63,7 @@
   z-index: 1;
   margin: auto;
   padding: 7px 0;
+  border-radius: 10px;
 }
 
 .dropdown-content .button
@@ -86,6 +87,7 @@
   text-decoration: none;
   list-style-type: none;
   position:absolute;
+  border-radius: 10px;
 }
 
 .dropdown:hover .dropdown-content
@@ -97,7 +99,6 @@
 
 .dropdown-content li
 {
-  cursor: pointer;
   text-align: center;
   width: 100%;
   padding: 0 10px;

@@ -12,13 +12,14 @@
   --cyan: rgb(48, 227, 175);
   --darkcyan: rgb(35, 200, 155);
 
+  --darker: rgb(36, 54, 86);
   --dark: rgb(41, 61, 96);
   --not-so-dark:  rgb(49, 73, 115);
   --not-so-light:  rgb(191, 211, 223);
   --light: rgb(212, 234, 248);
 
-  --content-d: var(--not-so-dark);
-  --content-l: var(--not-so-light);
+  --content-d: var(--dark);
+  --content-l: var(--light);
 
   --header-d: var(--dark);
   --header-l: var(--light);
@@ -29,10 +30,13 @@
   --navbar-d: var(--not-so-dark);
   --navbar-l: var(--not-so-light);
 
-  --button-d: var(--light);
-  --button-l: var(--dark);
+  --button-d: var(--not-so-dark);
+  --button-l: var(--not-so-light);
 
 
-  --text-d: black;
-  --text-l: white;
+  --text-d: white;
+  --text-l: black;
+
+  --title-d: var(--lightcyan);
+  --title-l: var(--dark);
 }

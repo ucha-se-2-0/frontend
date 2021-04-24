@@ -22,15 +22,9 @@
 .button-content
 {
     display: inline-block;
-    color: var(--text-d);
     position: relative;
     z-index: 10;
     transition: color 0.5s;
-}
-
-.button:hover .button-content
-{
-    /* color: var(--text-d); */
 }
 
 .button-background
@@ -110,10 +104,6 @@
     left: 0%;
 }
 
-.search i{
-    color: var(--text-d);
-}
-
 /*FOOTER*/
 
 .footer
@@ -155,4 +145,14 @@
   border-top-right-radius: 0px;
   border-bottom-right-radius: 25px;
   border-top-left-radius: 25px;
+}
+
+/* TITLE */
+.content-title
+{
+    width: 100%;
+    margin: 50px 0 10px 0 !important;
+    text-align: center;
+    font-size: 80px;
+    color: var(--title-d);
 }
