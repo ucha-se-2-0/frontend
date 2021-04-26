@@ -1,51 +1,61 @@
 import React from 'react';
-import {Button, SearchField} from '../Components'
-import {lessonsUrls} from '../LessonsUrl'
-import {theme, colors} from '../Colors'
+import { Button, SearchField } from '../Components'
+import { lessonsUrls } from '../urls'
+import { theme, colors } from '../Colors'
 
-class DropdownElement extends React.Component
-{
-  render()
-  {
-    return(
-      <li style = {{backgroundColor: theme === "dark" ? colors.notSoDark : colors.notSoLight}}>
-        <Button name = {this.props.name} link = {this.props.name}/>
+class DropdownElement extends React.Component {
+  render() {
+    return (
+      <li style={{ backgroundColor: theme === "dark" ? colors.notSoDark : colors.notSoLight }}>
+        <Button name={this.props.name} link={this.props.link} />
       </li>
     );
   }
 }
 
 class Navbar extends React.Component {
-  render()
-  {
+  render() {
     return (
-      <div className="navbar" style = {{backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light}}>
+      <div className="navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
         <div className="dropdown">
-          <Button name = "Предмети"/>
+          <Button name="Предмети" />
           <ul className="dropdown-content">
-            <DropdownElement name = {<>Анатомия <br/> и физиология</>} link = "/topics/anatomy_and_physiology"/>
-            <DropdownElement name = "Клетка"  link = "/topics/cytology"/>
-            <DropdownElement name = "Вируси"   link = "/topics/viruses"/>
-            <DropdownElement name = "Генетика"   link = "/topics/genetics"/>
-            <DropdownElement name = "Екология"   link = "/topics/ecology"/>
-            <DropdownElement name = "Химия"   link = "/topics/chemistry"/>
+            <DropdownElement name={<>Анатомия <br /> и физиология</>} link="/subjects/anatomy_and_physiology" />
+            <DropdownElement name="Клетка" link="/subjects/cytology" />
+            <DropdownElement name="Вируси" link="/subjects/viruses" />
+            <DropdownElement name="Генетика" link="/subjects/genetics" />
+            <DropdownElement name="Екология" link="/subjects/ecology" />
+            <DropdownElement name="Химия" link="/subjects/chemistry" />
           </ul>
         </div>
 
-        <Button id = "unis" name = "Университети" link = "/universities" class = "important"/>
+        <Button id="unis" name="Университети" link="/universities" class="important" />
 
-        <SearchField height = "50%" search = {Search} class = "important"/>
+        <SearchField height="50%" search={Search} class="important" />
 
-        <Button name = "Вход" class = "important" link = "/Login"/>
+        <Button name="Вход" class="important" link="/Login" />
       </div>
     );
+  }
+
+  componentDidMount() {
+    let url = window.location.pathname;
+
+    switch (url) {
+      case "/":
+        OnResizeOrLoad();
+
+        window.addEventListener('resize', () => {
+          OnResizeOrLoad();
+        });
+        break;
+    }
   }
 }
 
 
 
-function Search(search_request)
-{
+function Search(search_request) {
   // let lessons = []
   // let request = new XMLHttpRequest;
   // for(let i = 0; i < lessonsUrls.length; i++)
@@ -62,12 +72,11 @@ function Search(search_request)
 
 
 
-function OnResizeOrLoad()
-{
+function OnResizeOrLoad() {
   //Navbar
   var navbarElements = document.querySelectorAll(".navbar>*");
-  navbarElements.forEach((element) => { 
-    element.style.fontSize = Math.pow(window.innerWidth, 0.5) * 0.8 + "px"; 
+  navbarElements.forEach((element) => {
+    element.style.fontSize = Math.pow(window.innerWidth, 0.5) * 0.8 + "px";
   });
 
   document.querySelectorAll(".navbar>*.dropdown").forEach(element => {
@@ -81,22 +90,7 @@ function OnResizeOrLoad()
   //document.getElementById("logoOrbits").style.height = Number(style.width.slice(0, -2)) / 6.0 + "px";
 }
 
-window.addEventListener('load', ()=>{
-  let url = window.location.pathname;
-
-  switch(url)
-  {
-    case "/":
-      OnResizeOrLoad();
-      
-      window.addEventListener('resize', ()=>{
-        OnResizeOrLoad();
-      });
-      break;
-    }
-});
-
-window.addEventListener('close', ()=>{
+window.addEventListener('close', () => {
   window.removeEventListener('load', OnResizeOrLoad);
   window.removeEventListener('resize', OnResizeOrLoad);
 });

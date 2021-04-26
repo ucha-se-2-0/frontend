@@ -31,6 +31,7 @@ window.addEventListener("load", ()=>{
         theme = cookie
     else
         setCookie("theme", "light", 24 * 30)
+    console.log(cookie)
 })
 
 function changeTheme()
@@ -38,11 +39,13 @@ function changeTheme()
     if(theme === "light")
     {
         theme = "dark"
+        setCookie("theme", "dark", 24 * 30)
         document.getElementById("root").style.backgroundColor = "var(--dark)";
     }
     else
     {
         theme = "light";
+        setCookie("theme", "light", 24 * 30)
         document.getElementById("root").style.backgroundColor = "var(--light)";
     }
 

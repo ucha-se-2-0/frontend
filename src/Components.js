@@ -40,7 +40,7 @@ class SearchField extends React.Component {
       style: {
         buttonBackground: { backgroundColor: "transparent" },
         input: { display: "none" },
-        buttonContent: { color: colors.text.dark },
+        buttonContent: { color: theme === "dark" ? colors.text.dark : colors.text.light },
         search: { width: "0%" }
       }
     }
@@ -55,7 +55,7 @@ class SearchField extends React.Component {
           style: {
             buttonBackground: { backgroundColor: "transparent" },
             input: { display: "none" },
-            buttonContent: { color: colors.text.dark },
+            buttonContent: { color: theme === "dark" ? colors.text.dark : colors.text.light },
             search: { width: "0%" }
           }
         });
@@ -76,7 +76,7 @@ class SearchField extends React.Component {
 
   render() {
     return (
-      <a className={"search button " + this.props.class} style={{ cursor: "default", width: this.state.style.search.width }} onClick={() => {
+      <div className={"search button " + this.props.class} style={{ cursor: "default", width: this.state.style.search.width }} onClick={() => {
         this.setState({
           visible: true,
           pressed: true,
@@ -107,7 +107,7 @@ class SearchField extends React.Component {
           } style={this.state.style.input} />
         </div>
         <div className="button-background" style={this.state.style.buttonBackground} />
-      </a>
+      </div>
     );
   }
 
@@ -121,7 +121,7 @@ class SearchField extends React.Component {
 class Footer extends React.Component {
   render() {
     return (
-      <div className="footer">
+      <div className="footer" style = {theme === "dark" ? {backgroundColor: colors.footer.dark, color: colors.text.dark} : {backgroundColor: colors.footer.light, color: colors.text.light}}>
         {/*TO DO*/}
       </div>
     );
@@ -131,13 +131,13 @@ class Footer extends React.Component {
 class DefaultNavbar extends React.Component {
   render() {
     return (
-      <div className="navbar">
+      <div className="navbar" style = {{backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light}}>
         {this.props.content}
 
-        <Button name="Вход" class="important" link = "/signin" />
+        <Button name="Вход" class="important" link = "/Login" />
 
         <a href="/" className="home important">
-          <img src="/Images/logo.png" alt="HOME"></img>
+          <img src={theme === "dark" ? "/Images/LogoLight.jpg" : "/Images/LogoDark.jpg"} alt="HOME"></img>
         </a>
       </div>
     );
@@ -147,7 +147,7 @@ class DefaultNavbar extends React.Component {
 class Header extends React.Component {
   render() {
     return (
-      <div className="header">
+      <div className="header" style = {theme === "dark" ? {backgroundColor: colors.header.dark, color: colors.text.dark} : {backgroundColor: colors.header.light, color: colors.text.light}}>
         {this.props.content}
       </div>
     );

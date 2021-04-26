@@ -3,7 +3,7 @@ import Content from './content'
 import {Footer} from '../Components'
 import Header from './Header'
 
-if(window.location.pathname==="/Login"){
+if(window.location.pathname.toLowerCase() ==="/login"){
     import('./Content.css');
     import('./Header');
     import('./Header.css')

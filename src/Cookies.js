@@ -20,9 +20,9 @@ function deleteCookie(name)
 
 function getCookie(name)
 {
-    let match = document.cookie.match(name + /\=[^;]*/);
+    let match = document.cookie.match(/theme\=[^;]*/);
     if(match)
-        return match[0].slice(name.length);
+        return match[0].slice(name.length + 1);
 }
 
 export {setCookie, getCookie, deleteCookie};

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { Button } from '../Components'
-import { GetNext } from '../LessonsUrl'
+import { GetNextLesson, GetSubject } from '../urls'
 
 var correctAnswers = []
 var turnedIn = false;
@@ -125,11 +125,12 @@ function CheckAnswers() {
 
     let toNextLesson = document.getElementById("toNextLesson")
     toNextLesson.style.display = "inline-flex";
-    let next = GetNext(window.location.pathname);
+    let next = GetNextLesson(window.location.pathname);
     if (next === undefined) {
-        let topic = JSON.parse(sessionStorage.getItem("topic"));
+        let topic = GetSubject(window.location.pathname);
         toNextLesson.getElementsByClassName("button-content")[0].innerHTML = "Към " + topic[0];
-        toNextLesson.setAttribute("href", "/topics/" + topic[1]);
+        //console.log(topic)
+        toNextLesson.setAttribute("href", "/subjects/" + topic[1]);
     }
     else {
         toNextLesson.getElementsByClassName("button-content")[0].innerHTML = "Към следващия урок (" + next[0] + ')';

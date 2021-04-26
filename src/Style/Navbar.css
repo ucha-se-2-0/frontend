@@ -11,8 +11,6 @@
   flex-flow: row wrap;
   justify-content: flex-end;
   font-weight: 550;
-
-  background-color: var(--navbar-d);
 }
 
 .navbar>*

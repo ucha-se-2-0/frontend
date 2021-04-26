@@ -1,13 +1,14 @@
 import React from 'react'
-import { GetTitle } from '../LessonsUrl';
+import { colors, theme } from '../Colors';
+import { GetLesson } from '../urls';
 
 
-
-function Header() {
-    return (
-        <div className="header">
-            {GetTitle(window.location.pathname)}
-            {/* <Router>
+class Header extends React.Component {
+    render() {
+        return (
+            <div className="header">
+                {GetLesson(window.location.pathname)}
+                {/* <Router>
                 <Route path="/lessons/epithelial_and_connective_tissues" exact render={() => <>Епителна и съединителни тъкани</>} />
                 <Route path="/lessons/muscle_and_nervous_tissue" exact render={() => <>Мускулна и нервна тъкани</>} />
 
@@ -56,8 +57,22 @@ function Header() {
 
                 <Route path="/lessons/hygienics_of_endocrine_system" exact render={() => <>Здравни познания</>} />
             </Router> */}
-        </div>
-    );
+            </div>
+        );
+    }
+    
+    componentDidMount()
+    {
+        if(theme === "dark")
+        {
+            document.getElementsByClassName("header")[0].style.boxShadow = "none";
+            document.getElementsByClassName("header")[0].style.backgroundColor = colors.dark;
+        }
+        else
+        {
+            document.getElementsByClassName("header")[0].style.boxShadow = "0px 0px 50px 10px rgb(20, 20, 55)";
+        }
+    }
 }
 
 export default Header;
