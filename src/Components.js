@@ -36,29 +36,23 @@ class Button extends React.Component {
 class SearchField extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.stateOfHidden = {
+      visible: false,
+      pressed: false,
       style: {
         buttonBackground: { backgroundColor: "transparent" },
-        input: { display: "none" },
+        input: { visibility: "hidden" },
         buttonContent: { color: theme === "dark" ? colors.text.dark : colors.text.light },
         search: { width: "0%" }
       }
     }
+    this.state = this.stateOfHidden;
   }
 
   componentDidMount() {
     window.addEventListener('click', event => {
       if (!this.state.pressed) {
-        this.setState({
-          visible: false,
-          pressed: false,
-          style: {
-            buttonBackground: { backgroundColor: "transparent" },
-            input: { display: "none" },
-            buttonContent: { color: theme === "dark" ? colors.text.dark : colors.text.light },
-            search: { width: "0%" }
-          }
-        });
+        this.setState(this.stateOfHidden);
       }
       else {
         this.state.pressed = false;
@@ -82,7 +76,7 @@ class SearchField extends React.Component {
           pressed: true,
           style: {
             buttonBackground: { backgroundColor: "white" },
-            input: { display: "inline-block" },
+            input: { visibility: "visible" },
             buttonContent: { color: colors.text.light },
             search: { width: window.innerWidth - Number(window.getComputedStyle(document.getElementsByClassName("search")[0]).marginLeft.match(/\d+/)[0]) - 60 + "px" }
           }

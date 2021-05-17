@@ -7,11 +7,13 @@
 
 .question
 {
-    width: 100%;
+    width: 70%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -83,7 +85,7 @@
 
 #result
 {
-    font-size: 50px;
+    font-size: calc(5vw + 10px);
     margin: 50px;
 }
 

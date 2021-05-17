@@ -17,7 +17,7 @@
   --light: rgb(192, 229, 255);
 
   --content-d: var(--dark);
-  --content-l: var(--not-so-light);
+  --content-l: var(--light);
 
   --header-d: var(--dark);
   --header-l: var(--light);

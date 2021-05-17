@@ -129,7 +129,6 @@ function CheckAnswers() {
     if (next === undefined) {
         let topic = GetSubject(window.location.pathname);
         toNextLesson.getElementsByClassName("button-content")[0].innerHTML = "Към " + topic[0];
-        //console.log(topic)
         toNextLesson.setAttribute("href", "/subjects/" + topic[1]);
     }
     else {
@@ -188,7 +187,7 @@ function CheckAnswers() {
                 let correctAnswerField = questions[q].getElementsByClassName("correctAnswer")[0];
                 correctAnswerField.style.display = "block";
 
-                questions[q].style.backgroundColor = "#ffe0c0";
+                questions[q].style.backgroundColor = "#ffcccc";
                 if(input.type === "number")
                 {
                     correctAnswerField.innerHTML = correctAnswers[q].answer;

@@ -13,12 +13,12 @@ function Content() {
             <Title name = "Предмети"/>
 
             <div className="subjects">
-                <Button name="Анатомия и физиология" link="/topics/anatomy_and_physiology" />
-                <Button name="Клетка" link="/topics/viruses" />
-                <Button name="Вируси" link="/topics/viruses" />
-                <Button name="Генетика" link="/topics/genetics" />
-                <Button name="Екология" link="/topics/ecology" />
-                <Button name="Химия" link="/topics/chemistry" />
+                <Button name="Анатомия и физиология" link="/subjects/anatomy_and_physiology" />
+                <Button name="Клетка" link="/subjects/viruses" />
+                <Button name="Вируси" link="/subjects/viruses" />
+                <Button name="Генетика" link="/subjects/genetics" />
+                <Button name="Екология" link="/subjects/ecology" />
+                <Button name="Химия" link="/subjects/chemistry" />
             </div>
         </div>
     );
