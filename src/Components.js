@@ -2,6 +2,7 @@
 //can be imported and simply used
 
 import React from "react"
+import {colors, theme} from './Colors'
 import "./Style/Components.css"
 
 class Button extends React.Component {
@@ -15,7 +16,12 @@ class Button extends React.Component {
   }
 
   render() {
-    const style = { width: this.props.width, height: this.props.height, cursor: this.state.cursor };
+    const style = { 
+      width: this.props.width, 
+      height: this.props.height, 
+      cursor: this.state.cursor,
+      backgroundColor: theme === "dark" ? colors.button.dark : colors.button.light,
+      color: theme === "dark" ? colors.text.dark : colors.text.light };
     return (
       <a id={this.props.id} className={"button " + this.props.class} href={this.props.link} style={style} onClick={this.props.onClick}>
         <div className="button-content" style={{ cursor: this.state.cursor }}>
@@ -30,30 +36,23 @@ class Button extends React.Component {
 class SearchField extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.stateOfHidden = {
+      visible: false,
+      pressed: false,
       style: {
         buttonBackground: { backgroundColor: "transparent" },
-        input: { display: "none" },
-        buttonContent: { color: "white" },
+        input: { visibility: "hidden" },
+        buttonContent: { color: theme === "dark" ? colors.text.dark : colors.text.light },
         search: { width: "0%" }
       }
     }
+    this.state = this.stateOfHidden;
   }
 
   componentDidMount() {
     window.addEventListener('click', event => {
-      console.log(this.state.pressed);
       if (!this.state.pressed) {
-        this.setState({
-          visible: false,
-          pressed: false,
-          style: {
-            buttonBackground: { backgroundColor: "transparent" },
-            input: { display: "none" },
-            buttonContent: { color: "white" },
-            search: { width: "0%" }
-          }
-        });
+        this.setState(this.stateOfHidden);
       }
       else {
         this.state.pressed = false;
@@ -71,14 +70,14 @@ class SearchField extends React.Component {
 
   render() {
     return (
-      <a className={"search button " + this.props.class} style={{ cursor: "default", width: this.state.style.search.width }} onClick={() => {
+      <div className={"search button " + this.props.class} style={{ cursor: "default", width: this.state.style.search.width }} onClick={() => {
         this.setState({
           visible: true,
           pressed: true,
           style: {
             buttonBackground: { backgroundColor: "white" },
-            input: { display: "inline-block" },
-            buttonContent: { color: "var(--darkpurple)" },
+            input: { visibility: "visible" },
+            buttonContent: { color: colors.text.light },
             search: { width: window.innerWidth - Number(window.getComputedStyle(document.getElementsByClassName("search")[0]).marginLeft.match(/\d+/)[0]) - 60 + "px" }
           }
         });
@@ -102,7 +101,7 @@ class SearchField extends React.Component {
           } style={this.state.style.input} />
         </div>
         <div className="button-background" style={this.state.style.buttonBackground} />
-      </a>
+      </div>
     );
   }
 
@@ -116,7 +115,7 @@ class SearchField extends React.Component {
 class Footer extends React.Component {
   render() {
     return (
-      <div className="footer">
+      <div className="footer" style = {theme === "dark" ? {backgroundColor: colors.footer.dark, color: colors.text.dark} : {backgroundColor: colors.footer.light, color: colors.text.light}}>
         {/*TO DO*/}
       </div>
     );
@@ -126,13 +125,13 @@ class Footer extends React.Component {
 class DefaultNavbar extends React.Component {
   render() {
     return (
-      <div className="navbar">
+      <div className="navbar" style = {{backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light}}>
         {this.props.content}
 
-        <Button name="Вход" class="important" link = "/signin" />
+        <Button name="Вход" class="important" link = "/Login" />
 
         <a href="/" className="home important">
-          <img src="/Images/logo.png" alt="HOME"></img>
+          <img src={theme === "dark" ? "/Images/LogoLight.jpg" : "/Images/LogoDark.jpg"} alt="HOME"></img>
         </a>
       </div>
     );
@@ -142,11 +141,22 @@ class DefaultNavbar extends React.Component {
 class Header extends React.Component {
   render() {
     return (
-      <div className="header">
+      <div className="header" style = {theme === "dark" ? {backgroundColor: colors.header.dark, color: colors.text.dark} : {backgroundColor: colors.header.light, color: colors.text.light}}>
         {this.props.content}
       </div>
     );
   }
 }
 
-export { Button, SearchField, Footer, DefaultNavbar, Header };
+class Title extends React.Component
+{
+  render()
+  {
+    return(
+    <div className="content-title" style = {{color: theme === "dark" ? colors.title.dark : colors.title.light}}>
+      {this.props.name}
+    </div>)
+  }
+}
+
+export { Button, SearchField, Footer, DefaultNavbar, Header, Title };

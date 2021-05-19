@@ -38,6 +38,11 @@
     transition: max-height 0.5s, margin 0.5s;
 }
 
+.topic>*
+{
+    text-align: start;
+}
+
 .topic>.button i
 {
     transform: rotateZ(0deg);

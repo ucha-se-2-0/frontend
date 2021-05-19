@@ -1,12 +1,12 @@
 import React from "react"
 import { Button } from '../Components'
-import { GetIdByUrl } from '../LessonsRelUrl'
+import { GetLessonIdByUrl } from '../urls'
 
 const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';//wtf is this
 
 var lesson_id;
 if (window.location.pathname.indexOf("/lessons/") !== -1)
-    lesson_id = GetIdByUrl(window.location.pathname);
+    lesson_id = GetLessonIdByUrl(window.location.pathname);
 
 var liked = [];
 var disliked = [];

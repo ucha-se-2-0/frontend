@@ -1,50 +1,41 @@
 import React from 'react'
-import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Content from './Content'
-import { Footer } from '../Components'
-import { DefaultNavbar as Navbar, Header, SearchField } from '../Components'
+import { DefaultNavbar as Navbar, Header, SearchField, Footer } from '../Components'
+import { colors, theme } from '../Colors'
+import { GetSubjectByUrl } from '../urls'
 
-if (window.location.pathname.match("/topics/")) {
+if (window.location.pathname.match("/subjects/")) {
     import('./Content.css');
     import('./Navbar.css');
 }
 
-function Subjects() {
-    return (
-        <>
-            <Router>
-                <Route path="/topics/anatomy_and_physiology" exact component={() => {
-                    sessionStorage.setItem("topic", JSON.stringify(["Анатомия и физиология", "anatomy_and_physiology"]));
-                    return <Header content="Анатомия и физиология" />
-                }} />
-                <Route path="/topics/cytology" exact component={() => {
-                    sessionStorage.setItem("topic", "Клетка");
-                    return <Header content="Клетка" />
-                }} />
-                <Route path="/topics/viruses" exact component={() => {
-                    sessionStorage.setItem("topic", "Вируси");
-                    return <Header content="Вируси" />
-                }} />
-                <Route path="/topics/genetics" exact component={() => {
-                    sessionStorage.setItem("topic", "Генетика");
-                    return <Header content="Генетика" />
-                }} />
-                <Route path="/topics/ecology" exact component={() => {
-                    sessionStorage.setItem("topic", "Екология");
-                    return <Header content="Екология" />
-                }} />
-                <Route path="/topics/chemistry" exact component={() => {
-                    sessionStorage.setItem("topic", "Биохимия");
-                    return <Header content="Биохимия" />
-                }} />
-            </Router>
+class Subjects extends React.Component {
+    render() {
+        return (
+            <>
+                <Header content={GetSubjectByUrl(window.location.pathname)} />
 
-            <Navbar content = { <SearchField search = {()=>{}} class = "important" />}/>
-            <Content />
-            <Footer />
-        </>
-    );
+                {/* <span style = {{width: "100%", height: "5px", display: "block", backgroundColor: colors.notSoLight}}/> */}
+
+                <Navbar content={<SearchField search={() => { }} class="important" />} />
+                <Content />
+                <Footer />
+            </>
+        );
+    }
+
+    componentDidMount()
+    {
+        if(theme === "dark")
+        {
+            document.getElementsByClassName("header")[0].style.boxShadow = "none";
+        }
+        else
+        {
+            document.getElementsByClassName("header")[0].style.boxShadow = "0px 0px 50px 10px rgb(20, 20, 55)";
+        }
+    }
 }
 
 export default Subjects;

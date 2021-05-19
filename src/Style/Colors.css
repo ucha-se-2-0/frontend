@@ -6,11 +6,35 @@
   --purple: rgb(185, 8, 224);
   --darkpurple: rgb(150, 0, 140);
 
-  --yellow: #ffcc30;
-
   --lightcyan: rgb(60, 255, 190);
   --cyan: rgb(48, 227, 175);
   --darkcyan: rgb(35, 200, 155);
 
-  --text-color: white;
+  --darker: rgb(36, 54, 86);
+  --dark: rgb(41, 61, 96);
+  --not-so-dark:  rgb(49, 73, 115);
+  --not-so-light:  rgb(180, 211, 223);
+  --light: rgb(192, 229, 255);
+
+  --content-d: var(--dark);
+  --content-l: var(--light);
+
+  --header-d: var(--dark);
+  --header-l: var(--light);
+
+  --footer-d: var(--not-so-dark);
+  --footer-l: var(--not-so-light);
+
+  --navbar-d: var(--not-so-dark);
+  --navbar-l: var(--not-so-light);
+
+  --button-d: var(--not-so-dark);
+  --button-l: var(--not-so-light);
+
+
+  --text-d: white;
+  --text-l: black;
+
+  --title-d: var(--lightcyan);
+  --title-l: var(--dark);
 }

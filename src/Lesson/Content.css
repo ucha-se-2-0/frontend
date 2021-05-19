@@ -3,12 +3,11 @@
     flex-direction: column;
 }
 
-
 #video
 {
-    width: 90%;
+    max-width: 100%;
+    width: calc(80% + 150px)
 }
-
 
 .likesAndDislikesWrapper
 {
@@ -272,4 +271,13 @@
 .replies
 {
     display: none;
+}
+
+
+@media screen and (max-width: 600px) {
+    #video
+    {
+        /* max-width:100vw;
+        width: 100vw; */
+    }
 }
