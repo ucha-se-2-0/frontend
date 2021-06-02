@@ -278,7 +278,7 @@ function Content() {
                         <FreeAnswerQuestion question="3 / 2 ?" correct={1.5} precision = {3}/>
                     </>
                 } />
-                <h1 id="result"></h1>
+                <h1 id="result"> </h1>
                 <Button id="checkAnswers" name="Провери отговорите" height="50px" onClick={CheckAnswers} />
                 <Button id="toLesson" name="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} />
                 <Button id="toNextLesson" height="50px" link="#" />

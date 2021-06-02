@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react'
+import React from 'react'
 import Content from './content'
 import {Footer} from '../Components'
 import Header from './Header'

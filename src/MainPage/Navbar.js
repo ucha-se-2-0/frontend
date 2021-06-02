@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, SearchField } from '../Components'
-import { lessonsUrls } from '../urls'
 import { theme, colors } from '../Colors'
 
 class DropdownElement extends React.Component {
@@ -41,14 +40,12 @@ class Navbar extends React.Component {
   componentDidMount() {
     let url = window.location.pathname;
 
-    switch (url) {
-      case "/":
+    if (url === "/") {
         OnResizeOrLoad();
 
         window.addEventListener('resize', () => {
           OnResizeOrLoad();
         });
-        break;
     }
   }
 }

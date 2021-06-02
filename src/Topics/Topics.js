@@ -2,7 +2,7 @@ import React from 'react'
 
 import Content from './Content'
 import { DefaultNavbar as Navbar, Header, SearchField, Footer } from '../Components'
-import { colors, theme } from '../Colors'
+import { theme } from '../Colors'
 import { GetSubjectByUrl } from '../urls'
 
 if (window.location.pathname.match("/subjects/")) {

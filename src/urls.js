@@ -63,7 +63,6 @@ function GetLesson(url) {
         {
             if (urls[subject][2][lesson][1] === url)
             {
-                console.log(urls[subject][2][lesson])
                 return urls[subject][2][lesson][0];
             }
         }

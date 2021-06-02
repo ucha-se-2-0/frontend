@@ -16,152 +16,17 @@
 .change-theme
 {
     position: absolute;
-    width: 50px;
-    height: 50px;
     right: 10px;
     top: 10px;
+    font-size: 35px;
 }
 
 #light-theme
 {
-    background-color: var(--light);
+    color: var(--light);
 }
 
 #dark-theme
 {
-    background-color: var(--dark);
+    color: var(--dark);
 }
-
-/*Аутизъм :)*/
-
-/* .electrons *
-{
-    background-color: blue;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-    position: absolute;
-    z-index: -1;
-}
-
-.electrons :nth-child(1)
-{
-    animation: elec1 1.5s 0.95s linear infinite;
-}
-
-.electrons :nth-child(2)
-{
-    animation: elec2 1.5s 0.15s linear infinite;
-}
-
-.electrons :nth-child(3)
-{
-    animation: elec3_4 1.5s 0.75s linear infinite;
-}
-
-.electrons :nth-child(4)
-{
-    animation: elec3_4 1.5s linear infinite;
-}
-
-@keyframes elec1
-{
-    from
-    {
-        left: 34.5%;
-        top: 20%;
-    }
-    10%
-    {
-        left: 36.5%;
-        top: 24%;
-    }
-    25%
-    {
-        left: 40.5%;
-        top: 44%;
-    }
-    50%
-    {
-        left: 43.8%;
-        top: 76%;
-    }
-    75%
-    {
-        left: 38.5%;
-        top: 52%;
-    }
-    to
-    {
-        left: 34.5%;
-        top: 20%;
-    }
-}
-
-@keyframes elec2
-{
-    from
-    {
-        left: 32.5%;
-        top: 56%;
-    }
-    10%
-    {
-        left: 35%;
-        top: 47%;
-    }
-    40%
-    {
-        left: 44%;
-        top: 42%;
-    }
-    50%
-    {
-        left: 47%;
-        top: 45%;
-    }
-    80%
-    {
-        left: 39%;
-        top: 57%;
-    }
-    to
-    {
-        left: 32.5%;
-        top: 56%;
-    }
-}
-
-@keyframes elec3_4
-{
-    from
-    {
-        left: 36.2%;
-        top: 82%;
-    }
-    10%
-    {
-        left: 37%;
-        top: 65%;
-    }
-    40%
-    {
-        left: 41%;
-        top: 26%;
-    }
-    50%
-    {
-        left: 43.5%;
-        top: 19%;
-    }
-    75%
-    {
-        left: 41%;
-        top: 52%;
-    }
-    to
-    {
-        left: 36.2%;
-        top: 82%;
-    }
-} */

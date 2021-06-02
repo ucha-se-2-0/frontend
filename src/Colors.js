@@ -31,7 +31,6 @@ window.addEventListener("load", ()=>{
         theme = cookie
     else
         setCookie("theme", "light", 24 * 30)
-    console.log(cookie)
 })
 
 function changeTheme()

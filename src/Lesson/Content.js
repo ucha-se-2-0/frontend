@@ -1,6 +1,7 @@
 import React from "react"
 import { Button } from '../Components'
 import { GetLessonIdByUrl } from '../urls'
+import { theme, colors } from '../Colors'
 
 const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';//wtf is this
 
@@ -21,7 +22,8 @@ class Comment extends React.Component {
             if (!this.props.is_reply) {
                 replies =
                     <div>
-                        <div className="collapse-replies" onClick={event => {
+                        <div className="collapse-replies" style = {{color: theme === "dark" ? colors.text.dark : colors.text.light}} 
+                        onClick={event => {
                             event.target.style.display = "none";
                             event.target.parentNode.querySelector(".show-replies").style.display = "block";
                             event.target.parentNode.querySelector(".replies").style.display = "none";
@@ -30,7 +32,8 @@ class Comment extends React.Component {
                             Скрий отговорите
                         </div>
 
-                        <div className="show-replies" onClick={event => {
+                        <div className="show-replies"  style = {{color: theme === "dark" ? colors.text.dark : colors.text.light}} 
+                        onClick={event => {
                             event.target.style.display = "none";
                             event.target.parentNode.querySelector(".collapse-replies").style.display = "block";
                             event.target.parentNode.querySelector(".replies").style.display = "block";
@@ -52,17 +55,17 @@ class Comment extends React.Component {
         return (
             <div className="comment" id={this.props.comment.comment_id}>
                 <div>
-                    <img /*TO DO*/ src="/Images/favicon.ico"></img>
+                    <img /*TO DO*/ alt = "icon" src="/Images/favicon.ico"></img>
                     <div>
-                        <div /*TO DO*/ className="author-name">name</div>
+                        <div className="author-name">{/*TO DO*/} name</div>
                         <div className="text"> {this.props.comment.content} </div>
                         <div className="comment-like-dislike">
-                            <i /*TO DO*/ color="grey" className="material-icons like-comment" onClick={
+                            <i color="grey" className="material-icons like-comment" onClick={
                                 event => {
                                     this.likeComment(event.target.parentNode);
                                 }}>thumb_up</i>
                             <div className="comment-likes">{this.props.comment.likes}</div>
-                            <i /*TO DO*/ color="grey" className="material-icons dislike-comment" onClick={
+                            <i color="grey" className="material-icons dislike-comment" onClick={
                                 event => {
                                     this.dislikeComment(event.target.parentNode);
                                 }}>thumb_down</i>
@@ -162,7 +165,7 @@ class Content extends React.Component {
 
     render() {
         return (
-            <div className="content">
+            <div className="content" style = {{backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light}}>
                 <video id="video" controls />
 
                 <div className="likesAndDislikesWrapper">
@@ -178,7 +181,7 @@ class Content extends React.Component {
 
                 <div id="compose-comment">
                     <div>
-                        <img src="/Images/favicon.ico" />
+                        <img alt = "icon" src="/Images/favicon.ico" />
                         <div className="input-wrapper">
                             <textarea placeholder="Оставете коментар" onInput={event => event.target.parentNode.dataset.myValue = event.target.value}></textarea>
                         </div>
