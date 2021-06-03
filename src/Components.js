@@ -1,7 +1,7 @@
 //Here are complex and often-used components that 
 //can be imported and simply used
 
-import React from "react"
+import React, { useRef } from "react"
 import { colors, theme } from './Colors'
 import "./Style/Components.css"
 
@@ -34,6 +34,75 @@ class Button extends React.Component {
   }
 }
 
+function DropdownElement(props) {
+  return (
+    <li style={{ backgroundColor: theme === "dark" ? colors.notSoDark : colors.notSoLight }}>
+      <Button name={props.name} link={props.link} />
+    </li>
+  );
+}
+
+class Dropdown extends React.Component {
+  constructor(props)
+  {
+    super(props)
+    this.dropdownEl = React.createRef()
+    this.state = {posLeft: 0}
+
+    window.addEventListener("resize", this.MoveMenu.bind(this))
+  }
+
+  componentDidMount()
+  {
+    //              ???
+    setTimeout(this.MoveMenu.bind(this))
+  }
+
+  MoveMenu()
+  {
+    let dd = this.dropdownEl.current
+    if(dd)
+    {
+      let button = dd.querySelector(".dropdown>.button")
+      let menu = dd.querySelector("ul")
+      let btnPos = button.getBoundingClientRect()
+      let offset = (menu.getBoundingClientRect().width - btnPos.width) / 2;
+      this.setState({posLeft: (btnPos.left - offset) + "px"})
+    }
+  }
+
+  render() {
+    let options = []
+    if (this.props.children instanceof Array) {
+      for (let i in this.props.children) {
+        if (this.props.children[i].type.name === "DropdownElement") {
+          options.push(this.props.children[i])
+        }
+      }
+    }
+
+    if (this.props.options) {
+      let key = 0
+      for (let opt of this.props.options) {
+        if (opt.name !== undefined && opt.link !== undefined) {
+          options.push(<DropdownElement key={key} name={opt.name} link={opt.link} />)
+        }
+
+        key++
+      }
+    }
+
+    return (
+      <div ref = {this.dropdownEl} className="dropdown">
+        <Button name={this.props.name}/>
+        <ul className="dropdown-options" style={{ left: this.state.posLeft }}>
+          {options}
+        </ul>
+      </div>
+    )
+  }
+}
+
 class SearchField extends React.Component {
   constructor(props) {
     super(props);
@@ -51,12 +120,10 @@ class SearchField extends React.Component {
 
   componentDidMount() {
     window.addEventListener('click', () => {
-      if(this.clickHandled)
-      {
+      if (this.clickHandled) {
         this.clickHandled = false
       }
-      else
-      {
+      else {
         if (!this.collapsed) {
           console.log("hide")
           this.setState(this.stateWhenCollapsed);
@@ -72,7 +139,7 @@ class SearchField extends React.Component {
       }
     });
   }
-  
+
   render() {
     this.stateWhenCollapsed.style.buttonContent.color = theme === "dark" ? colors.text.dark : colors.text.light
 
@@ -164,4 +231,4 @@ class Title extends React.Component {
   }
 }
 
-export { Button, SearchField, Footer, DefaultNavbar, Header, Title };
+export { Button, Dropdown, DropdownElement, SearchField, Footer, DefaultNavbar, Header, Title };
