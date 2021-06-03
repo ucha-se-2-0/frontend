@@ -7,9 +7,6 @@ function Header() {
             <img alt = "logo" src = {theme === "dark" ? "Images/LogoDark.jpg" : "Images/LogoLight.jpg"} id = "logo"></img>
             {/* <img alt = "dark" className = "change-theme" id = "dark-theme" style = {{display: theme === "dark" ? "none" : "block"}} onClick={changeTheme}></img>
             <img alt = "light" className = "change-theme" id = "light-theme" style = {{display: theme === "light" ? "none" : "block"}}  onClick={changeTheme}></img> */}
-
-            <i className = "change-theme fas fa-moon" id = "dark-theme" style = {{display: theme === "dark" ? "none" : "block"}} onClick={changeTheme}></i>
-            <i className = "change-theme fas fa-sun" id = "light-theme" style = {{display: theme === "light" ? "none" : "block"}}  onClick={changeTheme}></i>
         </div>
 
     );

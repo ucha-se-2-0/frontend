@@ -3,15 +3,10 @@ import render from './index'
 import {getCookie, setCookie} from './Cookies'
 
 const colors = {
-    lightcyan: "var(--lightcyan)",
     cyan: "var(--cyan)",
-    darkcyan: "var(--darkcyan)",
-
-    darker: "var(--darker)",
-    dark: "var(--dark)",
-    notSoDark: "var(--not-so-dark)",
-    notSoLight: "var(--not-so-light)",
+    purple: "var(--purple)",
     light: "var(--light)",
+    dark: "var(--dark)",
 
     text: { dark: "var(--text-d)", light: "var(--text-l)" },
     title: { dark: "var(--title-d)", light: "var(--title-l)" },
@@ -25,13 +20,13 @@ const colors = {
 
 var theme = "light";
 
-window.addEventListener("load", ()=>{
-    let cookie = getCookie("theme")
-    if(cookie !== undefined)
-        theme = cookie
-    else
-        setCookie("theme", "light", 24 * 30)
-})
+// window.addEventListener("load", ()=>{
+//     let cookie = getCookie("theme")
+//     if(cookie !== undefined)
+//         theme = cookie
+//     else
+//         setCookie("theme", "light", 24 * 30)
+// })
 
 function changeTheme()
 {

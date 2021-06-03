@@ -58,6 +58,7 @@ class SearchField extends React.Component {
       else
       {
         if (!this.collapsed) {
+          console.log("hide")
           this.setState(this.stateWhenCollapsed);
         }
       }
@@ -77,7 +78,7 @@ class SearchField extends React.Component {
 
     return (
       <div className={"search button " + this.props.class} style={{ cursor: "default", width: this.state.style.search.width }} onClick={() => {
-        if (this.state.collapsed) {
+        //if (this.state.collapsed) {
           this.clickHandled = true
           this.setState({
             collapsed: false,
@@ -88,7 +89,7 @@ class SearchField extends React.Component {
               search: { width: window.innerWidth - Number(window.getComputedStyle(document.getElementsByClassName("search")[0]).marginLeft.match(/\d+/)[0]) - 60 + "px" }
             }
           });
-        }
+        //}
       }}>
         <div className="button-content" style={{ cursor: "default", color: this.state.style.buttonContent.color }}>
           <i className="fa fa-search" onClick={() => {
