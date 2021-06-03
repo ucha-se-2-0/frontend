@@ -1,32 +1,22 @@
 import React from 'react';
-import { Button, SearchField } from '../Components'
+import { Button, SearchField, Dropdown, DropdownElement } from '../Components'
 import { theme, colors } from '../Colors'
 
-class DropdownElement extends React.Component {
-  render() {
-    return (
-      <li style={{ backgroundColor: theme === "dark" ? colors.notSoDark : colors.notSoLight }}>
-        <Button name={this.props.name} link={this.props.link} />
-      </li>
-    );
-  }
-}
+
 
 class Navbar extends React.Component {
   render() {
     return (
       <div className="navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
-        <div className="dropdown">
-          <Button name="Предмети" />
-          <ul className="dropdown-content">
-            <DropdownElement name={<>Анатомия <br /> и физиология</>} link="/subjects/anatomy_and_physiology" />
-            <DropdownElement name="Клетка" link="/subjects/cytology" />
-            <DropdownElement name="Вируси" link="/subjects/viruses" />
-            <DropdownElement name="Генетика" link="/subjects/genetics" />
-            <DropdownElement name="Екология" link="/subjects/ecology" />
-            <DropdownElement name="Химия" link="/subjects/chemistry" />
-          </ul>
-        </div>
+
+        <Dropdown name="Предмети">
+          <DropdownElement name={<>Анатомия <br /> и физиология</>} link="/subjects/anatomy_and_physiology" />
+          <DropdownElement name="Клетка" link="/subjects/cytology" />
+          <DropdownElement name="Вируси" link="/subjects/viruses" />
+          <DropdownElement name="Генетика" link="/subjects/genetics" />
+          <DropdownElement name="Екология" link="/subjects/ecology" />
+          <DropdownElement name="Химия" link="/subjects/chemistry" />
+        </Dropdown>
 
         <Button id="unis" name="Университети" link="/universities" class="important" />
 
@@ -41,11 +31,11 @@ class Navbar extends React.Component {
     let url = window.location.pathname;
 
     if (url === "/") {
-        OnResizeOrLoad();
+      OnResizeOrLoad();
 
-        window.addEventListener('resize', () => {
-          OnResizeOrLoad();
-        });
+      window.addEventListener('resize', () => {
+        OnResizeOrLoad();
+      });
     }
   }
 }
@@ -70,17 +60,6 @@ function Search(search_request) {
 
 
 function OnResizeOrLoad() {
-  //Navbar
-  var navbarElements = document.querySelectorAll(".navbar>*");
-  navbarElements.forEach((element) => {
-    element.style.fontSize = Math.pow(window.innerWidth, 0.5) * 0.8 + "px";
-  });
-
-  document.querySelectorAll(".navbar>*.dropdown").forEach(element => {
-    element.style.width = Number(window.getComputedStyle(element.querySelector(".dropdown-content li")).width.slice(0, -2)) + 20 + "px";
-  });
-
-
   //Logo
   var style = window.getComputedStyle(document.getElementById("logo").parentElement);
   document.getElementById("logo").style.height = Number(style.width.slice(0, -2)) / 5.0 + "px";
