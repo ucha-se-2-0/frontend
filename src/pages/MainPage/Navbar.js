@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, SearchField, Dropdown, DropdownElement } from '../Components'
-import { theme, colors } from '../Colors'
+import { Button, SearchField, Dropdown, DropdownElement } from '../../Components'
+import { theme, colors } from '../../Colors'
 
 
 

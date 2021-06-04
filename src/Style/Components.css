@@ -47,13 +47,12 @@
   position: absolute;
   display: inline-block;
   overflow: hidden;
-  height: auto ;
   min-width: 40px;
   width: 10px;
   transition: width 0.5s;
+  margin-top: auto;
   
   left: 0px;
-  top: 15%;
   z-index: 100;
 }
 

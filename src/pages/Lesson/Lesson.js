@@ -1,9 +1,9 @@
 import React from 'react'
 
 import Header from './Header'
-import { Footer, DefaultNavbar as Navbar, Button } from '../Components'
+import { Footer, DefaultNavbar as Navbar, Button } from '../../Components'
 import Content from './Content'
-import { theme } from '../Colors'
+import { theme } from '../../Colors'
 
 if (window.location.pathname.indexOf("/lessons/") !== -1) {
     import('./Content.css');

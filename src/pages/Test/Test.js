@@ -1,6 +1,6 @@
 import React from 'react'
-import {Footer, DefaultNavbar as Navbar, Header} from '../Components'
-import { GetSubject } from '../urls';
+import {Footer, DefaultNavbar as Navbar, Header} from '../../Components'
+import { GetSubject } from '../../urls';
 
 import {Content} from './Content'
 
