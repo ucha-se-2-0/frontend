@@ -206,16 +206,16 @@ class Content extends React.Component {
 
     componentDidMount()
     {
-        if(theme === "dark")
-        {
-            document.getElementsByClassName("content")[0].style.backgroundColor = colors.content.dark;
-            document.querySelectorAll(".button").forEach(el=>{el.style.backgroundColor = colors.content.dark});
-        }
-        else
-        {
-            document.getElementsByClassName("content")[0].style.backgroundColor = colors.content.light;
-            document.querySelectorAll(".button").forEach(el=>{el.style.backgroundColor = colors.light});
-        }
+        // if(theme === "dark")
+        // {
+        //     document.getElementsByClassName("content")[0].style.backgroundColor = colors.content.dark;
+        //     document.querySelectorAll(".button").forEach(el=>{el.style.backgroundColor = colors.content.dark});
+        // }
+        // else
+        // {
+        //     document.getElementsByClassName("content")[0].style.backgroundColor = colors.content.light;
+        //     document.querySelectorAll(".button").forEach(el=>{el.style.backgroundColor = colors.light});
+        // }
     }
 }
 

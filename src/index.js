@@ -19,7 +19,7 @@ import './Style/Components.css'
 import './index.css'
 
 window.addEventListener("load", ()=>{
-  document.getElementById("root").style.backgroundColor = theme === "dark" ? colors.darker : colors.light;
+  document.getElementById("root").style.backgroundColor = theme === "dark" ? colors.darker : "white";
   
 render();
 })

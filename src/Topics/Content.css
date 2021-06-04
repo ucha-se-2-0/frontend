@@ -20,11 +20,6 @@
     display: none;
 }
 
-.content .button:hover img
-{
-    /* display: block; */
-}
-
 .content .button-content
 {
     margin: 0;
