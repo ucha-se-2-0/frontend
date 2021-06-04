@@ -44,22 +44,21 @@
 /* SEARCH FIELD */
 
 .button.search {
-  min-width: 30px;
-  overflow: hidden;
-  height: auto !important;
-  min-width: 40px;
-  display: inline-block;
-  left: 0px;
-  top: 15%;
   position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  height: auto ;
+  min-width: 40px;
   width: 10px;
   transition: width 0.5s;
+  
+  left: 0px;
+  top: 15%;
   z-index: 100;
 }
 
 .search .button-content {
   display: inline-flex;
-  height: 100%;
   width: 100%;
   float: left;
 }

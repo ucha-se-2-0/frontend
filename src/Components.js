@@ -1,7 +1,7 @@
 //Here are complex and often-used components that 
 //can be imported and simply used
 
-import React, { useRef } from "react"
+import React from "react"
 import { colors, theme } from './Colors'
 import "./Style/Components.css"
 
@@ -53,7 +53,7 @@ class Dropdown extends React.Component {
 
   componentDidMount() {
     //              ???
-    setTimeout(this.MoveMenu.bind(this), 1000)
+    setTimeout(this.MoveMenu.bind(this), 500)
   }
 
   MoveMenu() {
@@ -158,7 +158,7 @@ class SearchField extends React.Component {
         style: {
           buttonBackground: { backgroundColor: colors.purple },
           input: { visibility: "visible", backgroundColor: colors.purple },
-          search: { width: "calc(100% - 40px)"}
+          search: { width: this.props.width ? this.props.width : "calc(100% - 40px)"}
         }
       });
     }

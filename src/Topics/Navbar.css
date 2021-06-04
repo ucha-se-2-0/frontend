@@ -1,6 +1,6 @@
-.navbar .search
+.navbar>.button.search
 {
-    margin-left: 80px !important;
+    margin-left: 80px;
 }
 
 .navbar

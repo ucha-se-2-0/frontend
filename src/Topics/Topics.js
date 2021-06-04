@@ -18,7 +18,7 @@ class Subjects extends React.Component {
 
                 {/* <span style = {{width: "100%", height: "5px", display: "block", backgroundColor: colors.notSoLight}}/> */}
 
-                <Navbar content={<SearchField search={() => { }} class="important" />} />
+                <Navbar content={<SearchField width = "calc(100% - 100px)" search={() => { }} class="important" />} />
                 <Content />
                 <Footer />
             </>
