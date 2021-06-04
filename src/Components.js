@@ -43,31 +43,27 @@ function DropdownElement(props) {
 }
 
 class Dropdown extends React.Component {
-  constructor(props)
-  {
+  constructor(props) {
     super(props)
     this.dropdownEl = React.createRef()
-    this.state = {posLeft: 0}
+    this.state = { posLeft: 0 }
 
     window.addEventListener("resize", this.MoveMenu.bind(this))
   }
 
-  componentDidMount()
-  {
+  componentDidMount() {
     //              ???
-    setTimeout(this.MoveMenu.bind(this))
+    setTimeout(this.MoveMenu.bind(this), 1000)
   }
 
-  MoveMenu()
-  {
+  MoveMenu() {
     let dd = this.dropdownEl.current
-    if(dd)
-    {
+    if (dd) {
       let button = dd.querySelector(".dropdown>.button")
       let menu = dd.querySelector("ul")
       let btnPos = button.getBoundingClientRect()
       let offset = (menu.getBoundingClientRect().width - btnPos.width) / 2;
-      this.setState({posLeft: (btnPos.left - offset) + "px"})
+      this.setState({ posLeft: (btnPos.left - offset) + "px" })
     }
   }
 
@@ -93,8 +89,8 @@ class Dropdown extends React.Component {
     }
 
     return (
-      <div ref = {this.dropdownEl} className="dropdown">
-        <Button name={this.props.name}/>
+      <div ref={this.dropdownEl} className="dropdown">
+        <Button name={this.props.name} />
         <ul className="dropdown-options" style={{ left: this.state.posLeft }}>
           {options}
         </ul>
@@ -110,12 +106,13 @@ class SearchField extends React.Component {
       collapsed: true,
       style: {
         buttonBackground: { backgroundColor: "transparent" },
-        input: { visibility: "hidden" },
-        buttonContent: { color: theme === "dark" ? colors.text.dark : colors.text.light },
+        input: { visibility: "hidden", backgroundColor: "transperent" },
         search: { width: "0%" }
       }
     }
     this.state = this.stateWhenCollapsed;
+
+    this.searchRequest = ""
   }
 
   componentDidMount() {
@@ -124,49 +121,28 @@ class SearchField extends React.Component {
         this.clickHandled = false
       }
       else {
-        if (!this.collapsed) {
-          console.log("hide")
-          this.setState(this.stateWhenCollapsed);
-        }
-      }
-    });
-
-    window.addEventListener('resize', () => {
-      if (!this.state.collapsed) {
-        let state = this.state;
-        state.style.search.width = window.innerWidth - Number(window.getComputedStyle(document.getElementsByClassName("search")[0]).marginLeft.match(/\d+/)[0]) - 60 + "px";
-        this.setState(state);
+        this.Collapse()
       }
     });
   }
 
   render() {
-    this.stateWhenCollapsed.style.buttonContent.color = theme === "dark" ? colors.text.dark : colors.text.light
-
     return (
       <div className={"search button " + this.props.class} style={{ cursor: "default", width: this.state.style.search.width }} onClick={() => {
-        //if (this.state.collapsed) {
-          this.clickHandled = true
-          this.setState({
-            collapsed: false,
-            style: {
-              buttonBackground: { backgroundColor: "white" },
-              input: { visibility: "visible" },
-              buttonContent: { color: colors.text.light },
-              search: { width: window.innerWidth - Number(window.getComputedStyle(document.getElementsByClassName("search")[0]).marginLeft.match(/\d+/)[0]) - 60 + "px" }
-            }
-          });
-        //}
+        this.clickHandled = true
+        this.Expand()
       }}>
-        <div className="button-content" style={{ cursor: "default", color: this.state.style.buttonContent.color }}>
+        <div className="button-content" style={{ cursor: "default" }}>
           <i className="fa fa-search" onClick={() => {
             if (!this.state.collapsed)
-              this.Search(document.getElementsByClassName("search")[0].firstChild.childNodes[1].value)
-          }}></i>
+              this.Search()
+          }} style = {{color: colors.cyan}}></i>
 
           <input type="text" onKeyUp={event => {
             if (event.key === "Enter")
-              this.Search(event.target.value);
+              this.Search();
+
+            this.searchRequest = event.target.value
           }
           } style={this.state.style.input} />
         </div>
@@ -175,11 +151,33 @@ class SearchField extends React.Component {
     );
   }
 
-  Search(request) {
+  Expand() {
+    if (this.state.collapsed) {
+      this.setState({
+        collapsed: false,
+        style: {
+          buttonBackground: { backgroundColor: colors.purple },
+          input: { visibility: "visible", backgroundColor: colors.purple },
+          search: { width: "calc(100% - 40px)"}
+        }
+      });
+    }
+  }
+
+  Collapse() {
+    if (!this.state.collapsed) {
+      this.setState(this.stateWhenCollapsed);
+    }
+  }
+
+  Search() {
     if (this.props.search !== undefined)
-      this.props.search(request)
+      this.props.search(this.searchRequest)
     else
       console.log("Search function not given! Set it using 'search' property of 'SearchField'");
+
+      console.log(this.searchRequest)
+    this.Collapse()
   }
 }
 

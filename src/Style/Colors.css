@@ -8,16 +8,16 @@
   --light: #aa95d1;
 
   --content-d: var(--dark);
-  --content-l: var(--light);
+  --content-l: white;
 
   --header-d: var(--dark);
   --header-l: var(--cyan);
 
   --footer-d: var(--not-so-dark);
-  --footer-l: var(--not-so-light);
+  --footer-l: var(--purple);
 
   --navbar-d: var(--not-so-dark);
-  --navbar-l: var(--not-so-light);
+  --navbar-l: var(--purple);
 
   --button-d: var(--not-so-dark);
   --button-l: var(--not-so-light);
@@ -27,5 +27,5 @@
   --text-l: white;
 
   --title-d: var(--lightcyan);
-  --title-l: var(--dark);
+  --title-l: var(--purple);
 }

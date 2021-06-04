@@ -20,8 +20,3 @@ code {
   font-family: 'Comfortaa';
   user-select: none;
 }
-
-#root
-{
-  background-color: var(--darker);
-}
