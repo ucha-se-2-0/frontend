@@ -1,22 +1,29 @@
-import React    from "react"
-import Content  from './Content'
-import {DefaultNavbar as Navbar, Footer, Header}   from '../../Components'
-import {GetUniName} from "../../urls"
+import React from "react"
+import Content from './Content'
+import { DefaultNavbar as Navbar, Footer, Header } from '../../Components'
+import { GetUniByUrl } from "../../urls"
 
-if(window.location.pathname === "/universities")
-{
+if (window.location.pathname === "/universities") {
     import('./Navbar.css');
     import('./Content.css');
 }
 
 function Universities() {
-    let headerText = GetUniName(window.location.pathname.slice("/universities/".length, window.location.pathname.length))
-    if(!headerText)
-        headerText = "Julemy ще Ви помогне да изберете най-подходящ университет (или нещо такова)"
-    
+    let uni = GetUniByUrl(window.location.pathname)
+
+    let headerContent = <div>Julemy ще Ви помогне да изберете най-подходящ университет (или нещо такова)</div>
+    // if (uni) {
+    //     headerContent = <a
+    //     style = {{color: "white"}}
+    //         href = {uni.data.link}
+    //         data-toggle="tooltip"
+    //         data-placement="bottom"
+    //         title="Посетете официалния сайт"> {uni.name} </a>
+    // }
+
     return (
         <React.StrictMode>
-            <Header content = {headerText}/>
+            <Header content={headerContent} />
             <Navbar />
             <Content />
             <Footer />

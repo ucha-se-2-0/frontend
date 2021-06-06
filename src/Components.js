@@ -53,7 +53,7 @@ class Dropdown extends React.Component {
 
   componentDidMount() {
     //              ???
-    setTimeout(this.MoveMenu.bind(this), 500)
+    setTimeout(this.MoveMenu.bind(this), 200)
   }
 
   MoveMenu() {
@@ -63,7 +63,7 @@ class Dropdown extends React.Component {
       let menu = dd.querySelector("ul")
       let btnPos = button.getBoundingClientRect()
       let offset = (menu.getBoundingClientRect().width - btnPos.width) / 2;
-      this.setState({ posLeft: (btnPos.left - offset) + "px" })
+      this.setState({ posLeft: - offset + "px" })
     }
   }
 

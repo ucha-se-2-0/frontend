@@ -37,4 +37,5 @@
   cursor: pointer;
   margin: auto 10px;
   padding: 7px 10px;
+  font-size: calc(2.5vw + 5px);
 }
