@@ -49,9 +49,8 @@
   display: inline-block;
   overflow: hidden;
   min-width: 40px;
-  width: 10px;
   transition: width 0.5s;
-  margin-top: auto;
+  top: 12px;
   
   left: 0px;
   z-index: 100;
@@ -63,9 +62,8 @@
   float: left;
 }
 
-.search .button-content * {
-  margin-top: auto;
-  margin-bottom: auto;
+.search .button-content i {
+  font-size: 25px;
 }
 
 .search input {
@@ -159,7 +157,7 @@
   position: absolute;
   overflow: hidden;
   padding: 0;
-  margin: 40px 0;
+  margin: calc(14px + 2.5vw) 0;
   height: 0px;
   transition: height 0.5s;
   border-radius: 10px;
@@ -194,4 +192,5 @@
 .dropdown-options li .button {
   width: 100%;
   padding: 10px;
+  margin: 0;
 }

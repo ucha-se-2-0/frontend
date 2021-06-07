@@ -29,12 +29,12 @@ function UniContent()
     }
 
     return(
-        <div className = "content" style = {{textAlign: "center"}}>
+        <div className = "content" style = {{textAlign: "center", width: "70%", margin: "30px auto"}}>
             {uni.data.info}
             <span style = {{backgroundColor: "#222222", height: "0.5px", width: "100%", margin: "50px 0"}}></span>
 
             <div style = {{fontWeight: "bold"}}>В {uni.name} можете да кандидатствате за следните специалности:</div>
-            <ul>
+            <ul style = {{width: "80%", margin: "20px auto"}}>
                 {spec}
             </ul>
 

@@ -62,7 +62,7 @@ class Dropdown extends React.Component {
       let button = dd.querySelector(".dropdown>.button")
       let menu = dd.querySelector("ul")
       let btnPos = button.getBoundingClientRect()
-      let offset = (menu.getBoundingClientRect().width - btnPos.width) / 2;
+      let offset = (menu.getBoundingClientRect().width - btnPos.width - 20) / 2;
       this.setState({ posLeft: - offset + "px" })
     }
   }

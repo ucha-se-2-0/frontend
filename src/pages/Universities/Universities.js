@@ -12,14 +12,14 @@ function Universities() {
     let uni = GetUniByUrl(window.location.pathname)
 
     let headerContent = <div>Julemy ще Ви помогне да изберете най-подходящ университет (или нещо такова)</div>
-    // if (uni) {
-    //     headerContent = <a
-    //     style = {{color: "white"}}
-    //         href = {uni.data.link}
-    //         data-toggle="tooltip"
-    //         data-placement="bottom"
-    //         title="Посетете официалния сайт"> {uni.name} </a>
-    // }
+    if (uni) {
+        headerContent = <a
+        style = {{color: "white"}}
+            href = {uni.data.link}
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Посетете официалния сайт"> {uni.name} </a>
+    }
 
     return (
         <React.StrictMode>
