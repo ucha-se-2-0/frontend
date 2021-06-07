@@ -1,0 +1,19 @@
+@import "../../Style/Colors.css";
+
+.navbar
+{
+  width: 99%;
+  position: sticky;
+  padding-left: 1%;
+  flex-flow:row nowrap;
+}
+
+.navbar>*:last-child
+{
+  margin-right: 50px;
+}
+
+.dropdown
+{
+  margin-right: 10px;
+}

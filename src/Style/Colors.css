@@ -1,0 +1,31 @@
+/*Define colors` names here*/
+
+:root
+{
+  --cyan: #7dd1c1;
+  --dark: #3f4760;
+  --purple: #615586;
+  --light: #aa95d1;
+
+  --content-d: var(--dark);
+  --content-l: white;
+
+  --header-d: var(--dark);
+  --header-l: var(--cyan);
+
+  --footer-d: var(--not-so-dark);
+  --footer-l: var(--purple);
+
+  --navbar-d: var(--not-so-dark);
+  --navbar-l: var(--purple);
+
+  --button-d: var(--not-so-dark);
+  --button-l: var(--purple);
+
+
+  --text-d: black;
+  --text-l: white;
+
+  --title-d: var(--lightcyan);
+  --title-l: var(--purple);
+}

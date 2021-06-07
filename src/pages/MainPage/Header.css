@@ -1,0 +1,32 @@
+@import "../../Style/Colors.css";
+
+.header
+{
+    padding: 0;
+    margin-top: 0;
+}
+
+.header img
+{
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.change-theme
+{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 35px;
+}
+
+#light-theme
+{
+    color: var(--light);
+}
+
+#dark-theme
+{
+    color: var(--dark);
+}
