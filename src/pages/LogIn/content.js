@@ -1,5 +1,5 @@
 import React from "react"
-import {Button} from '../Components'
+import {Button} from '../../Components'
 function Content(){
     return (
         <div className="content">

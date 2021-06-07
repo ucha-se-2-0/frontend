@@ -1,9 +1,9 @@
 import React from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { colors, theme } from '../Colors';
-import { Button } from '../Components'
+import { colors, theme } from '../../Colors';
+import { Button } from '../../Components'
 
-import { GetLessonUrl } from '../urls'
+import { GetLessonUrl } from '../../urls'
 
 function onDropdownClick(component) {
     component.childNodes.forEach(element => {
@@ -50,7 +50,7 @@ class LessonLink extends React.Component {
                         <img src={this.props.preview} alt="preview"></img>
                         {this.props.subtopics === undefined ? null :
                             (<i className="fa fa-caret-down" style={{ display: "inline-block", width: "10px", margin: "0 10px", fontSize: "20px" }} />)}
-                        <h3 style={{ display: "inline", marginLeft: "10px" }}>{this.props.title}</h3>
+                        <h4 style={{ display: "inline", marginLeft: "10px" }}>{this.props.title}</h4>
                     </>
                 } link={link} onClick={this.props.subtopics === undefined ? null : () => onDropdownClick(this.DOMnode.current)} />
 
@@ -75,7 +75,7 @@ class Content extends React.Component {
             </Route> */}
 
                 <Route path="/subjects/*" exact>
-                    <div className="content">
+                    <div className="content" style = {{backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light}}>
                         <div style={{ width: "80%" }}>
                             <Route path="/subjects/anatomy_and_physiology">
                                 <LessonLink title="Тъкани" subtopics={

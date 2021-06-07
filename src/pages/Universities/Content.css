@@ -1,8 +1,8 @@
-@import '../Style/Colors.css';
+@import '../../Style/Colors.css';
 
 .uni
 {
-    margin: 10px;
+    margin: 30px;
 }
 
 .content

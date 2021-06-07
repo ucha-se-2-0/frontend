@@ -53,7 +53,7 @@ class Dropdown extends React.Component {
 
   componentDidMount() {
     //              ???
-    setTimeout(this.MoveMenu.bind(this), 500)
+    setTimeout(this.MoveMenu.bind(this), 200)
   }
 
   MoveMenu() {
@@ -62,8 +62,8 @@ class Dropdown extends React.Component {
       let button = dd.querySelector(".dropdown>.button")
       let menu = dd.querySelector("ul")
       let btnPos = button.getBoundingClientRect()
-      let offset = (menu.getBoundingClientRect().width - btnPos.width) / 2;
-      this.setState({ posLeft: (btnPos.left - offset) + "px" })
+      let offset = (menu.getBoundingClientRect().width - btnPos.width - 20) / 2;
+      this.setState({ posLeft: - offset + "px" })
     }
   }
 
@@ -136,7 +136,7 @@ class SearchField extends React.Component {
           <i className="fa fa-search" onClick={() => {
             if (!this.state.collapsed)
               this.Search()
-          }} style = {{color: colors.cyan}}></i>
+          }} style={{ color: colors.cyan }}></i>
 
           <input type="text" onKeyUp={event => {
             if (event.key === "Enter")
@@ -158,7 +158,7 @@ class SearchField extends React.Component {
         style: {
           buttonBackground: { backgroundColor: colors.purple },
           input: { visibility: "visible", backgroundColor: colors.purple },
-          search: { width: this.props.width ? this.props.width : "calc(100% - 40px)"}
+          search: { width: this.props.width ? this.props.width : "calc(100% - 40px)" }
         }
       });
     }
@@ -176,7 +176,7 @@ class SearchField extends React.Component {
     else
       console.log("Search function not given! Set it using 'search' property of 'SearchField'");
 
-      console.log(this.searchRequest)
+    console.log(this.searchRequest)
     this.Collapse()
   }
 }

@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 
 import { Route, BrowserRouter as Router } from "react-router-dom"
 
-import MainPage from './MainPage/MainPage'
-import Universities from './Universities/Universities'
-import Topics from './Topics/Topics'
-import Lesson from './Lesson/Lesson'
-import LogIn from './LogIn/LogIn'
-import Test from './Test/Test'
+import MainPage from './pages/MainPage/MainPage'
+import Universities from './pages/Universities/Universities'
+import Topics from './pages/Topics/Topics'
+import Lesson from './pages/Lesson/Lesson'
+import LogIn from './pages/LogIn/LogIn'
+import Test from './pages/Test/Test'
 import {theme, colors} from './Colors'
 
 import './Style/Navbar.css'
@@ -21,7 +21,7 @@ import './index.css'
 window.addEventListener("load", ()=>{
   document.getElementById("root").style.backgroundColor = theme === "dark" ? colors.darker : "white";
   
-render();
+  render();
 })
 
 function render()
@@ -30,7 +30,7 @@ function render()
     <StrictMode>
       <Router>
         <Route path = "/"             exact component = {MainPage} />
-        <Route path = "/universities" exact component = {Universities} />
+        <Route path = "/universities*" component = {Universities} />
         <Route path = "/subjects/*"   exact component = {Topics } />
         <Route path = "/lessons/*"    exact component = {Lesson} />
         <Route path = "/Login"       exact component = {LogIn} />

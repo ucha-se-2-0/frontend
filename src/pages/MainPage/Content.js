@@ -1,5 +1,5 @@
-import { Button, Title } from '../Components'
-import {theme, colors } from '../Colors'
+import { Button, Title } from '../../Components'
+import {theme, colors } from '../../Colors'
 import React from "react"
 
 function Content() {

@@ -6,7 +6,7 @@
 .content .button
 {
     width: 98%;
-    padding: 10px 1%;
+    padding: 10px calc(0.5% + 10px);
 }
 
 .content .topic
