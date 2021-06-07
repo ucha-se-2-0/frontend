@@ -178,6 +178,8 @@ const unis = [
                     "Медицинска сестра (МУ-София - филиал „Проф. д-р Ив. Митев“ - Враца)",
                     "Лекарски асистент (МУ-София - филиал „Проф. д-р Ив. Митев“ - Враца)",
                 ],
+            link: "https://mu-sofia.bg/",
+            application: "https://mu-sofia.bg/priem/ksk/spravochnik-kandidatstudenti/"
         }
     },
     {
@@ -208,6 +210,8 @@ const unis = [
                     "Акушерка (Филиал Шумен)",
                     "Медицинска сестра (Филиал Шумен)",
                 ],
+            link: "https://www.mu-varna.bg/BG",
+            application: "https://www.mu-varna.bg/BG/Admission/Pages/default.aspx"
         }
     },
     {
@@ -234,6 +238,8 @@ const unis = [
                     " Инструктор диетично хранене",
                     " Медицинска козметика",
                 ],
+                link: "https://mu-plovdiv.bg/",
+                application: "https://mu-plovdiv.bg/priem/kandidat-studentski-spravochnik/"
         }
     },
     {
@@ -253,6 +259,8 @@ const unis = [
                     "Рентгенов лаборант",
                     "Помощник фармацевт",
                 ],
+                link: "https://mu-plovdiv.bg/",
+                application: "https://mu-plovdiv.bg/priem/kandidat-studentski-spravochnik/"
         }
     },
     {
@@ -274,6 +282,8 @@ const unis = [
                     "Акушерка (Филиал Хасково)",
                     "Медицинска сестра (Филиал Хасково)",
                 ],
+                link: "http://www.uni-sz.bg/",
+                application: "http://www.uni-sz.bg/%d0%be%d1%86%d0%b5%d0%bd%d0%ba%d0%b8-%d0%b8-%d0%ba%d0%bb%d0%b0%d1%81%d0%b8%d1%80%d0%b0%d0%bd%d0%b8%d1%8f-201415/"
         }
     },
     {
@@ -291,6 +301,8 @@ const unis = [
                     "Помощник фармацевт",
                     "Лекарски асистент",
                 ],
+                link: "https://www.btu.bg/index.php/bg/",
+                application: "https://www.btu.bg/index.php/bg/candidatstudpriem-all-gm/spravochnikm"
         }
     },
     {
@@ -306,6 +318,8 @@ const unis = [
                     "Медицинска сестра",
                     "Медицинска рехабилитация и ерготерапия",
                 ],
+                link: "https://mu-sofia.bg/",
+                application: "https://mu-sofia.bg/priem/ksk/spravochnik-kandidatstudenti/"
         }
     },
     {
@@ -326,6 +340,8 @@ const unis = [
                     "Алтернативен туризъм",
                     "Стопанско управление",
                 ],
+                link: "https://ltu.bg/bg/",
+                application: "https://ltu.bg/bg/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%BD%D0%B8-%D0%B8%D0%B7%D0%BF%D0%B8%D1%82%D0%B8"
         }
     }
 ]
@@ -343,18 +359,37 @@ const unis = [
 ]*/
 
 function GetUniName(url) {
-    for (let pair of unis) {
-        if (pair[1] === url)
-            return pair[0]
+    for (let uni of unis) {
+        if (uni.url === url)
+            return uni.name
     }
 }
 
 function GetUniUrl(name) {
-    return unis[name]
+    for (let uni of unis) {
+        if (uni.name === name)
+            return uni.url
+    }
+}
+
+function GetUniByUrl(url) {
+    url = url.substring("/univesities/".length + 1, url.length)
+    for (let uni of unis) {
+        if (uni.url === url)
+            return uni
+    }
+}
+
+function GetUniByName(name) {
+    for (let uni of unis)
+        if (uni.name === name)
+            return uni
 }
 
 export {
     GetUniName,
     GetUniUrl,
+    GetUniByUrl,
+    GetUniByName,
     unis
 }

@@ -50,7 +50,7 @@ class LessonLink extends React.Component {
                         <img src={this.props.preview} alt="preview"></img>
                         {this.props.subtopics === undefined ? null :
                             (<i className="fa fa-caret-down" style={{ display: "inline-block", width: "10px", margin: "0 10px", fontSize: "20px" }} />)}
-                        <h3 style={{ display: "inline", marginLeft: "10px" }}>{this.props.title}</h3>
+                        <h4 style={{ display: "inline", marginLeft: "10px" }}>{this.props.title}</h4>
                     </>
                 } link={link} onClick={this.props.subtopics === undefined ? null : () => onDropdownClick(this.DOMnode.current)} />
 
