@@ -6,7 +6,6 @@ import { colors, theme } from './Colors'
 import "./Style/Components.css"
 
 class Button extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = { cursor: "default" }
@@ -107,7 +106,7 @@ class SearchField extends React.Component {
       style: {
         buttonBackground: { backgroundColor: "transparent" },
         input: { visibility: "hidden", backgroundColor: "transperent" },
-        search: { width: "0%" }
+        search: { width: "0%", borderColor: "transparent" }
       }
     }
     this.state = this.stateWhenCollapsed;
@@ -128,11 +127,11 @@ class SearchField extends React.Component {
 
   render() {
     return (
-      <div className={"search button " + this.props.class} style={{ cursor: "default", width: this.state.style.search.width }} onClick={() => {
+      <div className={"search button " + this.props.class} style={this.state.style.search} onClick={() => {
         this.clickHandled = true
         this.Expand()
       }}>
-        <div className="button-content" style={{ cursor: "default" }}>
+        <div className="button-content">
           <i className="fa fa-search" onClick={() => {
             if (!this.state.collapsed)
               this.Search()
@@ -158,7 +157,7 @@ class SearchField extends React.Component {
         style: {
           buttonBackground: { backgroundColor: colors.purple },
           input: { visibility: "visible", backgroundColor: colors.purple },
-          search: { width: this.props.width ? this.props.width : "calc(100% - 40px)" }
+          search: { width: this.props.width ? this.props.width : "calc(100% - 20px)", borderColor: "white" }
         }
       });
     }

@@ -166,7 +166,7 @@ class Content extends React.Component {
     render() {
         return (
             <div className="content" style = {{backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light}}>
-                <video id="video" controls />
+                <video id="video" src = "/video/" controls />
 
                 <div className="likesAndDislikesWrapper">
                     <div id="likes">

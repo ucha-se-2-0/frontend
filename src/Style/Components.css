@@ -49,8 +49,10 @@
   display: inline-block;
   overflow: hidden;
   min-width: 40px;
-  transition: width 0.5s;
   top: 12px;
+
+  border: 1px solid white;
+  transition: border-color 0.5s, width 0.5s;
   
   left: 0px;
   z-index: 100;
