@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { colors } from '../../Colors';
 import { Button } from '../../Components'
-import { GetNextLesson, GetSubject } from '../../urls'
+import { GetNextLesson, GetSubject } from '../../assets'
 
 var calcPointsCallbacks = []
 var turnedIn = false

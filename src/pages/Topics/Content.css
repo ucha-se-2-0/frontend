@@ -42,4 +42,15 @@
 {
     transform: rotateZ(0deg);
     transition: transform 0.25s;
+
+    display: inline-block;
+    width: 10px;
+    margin: 0 10px;
+    font-size: 20px
+}
+
+.topic>.button h4
+{
+    display: inline;
+    margin-left: 10px;
 }

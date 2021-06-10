@@ -1,6 +1,6 @@
 import React from 'react'
 import { colors, theme } from '../../Colors';
-import { GetLesson } from '../../urls';
+import { GetLesson } from '../../assets';
 
 
 class Header extends React.Component {
