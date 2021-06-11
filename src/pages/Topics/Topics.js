@@ -3,7 +3,7 @@ import React from 'react'
 import Content from './Content'
 import { DefaultNavbar as Navbar, Header, SearchField, Footer } from '../../Components'
 import { theme } from '../../Colors'
-import { GetSubjectByUrl } from '../../urls'
+import { GetSubjectByUrl } from '../../assets'
 
 if (window.location.pathname.match("/subjects/")) {
     import('./Content.css');

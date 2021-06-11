@@ -1,6 +1,6 @@
 import React from "react"
 import { Button } from '../../Components'
-import { GetLessonIdByUrl } from '../../urls'
+import { GetLessonIdByUrl } from '../../assets'
 import { theme, colors } from '../../Colors'
 
 const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';//wtf is this
@@ -166,7 +166,7 @@ class Content extends React.Component {
     render() {
         return (
             <div className="content" style = {{backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light}}>
-                <video id="video" controls />
+                <video id="video" src = "/video/" controls />
 
                 <div className="likesAndDislikesWrapper">
                     <div id="likes">

@@ -345,18 +345,6 @@ const unis = [
         }
     }
 ]
-/*[
-    {name: "Медицински университет София", url: "Med_uni_Sofia", 
-    data: {
-        info: "Медицински университет София е най-старото висше училище за медицинско образование у нас. Медицинският университет в София възниква като Медицински факултет към Софийския университет. През 1950 година той се отделя от СУ и става самостоятелно учреждение.",
-        specialty: []}},
-    {name: "Медицински университет Варна", url: "Med_uni_Varna"},
-    {name: "Медицински университет Пловдив", url: "Med_uni_Plovdiv"},
-    {name: "Медицински университет Плевен", url: "Med_uni_Pleven"},
-    {name: "Тракийски университет Стара Загора", url: "Stara_Zagora"},
-    {name: 'Университет "Проф. д–р Асен Златаров" Бургас', url: "Prof_Asen_Zlatanov"},
-    {name: 'Софийски университет "Св. Климент Охридски"', url: "Sv_Kliment_Ohridski"}
-]*/
 
 function GetUniName(url) {
     for (let uni of unis) {
@@ -373,7 +361,9 @@ function GetUniUrl(name) {
 }
 
 function GetUniByUrl(url) {
-    url = url.substring("/univesities/".length + 1, url.length)
+    if(url.match("/universities/"))
+        url = url.substring("/univesities/".length + 1, url.length)
+        
     for (let uni of unis) {
         if (uni.url === url)
             return uni

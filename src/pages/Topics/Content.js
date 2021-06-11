@@ -3,9 +3,9 @@ import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { colors, theme } from '../../Colors';
 import { Button } from '../../Components'
 
-import { GetLessonUrl } from '../../urls'
+import { GetLessonUrl } from '../../assets'
 
-function onDropdownClick(component) {
+/*function onDropdownClick(component) {
     component.childNodes.forEach(element => {
         if (element.classList[0] === "topic") {
             if (element.style.display === "none" || element.style.display === "") {
@@ -27,14 +27,13 @@ function onDropdownClick(component) {
     else {
         component.querySelector(".button i").style.transform = "rotateZ(0deg)";
     }
-}
+}*/
 
 class LessonLink extends React.Component {
     constructor(props) {
         super(props);
 
-        if (this.props.subtopics !== undefined)
-            this.DOMnode = React.createRef();
+        this.state = {expanded: false}
     }
 
     render() {
@@ -43,18 +42,27 @@ class LessonLink extends React.Component {
             link = "/lessons/" + link;
         }
 
-        return (
-            <div className="topic" ref={this.DOMnode}>
-                <Button name={
-                    <>
-                        <img src={this.props.preview} alt="preview"></img>
-                        {this.props.subtopics === undefined ? null :
-                            (<i className="fa fa-caret-down" style={{ display: "inline-block", width: "10px", margin: "0 10px", fontSize: "20px" }} />)}
-                        <h4 style={{ display: "inline", marginLeft: "10px" }}>{this.props.title}</h4>
-                    </>
-                } link={link} onClick={this.props.subtopics === undefined ? null : () => onDropdownClick(this.DOMnode.current)} />
+        let button
+        let subtopics
+        if(this.props.subtopics)
+        {
+            subtopics = this.props.subtopics
+            button = <Button name = {
+            <>
+                <i className="fa fa-caret-down" />
+                <h4>{this.props.title}</h4>
+            </>} onClick = {()=>{this.setState({expanded: !this.state.expanded})}}/>
+        }
+        else
+        {
+            button = <Button link = { link } name = { <h4>{this.props.title}</h4> }/>
+        }
 
-                {this.props.subtopics}
+        return (
+
+            <div className="topic">
+                {button}
+                {subtopics}
             </div>
         );
     }
@@ -75,7 +83,7 @@ class Content extends React.Component {
             </Route> */}
 
                 <Route path="/subjects/*" exact>
-                    <div className="content" style = {{backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light}}>
+                    <div className="content" style={{ backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light }}>
                         <div style={{ width: "80%" }}>
                             <Route path="/subjects/anatomy_and_physiology">
                                 <LessonLink title="Тъкани" subtopics={
@@ -204,8 +212,7 @@ class Content extends React.Component {
         );
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         // if(theme === "dark")
         // {
         //     document.getElementsByClassName("content")[0].style.backgroundColor = colors.content.dark;
