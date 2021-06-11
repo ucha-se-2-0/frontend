@@ -8,9 +8,10 @@
 
 .header img
 {
-    object-fit: cover;
+    object-fit: contain;
     margin: 0;
     padding: 0;
+    height: 20vh !important;
 }
 
 .change-theme

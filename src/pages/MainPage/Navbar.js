@@ -9,14 +9,7 @@ class Navbar extends React.Component {
     return (
       <div className="navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
 
-        <Dropdown name="Предмети">
-          <DropdownElement name={<>Анатомия <br /> и физиология</>} link="/subjects/anatomy_and_physiology" />
-          <DropdownElement name="Клетка" link="/subjects/cytology" />
-          <DropdownElement name="Вируси" link="/subjects/viruses" />
-          <DropdownElement name="Генетика" link="/subjects/genetics" />
-          <DropdownElement name="Екология" link="/subjects/ecology" />
-          <DropdownElement name="Химия" link="/subjects/chemistry" />
-        </Dropdown>
+        <Button name = "Уроци" class = "important" link = "/lessons"/>
 
         <Button id="unis" name="Университети" link="/universities" class="important" />
 

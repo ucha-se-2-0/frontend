@@ -16,3 +16,11 @@
 {
   margin-right: 10px;
 }
+
+@media (max-width: 800px)
+{
+  .navbar .button
+  {
+    margin: auto 3px;
+  }
+}
