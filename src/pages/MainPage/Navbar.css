@@ -17,9 +17,9 @@
   margin-right: 10px;
 }
 
-@media (max-width: 800px)
+@media (max-width: 500px)
 {
-  .navbar .button
+  .navbar .button:not(.search)
   {
     margin: auto 3px;
   }

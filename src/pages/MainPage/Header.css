@@ -11,7 +11,7 @@
     object-fit: contain;
     margin: 0;
     padding: 0;
-    height: 20vh !important;
+    height: calc(15vh + 10vw);
 }
 
 .change-theme

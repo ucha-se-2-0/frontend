@@ -101,12 +101,13 @@ class Dropdown extends React.Component {
 class SearchField extends React.Component {
   constructor(props) {
     super(props);
+    this.margin = this.props.margin ? this.props.margin : "10px"
     this.stateWhenCollapsed = {
       collapsed: true,
       style: {
         buttonBackground: { backgroundColor: "transparent" },
         input: { visibility: "hidden", backgroundColor: "transperent" },
-        search: { width: "0%", borderColor: "transparent" }
+        search: { width: "0%", marginLeft: this.margin, borderColor: "transparent" }
       }
     }
     this.state = this.stateWhenCollapsed;
@@ -137,7 +138,7 @@ class SearchField extends React.Component {
               this.Search()
           }} style={{ color: colors.cyan }}></i>
 
-          <input type="text" onKeyUp={event => {
+          <input type="text" placeholder={this.props.placeholder} onKeyUp={event => {
             if (event.key === "Enter")
               this.Search();
 
@@ -157,7 +158,11 @@ class SearchField extends React.Component {
         style: {
           buttonBackground: { backgroundColor: colors.purple },
           input: { visibility: "visible", backgroundColor: colors.purple },
-          search: { width: this.props.width ? this.props.width : "calc(100% - 20px)", borderColor: "white" }
+          search: {
+            width: this.props.width ? this.props.width : "calc(100% - 20px)",
+            marginLeft: this.margin,
+            borderColor: "white"
+          }
         }
       });
     }
@@ -219,13 +224,16 @@ class Header extends React.Component {
   }
 }
 
-class Title extends React.Component {
-  render() {
-    return (
-      <div className="content-title" style={{ color: theme === "dark" ? colors.title.dark : colors.title.light }}>
-        {this.props.name}
-      </div>)
-  }
+function Title(props) {
+  return (
+    <div className = {"content-title" + (props.subtitle ? " content-subtitle" : "")} style={{ color: theme === "dark" ? colors.title.dark : colors.title.light }}>
+      {props.name}
+    </div>)
 }
 
-export { Button, Dropdown, DropdownElement, SearchField, Footer, DefaultNavbar, Header, Title };
+function Subtitle(props)
+{
+  return(<Title subtitle {...props}/>)
+}
+
+export { Button, Dropdown, DropdownElement, SearchField, Footer, DefaultNavbar, Header, Title, Subtitle };

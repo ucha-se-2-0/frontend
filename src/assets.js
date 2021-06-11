@@ -1,5 +1,87 @@
-const urls = [
-    ["Анатомия и физиология", "anatomy_and_physiology",
+const lessons = {
+    biology:
+    {
+        grade_8: [
+            {
+                sectionName: "Структурна организация на човешкия организъм", url: "strukturna_organizatsiya_na_choveshkiya_organizam", lessons: [
+                    { title: "", url: "" }
+                ]
+            },
+            {
+                sectionName: "Обмяна на веществата", url: "obmyana_na_veshtestvata", subsections: [
+                    {
+                        title: "Храносмилателна система", lessons: [
+                            { title: "", url: "" }
+                        ]
+                    },
+                    {
+                        title: "Дихателна система", lessons: [
+                            { title: "", url: "" }
+                        ]
+                    },
+                    {
+                        title: "Отделителна система", lessons: [
+                            { title: "", url: "" }
+                        ]
+                    },
+                    {
+                        title: "Сърдечно-съдова система", lessons: [
+                            { title: "", url: "" }
+                        ]
+                    }
+                ]
+            },
+            {
+                sectionName: "Движение и опора на тялото", url: "dvizhenie_i_opora_na_tyaloto", lessons: [
+                    { title: "", url: "" }
+                ]
+            },
+            {
+                sectionName: "Размножаване, растеж и развитие", url: "razmnozhavane_rastezh_i_razvitie", lessons: [
+                    { title: "", url: "" }
+                ]
+            },
+            {
+                sectionName: "Регулация и хомеостаза", url: "regulatsiya_i_homeostaza", subsections: [
+                    {
+                        title: "Нервна система", lessons: [
+                            { title: "", url: "" }
+                        ]
+                    },
+                    {
+                        title: "Ендокринна система", lessons: [
+                            { title: "", url: "" }
+                        ]
+                    },
+                    {
+                        title: "Сетивни системи", lessons: [
+                            { title: "", url: "" }
+                        ]
+                    }
+                ]
+            }
+        ],
+        grade_9: [
+            { sectionName: "Химичен състав на живата материя", url: "himichen_sastav_na_zhivata_materiya", lessons: [{ title: "", url: "" }] },
+            { sectionName: "Надмолекулни комплекси", url: "nadmolekulni_kompleksi", lessons: [{ title: "", url: "" }] },
+            { sectionName: "Структура и процеси в клетката", url: "struktura_i_protsesi_v_kletkata", lessons: [{ title: "", url: "" }] },
+            { sectionName: "Възпроизводство на клетката", url: "vazproizvodstvo_na_kletkata", lessons: [{ title: "", url: "" }] },
+        ],
+        grade_10: [
+            { sectionName: "Генетика", url: "genetika", lessons: [{ title: "", url: "" }] },
+            { sectionName: "Еволюция", url: "evolyutsiya", lessons: [{ title: "", url: "" }] },
+            { sectionName: "Екология", url: "ekologiya", lessons: [{ title: "", url: "" }] }
+        ]
+    },
+    chemistry: {
+
+    }
+    // ["Клетка", "cytology", []],
+    // ["Вируси", "viruses", []],
+    // ["Генетика", "genetics", []],
+    // ["Екология", "ecology", []],
+    // ["Биохимия", "chemistry", []]
+    /*"Анатомия и физиология", "anatomy_and_physiology",
         [
             ["Епителна и съединителна тъкани", "epithelial_and_connective_tissues"],
             ["Мускулна и нервна тъкани", "muscle_and_nervous_tissue"],
@@ -37,19 +119,14 @@ const urls = [
             ["Околощитовидни жлези", "parathyroid_glands"],
             ["Здравни познания за ендокринна система", "hygienics_of_endocrine_system"]
         ]
-    ],
-    ["Клетка", "cytology", []],
-    ["Вируси", "viruses", []],
-    ["Генетика", "genetics", []],
-    ["Екология", "ecology", []],
-    ["Биохимия", "chemistry", []]
-]
+    },*/
+}
 
 function GetLessonUrl(lessonTitle) {
-    for (let subject = 0; subject < urls.length; subject++) {
-        for (let pair = 0; pair < urls[subject][2].length; pair++) {
-            if (urls[subject][2][pair][0] === lessonTitle) {
-                return urls[subject][2][pair][1];
+    for (let subject = 0; subject < lessons.length; subject++) {
+        for (let pair = 0; pair < lessons[subject][2].length; pair++) {
+            if (lessons[subject][2][pair][0] === lessonTitle) {
+                return lessons[subject][2][pair][1];
             }
         }
     }
@@ -58,10 +135,10 @@ function GetLessonUrl(lessonTitle) {
 function GetLesson(url) {
     url = url.match(/\/[^/]+/g);
     url = url[url.length - 1].slice(1);
-    for (let subject = 0; subject < urls.length; subject++) {
-        for (let lesson = 0; lesson < urls[subject][2].length; lesson++) {
-            if (urls[subject][2][lesson][1] === url) {
-                return urls[subject][2][lesson][0];
+    for (let subject = 0; subject < lessons.length; subject++) {
+        for (let lesson = 0; lesson < lessons[subject][2].length; lesson++) {
+            if (lessons[subject][2][lesson][1] === url) {
+                return lessons[subject][2][lesson][0];
             }
         }
     }
@@ -70,10 +147,10 @@ function GetLesson(url) {
 function GetSubject(url) {
     url = url.match(/\/[^/]+/g);
     url = url[url.length - 1].slice(1);
-    for (let subject = 0; subject < urls.length; subject++) {
-        for (let lesson = 0; lesson < urls[subject][2].length; lesson++) {
-            if (urls[subject][2][lesson][1] === url) {
-                return [urls[subject][0], urls[subject][1]];
+    for (let subject = 0; subject < lessons.length; subject++) {
+        for (let lesson = 0; lesson < lessons[subject][2].length; lesson++) {
+            if (lessons[subject][2][lesson][1] === url) {
+                return [lessons[subject][0], lessons[subject][1]];
             }
         }
     }
@@ -82,23 +159,23 @@ function GetSubject(url) {
 function GetNextLesson(url) {
     url = url.match(/\/[^/]+/g);
     url = url[url.length - 1].slice(1);
-    for (let subject = 0; subject < urls.length; subject++) {
-        for (let lesson = 0; lesson < urls[subject][2].length - 1; lesson++) {
-            if (urls[subject][2][lesson][1] === url) {
-                return urls[subject][2][lesson + 1];
+    for (let subject = 0; subject < lessons.length; subject++) {
+        for (let lesson = 0; lesson < lessons[subject][2].length - 1; lesson++) {
+            if (lessons[subject][2][lesson][1] === url) {
+                return lessons[subject][2][lesson + 1];
             }
         }
 
-        if (urls[subject][2][urls[subject][2].length - 1][1] === url) {
+        if (lessons[subject][2][lessons[subject][2].length - 1][1] === url) {
             return undefined;
         }
     }
 }
 
 function GetSubjectUrl(subjectTitle) {
-    for (let subject = 0; subject < urls.length; subject++) {
-        if (urls[subject][0] === subjectTitle) {
-            return urls[subject][1];
+    for (let subject = 0; subject < lessons.length; subject++) {
+        if (lessons[subject][0] === subjectTitle) {
+            return lessons[subject][1];
         }
     }
 }
@@ -108,9 +185,9 @@ function GetSubjectByUrl(url) {
     url = url.match(/\/[^/]+/g);
     url = url[url.length - 1].slice(1);
 
-    for (let subject = 0; subject < urls.length; subject++) {
-        if (urls[subject][1] === url) {
-            return urls[subject][0];
+    for (let subject = 0; subject < lessons.length; subject++) {
+        if (lessons[subject][1] === url) {
+            return lessons[subject][0];
         }
     }
 }
@@ -118,8 +195,8 @@ function GetSubjectByUrl(url) {
 function GetLessonIdByUrl(url) {
     var res = url.match(/\/[^/]+/g);
     res = res[res.length - 1].slice(1);
-    for (let i = 0; i < urls.length - 1; i++) {
-        if (urls[i][1] === res)
+    for (let i = 0; i < lessons.length - 1; i++) {
+        if (lessons[i][1] === res)
             return i;
     }
 }
@@ -127,9 +204,22 @@ function GetLessonIdByUrl(url) {
 function GetIdBySubject(url) {
     var res = url.match(/\/[^/]+/g);
     res = res[res.length - 1].slice(1);
-    for (let i = 0; i < urls.length - 1; i++) {
-        if (urls[i][1] === res)
+    for (let i = 0; i < lessons.length - 1; i++) {
+        if (lessons[i][1] === res)
             return i;
+    }
+}
+
+function GetSectionByUrl(url) {
+    for (let subject in lessons) {
+        for (let grade in lessons[subject]) {
+            for (let section of lessons[subject][grade]) {
+                if (section.url === url) {
+                    console.log(section)
+                    return section
+                }
+            }
+        }
     }
 }
 
@@ -141,7 +231,9 @@ export {
     GetIdBySubject,
     GetSubject,
     GetSubjectUrl,
-    GetSubjectByUrl
+    GetSubjectByUrl,
+    GetSectionByUrl,
+    lessons
 }
 
 
@@ -238,8 +330,8 @@ const unis = [
                     " Инструктор диетично хранене",
                     " Медицинска козметика",
                 ],
-                link: "https://mu-plovdiv.bg/",
-                application: "https://mu-plovdiv.bg/priem/kandidat-studentski-spravochnik/"
+            link: "https://mu-plovdiv.bg/",
+            application: "https://mu-plovdiv.bg/priem/kandidat-studentski-spravochnik/"
         }
     },
     {
@@ -259,8 +351,8 @@ const unis = [
                     "Рентгенов лаборант",
                     "Помощник фармацевт",
                 ],
-                link: "https://mu-plovdiv.bg/",
-                application: "https://mu-plovdiv.bg/priem/kandidat-studentski-spravochnik/"
+            link: "https://mu-plovdiv.bg/",
+            application: "https://mu-plovdiv.bg/priem/kandidat-studentski-spravochnik/"
         }
     },
     {
@@ -282,8 +374,8 @@ const unis = [
                     "Акушерка (Филиал Хасково)",
                     "Медицинска сестра (Филиал Хасково)",
                 ],
-                link: "http://www.uni-sz.bg/",
-                application: "http://www.uni-sz.bg/%d0%be%d1%86%d0%b5%d0%bd%d0%ba%d0%b8-%d0%b8-%d0%ba%d0%bb%d0%b0%d1%81%d0%b8%d1%80%d0%b0%d0%bd%d0%b8%d1%8f-201415/"
+            link: "http://www.uni-sz.bg/",
+            application: "http://www.uni-sz.bg/%d0%be%d1%86%d0%b5%d0%bd%d0%ba%d0%b8-%d0%b8-%d0%ba%d0%bb%d0%b0%d1%81%d0%b8%d1%80%d0%b0%d0%bd%d0%b8%d1%8f-201415/"
         }
     },
     {
@@ -301,8 +393,8 @@ const unis = [
                     "Помощник фармацевт",
                     "Лекарски асистент",
                 ],
-                link: "https://www.btu.bg/index.php/bg/",
-                application: "https://www.btu.bg/index.php/bg/candidatstudpriem-all-gm/spravochnikm"
+            link: "https://www.btu.bg/index.php/bg/",
+            application: "https://www.btu.bg/index.php/bg/candidatstudpriem-all-gm/spravochnikm"
         }
     },
     {
@@ -318,8 +410,8 @@ const unis = [
                     "Медицинска сестра",
                     "Медицинска рехабилитация и ерготерапия",
                 ],
-                link: "https://mu-sofia.bg/",
-                application: "https://mu-sofia.bg/priem/ksk/spravochnik-kandidatstudenti/"
+            link: "https://mu-sofia.bg/",
+            application: "https://mu-sofia.bg/priem/ksk/spravochnik-kandidatstudenti/"
         }
     },
     {
@@ -340,8 +432,8 @@ const unis = [
                     "Алтернативен туризъм",
                     "Стопанско управление",
                 ],
-                link: "https://ltu.bg/bg/",
-                application: "https://ltu.bg/bg/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%BD%D0%B8-%D0%B8%D0%B7%D0%BF%D0%B8%D1%82%D0%B8"
+            link: "https://ltu.bg/bg/",
+            application: "https://ltu.bg/bg/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%BD%D0%B8-%D0%B8%D0%B7%D0%BF%D0%B8%D1%82%D0%B8"
         }
     }
 ]
@@ -361,9 +453,9 @@ function GetUniUrl(name) {
 }
 
 function GetUniByUrl(url) {
-    if(url.match("/universities/"))
+    if (url.match("/universities/"))
         url = url.substring("/univesities/".length + 1, url.length)
-        
+
     for (let uni of unis) {
         if (uni.url === url)
             return uni
