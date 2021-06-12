@@ -1,1 +1,0 @@
-# Julemy frontend repository
