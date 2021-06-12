@@ -1,7 +1,7 @@
 import React from "react"
 import { Route, BrowserRouter as Router } from "react-router-dom"
 import { Button } from '../../Components'
-import { unis, GetUniByUrl } from "../../assets"
+import { unis, GetUniByUrl } from "../../Assets"
 
 function UnisNavContent() 
 {

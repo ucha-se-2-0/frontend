@@ -4,58 +4,96 @@ const lessons = {
         grade_8: [
             {
                 sectionName: "Структурна организация на човешкия организъм", url: "strukturna_organizatsiya_na_choveshkiya_organizam", lessons: [
-                    { title: "", url: "" }
+                    { title: "Клетка", url: "kletka" },
+                    { title: "Епителна и съединителна тъкан", url: "еpitelna_i_saedinitelna_takan" },
+                    { title: "Мускулна и нервна тъкан", url: "kletka" },
+                    { title: "Организмът - единно цяло", url: "kletka" },
+                    { title: "Микроскопско наблюдение на човешки тъкани", url: "kletka" }
                 ]
             },
             {
                 sectionName: "Обмяна на веществата", url: "obmyana_na_veshtestvata", subsections: [
                     {
                         title: "Храносмилателна система", lessons: [
-                            { title: "", url: "" }
+                            { title: "Хранене", url: "hranene" },
+                            { title: "Храносмилане в устната кухина", url: "hranosmilane_v_ustnata_kuhina" },
+                            { title: "Храносмилане в стомаха и в червата", url: "hranosmilane_v_stomaha_i_v_chervata" },
+                            { title: "Доказване на съдържанието на въглехидрати, мазнини и белтъци в хранителни продукти", url: "dokazvane_na_vaglehidrati_maznini_i_beltatsi" },
+                            { title: "Хигиена на храненето и здравни познания за храносмилателната система", url: "higiena_na_hranosmilatelnata_sistema" },
+                            { title: "Съставяне на здравословно хранително меню", url: "sastavyane_na_zdravoslovno_hranitelno_menyu" }
                         ]
                     },
                     {
                         title: "Дихателна система", lessons: [
-                            { title: "", url: "" }
+                            { title: "Дихателна система", url: "dihatelna_sistema" },
+                            { title: "Дишане", url: "dishane" },
+                            { title: "Измерване на дихателна честота и изчисляване на жизнената вместимост на белите дробове", url: "dihatelna_chestota_i_vmestimost_na_belite_drobove" },
+                            { title: "Хигиена и здравни познания за дихателната система", url: "higiena_na_dihatelnata_sistema" },
+
                         ]
                     },
                     {
                         title: "Отделителна система", lessons: [
-                            { title: "", url: "" }
+                            { title: "Отделяне", url: "otdelyane" },
+                            { title: "Хигиена и здравни познания за отделителната система", url: "higiena_na_otdelitelnata_sistema" }
                         ]
                     },
                     {
                         title: "Сърдечно-съдова система", lessons: [
-                            { title: "", url: "" }
+                            { title: "Сърце и кръвоносни съдове", url: "" },
+                            { title: "Кръв", url: "" },
+                            { title: "Сърдечна дейност. Кръвообращение", url: "" },
+                            { title: "Измерване на честотата на пулса и стойностите на артериалното налягане", url: "" },
+                            { title: "Имунитет", url: "" },
+                            { title: "Хигиена и здравни познания за сърдечно-съдова система", url: "" },
+                            { title: "Изчисляване на индекса на телесната маса, основната обмяна на веществата и дневния енргоразход", url: "" }
                         ]
                     }
                 ]
             },
             {
                 sectionName: "Движение и опора на тялото", url: "dvizhenie_i_opora_na_tyaloto", lessons: [
-                    { title: "", url: "" }
+                    { title: "Устройсво на костите и ставите. Череп", url: "" },
+                    { title: "Гръбначен стълб, гръден кош и крайници", url: "" },
+                    { title: "Мускули", url: "" },
+                    { title: "Превенция на заболявания и увреждания на опорно-двигателната система", url: "" },
+                    { title: "Оказване на долекарска помощ при травми на опорно-двигателната система, кръвотечения и поражения от електричен ток", url: "" }
                 ]
             },
             {
                 sectionName: "Размножаване, растеж и развитие", url: "razmnozhavane_rastezh_i_razvitie", lessons: [
-                    { title: "", url: "" }
+                    { title: "Мъжка полова система", url: "" },
+                    { title: "Женска полова система", url: "" },
+                    { title: "Оплождане. Зародишно и следзародишно развитие", url: "" },
+                    { title: "Хигиена на половата система и безопасно сексуално поведение", url: "" }
                 ]
             },
             {
                 sectionName: "Регулация и хомеостаза", url: "regulatsiya_i_homeostaza", subsections: [
                     {
                         title: "Нервна система", lessons: [
-                            { title: "", url: "" }
+                            { title: "Гръбначен мозък", url: "" },
+                            { title: "Главен мозък", url: "" },
+                            { title: "Краен мозък", url: "" },
+                            { title: "Вегетативна нервна система", url: "" },
+                            { title: "Профилактика на нервната система", url: "" }
                         ]
                     },
                     {
                         title: "Ендокринна система", lessons: [
-                            { title: "", url: "" }
+                            { title: "Хипофиза", url: "" },
+                            { title: "Щитовидна жлеза и околощитовидни жлези", url: "" },
+                            { title: "Задстомашна жлеза", url: "" },
+                            { title: "Надбъбречни жлези", url: "" },
+                            { title: "Полови жлези", url: "" }
                         ]
                     },
                     {
                         title: "Сетивни системи", lessons: [
-                            { title: "", url: "" }
+                            { title: "Зрителна система", url: "" },
+                            { title: "Обонятелна и вкусова система", url: "" },
+                            { title: "Слухова система и вестибуларен апарат", url: "" },
+                            { title: "Кожа", url: "" }
                         ]
                     }
                 ]
@@ -122,11 +160,41 @@ const lessons = {
     },*/
 }
 
-function GetLessonUrl(lessonTitle) {
+/*function GetLessonUrl(lessonTitle) {
     for (let subject = 0; subject < lessons.length; subject++) {
         for (let pair = 0; pair < lessons[subject][2].length; pair++) {
             if (lessons[subject][2][pair][0] === lessonTitle) {
                 return lessons[subject][2][pair][1];
+            }
+        }
+    }
+}*/
+
+function FindLessonInSections(sections, url)
+{
+    for(let s of sections)
+    {
+        let l = FindLessonInSection(s, url)
+        if(l)
+            return l;
+    }
+}
+
+function FindLessonInSection(section, url)
+{
+    if (section.lessons) {
+        for (let lesson of section.lessons) {
+            if (lesson.url === url) {
+                return lesson
+            }
+        }
+    }
+    else if (section.subsections) {
+        for (let ss of section.subsections) {
+            for (let lesson of ss.lessons) {
+                if (lesson.url === url) {
+                    return lesson
+                }
             }
         }
     }
@@ -135,16 +203,16 @@ function GetLessonUrl(lessonTitle) {
 function GetLesson(url) {
     url = url.match(/\/[^/]+/g);
     url = url[url.length - 1].slice(1);
-    for (let subject = 0; subject < lessons.length; subject++) {
-        for (let lesson = 0; lesson < lessons[subject][2].length; lesson++) {
-            if (lessons[subject][2][lesson][1] === url) {
-                return lessons[subject][2][lesson][0];
-            }
+    for (let grade in lessons.biology) {
+        let l = FindLessonInSections(lessons.biology[grade], url)
+        if(l)
+        {
+            return l
         }
     }
 }
 
-function GetSubject(url) {
+/*function GetSubject(url) {
     url = url.match(/\/[^/]+/g);
     url = url[url.length - 1].slice(1);
     for (let subject = 0; subject < lessons.length; subject++) {
@@ -208,14 +276,13 @@ function GetIdBySubject(url) {
         if (lessons[i][1] === res)
             return i;
     }
-}
+}*/
 
 function GetSectionByUrl(url) {
     for (let subject in lessons) {
         for (let grade in lessons[subject]) {
             for (let section of lessons[subject][grade]) {
                 if (section.url === url) {
-                    console.log(section)
                     return section
                 }
             }
@@ -224,14 +291,14 @@ function GetSectionByUrl(url) {
 }
 
 export {
-    GetLessonUrl,
+    //GetLessonUrl,
     GetLesson,
-    GetNextLesson,
-    GetLessonIdByUrl,
-    GetIdBySubject,
-    GetSubject,
-    GetSubjectUrl,
-    GetSubjectByUrl,
+    // GetNextLesson,
+    // GetLessonIdByUrl,
+    // GetIdBySubject,
+    // GetSubject,
+    // GetSubjectUrl,
+    // GetSubjectByUrl,
     GetSectionByUrl,
     lessons
 }

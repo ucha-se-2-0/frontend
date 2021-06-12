@@ -1,6 +1,6 @@
 import { Button, Subtitle, Title } from '../../Components'
 import React from 'react'
-import { GetLessonUrl, lessons } from '../../assets'
+import { GetLessonUrl, lessons } from '../../Assets'
 
 class Content extends React.Component {
     render() {

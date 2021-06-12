@@ -9,21 +9,6 @@
     width: calc(80% + 150px)
 }
 
-.likesAndDislikesWrapper
-{
-    margin: 10px 10% 20px auto;
-    width: auto;
-}
-
-#likes,
-#dislikes
-{
-    display: inline-flex;
-    margin: 0 10px;
-    font-size: calc(1vw + 30px);
-    align-content: center;
-}
-
 #likes i, #dislikes i
 {
     display: block;
@@ -203,7 +188,7 @@
 {
     display: flex;
     margin-left: 30px;
-    margin-top: 15px;
+    margin-top: 0;
     color: grey;
     font-size: 15px;
     cursor: default;
@@ -252,7 +237,6 @@
 {
     font-size: 15px;
     color: grey;
-    margin-left: 40px;
     margin-top: -10px;
 }
 
@@ -261,16 +245,6 @@
 {
     font-family: 'Font Awesome 5 Free';
     margin-right: 10px;
-}
-
-.collapse-replies
-{
-    display: none;
-}
-
-.replies
-{
-    display: none;
 }
 
 

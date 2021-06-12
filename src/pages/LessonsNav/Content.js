@@ -1,6 +1,6 @@
 import React from "react";
-import { GetSectionByUrl } from "../../assets";
-import {Button} from '../../Components'
+import { GetSectionByUrl } from "../../Assets";
+import { Button, Subtitle } from '../../Components'
 
 var section = GetSectionByUrl(window.location.pathname.slice("/lessons/sections/".length))
 
@@ -14,17 +14,37 @@ class Content extends React.Component {
     }
 
     GenLessonsLinks() {
-        let links = []
+        let res = []
 
         if (section.lessons) {
-            let i = 0
+            let links = []
+            let key = 0
+
             for (let l of section.lessons) {
-                i++
-                links.push(<Button key = {i} name = {l.title} link = {l.url} />)
+                key++
+                links.push(<Button key={key} name={l.title} link={"/lessons/" + l.url} />)
+            }
+
+            res.push(<div className = "lessons-links" key = {0}>{links}</div>)
+        }
+        else if (section.subsections) {
+            let key = 0
+
+            for (let ss of section.subsections) {
+                let links = []
+
+                res.push(<Subtitle name = {ss.title} key = {key}/>)
+
+                for (let l of ss.lessons) {
+                    key++
+                    links.push(<Button key={key} name={l.title} link={"/lessons/" + l.url} />)
+                }
+
+                res.push(<div className = "lessons-links" key = {key + 1}>{links}</div>)
             }
         }
 
-        return links
+        return res
     }
 }
 
