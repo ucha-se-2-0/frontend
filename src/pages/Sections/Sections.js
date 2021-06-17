@@ -3,22 +3,18 @@ import React from 'react'
 import Content from './Content'
 import { DefaultNavbar as Navbar, Header, SearchField, Footer } from '../../Components'
 import { theme } from '../../Colors'
-import { GetSubjectByUrl } from '../../urls'
 
-if (window.location.pathname.match("/subjects/")) {
-    import('./Content.css');
-    import('./Navbar.css');
+if (window.location.pathname.match("/lessons")) {
 }
+import('./Content.css');
+import('./Navbar.css');
 
-class Subjects extends React.Component {
+class Sections extends React.Component {
     render() {
         return (
             <>
-                <Header content={GetSubjectByUrl(window.location.pathname)} />
-
-                {/* <span style = {{width: "100%", height: "5px", display: "block", backgroundColor: colors.notSoLight}}/> */}
-
-                <Navbar content={<SearchField width = "calc(100% - 100px)" search={() => { }} class="important" />} />
+                <Header content = "Уроци" />
+                <Navbar content={<SearchField placeholder = "Потърсете урок" margin = "80px" width = "calc(100% - 100px)" search={() => { }} class="important" />} />
                 <Content />
                 <Footer />
             </>
@@ -38,4 +34,4 @@ class Subjects extends React.Component {
     }
 }
 
-export default Subjects;
+export default Sections;

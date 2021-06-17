@@ -1,0 +1,68 @@
+.content .topic {
+    margin: 10px;
+    width: 100%;
+}
+
+.content .button img {
+    display: none;
+}
+
+.content .button-content {
+    margin: 0;
+}
+
+.content .topic .topic {
+    margin: 0;
+    display: none;
+    margin-left: 50px;
+    transition: max-height 0.5s, margin 0.5s;
+}
+
+.topic>* {
+    text-align: start;
+}
+
+.topic>.button i {
+    transform: rotateZ(0deg);
+    transition: transform 0.25s;
+    display: inline-block;
+    width: 10px;
+    margin: 0 10px;
+    font-size: 20px
+}
+
+.topic>.button h4 {
+    display: inline;
+    margin-left: 10px;
+}
+
+.content .sections-links,
+.content .lessons-links {
+    min-width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.content .sections-links .button,
+.content .lessons-links .button {
+    margin: 10px;
+    padding: 10px;
+    font-size: medium;
+}
+
+@media screen and (min-width: 800px) {
+    .content .sections-links,
+    .content .lessons-links {
+        flex-flow: wrap;
+        justify-content: space-around;
+        align-content: center;
+    }
+
+    .content .sections-links .button,
+    .content .lessons-links .button {
+        width: calc(5% + 150px);
+        margin: 30px calc(40px - 2vw);
+        min-height: calc(10vw + 50px);
+    }
+}

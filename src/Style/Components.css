@@ -4,9 +4,10 @@
 
 .button {
   padding: 0 10px;
-  display: inline-flex;
   position: relative;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
 
   text-decoration: none !important;
   text-align: center;
@@ -19,6 +20,7 @@
 .button-content {
   display: inline-block;
   position: relative;
+  width: 100%;
   z-index: 10;
   transition: color 0.5s;
 }
@@ -89,6 +91,23 @@
   left: 0%;
 }
 
+.search input::placeholder 
+{
+  color: #cccccc;
+  opacity: 1;
+}
+
+.search input:-ms-input-placeholder
+{
+  color: #cccccc;
+}
+
+.search input::-ms-input-placeholder
+{
+  color: #cccccc;
+}
+
+
 /*FOOTER*/
 
 .footer {
@@ -96,7 +115,7 @@
   position: static;
   bottom: 0px;
   width: 100%;
-  height: 400px;
+  height: 300px;
   background-color: var(--footer-d);
 }
 
@@ -133,11 +152,22 @@
 
 .content-title {
   width: 100%;
-  padding: 30px 10px;
-  margin: 10px 0 10px 0;
+  padding: 0px;
+  margin: 10px 0;
+  
   text-align: center;
-  font-size: 80px;
+  line-height: normal;
   color: var(--text-l);
+}
+
+.content-title:not(.content-subtitle)
+{
+  font-size: calc(45px + 3vw);
+}
+
+.content-subtitle
+{
+  font-size: calc(35px + 2vw);
 }
 
 /* DROPDOWN */

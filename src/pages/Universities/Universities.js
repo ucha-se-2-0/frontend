@@ -1,7 +1,7 @@
 import React from "react"
 import Content from './Content'
 import { DefaultNavbar as Navbar, Footer, Header } from '../../Components'
-import { GetUniByUrl } from "../../urls"
+import { GetUniByUrl } from "../../Assets"
 
 if (window.location.pathname === "/universities") {
     import('./Navbar.css');

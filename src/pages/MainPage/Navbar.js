@@ -9,14 +9,7 @@ class Navbar extends React.Component {
     return (
       <div className="navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
 
-        <Dropdown name="Предмети">
-          <DropdownElement name={<>Анатомия <br /> и физиология</>} link="/subjects/anatomy_and_physiology" />
-          <DropdownElement name="Клетка" link="/subjects/cytology" />
-          <DropdownElement name="Вируси" link="/subjects/viruses" />
-          <DropdownElement name="Генетика" link="/subjects/genetics" />
-          <DropdownElement name="Екология" link="/subjects/ecology" />
-          <DropdownElement name="Химия" link="/subjects/chemistry" />
-        </Dropdown>
+        <Button name = "Уроци" class = "important" link = "/lessons"/>
 
         <Button id="unis" name="Университети" link="/universities" class="important" />
 
@@ -25,18 +18,6 @@ class Navbar extends React.Component {
         <Button name="Вход" class="important" link="/Login" />
       </div>
     );
-  }
-
-  componentDidMount() {
-    let url = window.location.pathname;
-
-    if (url === "/") {
-      OnResizeOrLoad();
-
-      window.addEventListener('resize', () => {
-        OnResizeOrLoad();
-      });
-    }
   }
 }
 
@@ -56,19 +37,5 @@ function Search(search_request) {
   // if(lessons.length === 0)
   //   console.log("Couldn't find anything that matches '", request, "'");
 }
-
-
-
-function OnResizeOrLoad() {
-  //Logo
-  var style = window.getComputedStyle(document.getElementById("logo").parentElement);
-  document.getElementById("logo").style.height = Number(style.width.slice(0, -2)) / 5.0 + "px";
-  //document.getElementById("logoOrbits").style.height = Number(style.width.slice(0, -2)) / 6.0 + "px";
-}
-
-window.addEventListener('close', () => {
-  window.removeEventListener('load', OnResizeOrLoad);
-  window.removeEventListener('resize', OnResizeOrLoad);
-});
 
 export default Navbar;
