@@ -3,107 +3,147 @@ const lessons = {
     {
         grade_8: [
             {
-                sectionName: "Структурна организация на човешкия организъм", url: "strukturna_organizatsiya_na_choveshkiya_organizam", lessons: [
+                sectionName: "Структурна организация на човешкия организъм", url: "strukturna-organizatsiya-na-choveshkiya-organizam", lessons: [
                     { title: "Клетка", url: "kletka" },
-                    { title: "Епителна и съединителна тъкан", url: "еpitelna_i_saedinitelna_takan" },
-                    { title: "Мускулна и нервна тъкан", url: "kletka" },
-                    { title: "Организмът - единно цяло", url: "kletka" },
-                    { title: "Микроскопско наблюдение на човешки тъкани", url: "kletka" }
+                    { title: "Епителна и съединителна тъкан", url: "еpitelna-i-saedinitelna-takan" },
+                    { title: "Мускулна и нервна тъкан", url: "muskulna-i-nervna-takan" },
+                    { title: "Организмът - единно цяло", url: "organizmat-edinno-tsyalo" },
+                    { title: "Микроскопско наблюдение на човешки тъкани", url: "mikroskopsko-nablyudenie-na-choveshki-takani" }
                 ]
             },
             {
-                sectionName: "Обмяна на веществата", url: "obmyana_na_veshtestvata", subsections: [
+                sectionName: "Обмяна на веществата", url: "obmyana-na-veshtestvata", subsections: [
                     {
                         title: "Храносмилателна система", lessons: [
                             { title: "Хранене", url: "hranene" },
-                            { title: "Храносмилане в устната кухина", url: "hranosmilane_v_ustnata_kuhina" },
-                            { title: "Храносмилане в стомаха и в червата", url: "hranosmilane_v_stomaha_i_v_chervata" },
-                            { title: "Доказване на съдържанието на въглехидрати, мазнини и белтъци в хранителни продукти", url: "dokazvane_na_vaglehidrati_maznini_i_beltatsi" },
-                            { title: "Хигиена на храненето и здравни познания за храносмилателната система", url: "higiena_na_hranosmilatelnata_sistema" },
-                            { title: "Съставяне на здравословно хранително меню", url: "sastavyane_na_zdravoslovno_hranitelno_menyu" }
+                            { title: "Храносмилане в устната кухина", url: "hranosmilane-v-ustnata-kuhina" },
+                            { title: "Храносмилане в стомаха и в червата", url: "hranosmilane-v-stomaha-i-v-chervata" },
+                            { title: "Доказване на съдържанието на въглехидрати, мазнини и белтъци в хранителни продукти", url: "dokazvane-na-vaglehidrati-maznini-i-beltatsi" },
+                            { title: "Хигиена на храненето и здравни познания за храносмилателната система", url: "higiena-na-hranosmilatelnata-sistema" },
+                            { title: "Съставяне на здравословно хранително меню", url: "sastavyane-na-zdravoslovno-hranitelno-menyu" }
                         ]
                     },
                     {
                         title: "Дихателна система", lessons: [
-                            { title: "Дихателна система", url: "dihatelna_sistema" },
+                            { title: "Дихателна система", url: "dihatelna-sistema" },
                             { title: "Дишане", url: "dishane" },
-                            { title: "Измерване на дихателна честота и изчисляване на жизнената вместимост на белите дробове", url: "dihatelna_chestota_i_vmestimost_na_belite_drobove" },
-                            { title: "Хигиена и здравни познания за дихателната система", url: "higiena_na_dihatelnata_sistema" },
+                            { title: "Измерване на дихателна честота и изчисляване на жизнената вместимост на белите дробове", url: "dihatelna-chestota-i-vmestimost-na-belite-drobove" },
+                            { title: "Хигиена и здравни познания за дихателната система", url: "higiena-na-dihatelnata-sistema" },
 
                         ]
                     },
                     {
                         title: "Отделителна система", lessons: [
                             { title: "Отделяне", url: "otdelyane" },
-                            { title: "Хигиена и здравни познания за отделителната система", url: "higiena_na_otdelitelnata_sistema" }
+                            { title: "Хигиена и здравни познания за отделителната система", url: "higiena-na-otdelitelnata-sistema" }
                         ]
                     },
                     {
                         title: "Сърдечно-съдова система", lessons: [
-                            { title: "Сърце и кръвоносни съдове", url: "" },
-                            { title: "Кръв", url: "" },
-                            { title: "Сърдечна дейност. Кръвообращение", url: "" },
-                            { title: "Измерване на честотата на пулса и стойностите на артериалното налягане", url: "" },
-                            { title: "Имунитет", url: "" },
-                            { title: "Хигиена и здравни познания за сърдечно-съдова система", url: "" },
-                            { title: "Изчисляване на индекса на телесната маса, основната обмяна на веществата и дневния енргоразход", url: "" }
+                            { title: "Сърце и кръвоносни съдове", url: "sartse-i-kravonosni-sadove" },
+                            { title: "Кръв", url: "kruv" },
+                            { title: "Сърдечна дейност. Кръвообращение", url: "sardechna-deynost-i-kravoobrashtenie" },
+                            { title: "Измерване на честотата на пулса и стойностите на артериалното налягане", url: "puls-i-arterialnoto-nalyagane" },
+                            { title: "Имунитет", url: "imunitet" },
+                            { title: "Хигиена и здравни познания за сърдечно-съдова система", url: "higiena-na-sardechno-sadova-sistema" },
+                            { title: "Изчисляване на индекса на телесната маса, основната обмяна на веществата и дневния енргоразход", url: "indeks-na-telesnata-masa-i-dneven-enrgorazhod" }
                         ]
                     }
                 ]
             },
             {
-                sectionName: "Движение и опора на тялото", url: "dvizhenie_i_opora_na_tyaloto", lessons: [
-                    { title: "Устройсво на костите и ставите. Череп", url: "" },
-                    { title: "Гръбначен стълб, гръден кош и крайници", url: "" },
-                    { title: "Мускули", url: "" },
-                    { title: "Превенция на заболявания и увреждания на опорно-двигателната система", url: "" },
-                    { title: "Оказване на долекарска помощ при травми на опорно-двигателната система, кръвотечения и поражения от електричен ток", url: "" }
+                sectionName: "Движение и опора на тялото", url: "dvizhenie-i-opora-na-tyaloto", lessons: [
+                    { title: "Устройсво на костите и ставите", url: "ustroysvo-na-kostite-i-stavite" },
+                    { title: "Череп", url: "cherep"},
+                    { title: "Гръбначен стълб, гръден кош и крайници", url: "grabnachen-stalb-graden-kosh-i-kraynitsi" },
+                    { title: "Мускули", url: "muskuli" },
+                    { title: "Превенция на заболявания и увреждания на опорно-двигателната система", url: "preventsiya-na-zabolyavaniya-i-uvrezhdaniya-na-oporno-dvigatelnata-sistema" },
+                    { title: "Оказване на долекарска помощ при травми на опорно-двигателната система, кръвотечения и поражения от електричен ток", url: "dolekarska-pomosht-pri-travmi" }
                 ]
             },
             {
-                sectionName: "Размножаване, растеж и развитие", url: "razmnozhavane_rastezh_i_razvitie", lessons: [
-                    { title: "Мъжка полова система", url: "" },
-                    { title: "Женска полова система", url: "" },
-                    { title: "Оплождане. Зародишно и следзародишно развитие", url: "" },
-                    { title: "Хигиена на половата система и безопасно сексуално поведение", url: "" }
+                sectionName: "Размножаване, растеж и развитие", url: "razmnozhavane-rastezh-i-razvitie", lessons: [
+                    { title: "Мъжка полова система", url: "mazhka-polova-sistema" },
+                    { title: "Женска полова система", url: "zhenska-polova-sistema" },
+                    { title: "Оплождане. Зародишно и следзародишно развитие", url: "oplozhdane-zarodishno-i-sledzarodishno-razvitie" },
+                    { title: "Хигиена на половата система и безопасно сексуално поведение", url: "higiena-na-polovata-sistema-i-bezopasno-seksualno-povedenie" }
                 ]
             },
             {
-                sectionName: "Регулация и хомеостаза", url: "regulatsiya_i_homeostaza", subsections: [
+                sectionName: "Регулация и хомеостаза", url: "regulatsiya-i-homeostaza", subsections: [
                     {
                         title: "Нервна система", lessons: [
-                            { title: "Гръбначен мозък", url: "" },
-                            { title: "Главен мозък", url: "" },
-                            { title: "Краен мозък", url: "" },
-                            { title: "Вегетативна нервна система", url: "" },
-                            { title: "Профилактика на нервната система", url: "" }
+                            { title: "Гръбначен мозък", url: "grabnachen-mozak" },
+                            { title: "Главен мозък", url: "glaven-mozak" },
+                            { title: "Краен мозък", url: "kraen-mozak" },
+                            { title: "Вегетативна нервна система", url: "vegetativna-nervna-sistema" },
+                            { title: "Профилактика на нервната система", url: "profilaktika-na-nervnata-sistema" }
                         ]
                     },
                     {
                         title: "Ендокринна система", lessons: [
-                            { title: "Хипофиза", url: "" },
-                            { title: "Щитовидна жлеза и околощитовидни жлези", url: "" },
-                            { title: "Задстомашна жлеза", url: "" },
-                            { title: "Надбъбречни жлези", url: "" },
-                            { title: "Полови жлези", url: "" }
+                            { title: "Хипофиза", url: "hipofiza" },
+                            { title: "Щитовидна жлеза и околощитовидни жлези", url: "shtitovidna-zhleza-i-okoloshtitovidni-zhlezi" },
+                            { title: "Задстомашна жлеза", url: "задстомашна-жлеза" },
+                            { title: "Надбъбречни жлези", url: "nadbabrechni-zhlezi" },
+                            { title: "Полови жлези", url: "polovi-zhlezi" }
                         ]
                     },
                     {
                         title: "Сетивни системи", lessons: [
-                            { title: "Зрителна система", url: "" },
-                            { title: "Обонятелна и вкусова система", url: "" },
-                            { title: "Слухова система и вестибуларен апарат", url: "" },
-                            { title: "Кожа", url: "" }
+                            { title: "Зрителна система", url: "zritelna-sistema" },
+                            { title: "Обонятелна и вкусова система", url: "obonyatelna-i-vkusova-sistema" },
+                            { title: "Слухова система и вестибуларен апарат", url: "sluhova-sistema-i-vestibularen-aparat" },
+                            { title: "Кожа", url: "kozha" }
                         ]
                     }
                 ]
             }
         ],
         grade_9: [
-            { sectionName: "Химичен състав на живата материя", url: "himichen_sastav_na_zhivata_materiya", lessons: [{ title: "", url: "" }] },
-            { sectionName: "Надмолекулни комплекси", url: "nadmolekulni_kompleksi", lessons: [{ title: "", url: "" }] },
-            { sectionName: "Структура и процеси в клетката", url: "struktura_i_protsesi_v_kletkata", lessons: [{ title: "", url: "" }] },
-            { sectionName: "Възпроизводство на клетката", url: "vazproizvodstvo_na_kletkata", lessons: [{ title: "", url: "" }] },
+            {
+                sectionName: "Химичен състав на живата материя", url: "himichen-sastav-na-zhivata-materiya", lessons: [
+                    { title: "Химичен състав на клетката", url: "himichen-sastav-na-kletkata" },
+                    { title: "Липиди", url: "lipidi" },
+                    { title: "Въглехидрати", url: "vaglehidrati" },
+                    { title: "Белтъци", url: "beltatsi" },
+                    { title: "Ензими", url: "enzimi" },
+                    { title: "Нуклеинови киселини", url: "nukleinovi-kiselini" },
+                    { title: "Химичен състав на клетката (експеримент)", url: "himichen-sastav-na-kletkata-eksperiment" }
+                ]
+            },
+            {
+                sectionName: "Надмолекулни комплекси", url: "nadmolekulni-kompleksi", lessons: [
+                    { title: "Надмолекулни комплекси. Вируси", url: "virusi" },
+                    { title: "Вирусни заболявания", url: "virusni-zabolyavaniya" }
+                ]
+            },
+            {
+                sectionName: "Структура и процеси в клетката", url: "struktura-i-protsesi-v-kletkata", lessons: [
+                    { title: "Клетъчен строеж на организмите. Клетъчна теория", url: "kletachna-teoriya" },
+                    { title: "Прокариотна клетка. Бактерии", url: "prokariotna-kletka-bakterii" },
+                    { title: "Бактериални заболявания", url: "bakterialni-zabolyavaniya" },
+                    { title: "Еукариотна клетка", url: "eukariotna-kletka" },
+                    { title: "Клетъчна мембрана. Мембранен транспорт", url: "kletachna-membrana" },
+                    { title: "Едномембранни органели", url: "ednomembranni-organeli" },
+                    { title: "Двумембранни и немембранни органели", url: "dvumembranni-i-nemembranni-organeli" },
+                    { title: "Устройство на клетката (екперимент)", url: "ustroystvo-na-kletkata-ekperiment" },
+                    { title: "Метаболизъм. Катаболитни процеси", url: "metabolizam-katabolitni-protsesi" },
+                    { title: "Анаболитни проциси. Фотосинтеза", url: "anabolitni-protsisi-fotosinteza" },
+                    { title: "Генетични процесил Репликация", url: "genetichni-protsesil-replikatsiya" },
+                    { title: "Транскрипция", url: "transkriptsiya" },
+                    { title: "Транслация", url: "translatsiya" },
+                ]
+            },
+            {
+                sectionName: "Възпроизводство на клетката", url: "vazproizvodstvo-na-kletkata", lessons: [
+                    { title: "Хромозоми", url: "hromozomi" },
+                    { title: "Митоза", url: "mitoza" },
+                    { title: "Мейоза", url: "meyoza" },
+                    { title: "Жизнен цикъл на клетката", url: "zhiznen-tsikal-na-kletkata" },
+                    { title: "Делене на клетката (експеримент)", url: "delene-na-kletkata-eksperiment" }
+                ]
+            },
         ],
         grade_10: [
             { sectionName: "Генетика", url: "genetika", lessons: [{ title: "", url: "" }] },
@@ -119,43 +159,43 @@ const lessons = {
     // ["Генетика", "genetics", []],
     // ["Екология", "ecology", []],
     // ["Биохимия", "chemistry", []]
-    /*"Анатомия и физиология", "anatomy_and_physiology",
+    /*"Анатомия и физиология", "anatomy-and-physiology",
         [
-            ["Епителна и съединителна тъкани", "epithelial_and_connective_tissues"],
-            ["Мускулна и нервна тъкани", "muscle_and_nervous_tissue"],
+            ["Епителна и съединителна тъкани", "epithelial-and-connective-tissues"],
+            ["Мускулна и нервна тъкани", "muscle-and-nervous-tissue"],
             ["Кожа", "skin"],
-            ["Мускули. Устройство. Видове", "muscle_anatomy"],
-            ["Физиология на мускулите", "muscle_physiology"],
-            ["Сърце. Кръвоносни съдове", "heart_and_blood_vessels"],
-            ["Кръвни клетки. Кръвни групи", "blood_cells_and_blood_types"],
-            ["Имунитет. Вакцинация", "immunity_and_vaccination"],
-            ["Сърдечна дейност. Кръвообращение. Лимфна система", "heart_activity_blood_circulation_and_lymphathic_system"],
-            ["Храносмилане в устната кухина", "digestion_in_oral_cavity"],
-            ["Храносмилане в червата и стомаха", "digestion_in_intestines_and_stomach"],
-            ["Органи на отделителна система", "excretory_organs"],
-            ["Хигиена на отделителна система", "hygienics_of_excretory_system"],
-            ["Органи на дихателна система", "respiratory_organs"],
+            ["Мускули. Устройство. Видове", "muscle-anatomy"],
+            ["Физиология на мускулите", "muscle-physiology"],
+            ["Сърце. Кръвоносни съдове", "heart-and-blood-vessels"],
+            ["Кръвни клетки. Кръвни групи", "blood-cells-and-blood-types"],
+            ["Имунитет. Вакцинация", "immunity-and-vaccination"],
+            ["Сърдечна дейност. Кръвообращение. Лимфна система", "heart-activity-blood-circulation-and-lymphathic-system"],
+            ["Храносмилане в устната кухина", "digestion-in-oral-cavity"],
+            ["Храносмилане в червата и стомаха", "digestion-in-intestines-and-stomach"],
+            ["Органи на отделителна система", "excretory-organs"],
+            ["Хигиена на отделителна система", "hygienics-of-excretory-system"],
+            ["Органи на дихателна система", "respiratory-organs"],
             ["Дишане", "respiration"],
-            ["Мъжка", "male_reproductive_system"],
-            ["Женска", "female_reproductive_system"],
-            ["Хигиена на полова система", "hygienics_of_reproductive_system"],
-            ["Гръбначен мозък", "medulla_spinalis"],
+            ["Мъжка", "male-reproductive-system"],
+            ["Женска", "female-reproductive-system"],
+            ["Хигиена на полова система", "hygienics-of-reproductive-system"],
+            ["Гръбначен мозък", "medulla-spinalis"],
             ["Главен мозък", "cerebrum"],
             ["Краен мозък", "telencephalon"],
-            ["Вегетативна нервна система", "autonomic_nervous_system"],
-            ["Зрителна система", "visual_system"],
-            ["Хигиена на зрителна система", "hygienics_of_visual_system"],
-            ["Слухова система. Равновесие", "auditory_system_and_balance"],
-            ["Вкусова система", "gustatory_system"],
-            ["Обонятелна система", "olfactory_system"],
-            ["Обща сетивност", "general_sensitivity"],
+            ["Вегетативна нервна система", "autonomic-nervous-system"],
+            ["Зрителна система", "visual-system"],
+            ["Хигиена на зрителна система", "hygienics-of-visual-system"],
+            ["Слухова система. Равновесие", "auditory-system-and-balance"],
+            ["Вкусова система", "gustatory-system"],
+            ["Обонятелна система", "olfactory-system"],
+            ["Обща сетивност", "general-sensitivity"],
             ["Хипофиза", "hypophysis"],
-            ["Щитовидна жлеза", "thyroid_gland"],
+            ["Щитовидна жлеза", "thyroid-gland"],
             ["Полови жлези", "gonads"],
             ["Задстомашна жлеза", "pancreas"],
-            ["Надбъбречни жлези", "adrenal_glands"],
-            ["Околощитовидни жлези", "parathyroid_glands"],
-            ["Здравни познания за ендокринна система", "hygienics_of_endocrine_system"]
+            ["Надбъбречни жлези", "adrenal-glands"],
+            ["Околощитовидни жлези", "parathyroid-glands"],
+            ["Здравни познания за ендокринна система", "hygienics-of-endocrine-system"]
         ]
     },*/
 }
@@ -170,18 +210,16 @@ const lessons = {
     }
 }*/
 
-function FindLessonInSections(sections, url)
-{
-    for(let s of sections)
-    {
+
+function FindLessonInSections(sections, url) {
+    for (let s of sections) {
         let l = FindLessonInSection(s, url)
-        if(l)
+        if (l)
             return l;
     }
 }
 
-function FindLessonInSection(section, url)
-{
+function FindLessonInSection(section, url) {
     if (section.lessons) {
         for (let lesson of section.lessons) {
             if (lesson.url === url) {
@@ -201,12 +239,13 @@ function FindLessonInSection(section, url)
 }
 
 function GetLesson(url) {
+    if (url === "/")
+        return
     url = url.match(/\/[^/]+/g);
     url = url[url.length - 1].slice(1);
     for (let grade in lessons.biology) {
         let l = FindLessonInSections(lessons.biology[grade], url)
-        if(l)
-        {
+        if (l) {
             return l
         }
     }
@@ -307,7 +346,7 @@ export {
 const unis = [
     {
         name: "Медицински университет София",
-        url: "Med_uni_Sofia",
+        url: "Med-uni-Sofia",
         data:
         {
             info: "Медицински университет София е най-старото висше училище за медицинско образование у нас. Медицинският университет в София възниква като Медицински факултет към Софийския университет. През 1950 година той се отделя от СУ и става самостоятелно учреждение.",
@@ -343,7 +382,7 @@ const unis = [
     },
     {
         name: "Медицински университет Варна",
-        url: "Med_uni_Varna",
+        url: "Med-uni-Varna",
         data:
         {
             info: "Варненският медицински университет „Проф. д-р Параскев Стоянов“ или МУ Варна е един от най-добрите медицински университети в страната, едно от най-модерните и високотехнологични висши училища.",
@@ -375,7 +414,7 @@ const unis = [
     },
     {
         name: "Медицински университет Пловдив",
-        url: "Med_uni_Plovdiv",
+        url: "Med-uni-Plovdiv",
         data:
         {
             info: "Медицинският университет в Пловдив е един от най-старите медицински университети в страната, известен със своето обучение и традиции.",
@@ -403,7 +442,7 @@ const unis = [
     },
     {
         name: "Медицински университет Плевен",
-        url: "Med_uni_Pleven",
+        url: "Med-uni-Pleven",
         data:
         {
             info: "Медицинският университет в Плевен има 45-годишна история и внушителна материална база (вкл. учебни звена, обновен спортен комплекс, две студентски общежития, модерна университетска библиотека, собствен издателски център).",
@@ -424,7 +463,7 @@ const unis = [
     },
     {
         name: "Тракийски университет Стара Загора",
-        url: "Stara_Zagora",
+        url: "Stara-Zagora",
         data:
         {
             info: "Тракийският университет се намира в град Стара Загора – в центъра на страната. Университетът заема пето място в рейтинговата класация на университетите в България и обучава общо над 8200 български и чуждестранни студенти.",
@@ -447,7 +486,7 @@ const unis = [
     },
     {
         name: "Университет ,,Проф. д – р Асен Златаров“ Бургас",
-        url: "Prof_Asen_Zlatanov",
+        url: "Prof-Asen-Zlatanov",
         data:
         {
             info: "Университет „Проф. д-р Асен Златаров“, МУ Бургас е единственият държавен университет в Югоизточна България, който разполага с 5 учебни корпуса, спортна база, 3 студентски общежития, стол, поща, център за медицинско обслужване, печатна база. По качество на научните изследвания университетът е класиран на едно от първите места в България по системата Хирш за принос в науката.",
@@ -466,7 +505,7 @@ const unis = [
     },
     {
         name: "Софийски университет ,,Св. Климент Охридски“",
-        url: "Sv_Kliment_Ohridski",
+        url: "Sv-Kliment-Ohridski",
         data:
         {
             info: "Софийски университет „Св. Климент Охридски” е първото българско висше училище. Неговата история е въплъщение и продължение на многовековната българска културна и просветна традиция. Софийският университет е един от авторитетните научни центрове на Балканите, напълно развит европейски тип университет. Това е най-големият и престижен учебен и научноизследователски център в страната, който обхваща 16 факултета със 119 специалности.",
@@ -483,7 +522,7 @@ const unis = [
     },
     {
         name: "Лесотехнически университет София",
-        url: "Lesotehnichecski_Sofia",
+        url: "Lesotehnichecski-Sofia",
         data:
         {
             info: "Лесотехническият университет е единственият университет в България, в който се обучават специалисти в областта на горското стопанство, технологията на дървесината и производството на мебели, инженерния дизайн на мебели и ландшафтната архитектура.",

@@ -1,4 +1,5 @@
 import React from "react"
+import VideoPlayer from "react-video-js-player"
 import { Button } from '../../Components'
 import { GetLesson } from '../../Assets'
 import { theme, colors } from '../../Colors'
@@ -80,7 +81,7 @@ class Comment extends React.Component {
         if (this.state.disliked)
             dislikes--
 
-        this.setState({ liked: !this.state.liked, likes: likes, disliked: false, dislikes: dislikes})
+        this.setState({ liked: !this.state.liked, likes: likes, disliked: false, dislikes: dislikes })
     }
 
     Dislike() {
@@ -98,9 +99,10 @@ class Comment extends React.Component {
         if (this.state.liked)
             likes--
 
-        this.setState({ liked: false, likes: likes, disliked: !this.state.disliked, dislikes: dislikes})
+        this.setState({ liked: false, likes: likes, disliked: !this.state.disliked, dislikes: dislikes })
     }
 }
+
 
 class Content extends React.Component {
     constructor(props) {
@@ -112,17 +114,32 @@ class Content extends React.Component {
     render() {
         return (
             <div className="content" style={{ backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light }}>
-                <video id="video" src={"/video?id=" + lesson.id} controls />
+                <div className="video">
+                    <VideoPlayer src={"/julemy.mp4"} className = "vjs-fluid" />
+                </div>
+
+                <span className="separator" />
+
+                <div className="content-text">
+                    Тук може да има урок като текст. Може да има илюстрации и прикачени файлове. Може да има само кратко описание. Никотинаминадениндинуклеотид иесщксоищожвкяс  и88о ево  мищ жвеик меи вякеищ
+                </div>
+
+                <span className="separator" />
 
                 <div id="compose-comment">
                     <div>
                         <img alt="icon" src="/Images/favicon.ico" />
-                        <div className="input-wrapper">
-                            <textarea placeholder="Оставете коментар" onInput={e => this.setState({ newCommentValue: e.target.value })}></textarea>
+                        <div className="textarea-wrapper">
+                            <textarea placeholder="Оставете коментар" onInput={e => {
+                                this.setState({ newCommentValue: e.target.value })
+                                e.target.parentNode.dataset.value = e.target.value
+                            }}></textarea>
+                            <div style={{ visibility: "hidden" }}>{this.state.newCommentValue}</div>
                         </div>
                     </div>
                     <Button name="Публикувай" onClick={this.PostComment.bind(this, null)} />
                 </div>
+
 
                 <div id="comments">{this.state.commentsElements}</div>
 
@@ -147,8 +164,8 @@ class Content extends React.Component {
     GetCommentsElements(comments) {
         let commentsElements = [];
 
-        for (let c of comments) {
-            commentsElements.push(<Comment comment={c} />)
+        for (let c in comments) {
+            commentsElements.push(<Comment comment={comments[c]} key={c} />)
         };
 
         return commentsElements;
@@ -163,13 +180,13 @@ class Content extends React.Component {
             let comments = [
                 { content: "syjsdgsgg", comment_id: 0, author: { username: "user123", id: 1 }, likes: 2, dislikes: 1 },
                 {
-                    content: "1", comment_id: 1, author: { username: "user124", id: 1 }, likes: 5, replies: [
+                    content: "1", comment_id: 1, author: { username: "user124", id: 1 }, likes: 5, dislikes: 0, replies: [
                         {
-                            content: "1.0", comment_id: 2, author: { username: "user129", id: 1 }, parent_id: 1, replies: [
-                                { content: "1.1.0", comment_id: 3, author: { username: "user125", id: 1 }, parent_id: 2 },
-                                { content: "1.1.1", comment_id: 4, author: { username: "user126", id: 1 }, parent_id: 2 }]
+                            content: "1.0", comment_id: 2, author: { username: "user129", id: 1 }, likes: 0, dislikes: 0, parent_id: 1, replies: [
+                                { content: "1.1.0", comment_id: 3, author: { username: "user125", id: 1 }, likes: 0, dislikes: 0, parent_id: 2 },
+                                { content: "1.1.1", comment_id: 4, author: { username: "user126", id: 1 }, likes: 0, dislikes: 0, parent_id: 2 }]
                         },
-                        { content: "1.1", comment_id: 5, author: { username: "user127", id: 1 }, parent_id: 1 }]
+                        { content: "1.1", comment_id: 5, author: { username: "user127", id: 1 }, likes: 0, dislikes: 0, parent_id: 1 }]
                 },
                 { content: "yes", comment_id: 6, author: { username: "user128", id: 1 }, likes: 3, dislikes: 1 },
             ];
