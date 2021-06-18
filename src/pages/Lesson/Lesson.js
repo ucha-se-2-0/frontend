@@ -5,9 +5,7 @@ import Content from './Content'
 import { theme } from '../../Colors'
 import { GetLesson } from '../../Assets';
 
-if (window.location.pathname.indexOf("/lessons/") !== -1) {
-    import('./Content.css');
-}
+import "./Content.css"
 
 let lesson = GetLesson(window.location.pathname)
 

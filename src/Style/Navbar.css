@@ -27,10 +27,8 @@
   color: var(--text-color); 
 }
 
-
 .navbar .button
 {
-  /* cursor: pointer; */
   margin: auto 10px;
   padding: 7px 10px;
   font-size: calc(1vw + 10px);
@@ -38,7 +36,7 @@
 
 @media (max-width: 800px)
 {
-  .navbar>*:not(.important)
+  .navbar>*.not-important
   {
     display: none;
   }

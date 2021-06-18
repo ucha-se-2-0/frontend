@@ -1,6 +1,5 @@
 import React from "react"
-import VideoPlayer from "react-video-js-player"
-import { Button } from '../../Components'
+import { Button, Video } from '../../Components'
 import { GetLesson } from '../../Assets'
 import { theme, colors } from '../../Colors'
 
@@ -114,9 +113,7 @@ class Content extends React.Component {
     render() {
         return (
             <div className="content" style={{ backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light }}>
-                <div className="video">
-                    <VideoPlayer src={"/julemy.mp4"} className = "vjs-fluid" />
-                </div>
+                <Video src={"/julemy.mp4"} />
 
                 <span className="separator" />
 

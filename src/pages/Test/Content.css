@@ -1,6 +1,6 @@
 @import '../../Style/Colors.css';
 
-.content
+.content.test-content
 {
     flex-direction: column;
 }

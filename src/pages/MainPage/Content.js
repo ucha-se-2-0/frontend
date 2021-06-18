@@ -1,14 +1,13 @@
-import { Button, Title } from '../../Components'
-import {theme, colors } from '../../Colors'
+import { Button, Title, Video } from '../../Components'
+import { theme, colors } from '../../Colors'
 import React from "react"
 
 function Content() {
     return (
         <div className="content" style = {{backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light}}>
             <Title name = "За Julemy"/>
-            <video>
-                <source src="AboutUs.{$format}" type="video/{$format}"></source>
-            </video>
+
+            <Video src = "/julemy.mp4"/>
 
             <Title name = "Предмети"/>
 

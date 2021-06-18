@@ -1,34 +1,5 @@
 @import "../../Style/Colors.css";
 
-.content
-{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-
-@media (max-width: 700px)
-{
-    .content-title
-    {
-        font-size: 55px;
-    }
-}
-
-.content .text
-{
-    font-size: 30px;
-}
-
-.content>.button
-{
-    display: inline !important;
-    height: 100px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .subjects
 {
     display: flex;
@@ -41,5 +12,4 @@
     width: 200px;
     height: 200px;
     margin: 50px;
-
 }

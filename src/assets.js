@@ -4,7 +4,7 @@ const lessons = {
         grade_8: [
             {
                 sectionName: "Структурна организация на човешкия организъм", url: "strukturna-organizatsiya-na-choveshkiya-organizam", lessons: [
-                    { title: "Клетка", url: "kletka" },
+                    { title: "Клетка", url: "kletka", test: [{}, {}] },
                     { title: "Епителна и съединителна тъкан", url: "еpitelna-i-saedinitelna-takan" },
                     { title: "Мускулна и нервна тъкан", url: "muskulna-i-nervna-takan" },
                     { title: "Организмът - единно цяло", url: "organizmat-edinno-tsyalo" },

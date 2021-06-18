@@ -2,6 +2,7 @@
 //can be imported and simply used
 
 import React from "react"
+import VideoPlayer from "react-video-js-player"
 import { colors, theme } from './Colors'
 import "./Style/Components.css"
 
@@ -19,7 +20,7 @@ class Button extends React.Component {
       width: this.props.width,
       height: this.props.height,
       cursor: this.state.cursor,
-      backgroundColor: theme === "dark" ? colors.button.dark : colors.button.light,
+      backgroundColor: theme === "dark" ? colors.button.light : colors.button.dark,
       color: theme === "dark" ? colors.text.dark : colors.text.light
     };
     return (
@@ -204,9 +205,9 @@ class DefaultNavbar extends React.Component {
       <div className="navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
         {this.props.content}
 
-        <Button name="Вход" class="important" link="/Login" />
+        <Button name="Вход" link="/Login" />
 
-        <a href="/" className="home important">
+        <a href="/" className="home">
           <img src={theme === "dark" ? "/Images/LogoLight.jpg" : "/Images/LogoDark.jpg"} alt="HOME"></img>
         </a>
       </div>
@@ -226,14 +227,20 @@ class Header extends React.Component {
 
 function Title(props) {
   return (
-    <div className = {"content-title" + (props.subtitle ? " content-subtitle" : "")} style={{ color: theme === "dark" ? colors.title.dark : colors.title.light }}>
+    <div className={"content-title" + (props.subtitle ? " content-subtitle" : "")} style={{ color: theme === "dark" ? colors.title.light : colors.title.dark }}>
       {props.name}
     </div>)
 }
 
-function Subtitle(props)
-{
-  return(<Title subtitle {...props}/>)
+function Subtitle(props) {
+  return (<Title subtitle {...props} />)
 }
 
-export { Button, Dropdown, DropdownElement, SearchField, Footer, DefaultNavbar, Header, Title, Subtitle };
+function Video(props) {
+  return (
+    <div className="video">
+      <VideoPlayer {...props} className="vjs-fluid" />
+    </div>)
+}
+
+export { Button, Dropdown, DropdownElement, SearchField, Footer, DefaultNavbar, Header, Title, Subtitle, Video };

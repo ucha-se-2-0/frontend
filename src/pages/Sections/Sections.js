@@ -4,10 +4,8 @@ import Content from './Content'
 import { DefaultNavbar as Navbar, Header, SearchField, Footer } from '../../Components'
 import { theme } from '../../Colors'
 
-if (window.location.pathname.match("/lessons")) {
-}
-import('./Content.css');
-import('./Navbar.css');
+import './Content.css'
+import './Navbar.css'
 
 class Sections extends React.Component {
     render() {
@@ -23,6 +21,8 @@ class Sections extends React.Component {
 
     componentDidMount()
     {
+        //Might change
+        
         if(theme === "dark")
         {
             document.getElementsByClassName("header")[0].style.boxShadow = "none";

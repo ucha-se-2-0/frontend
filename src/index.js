@@ -17,7 +17,7 @@ import './Style/Header.css'
 import './Style/Content.css'
 import './Style/Components.css'
 
-import './index.css'
+import './Style/index.css'
 
 window.addEventListener("load", () => {
   document.getElementById("root").style.backgroundColor = theme === "dark" ? colors.darker : "white";

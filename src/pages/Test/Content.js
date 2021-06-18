@@ -189,22 +189,22 @@ class Content extends React.Component {
 
     render() {
         return (
-            <div className="content">
-                <Router>
+            <div className="content test-content">
+                {/* <Router>
                     <Route path="/tests/skin" exact render={() =>
-                        <>
+                        <> */}
                             <Question question="What?" options={["dk", "that", "something"]} correct={[2, 0]} />
                             <Question question="How?" options={["somehow", "no", "cucumber"]} correct={2} />
                             {/* <FreeAnswerQuestion question="Explain" correct={"Because"} />
                             <FreeAnswerQuestion question="3 / 2 ?" correct={1.5} precision={3} /> */}
-                        </>
-                    } />
+                        {/* </>
+                    } /> */}
                     <h1> {this.state.result === -1 ? "" : "Резултат: " + this.state.result + "%"} </h1>
                     {this.state.result === -1 ? <Button id="checkAnswers" name="Провери отговорите" height="50px" onClick={this.CheckAnswers.bind(this)} /> : <></>}
 
                     <Button id="toLesson" name="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} />
                     <Button id="toNextLesson" height="50px" link="#" />
-                </Router>
+                {/* </Router> */}
             </div>
         );
     }

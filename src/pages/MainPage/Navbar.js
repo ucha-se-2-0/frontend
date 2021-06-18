@@ -7,7 +7,7 @@ import { theme, colors } from '../../Colors'
 class Navbar extends React.Component {
   render() {
     return (
-      <div className="navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
+      <div className="navbar main-page-navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
 
         <Button name = "Уроци" class = "important" link = "/lessons"/>
 

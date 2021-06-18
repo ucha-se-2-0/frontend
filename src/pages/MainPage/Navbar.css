@@ -1,25 +1,14 @@
 @import "../../Style/Colors.css";
 
-.navbar
+.navbar.main-page-navbar
 {
   position: sticky;
-  padding-left: 1%;
-  flex-flow:row nowrap;
 }
 
-.navbar>*:last-child
-{
-  margin-right: 3vw;
-}
 
-.dropdown
+@media (max-width: 600px)
 {
-  margin-right: 10px;
-}
-
-@media (max-width: 500px)
-{
-  .navbar .button:not(.search)
+  .main-page-navbar .button:not(.search):not(:last-child)
   {
     margin: auto 3px;
   }

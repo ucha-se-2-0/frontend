@@ -3,10 +3,7 @@ import Content from './Content'
 import { DefaultNavbar as Navbar, Footer, Header } from '../../Components'
 import { GetUniByUrl } from "../../Assets"
 
-if (window.location.pathname === "/universities") {
-    import('./Navbar.css');
-    import('./Content.css');
-}
+import "./Content.css"
 
 function Universities() {
     let uni = GetUniByUrl(window.location.pathname)
