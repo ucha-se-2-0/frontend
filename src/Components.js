@@ -3,7 +3,7 @@
 
 import React from "react"
 import VideoPlayer from "react-video-js-player"
-import { colors, theme } from './Colors'
+import { colors, theme } from './Style/Colors'
 import "./Style/Components.css"
 
 class Button extends React.Component {
@@ -24,9 +24,11 @@ class Button extends React.Component {
       color: theme === "dark" ? colors.text.dark : colors.text.light
     };
     return (
-      <a id={this.props.id} className={"button " + this.props.class} href={this.props.link} style={style} onClick={this.props.onClick}>
+      <a className="button" href={this.props.link} style={style} onClick={this.props.onClick}>
         <div className="button-content" style={{ cursor: this.state.cursor }}>
           {this.props.name}
+          {this.props.title}
+          {this.props.content}
         </div>
         <div className="button-background"> </div>
       </a>
@@ -129,7 +131,7 @@ class SearchField extends React.Component {
 
   render() {
     return (
-      <div className={"search button " + this.props.class} style={this.state.style.search} onClick={() => {
+      <div className="search button" style={this.state.style.search} onClick={() => {
         this.clickHandled = true
         this.Expand()
       }}>
@@ -199,7 +201,7 @@ class Footer extends React.Component {
   }
 }
 
-class DefaultNavbar extends React.Component {
+class Navbar extends React.Component {
   render() {
     return (
       <div className="navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
@@ -229,6 +231,8 @@ function Title(props) {
   return (
     <div className={"content-title" + (props.subtitle ? " content-subtitle" : "")} style={{ color: theme === "dark" ? colors.title.light : colors.title.dark }}>
       {props.name}
+      {props.title}
+      {props.content}
     </div>)
 }
 
@@ -243,4 +247,4 @@ function Video(props) {
     </div>)
 }
 
-export { Button, Dropdown, DropdownElement, SearchField, Footer, DefaultNavbar, Header, Title, Subtitle, Video };
+export { Button, Dropdown, DropdownElement, SearchField, Footer, Navbar, Header, Title, Subtitle, Video };

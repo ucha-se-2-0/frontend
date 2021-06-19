@@ -1,5 +1,5 @@
 //Expiration time is in hours
-function setCookie(name, value, exp_time)
+function SetCookie(name, value, exp_time)
 {
     if(exp_time !== undefined)
     {
@@ -13,16 +13,16 @@ function setCookie(name, value, exp_time)
     }
 }
 
-function deleteCookie(name)
+function DeleteCookie(name)
 {
     document.cookie = name + "=; expires=" + new Date().toUTCString();
 }
 
-function getCookie(name)
+function GetCookie(name)
 {
-    let match = document.cookie.match(/theme=[^;]*/);
+    let match = document.cookie.match(name + /=[^;]*/);
     if(match)
         return match[0].slice(name.length + 1);
 }
 
-export {setCookie, getCookie, deleteCookie};
+export {SetCookie, GetCookie, DeleteCookie};

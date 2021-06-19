@@ -24,6 +24,7 @@
 
 
 .content-text {
+    user-select: text;
     text-align: left;
     width: 95%;
     margin-top: 40px;

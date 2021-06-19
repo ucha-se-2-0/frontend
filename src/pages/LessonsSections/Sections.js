@@ -1,8 +1,8 @@
 import React from 'react'
 
 import Content from './Content'
-import { DefaultNavbar as Navbar, Header, SearchField, Footer } from '../../Components'
-import { theme } from '../../Colors'
+import { Navbar as Navbar, Header, SearchField, Footer } from '../../Components'
+import { theme } from '../../Style/Colors'
 
 import './Content.css'
 import './Navbar.css'
@@ -12,7 +12,7 @@ class Sections extends React.Component {
         return (
             <>
                 <Header content = "Уроци" />
-                <Navbar content={<SearchField placeholder = "Потърсете урок" margin = "80px" width = "calc(100% - 100px)" search={() => { }} class="important" />} />
+                <Navbar content={<SearchField placeholder = "Потърсете урок" margin = "80px" width = "calc(100% - 100px)" search={() => { }} />} />
                 <Content />
                 <Footer />
             </>

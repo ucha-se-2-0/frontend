@@ -5,19 +5,19 @@ import { Route, Switch, BrowserRouter as Router, Redirect } from "react-router-d
 
 import MainPage from './pages/MainPage/MainPage'
 import Universities from './pages/Universities/Universities'
-import Sections from './pages/Sections/Sections'
+import Sections from './pages/LessonsSections/Sections'
 import LessonsNav from './pages/LessonsNav/LessonsNav'
 import Lesson from './pages/Lesson/Lesson'
 import LogIn from './pages/LogIn/LogIn'
 import Test from './pages/Test/Test'
-import { theme, colors } from './Colors'
+import { theme, colors } from './Style/Colors'
 
 import './Style/Navbar.css'
 import './Style/Header.css'
 import './Style/Content.css'
 import './Style/Components.css'
 
-import './Style/index.css'
+import './Style/Index.css'
 
 window.addEventListener("load", () => {
   document.getElementById("root").style.backgroundColor = theme === "dark" ? colors.darker : "white";

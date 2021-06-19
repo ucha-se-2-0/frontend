@@ -1,8 +1,8 @@
-import { GetSectionByUrl } from "../../Assets";
-import { DefaultNavbar as Navbar, Header, Footer } from "../../Components";
+import { GetSection } from "../../Assets";
+import { Navbar as Navbar, Header, Footer } from "../../Components";
 import Content from './Content'
 
-var section = GetSectionByUrl(window.location.pathname.slice("/lessons/sections/".length))
+var section = GetSection(window.location.pathname.slice("/lessons/sections/".length))
 
 
 function LessonsNav() {

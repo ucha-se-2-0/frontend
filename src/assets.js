@@ -4,11 +4,16 @@ const lessons = {
         grade_8: [
             {
                 sectionName: "Структурна организация на човешкия организъм", url: "strukturna-organizatsiya-na-choveshkiya-organizam", lessons: [
-                    { title: "Клетка", url: "kletka", test: [{}, {}] },
-                    { title: "Епителна и съединителна тъкан", url: "еpitelna-i-saedinitelna-takan" },
-                    { title: "Мускулна и нервна тъкан", url: "muskulna-i-nervna-takan" },
-                    { title: "Организмът - единно цяло", url: "organizmat-edinno-tsyalo" },
-                    { title: "Микроскопско наблюдение на човешки тъкани", url: "mikroskopsko-nablyudenie-na-choveshki-takani" }
+                    {
+                        title: "Клетка", url: "kletka", test: [
+                            { q: "Коя е най-малката структурна и функционална единица на многоклетъчните организми?", opt: ["атом", "молекула", "клетка", "тъкан"], ans: 2 },
+                            { q: "Органичните вещества, които влизат в състава на клетки-те са: ", opt: ["вода", "въглехидрати", "белтъци", "минерални соли", "мазнини", "нуклеинови киселини"], ans: [1, 2, 4, 5] },
+                        ]
+                    },
+                    { title: "Епителна и съединителна тъкан", url: "epitelna-i-saedinitelna-takan", test: [{ question: "aaa", ans: 1.5, precision: 3 }] },
+                    { title: "Мускулна и нервна тъкан", url: "muskulna-i-nervna-takan", test: [{}, {}] },
+                    { title: "Организмът - единно цяло", url: "organizmat-edinno-tsyalo", test: [{}, {}] },
+                    { title: "Микроскопско наблюдение на човешки тъкани", url: "mikroskopsko-nablyudenie-na-choveshki-takani", test: [] }
                 ]
             },
             {
@@ -54,7 +59,7 @@ const lessons = {
             {
                 sectionName: "Движение и опора на тялото", url: "dvizhenie-i-opora-na-tyaloto", lessons: [
                     { title: "Устройсво на костите и ставите", url: "ustroysvo-na-kostite-i-stavite" },
-                    { title: "Череп", url: "cherep"},
+                    { title: "Череп", url: "cherep" },
                     { title: "Гръбначен стълб, гръден кош и крайници", url: "grabnachen-stalb-graden-kosh-i-kraynitsi" },
                     { title: "Мускули", url: "muskuli" },
                     { title: "Превенция на заболявания и увреждания на опорно-двигателната система", url: "preventsiya-na-zabolyavaniya-i-uvrezhdaniya-na-oporno-dvigatelnata-sistema" },
@@ -154,170 +159,70 @@ const lessons = {
     chemistry: {
 
     }
-    // ["Клетка", "cytology", []],
-    // ["Вируси", "viruses", []],
-    // ["Генетика", "genetics", []],
-    // ["Екология", "ecology", []],
-    // ["Биохимия", "chemistry", []]
-    /*"Анатомия и физиология", "anatomy-and-physiology",
-        [
-            ["Епителна и съединителна тъкани", "epithelial-and-connective-tissues"],
-            ["Мускулна и нервна тъкани", "muscle-and-nervous-tissue"],
-            ["Кожа", "skin"],
-            ["Мускули. Устройство. Видове", "muscle-anatomy"],
-            ["Физиология на мускулите", "muscle-physiology"],
-            ["Сърце. Кръвоносни съдове", "heart-and-blood-vessels"],
-            ["Кръвни клетки. Кръвни групи", "blood-cells-and-blood-types"],
-            ["Имунитет. Вакцинация", "immunity-and-vaccination"],
-            ["Сърдечна дейност. Кръвообращение. Лимфна система", "heart-activity-blood-circulation-and-lymphathic-system"],
-            ["Храносмилане в устната кухина", "digestion-in-oral-cavity"],
-            ["Храносмилане в червата и стомаха", "digestion-in-intestines-and-stomach"],
-            ["Органи на отделителна система", "excretory-organs"],
-            ["Хигиена на отделителна система", "hygienics-of-excretory-system"],
-            ["Органи на дихателна система", "respiratory-organs"],
-            ["Дишане", "respiration"],
-            ["Мъжка", "male-reproductive-system"],
-            ["Женска", "female-reproductive-system"],
-            ["Хигиена на полова система", "hygienics-of-reproductive-system"],
-            ["Гръбначен мозък", "medulla-spinalis"],
-            ["Главен мозък", "cerebrum"],
-            ["Краен мозък", "telencephalon"],
-            ["Вегетативна нервна система", "autonomic-nervous-system"],
-            ["Зрителна система", "visual-system"],
-            ["Хигиена на зрителна система", "hygienics-of-visual-system"],
-            ["Слухова система. Равновесие", "auditory-system-and-balance"],
-            ["Вкусова система", "gustatory-system"],
-            ["Обонятелна система", "olfactory-system"],
-            ["Обща сетивност", "general-sensitivity"],
-            ["Хипофиза", "hypophysis"],
-            ["Щитовидна жлеза", "thyroid-gland"],
-            ["Полови жлези", "gonads"],
-            ["Задстомашна жлеза", "pancreas"],
-            ["Надбъбречни жлези", "adrenal-glands"],
-            ["Околощитовидни жлези", "parathyroid-glands"],
-            ["Здравни познания за ендокринна система", "hygienics-of-endocrine-system"]
-        ]
-    },*/
 }
 
-/*function GetLessonUrl(lessonTitle) {
-    for (let subject = 0; subject < lessons.length; subject++) {
-        for (let pair = 0; pair < lessons[subject][2].length; pair++) {
-            if (lessons[subject][2][pair][0] === lessonTitle) {
-                return lessons[subject][2][pair][1];
-            }
-        }
-    }
-}*/
-
-
-function FindLessonInSections(sections, url) {
+function FindLessonInSections(sections, url, next_lesson) {
     for (let s of sections) {
-        let l = FindLessonInSection(s, url)
-        if (l)
-            return l;
+        let res = FindLessonInSection(s, url, next_lesson)
+        if (res === "eos")
+            return { section: s }
+        return res
     }
 }
 
-function FindLessonInSection(section, url) {
+function FindLessonInSection(section, url, next_lesson) {
     if (section.lessons) {
-        for (let lesson of section.lessons) {
-            if (lesson.url === url) {
-                return lesson
+        for (let l in section.lessons) {
+            if (section.lessons[l].url === url) {
+                if (next_lesson) {
+                    if (parseInt(l) + 1 === section.lessons.length) {
+                        //End of section
+                        console.log("eos")
+                        return "eos"
+                    }
+
+                    return section.lessons[parseInt(l) + 1]
+                }
+                return section.lessons[l]
             }
         }
     }
     else if (section.subsections) {
         for (let ss of section.subsections) {
-            for (let lesson of ss.lessons) {
-                if (lesson.url === url) {
-                    return lesson
+            let res = FindLessonInSection(ss, url, next_lesson)
+            if (res) {
+                if (!"eos".localeCompare(res)) {
+                    return { section: section, subsection: ss }
                 }
+
+                return res
             }
         }
     }
 }
 
-function GetLesson(url) {
+function FindLesson(url, next_lesson) {
     if (url === "/")
         return
-    url = url.match(/\/[^/]+/g);
-    url = url[url.length - 1].slice(1);
+    url = url.match(/[^/]+$/)[0];
+
     for (let grade in lessons.biology) {
-        let l = FindLessonInSections(lessons.biology[grade], url)
+        let l = FindLessonInSections(lessons.biology[grade], url, next_lesson)
         if (l) {
             return l
         }
     }
 }
 
-/*function GetSubject(url) {
-    url = url.match(/\/[^/]+/g);
-    url = url[url.length - 1].slice(1);
-    for (let subject = 0; subject < lessons.length; subject++) {
-        for (let lesson = 0; lesson < lessons[subject][2].length; lesson++) {
-            if (lessons[subject][2][lesson][1] === url) {
-                return [lessons[subject][0], lessons[subject][1]];
-            }
-        }
-    }
+function GetLesson(url) {
+    return FindLesson(url, false)
 }
 
 function GetNextLesson(url) {
-    url = url.match(/\/[^/]+/g);
-    url = url[url.length - 1].slice(1);
-    for (let subject = 0; subject < lessons.length; subject++) {
-        for (let lesson = 0; lesson < lessons[subject][2].length - 1; lesson++) {
-            if (lessons[subject][2][lesson][1] === url) {
-                return lessons[subject][2][lesson + 1];
-            }
-        }
-
-        if (lessons[subject][2][lessons[subject][2].length - 1][1] === url) {
-            return undefined;
-        }
-    }
+    return FindLesson(url, true)
 }
 
-function GetSubjectUrl(subjectTitle) {
-    for (let subject = 0; subject < lessons.length; subject++) {
-        if (lessons[subject][0] === subjectTitle) {
-            return lessons[subject][1];
-        }
-    }
-}
-
-
-function GetSubjectByUrl(url) {
-    url = url.match(/\/[^/]+/g);
-    url = url[url.length - 1].slice(1);
-
-    for (let subject = 0; subject < lessons.length; subject++) {
-        if (lessons[subject][1] === url) {
-            return lessons[subject][0];
-        }
-    }
-}
-
-function GetLessonIdByUrl(url) {
-    var res = url.match(/\/[^/]+/g);
-    res = res[res.length - 1].slice(1);
-    for (let i = 0; i < lessons.length - 1; i++) {
-        if (lessons[i][1] === res)
-            return i;
-    }
-}
-
-function GetIdBySubject(url) {
-    var res = url.match(/\/[^/]+/g);
-    res = res[res.length - 1].slice(1);
-    for (let i = 0; i < lessons.length - 1; i++) {
-        if (lessons[i][1] === res)
-            return i;
-    }
-}*/
-
-function GetSectionByUrl(url) {
+function GetSection(url) {
     for (let subject in lessons) {
         for (let grade in lessons[subject]) {
             for (let section of lessons[subject][grade]) {
@@ -330,15 +235,9 @@ function GetSectionByUrl(url) {
 }
 
 export {
-    //GetLessonUrl,
     GetLesson,
-    // GetNextLesson,
-    // GetLessonIdByUrl,
-    // GetIdBySubject,
-    // GetSubject,
-    // GetSubjectUrl,
-    // GetSubjectByUrl,
-    GetSectionByUrl,
+    GetNextLesson,
+    GetSection,
     lessons
 }
 
@@ -347,218 +246,180 @@ const unis = [
     {
         name: "Медицински университет София",
         url: "Med-uni-Sofia",
-        data:
-        {
-            info: "Медицински университет София е най-старото висше училище за медицинско образование у нас. Медицинският университет в София възниква като Медицински факултет към Софийския университет. През 1950 година той се отделя от СУ и става самостоятелно учреждение.",
-            spec:
-                [
-                    "Медицина",
-                    "Дентална медицина",
-                    "Фармация",
-                    "Управление на здравните грижи",
-                    "Кинезитерапия ",
-                    "Акушерка",
-                    "Медицинска сестра",
-                    "Медицински лаборант",
-                    "Помощник фармацевт",
-                    "Инспектор по обществено здраве",
-                    "Лекарски асистент",
-                    "Медицински лаборант (МК - Филаретова)",
-                    "Рентгенов лаборант (МК - Филаретова)",
-                    "Рехабилитатор (МК - Филаретова)",
-                    "Масажист (МК - Филаретова)",
-                    "Зъботехник (МК - Филаретова)",
-                    "Помощник фармацевт (МК - Филаретова)",
-                    "Инспектор по обществено здраве (МК - Филаретова)",
-                    "Медико-социални грижи (МК - Филаретова)",
-                    "Лекарски асистент (МУ-София, Филиал - Враца)",
-                    "Акушерка (МУ-София - филиал „Проф. д-р Ив. Митев“ - Враца)",
-                    "Медицинска сестра (МУ-София - филиал „Проф. д-р Ив. Митев“ - Враца)",
-                    "Лекарски асистент (МУ-София - филиал „Проф. д-р Ив. Митев“ - Враца)",
-                ],
-            link: "https://mu-sofia.bg/",
-            application: "https://mu-sofia.bg/priem/ksk/spravochnik-kandidatstudenti/"
-        }
+        info: "Медицински университет София е най-старото висше училище за медицинско образование у нас. Медицинският университет в София възниква като Медицински факултет към Софийския университет. През 1950 година той се отделя от СУ и става самостоятелно учреждение.",
+        spec:
+            [
+                "Медицина",
+                "Дентална медицина",
+                "Фармация",
+                "Управление на здравните грижи",
+                "Кинезитерапия ",
+                "Акушерка",
+                "Медицинска сестра",
+                "Медицински лаборант",
+                "Помощник фармацевт",
+                "Инспектор по обществено здраве",
+                "Лекарски асистент",
+                "Медицински лаборант (МК - Филаретова)",
+                "Рентгенов лаборант (МК - Филаретова)",
+                "Рехабилитатор (МК - Филаретова)",
+                "Масажист (МК - Филаретова)",
+                "Зъботехник (МК - Филаретова)",
+                "Помощник фармацевт (МК - Филаретова)",
+                "Инспектор по обществено здраве (МК - Филаретова)",
+                "Медико-социални грижи (МК - Филаретова)",
+                "Лекарски асистент (МУ-София, Филиал - Враца)",
+                "Акушерка (МУ-София - филиал „Проф. д-р Ив. Митев“ - Враца)",
+                "Медицинска сестра (МУ-София - филиал „Проф. д-р Ив. Митев“ - Враца)",
+                "Лекарски асистент (МУ-София - филиал „Проф. д-р Ив. Митев“ - Враца)",
+            ],
+        link: "https://mu-sofia.bg/",
+        application: "https://mu-sofia.bg/priem/ksk/spravochnik-kandidatstudenti/"
     },
     {
         name: "Медицински университет Варна",
         url: "Med-uni-Varna",
-        data:
-        {
-            info: "Варненският медицински университет „Проф. д-р Параскев Стоянов“ или МУ Варна е един от най-добрите медицински университети в страната, едно от най-модерните и високотехнологични висши училища.",
-            spec:
-                [
-                    "Медицина",
-                    "Дентална медицина",
-                    "Фармация",
-                    "Управление на здравните грижи",
-                    "Кинезитерапия",
-                    "Акушерка",
-                    "Медицинска сестра",
-                    "Медицински лаборант",
-                    "Рентгенов лаборант",
-                    "Рехабилитатор",
-                    "Зъботехник",
-                    "Помощник фармацевт",
-                    "Инспектор по обществено здраве",
-                    "Акушерка (Филиал Сливен)",
-                    "Медицинска сестра (Филиал Сливен)",
-                    "Акушерка (Филиал Велико Търново)",
-                    "Медицинска сестра (Филиал Велико Търново)",
-                    "Акушерка (Филиал Шумен)",
-                    "Медицинска сестра (Филиал Шумен)",
-                ],
-            link: "https://www.mu-varna.bg/BG",
-            application: "https://www.mu-varna.bg/BG/Admission/Pages/default.aspx"
-        }
+        info: "Варненският медицински университет „Проф. д-р Параскев Стоянов“ или МУ Варна е един от най-добрите медицински университети в страната, едно от най-модерните и високотехнологични висши училища.",
+        spec:
+            [
+                "Медицина",
+                "Дентална медицина",
+                "Фармация",
+                "Управление на здравните грижи",
+                "Кинезитерапия",
+                "Акушерка",
+                "Медицинска сестра",
+                "Медицински лаборант",
+                "Рентгенов лаборант",
+                "Рехабилитатор",
+                "Зъботехник",
+                "Помощник фармацевт",
+                "Инспектор по обществено здраве",
+                "Акушерка (Филиал Сливен)",
+                "Медицинска сестра (Филиал Сливен)",
+                "Акушерка (Филиал Велико Търново)",
+                "Медицинска сестра (Филиал Велико Търново)",
+                "Акушерка (Филиал Шумен)",
+                "Медицинска сестра (Филиал Шумен)",
+            ],
+        link: "https://www.mu-varna.bg/BG",
+        application: "https://www.mu-varna.bg/BG/Admission/Pages/default.aspx"
     },
     {
         name: "Медицински университет Пловдив",
         url: "Med-uni-Plovdiv",
-        data:
-        {
-            info: "Медицинският университет в Пловдив е един от най-старите медицински университети в страната, известен със своето обучение и традиции.",
-            spec:
-                [
-                    " Медицина",
-                    " Дентална медицина",
-                    " Фармация",
-                    " Управление на здравните грижи",
-                    " Медицинска сестра",
-                    " Акушерка",
-                    " Лекарски асистент",
-                    " Зъботехник",
-                    " Медицински лаборант",
-                    " Рентгенов лаборант",
-                    " Рехабилитатор",
-                    " Помощник фармацевт",
-                    " Инспектор по обществено здраве",
-                    " Инструктор диетично хранене",
-                    " Медицинска козметика",
-                ],
-            link: "https://mu-plovdiv.bg/",
-            application: "https://mu-plovdiv.bg/priem/kandidat-studentski-spravochnik/"
-        }
+        info: "Медицинският университет в Пловдив е един от най-старите медицински университети в страната, известен със своето обучение и традиции.",
+        spec:
+            [
+                " Медицина",
+                " Дентална медицина",
+                " Фармация",
+                " Управление на здравните грижи",
+                " Медицинска сестра",
+                " Акушерка",
+                " Лекарски асистент",
+                " Зъботехник",
+                " Медицински лаборант",
+                " Рентгенов лаборант",
+                " Рехабилитатор",
+                " Помощник фармацевт",
+                " Инспектор по обществено здраве",
+                " Инструктор диетично хранене",
+                " Медицинска козметика",
+            ],
+        link: "https://mu-plovdiv.bg/",
+        application: "https://mu-plovdiv.bg/priem/kandidat-studentski-spravochnik/"
     },
     {
         name: "Медицински университет Плевен",
         url: "Med-uni-Pleven",
-        data:
-        {
-            info: "Медицинският университет в Плевен има 45-годишна история и внушителна материална база (вкл. учебни звена, обновен спортен комплекс, две студентски общежития, модерна университетска библиотека, собствен издателски център).",
-            spec:
-                [
-                    "Медицина",
-                    "Фармация",
-                    "Управление на здравните грижи",
-                    "Акушерка",
-                    "Медицинска сестра",
-                    "Медицински лаборант",
-                    "Рентгенов лаборант",
-                    "Помощник фармацевт",
-                ],
-            link: "https://mu-plovdiv.bg/",
-            application: "https://mu-plovdiv.bg/priem/kandidat-studentski-spravochnik/"
-        }
+        info: "Медицинският университет в Плевен има 45-годишна история и внушителна материална база (вкл. учебни звена, обновен спортен комплекс, две студентски общежития, модерна университетска библиотека, собствен издателски център).",
+        spec:
+            [
+                "Медицина",
+                "Фармация",
+                "Управление на здравните грижи",
+                "Акушерка",
+                "Медицинска сестра",
+                "Медицински лаборант",
+                "Рентгенов лаборант",
+                "Помощник фармацевт",
+            ],
+        link: "https://mu-plovdiv.bg/",
+        application: "https://mu-plovdiv.bg/priem/kandidat-studentski-spravochnik/"
     },
     {
         name: "Тракийски университет Стара Загора",
         url: "Stara-Zagora",
-        data:
-        {
-            info: "Тракийският университет се намира в град Стара Загора – в центъра на страната. Университетът заема пето място в рейтинговата класация на университетите в България и обучава общо над 8200 български и чуждестранни студенти.",
-            spec:
-                [
-                    "Ветеринарна медицина",
-                    "Медицина",
-                    "Управление на здравните грижи",
-                    "Акушерка",
-                    "Медицинска сестра",
-                    "Медицински лаборант",
-                    "Рехабилитатор",
-                    "Лекарски асистент",
-                    "Акушерка (Филиал Хасково)",
-                    "Медицинска сестра (Филиал Хасково)",
-                ],
-            link: "http://www.uni-sz.bg/",
-            application: "http://www.uni-sz.bg/%d0%be%d1%86%d0%b5%d0%bd%d0%ba%d0%b8-%d0%b8-%d0%ba%d0%bb%d0%b0%d1%81%d0%b8%d1%80%d0%b0%d0%bd%d0%b8%d1%8f-201415/"
-        }
+        info: "Тракийският университет се намира в град Стара Загора – в центъра на страната. Университетът заема пето място в рейтинговата класация на университетите в България и обучава общо над 8200 български и чуждестранни студенти.",
+        spec:
+            [
+                "Ветеринарна медицина",
+                "Медицина",
+                "Управление на здравните грижи",
+                "Акушерка",
+                "Медицинска сестра",
+                "Медицински лаборант",
+                "Рехабилитатор",
+                "Лекарски асистент",
+                "Акушерка (Филиал Хасково)",
+                "Медицинска сестра (Филиал Хасково)",
+            ],
+        link: "http://www.uni-sz.bg/",
+        application: "http://www.uni-sz.bg/%d0%be%d1%86%d0%b5%d0%bd%d0%ba%d0%b8-%d0%b8-%d0%ba%d0%bb%d0%b0%d1%81%d0%b8%d1%80%d0%b0%d0%bd%d0%b8%d1%8f-201415/"
     },
     {
         name: "Университет ,,Проф. д – р Асен Златаров“ Бургас",
         url: "Prof-Asen-Zlatanov",
-        data:
-        {
-            info: "Университет „Проф. д-р Асен Златаров“, МУ Бургас е единственият държавен университет в Югоизточна България, който разполага с 5 учебни корпуса, спортна база, 3 студентски общежития, стол, поща, център за медицинско обслужване, печатна база. По качество на научните изследвания университетът е класиран на едно от първите места в България по системата Хирш за принос в науката.",
-            spec:
-                [
-                    "Медицина",
-                    "Акушерка",
-                    "Медицинска сестра",
-                    "Рехабилитатор",
-                    "Помощник фармацевт",
-                    "Лекарски асистент",
-                ],
-            link: "https://www.btu.bg/index.php/bg/",
-            application: "https://www.btu.bg/index.php/bg/candidatstudpriem-all-gm/spravochnikm"
-        }
+        info: "Университет „Проф. д-р Асен Златаров“, МУ Бургас е единственият държавен университет в Югоизточна България, който разполага с 5 учебни корпуса, спортна база, 3 студентски общежития, стол, поща, център за медицинско обслужване, печатна база. По качество на научните изследвания университетът е класиран на едно от първите места в България по системата Хирш за принос в науката.",
+        spec:
+            [
+                "Медицина",
+                "Акушерка",
+                "Медицинска сестра",
+                "Рехабилитатор",
+                "Помощник фармацевт",
+                "Лекарски асистент",
+            ],
+        link: "https://www.btu.bg/index.php/bg/",
+        application: "https://www.btu.bg/index.php/bg/candidatstudpriem-all-gm/spravochnikm"
     },
     {
         name: "Софийски университет ,,Св. Климент Охридски“",
         url: "Sv-Kliment-Ohridski",
-        data:
-        {
-            info: "Софийски университет „Св. Климент Охридски” е първото българско висше училище. Неговата история е въплъщение и продължение на многовековната българска културна и просветна традиция. Софийският университет е един от авторитетните научни центрове на Балканите, напълно развит европейски тип университет. Това е най-големият и престижен учебен и научноизследователски център в страната, който обхваща 16 факултета със 119 специалности.",
-            spec:
-                [
-                    "Медицина",
-                    "Фармация",
-                    "Медицинска сестра",
-                    "Медицинска рехабилитация и ерготерапия",
-                ],
-            link: "https://mu-sofia.bg/",
-            application: "https://mu-sofia.bg/priem/ksk/spravochnik-kandidatstudenti/"
-        }
+        info: "Софийски университет „Св. Климент Охридски” е първото българско висше училище. Неговата история е въплъщение и продължение на многовековната българска културна и просветна традиция. Софийският университет е един от авторитетните научни центрове на Балканите, напълно развит европейски тип университет. Това е най-големият и престижен учебен и научноизследователски център в страната, който обхваща 16 факултета със 119 специалности.",
+        spec:
+            [
+                "Медицина",
+                "Фармация",
+                "Медицинска сестра",
+                "Медицинска рехабилитация и ерготерапия",
+            ],
+        link: "https://mu-sofia.bg/",
+        application: "https://mu-sofia.bg/priem/ksk/spravochnik-kandidatstudenti/"
     },
     {
         name: "Лесотехнически университет София",
         url: "Lesotehnichecski-Sofia",
-        data:
-        {
-            info: "Лесотехническият университет е единственият университет в България, в който се обучават специалисти в областта на горското стопанство, технологията на дървесината и производството на мебели, инженерния дизайн на мебели и ландшафтната архитектура.",
-            spec:
-                [
-                    "Ветеринарна медицина",
-                    "Агрономство",
-                    "Растителна защита",
-                    "Екология и опазване на околната среда",
-                    "Горско стопанство",
-                    "Технология на дървесината и мебелите",
-                    "Компютърни технологии в мебелната индустрия",
-                    "Алтернативен туризъм",
-                    "Стопанско управление",
-                ],
-            link: "https://ltu.bg/bg/",
-            application: "https://ltu.bg/bg/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%BD%D0%B8-%D0%B8%D0%B7%D0%BF%D0%B8%D1%82%D0%B8"
-        }
+        info: "Лесотехническият университет е единственият университет в България, в който се обучават специалисти в областта на горското стопанство, технологията на дървесината и производството на мебели, инженерния дизайн на мебели и ландшафтната архитектура.",
+        spec:
+            [
+                "Ветеринарна медицина",
+                "Агрономство",
+                "Растителна защита",
+                "Екология и опазване на околната среда",
+                "Горско стопанство",
+                "Технология на дървесината и мебелите",
+                "Компютърни технологии в мебелната индустрия",
+                "Алтернативен туризъм",
+                "Стопанско управление",
+            ],
+        link: "https://ltu.bg/bg/",
+        application: "https://ltu.bg/bg/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%BD%D0%B8-%D0%B8%D0%B7%D0%BF%D0%B8%D1%82%D0%B8"
     }
 ]
 
-function GetUniName(url) {
-    for (let uni of unis) {
-        if (uni.url === url)
-            return uni.name
-    }
-}
-
-function GetUniUrl(name) {
-    for (let uni of unis) {
-        if (uni.name === name)
-            return uni.url
-    }
-}
-
-function GetUniByUrl(url) {
+function GetUni(url) {
     if (url.match("/universities/"))
         url = url.substring("/univesities/".length + 1, url.length)
 
@@ -568,16 +429,7 @@ function GetUniByUrl(url) {
     }
 }
 
-function GetUniByName(name) {
-    for (let uni of unis)
-        if (uni.name === name)
-            return uni
-}
-
 export {
-    GetUniName,
-    GetUniUrl,
-    GetUniByUrl,
-    GetUniByName,
+    GetUni,
     unis
 }

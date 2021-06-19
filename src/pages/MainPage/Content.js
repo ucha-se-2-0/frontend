@@ -1,5 +1,5 @@
 import { Button, Title, Video } from '../../Components'
-import { theme, colors } from '../../Colors'
+import { theme, colors } from '../../Style/Colors'
 import React from "react"
 
 function Content() {

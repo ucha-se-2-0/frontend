@@ -1,5 +1,5 @@
 import React from "react"
-import {theme, changeTheme, colors} from '../../Colors'
+import {theme, changeTheme, colors} from '../../Style/Colors'
 
 function Header() {
     return (

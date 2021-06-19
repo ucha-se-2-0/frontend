@@ -17,7 +17,24 @@ Examples:
 `-l` stands for "light"  
 Two colors for components are needed to imlement dark and light theme (if there will be such)
 
-See "README.m<span>d</span>" of "src" folder to learn how to use defined colors in your javascript code  
+See about "Colors.js" to learn how to use defined colors in your javascript code  
+
+<br></br>
+## "Colors.js"
+Allows you to use defined colors in your css files.  
+Use
+```js
+import { colors } from '../../Style/Colors'
+```
+to import `colors`  
+Examples:  
+`<div style = {{backgroundColor: colors.cyan}} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/7dd1c1/000000?text=+)  
+`<div style = {{backgroundColor: {colors.dark} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/3f4760/000000?text=+)  
+`<div style = {{backgroundColor: {colors.content.dark} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/3f4760/000000?text=+)  
+`<div style = {{backgroundColor: {colors.content.light} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/ffffff/000000?text=+)  
+`<div style = {{backgroundColor: {colors.text.dark} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/000000/000000?text=+)  
+`<div style = {{backgroundColor: {colors.text.light} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/ffffff/000000?text=+)
+
 
 <br></br>
 ## "Components.css"

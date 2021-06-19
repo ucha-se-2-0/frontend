@@ -157,7 +157,7 @@
   
   text-align: center;
   line-height: normal;
-  color: var(--text-l);
+  color: var(--text-d);
 }
 
 .content-title:not(.content-subtitle)

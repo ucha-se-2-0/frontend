@@ -1,7 +1,7 @@
 import React from "react"
 import { Button, Video } from '../../Components'
 import { GetLesson } from '../../Assets'
-import { theme, colors } from '../../Colors'
+import { theme, colors } from '../../Style/Colors'
 
 var lesson = GetLesson(window.location.pathname);
 

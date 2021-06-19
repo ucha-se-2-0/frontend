@@ -2,6 +2,7 @@
 {
     width: 90%;
     margin-top: 30px;
+    user-select: text;
 }
 
 #compose-comment .button
@@ -69,7 +70,7 @@
     background-color: black;
 }
 
-#comments
+div#comments
 {
     font-size: 20px;
     width: 90%;
@@ -118,6 +119,7 @@
     margin: auto 0 auto 20px;
     word-wrap: break-word;
     max-width: 90%;
+    user-select: text;
 }
 
 .comment .author-name
@@ -127,6 +129,7 @@
     margin-left: 20px;
     font-size: 20px;
     font-weight: 1000;
+    user-select: text;
 }
 
 .comment>div:first-of-type
