@@ -50,7 +50,7 @@ Properties:
   * `placeholder` - placeholder of input
   * `width` - width of the serch field when expended. By default it is `100% - 20px`
   * `search(request)` - funcition that is invoked when search request is made (enter pressed or search icon clicked). `search` takes argument `request` and must return a component for search result window
-* `Footer` - footer. It will probably be same for all pages so it doesn't have any `props`. (Actually it is empty `:)` )
+* `Footer` - footer. It will probably be same for all pages so it doesn't have any `props`. (Actually it is empty :smiley: )
 * `Navbar` 
   Properties:  
   * `content` - this is put inside `Navbar`
@@ -60,11 +60,11 @@ Properties:
 * `Title` 
   Properties:  
   * `name`, `title` or `content` - these are synonyms
-  * `subtitle` - boolean. If set font is smaller (you can use `Subtitle`)
+  * `subtitle` - boolean. If set font is smaller (you can use `Subtitle` component instead)
 * `Subtitle`
   Properties:  
   * `name`, `title` or `content` - these are synonyms
-* `Video` - wrapper for video-js `VideoPlayer` component. All given properties will be passed to `VideoPlayer` component. You can access this component from css using `.video` query. (**Remember: don't override default styling**)
+* `Video` - wrapper for video-js `VideoPlayer` component. All given properties will be passed to `VideoPlayer` component. You can access this component from css using `.video` query. (**Remember: don't override default styling** (see readme of `src/Style`))
 
 <br></br>
 ## "Cookies.js"
