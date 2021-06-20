@@ -1,6 +1,6 @@
-import './Style/Colors.css'
-import render from './index'
-import {getCookie, setCookie} from './Cookies'
+import './Colors.css'
+import render from '../index'
+import {GetCookie, SetCookie} from '../Cookies'
 
 const colors = {
     cyan: "var(--cyan)",
@@ -33,13 +33,13 @@ function changeTheme()
     if(theme === "light")
     {
         theme = "dark"
-        setCookie("theme", "dark", 24 * 30)
+        SetCookie("theme", "dark", 24 * 30)
         document.getElementById("root").style.backgroundColor = "var(--dark)";
     }
     else
     {
         theme = "light";
-        setCookie("theme", "light", 24 * 30)
+        SetCookie("theme", "light", 24 * 30)
         document.getElementById("root").style.backgroundColor = "var(--light)";
     }
 

@@ -1,13 +1,10 @@
 import React from 'react'
-import {Footer, DefaultNavbar as Navbar, Header} from '../../Components'
+import {Footer, Navbar as Navbar, Header} from '../../Components'
 import { GetLesson } from '../../Assets';
 
 import {Content} from './Content'
 
-if(window.location.pathname.match("/tests/"))
-{
-    import('./Content.css');
-}
+import "./Content.css"
 
 function Test()
 {

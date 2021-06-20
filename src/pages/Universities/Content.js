@@ -1,7 +1,7 @@
 import React from "react"
 import { Route, BrowserRouter as Router } from "react-router-dom"
 import { Button } from '../../Components'
-import { unis, GetUniByUrl } from "../../Assets"
+import { unis, GetUni } from "../../Assets"
 
 function UnisNavContent() 
 {
@@ -20,17 +20,17 @@ function UnisNavContent()
 
 function UniContent()
 {
-    let uni = GetUniByUrl(window.location.pathname)
+    let uni = GetUni(window.location.pathname)
 
     let spec = []
-    for(let s in uni.data.spec)
+    for(let s in uni.spec)
     {
-        spec.push(<li key = {s} style = {{textAlign: "left"}}>{uni.data.spec[s]}</li>)
+        spec.push(<li key = {s} style = {{textAlign: "left"}}>{uni.spec[s]}</li>)
     }
 
     return(
         <div className = "content" style = {{textAlign: "center", width: "70%", margin: "30px auto"}}>
-            {uni.data.info}
+            {uni.info}
             <span style = {{backgroundColor: "#222222", height: "0.5px", width: "100%", margin: "50px 0"}}></span>
 
             <div style = {{fontWeight: "bold"}}>В {uni.name} можете да кандидатствате за следните специалности:</div>
@@ -38,8 +38,8 @@ function UniContent()
                 {spec}
             </ul>
 
-            <a href = {uni.data.application} style = {{fontWeight: "bold", width: "100%"}}>Кандидатстване в {uni.name}</a>
-            <a href = {uni.data.link} style = {{fontWeight: "bold", width: "100%"}}>Посетете {uni.name}</a>
+            <a href = {uni.application} style = {{fontWeight: "bold", width: "100%"}}>Кандидатстване в {uni.name}</a>
+            <a href = {uni.link} style = {{fontWeight: "bold", width: "100%"}}>Посетете официалния сайт на {uni.name}</a>
         </div>
     )
 }

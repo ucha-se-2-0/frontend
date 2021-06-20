@@ -1,27 +1,58 @@
 @import '../../Style/Colors.css';
 
-.content
+.content.test-content
 {
     flex-direction: column;
+    width: 90%;
+    margin-left: 5%;
+    padding: 10px;
 }
 
 .question
 {
-    width: 70%;
+    width: 100%;
     border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: calc(15px + 0.7vw);
+
     display: flex;
     flex-direction: column;
     align-content: center;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-
-.question h2
+.question input
 {
-    margin: 10px auto;
-    display: inline;
+    width: 90%;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 5px;
+    outline: none;
+    margin: 0px auto 20px auto;
+
+    font-size: calc(10px + 0.7vw);
+    resize: none;
 }
+
+.question>p
+{
+    margin: 20px 10px 30px 10px;
+}
+
+.question input::-webkit-outer-spin-button,
+.question input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+@media screen and (min-width: 600px)
+{
+    .question
+    {
+        width: 80%;
+    }
+}
+
 
 
 .option
@@ -42,7 +73,7 @@
     background-color: #aaaaaa;
 }
 
-.option h3
+.option p
 {
     margin-top:auto;
     margin-bottom:auto;
@@ -65,34 +96,10 @@
 }
 
 
-#toLesson
-{
-    display: none;
-}
-
-#toNextLesson
-{
-    display: none;
-}
-
 #result
 {
     font-size: calc(5vw + 10px);
     margin: 50px;
-}
-
-.question input
-{
-    border-radius: 5px;
-    font-size: large;
-    resize: none;
-    margin-left: 5%;
-    margin-bottom: 20px;
-    border: none;
-    outline: none;
-    padding: 5px;
-    border-bottom: 1px solid black;
-    width: calc(90% - 10px);
 }
 
 .free-answer .correctAnswer

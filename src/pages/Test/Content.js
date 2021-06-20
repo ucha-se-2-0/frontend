@@ -1,11 +1,9 @@
 import React from 'react'
-import { Route, BrowserRouter as Router } from 'react-router-dom';
-import { colors } from '../../Colors';
-import { Button } from '../../Components'
-import { GetNextLesson, GetSubject } from '../../Assets'
+import { colors } from '../../Style/Colors';
+import { Button, Title } from '../../Components'
+import { GetNextLesson, GetLesson } from '../../Assets'
 
-var calcPointsCallbacks = []
-var turnedIn = false
+
 
 class Question extends React.Component {
 
@@ -13,14 +11,14 @@ class Question extends React.Component {
         super(props);
         this.oneCorrectAnswer = !(this.props.correct instanceof Array)
 
-        this.state = { selected: [], checked: false }
+        this.state = { selected: [] }
         if (this.oneCorrectAnswer) {
             this.state.selected = -1
         }
     }
 
     componentDidMount() {
-        calcPointsCallbacks.push(this.CalcPoints.bind(this))
+        this.props.addTurnInCallback(this.CalcPoints.bind(this))
     }
 
     render() {
@@ -38,7 +36,7 @@ class Question extends React.Component {
             }
 
             let optionBackground = null
-            if (this.state.checked) {
+            if (this.props.turnedIn) {
                 if (this.oneCorrectAnswer) {
                     if (this.props.correct === this.state.selected) {
                         optionBackground = "transparent"
@@ -60,8 +58,7 @@ class Question extends React.Component {
                         if (c === i) {
                             optionCorrect = true
 
-                            if (!this.state.selected[i])
-                            {
+                            if (!this.state.selected[i]) {
                                 anyError = true
                                 console.log(i)
                             }
@@ -85,46 +82,56 @@ class Question extends React.Component {
                 <div className="option" key={i} style={{ backgroundColor: optionBackground }} onClick={() => { this.OnClick(i) }}>
                     <div className="checkbox" style={checkboxStyle}>
                     </div>
-                    <h3>{this.props.options[i]}</h3>
+                    <p>{this.props.options[i]}</p>
                 </div>
             );
         }
 
 
         return (
-            <div className="question" style={{ backgroundColor: this.state.checked ? anyError ? "#ffddcc" : "#ddffbb" : "transparent" }}>
-                <h2>{this.props.question}</h2>
+            <div className="question" style={{ backgroundColor: this.props.turnedIn ? anyError ? "#ffddcc" : "#ddffbb" : "transparent" }}>
+                <p>{this.props.question}</p>
                 {options}
             </div>
         );
     }
 
     CalcPoints() {
-        let max_points = 0
+        let max_points = this.props.options.length / 4
         let points = 0
         if (this.oneCorrectAnswer) {
-            max_points = this.props.options.length / 4
             points = (this.state.selected === this.props.correct) ? this.props.options.length / 4 : 0
         }
         else {
-            let correctCount = 0
-            for (let i in this.props.correct) {
-                max_points += (this.props.options.length - i) / 4
+            for (let o in this.props.options) {
+                let option_correct = false
+                for (let c of this.props.correct) {
+                    if (c == o) {
+                        option_correct = true
+                        break
+                    }
+                }
 
-                if (this.state.selected[this.props.correct[i]]) {
-                    points += (this.props.options.length - correctCount) / 4
-                    correctCount++;
+                let selected = this.state.selected[o] ? true : false
+                if(option_correct === selected)
+                {
+                    points += 0.25
+                }
+                else
+                {
+                    points -= 0.25
                 }
             }
         }
 
-        this.setState({ checked: true })
+        if(points < 0)
+            points = 0
 
         return { max_points: max_points, points: points }
     }
 
     OnClick(id) {
-        if (!turnedIn) {
+        if (!this.props.turnedIn) {
 
             let selected = this.state.selected;
             if (this.oneCorrectAnswer) {
@@ -145,229 +152,194 @@ class Question extends React.Component {
     }
 }
 
-// class FreeAnswerQuestion extends React.Component {
-//     componentDidMount() {
-//         if (typeof this.props.correct === "number") {
-//             if (this.props.precision !== undefined) {
-//                 correctAnswers.push({
-//                     answer: Math.round(this.props.correct * Math.pow(10, this.props.precision)) / Math.pow(10, this.props.precision),
-//                     precision: this.props.precision
-//                 });
-//             }
-//             else {
-//                 correctAnswers.push({
-//                     answer: Math.round(this.props.correct),
-//                     precision: 0
-//                 });
-//             }
-//         }
-//         else {
-//             correctAnswers.push(this.props.correct.toLowerCase());
-//         }
-//     }
+class FreeAnswerQuestion extends React.Component {
+    constructor(props) {
+        super(props)
+        this.answerIsNumber = (typeof this.props.correct === "number")
+        this.givenAnswer = ""
+    }
 
-//     render() {
-//         return (
-//             <div className="question free-answer">
-//                 <h2>{this.props.question}</h2>
-//                 <input placeholder="Въведете отговора си" type={typeof this.props.correct === "number" ? "number" : "text"}></input>
-//                 <div className="correctAnswer"></div>
-//             </div>
-//         );
-//     }
-// }
+    componentDidMount() {
+        this.props.addTurnInCallback(this.CalcPoints.bind(this))
+    }
+
+    CalcPoints() {
+        let max_points = 0
+        let points = 0
+        if (this.answerIsNumber) {
+            max_points = this.props.points ? this.props.points : 2
+            if (this.props.precision) {
+                if (parseInt(this.givenAnswer) - this.props.correct < Math.pow(0.1, this.props.precision))
+                    points = max_points
+            }
+            else {
+                if (parseInt(this.givenAnswer) === this.props.correct)
+                    points = max_points
+            }
+        }
+        else {
+            max_points = this.props.points ? this.props.points : 3
+            let mismatches = 0
+            mismatches = Math.abs(this.givenAnswer.length - this.props.correct.length)
+            for (let s = 0; s < this.givenAnswer.length && s < this.props.correct.length; s++) {
+                if (this.givenAnswer[s] !== this.props.correct[s]) {
+                    if (this.props.exact || mismatches >= 1) {
+                        break
+                    }
+
+                    mismatches++
+                }
+            }
+        }
+
+        return { max_points: max_points, points: points }
+    }
+
+    render() {
+        let placeholder = "Въведете отговора си"
+        if (this.props.precision) {
+            placeholder += " с точност до " + this.props.precision + " знака след запетая"
+        }
+
+        return (
+            <div className="question free-answer">
+                <p>{this.props.question}</p>
+                <input placeholder={placeholder} type="text" onKeyDown={e => {
+                    if (this.answerIsNumber) {
+                        if (e.key === "Backspace")
+                            return
+
+                        if ((e.target.value + e.key).match(/^(\d+(\.|,){1}\d*|\d+)$/)) {
+                            this.givenAnswer += e.key
+                            e.target.value += e.key
+                        }
+                        e.preventDefault()
+                    }
+                    else {
+                        this.givenAnswer += e.key
+                    }
+                }} />
+                {this.props.turnedIn ? <div className="correctAnswer">{this.props.correct}</div> : <></>}
+            </div>
+        );
+    }
+}
 
 
 class Content extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = { result: -1 }
-    }
+        this.state = { result: -1, turnedIn: false }
 
+        this.turnInCallbacks = []
+    }
 
 
     render() {
         return (
-            <div className="content">
-                <Router>
-                    <Route path="/tests/skin" exact render={() =>
-                        <>
-                            <Question question="What?" options={["dk", "that", "something"]} correct={[2, 0]} />
-                            <Question question="How?" options={["somehow", "no", "cucumber"]} correct={2} />
-                            {/* <FreeAnswerQuestion question="Explain" correct={"Because"} />
-                            <FreeAnswerQuestion question="3 / 2 ?" correct={1.5} precision={3} /> */}
-                        </>
-                    } />
-                    <h1> {this.state.result === -1 ? "" : "Резултат: " + this.state.result + "%"} </h1>
-                    {this.state.result === -1 ? <Button id="checkAnswers" name="Провери отговорите" height="50px" onClick={this.CheckAnswers.bind(this)} /> : <></>}
+            <div className="content test-content">
 
-                    <Button id="toLesson" name="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} />
-                    <Button id="toNextLesson" height="50px" link="#" />
-                </Router>
+                {this.GetQuestions()}
+
+                {this.GetActions()}
             </div>
         );
     }
 
+    AddTurnInCallback(callback) {
+        this.turnInCallbacks.push(callback)
+    }
+
+    GetActions() {
+        if (this.state.turnedIn) {
+            let next = GetNextLesson(window.location.pathname)
+            let next_title, next_link, message
+            if (next.title) {
+                next_title = "Към следващия урок (" + next.title + ")"
+                next_link = "/lessons/" + next.url
+            }
+            else {
+                console.log(next)
+                if(next.subsection)
+                {
+                    message = "Това беше последният урок от подраздела \"" + next.subsection.title + '"'
+                    next_title = "Към раздел \"" + next.section.sectionName + '"'
+                    next_link = "/lessons/sections/" + next.section.url
+                }
+                else
+                {
+                    message = "Това беше последният урок от раздела \"" + next.section.sectionName + '"'
+                    next_title = "Към уроците"
+                    next_link = "/lessons"
+                }
+
+            }
+
+            if (message) {
+                message = <div style = {{textAlign: "center"}} className = "content-text">{message}</div>
+            }
+
+            return (<>
+                <Title subtitle content = {"Резултат: " + this.state.result + "%"} />
+                {message}
+                <Button name="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} />
+                <Button name={next_title} height="50px" link={next_link} />
+            </>)
+        }
+        return <Button name="Провери отговорите" height="50px" onClick={this.CheckAnswers.bind(this)} />
+    }
+
+    GetQuestions() {
+        let questions = []
+        let lesson = GetLesson(window.location.pathname)
+
+        let key = 0
+        for (let q of lesson.test) {
+            if (q.opt) {
+                questions.push(
+                    <Question
+                        key={key}
+                        addTurnInCallback={this.AddTurnInCallback.bind(this)}
+                        turnedIn={this.state.turnedIn}
+                        question={q.q}
+                        options={q.opt}
+                        correct={q.ans} />)
+            }
+            else {
+                questions.push(
+                    <FreeAnswerQuestion
+                        key={key}
+                        addTurnInCallback={this.AddTurnInCallback.bind(this)}
+                        turnedIn={this.state.turnedIn}
+                        question={q.q}
+                        correct={q.ans}
+                        exact={q.exact}
+                        precision={q.prec} />
+                )
+            }
+
+            key++
+        }
+
+        return (
+            questions
+        )
+    }
+
 
     CheckAnswers() {
+        this.setState({ turnedIn: true })
+
         let points = 0
         let max_points = 0
-        for (let callback of calcPointsCallbacks) {
+        for (let callback of this.turnInCallbacks) {
             let res = callback()
             points += res.points
             max_points += res.max_points
         }
 
         this.setState({ result: Math.round(points / max_points * 10000) / 100 })
-        /* let result = 0;
-        let maxResult = 0;
-    
-        turnedIn = true;
-    
-        let content = document.getElementsByClassName("content")[0];
-        document.getElementById("checkAnswers").style.display = "none";
-        document.getElementById("toLesson").style.display = "inline-flex";
-    
-        let toNextLesson = document.getElementById("toNextLesson")
-        toNextLesson.style.display = "inline-flex";
-        let next = GetNextLesson(window.location.pathname);
-        if (next === undefined) {
-            let topic = GetSubject(window.location.pathname);
-            toNextLesson.getElementsByClassName("button-content")[0].innerHTML = "Към " + topic[0];
-            toNextLesson.setAttribute("href", "/subjects/" + topic[1]);
-        }
-        else {
-            toNextLesson.getElementsByClassName("button-content")[0].innerHTML = "Към следващия урок (" + next[0] + ')';
-            toNextLesson.setAttribute("href", "/lessons/" + next[1]);
-        }
-    
-        let questions = content.querySelectorAll(".question");
-        for (let q = 0; q < questions.length; q++) {
-    
-            if (questions[q].classList.contains("free-answer")) {
-                //Free answer questions
-                maxResult += 3;
-                let input = questions[q].getElementsByTagName("input")[0];
-                input.setAttribute("readonly", true);
-    
-                let dRes = 0;
-    
-                console.log(input.value, correctAnswers[q]);
-    
-                if (input.type === "number") {
-                    if (Math.round(input.value * Math.pow(10, correctAnswers[q].precision)) / Math.pow(10, correctAnswers[q].precision) === correctAnswers[q].answer)
-                        dRes = 3;
-                }
-                else {
-                    let value = input.value.toLowerCase();
-    
-                    if (Math.abs(value.length - correctAnswers[q].length) < 2) {
-                        dRes = 3;
-                        if (Math.abs(value.length - correctAnswers[q].length) === 1) {
-                            dRes = 1.5;
-                        }
-                        let offset = 0;
-                        for (let i = 0; i + offset < value.length && i < correctAnswers[q].length; i++) {
-                            if (value[i + offset] !== correctAnswers[q][i]) {
-                                if (value[i + 1] === correctAnswers[q][i]) {
-                                    offset = 1;
-                                }
-                                if (i + 1 < correctAnswers[q].length && value[i] === correctAnswers[q][i + 1]) {
-                                    offset = -1;
-                                }
-                                dRes -= 1.5;
-                                if (dRes === 0) {
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-                result += dRes;
-                if (dRes === 3) {
-                    questions[q].style.backgroundColor = "#ddffbb";
-                    questions[q].getElementsByTagName("input")[0].style.backgroundColor = "#77ff55";
-                }
-                else {
-                    let correctAnswerField = questions[q].getElementsByClassName("correctAnswer")[0];
-                    correctAnswerField.style.display = "block";
-    
-                    questions[q].style.backgroundColor = "#ffcccc";
-                    if (input.type === "number") {
-                        correctAnswerField.innerHTML = correctAnswers[q].answer;
-                    }
-                    else {
-                        correctAnswerField.innerHTML = correctAnswers[q];
-                    }
-                }
-            }
-            else {
-                let mistake = false;
-    
-                let correctOptions = 0;
-                for (let i = 0; i < correctAnswers[q].length; i++) {
-                    correctOptions += correctAnswers[q][i];
-                }
-    
-                let answerOptions = questions[q].getElementsByClassName("option");
-    
-                let givenAnswer = JSON.parse(questions[q].getAttribute("given_answer"));
-    
-                if (correctAnswers[q] instanceof Array) {
-                    maxResult += 2;
-    
-                    let dRes = 0;
-    
-                    for (let op = 0; op < correctAnswers[q].length; op++) {
-    
-                        if (givenAnswer[op]) {
-                            if (correctAnswers[q][op]) {
-                                answerOptions[op].style.backgroundColor = "#77ff55";
-                                dRes += 2 / correctOptions;
-                            }
-                            else {
-                                answerOptions[op].style.backgroundColor = "#ee7070";
-                                dRes -= 2 / correctOptions;
-                                mistake = true;
-                            }
-                        }
-                        else if (correctAnswers[q][op]) {
-                            answerOptions[op].style.backgroundColor = "#77ff55";
-                            mistake = true;
-                        }
-                    }
-    
-                    if (dRes > 0)
-                        result += dRes;
-                }
-                else {
-                    maxResult += 1;
-    
-                    answerOptions[correctAnswers[q]].style.backgroundColor = "#77ff55";
-    
-                    if (givenAnswer === -1)
-                        mistake = true;
-                    else
-                        if (givenAnswer !== correctAnswers[q]) {
-                            answerOptions[givenAnswer].style.backgroundColor = "#ee7070";
-                            mistake = true;
-                        }
-                        else
-                            result += 1;
-                }
-    
-                if (mistake) {
-                    questions[q].style.backgroundColor = "#ffcccc";
-                }
-                else {
-                    questions[q].style.backgroundColor = "#ddffbb";
-                }
-            }
-        }
-    
-    
-        document.getElementById("result").innerHTML = "Резултат: " + Math.round(result / maxResult * 1000) / 10 + "%";*/
     }
 }
 

@@ -157,7 +157,7 @@
   
   text-align: center;
   line-height: normal;
-  color: var(--text-l);
+  color: var(--text-d);
 }
 
 .content-title:not(.content-subtitle)
@@ -225,4 +225,19 @@
   width: 100%;
   padding: 10px;
   margin: 0;
+}
+
+/* VIDEO */
+
+.video
+{
+    width: 100%;
+    box-shadow: black 0px 0px 50px 0px;
+}
+
+@media screen and (min-width: 700px) {
+  .video
+  {
+      width: 80%;
+  }
 }

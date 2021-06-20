@@ -1,13 +1,11 @@
 import React from 'react'
 
-import { Header, Footer, DefaultNavbar as Navbar, Button } from '../../Components'
+import { Header, Footer, Navbar as Navbar, Button } from '../../Components'
 import Content from './Content'
-import { theme } from '../../Colors'
+import { theme } from '../../Style/Colors'
 import { GetLesson } from '../../Assets';
 
-if (window.location.pathname.indexOf("/lessons/") !== -1) {
-    import('./Content.css');
-}
+import "./Content.css"
 
 let lesson = GetLesson(window.location.pathname)
 

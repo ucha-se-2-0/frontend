@@ -13,19 +13,19 @@
   --header-d: var(--dark);
   --header-l: var(--cyan);
 
-  --footer-d: var(--not-so-dark);
+  --footer-d: var(--dark);
   --footer-l: var(--purple);
 
-  --navbar-d: var(--not-so-dark);
+  --navbar-d: var(--dark);
   --navbar-l: var(--purple);
 
-  --button-d: var(--not-so-dark);
-  --button-l: var(--purple);
+  --button-d: var(--purple);
+  --button-l: var(--light);
 
 
   --text-d: black;
   --text-l: white;
 
-  --title-d: var(--lightcyan);
-  --title-l: var(--purple);
+  --title-d: var(--purple);
+  --title-l: var(--cyan);
 }

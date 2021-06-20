@@ -1,14 +1,8 @@
-.video
-{
-    width: 100%;
-    box-shadow: black 0px 0px 50px 0px;
-}
-
-
 #compose-comment
 {
     width: 90%;
     margin-top: 30px;
+    user-select: text;
 }
 
 #compose-comment .button
@@ -76,7 +70,7 @@
     background-color: black;
 }
 
-#comments
+div#comments
 {
     font-size: 20px;
     width: 90%;
@@ -125,6 +119,7 @@
     margin: auto 0 auto 20px;
     word-wrap: break-word;
     max-width: 90%;
+    user-select: text;
 }
 
 .comment .author-name
@@ -134,6 +129,7 @@
     margin-left: 20px;
     font-size: 20px;
     font-weight: 1000;
+    user-select: text;
 }
 
 .comment>div:first-of-type
@@ -210,25 +206,4 @@
 {
     font-family: 'Font Awesome 5 Free';
     margin-right: 10px;
-}
-
-.separator
-{
-    background-color: #999999;
-    width: 100%; 
-    margin-top: 40px; 
-    height: 0.5px
-}
-
-@media screen and (min-width: 600px)
-{
-    .separator
-    {
-        width: 90%;
-    }
-
-    .video
-    {
-        width: 80%;
-    }
 }

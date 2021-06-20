@@ -1,8 +1,8 @@
 import React from "react";
-import { GetSectionByUrl } from "../../Assets";
+import { GetSection } from "../../Assets";
 import { Button, Subtitle } from '../../Components'
 
-var section = GetSectionByUrl(window.location.pathname.slice("/lessons/sections/".length))
+var section = GetSection(window.location.pathname.slice("/lessons/sections/".length))
 
 class Content extends React.Component {
     render() {
