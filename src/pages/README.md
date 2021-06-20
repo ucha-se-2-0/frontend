@@ -54,7 +54,7 @@ css :
     /* Some style */
 }
 ```
-### To bind your page to the site export your page's component from `"YourPageFile.js"`: 
+### To bind your page to the site, export your page's component from `"YourPageFile.js"`: 
 ```js
 export default MyPage
 ```
