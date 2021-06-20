@@ -13,29 +13,12 @@ class Navbar extends React.Component {
 
         <Button id="unis" name="Университети" link="/universities" class="important" />
 
-        <SearchField height="50%" search={Search} class="important" />
+        <SearchField height="50%" search={(request)=>{}} class="important" />
 
         <Button name="Вход" class="important" link="/Login" />
       </div>
     );
   }
-}
-
-
-
-function Search(search_request) {
-  // let lessons = []
-  // let request = new XMLHttpRequest;
-  // for(let i = 0; i < lessonsUrls.length; i++)
-  // {
-  //   request.open('GET', '', false);
-  //   request.send();
-  //   if(request.responseText.match(search_request).length !== 0)
-  //     lessons.push(lessonsUrls[i][1]);
-  // }
-
-  // if(lessons.length === 0)
-  //   console.log("Couldn't find anything that matches '", request, "'");
 }
 
 export default Navbar;

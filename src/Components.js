@@ -107,6 +107,7 @@ class SearchField extends React.Component {
     this.margin = this.props.margin ? this.props.margin : "10px"
     this.stateWhenCollapsed = {
       collapsed: true,
+      searchResult: <></>,
       style: {
         buttonBackground: { backgroundColor: "transparent" },
         input: { visibility: "hidden", backgroundColor: "transperent" },
@@ -131,6 +132,7 @@ class SearchField extends React.Component {
 
   render() {
     return (
+      <>
       <div className="search button" style={this.state.style.search} onClick={() => {
         this.clickHandled = true
         this.Expand()
@@ -151,6 +153,8 @@ class SearchField extends React.Component {
         </div>
         <div className="button-background" style={this.state.style.buttonBackground} />
       </div>
+      {this.state.searchResult}
+      </>
     );
   }
 
@@ -178,12 +182,7 @@ class SearchField extends React.Component {
   }
 
   Search() {
-    if (this.props.search !== undefined)
-      this.props.search(this.searchRequest)
-    else
-      console.log("Search function not given! Set it using 'search' property of 'SearchField'");
-
-    console.log(this.searchRequest)
+    this.setState({searchResult: this.props.search(this.searchRequest)})
     this.Collapse()
   }
 }

@@ -3,7 +3,7 @@
 
 <br></br>
 ## "Colors.css"
-Allows you to use defined colors in your css files.  
+### Allows you to use defined colors in your css files.  
 Examples:  
 
 `background-color: var(--cyan)`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/7dd1c1/000000?text=+)  
@@ -15,19 +15,19 @@ Examples:
 
 `-d` stands for "dark"  
 `-l` stands for "light"  
-Two colors for components are needed to imlement dark and light theme (if there will be such)
+### Two colors for components are needed to imlement dark and light theme (if there will be such)
 
 See about "Colors.js" to learn how to use defined colors in your javascript code  
 
 <br></br>
 ## "Colors.js"
-Allows you to use defined colors in your css files.  
-Use
+### Allows you to use defined colors in your css files.  
+### Use
 ```js
 import { colors } from '../../Style/Colors'
 ```
-to import `colors`  
-Examples:  
+### to import `colors`  
+### Examples:  
 `<div style = {{backgroundColor: colors.cyan}} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/7dd1c1/000000?text=+)  
 `<div style = {{backgroundColor: {colors.dark} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/3f4760/000000?text=+)  
 `<div style = {{backgroundColor: {colors.content.dark} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/3f4760/000000?text=+)  
@@ -38,29 +38,31 @@ Examples:
 
 <br></br>
 ## "Components.css"
-Style for default components (implemented in "Components.js")  
-#### You shouldn't care about this file (except when you create a new component)
+### Style for default components (implemented in "Components.js")  
+### Put here style for your general-purpose (not related to a specific page) component
 
 <br></br>
 ## "Content.css"
-Style for pages` content (body)  
+### Style for pages` content (body)  
 ### CSS classes:  
-* `.content`
+* `.content` - class for content wrapper
 * `.content-text` - you should apply it to div with reqular text
 * `.separator` - use `<span className = "separator"/>` to get a horizontal line
 
 <br></br>
 ## "Navbar.css"
-Style for very pages` navbar
+### Style for very pages` navbar
 ### CSS classes:  
+* `.navbar` - class for navbar wrapper
 * `.not-important` - when applied to navbar`s child it is hidden when page is less than 600px wide
 
 <br></br>
 ## "Header.css"
-Style for pages` header  
-##### You shouldn't care about this file
+### Style for pages` header  
+#### You shouldn't care about this file, but if you do, the only class defined for header is `.header` - class for header wrapper
+
 
 <br></br>
 ## "Index.css"
-Style for very general stuff (html body, code)
-##### You shouldn't care about this file
+### Style for very general stuff (html body, code)
+#### You shouldn't care about this file
