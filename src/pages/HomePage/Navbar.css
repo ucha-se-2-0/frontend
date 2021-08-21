@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  justify-content:flex-start;
+  padding: 10px;
+}
+
+.logo {
+  width: 20vw;
+  margin: 0 auto;
+}
+
+.navigation {
+  font-size: 30px;
+  justify-self: center;
+  flex-grow: 0;
+  flex-basis: 0;
+}
+
+.navigation .options {
+  font-size: 20px;
+}
+
+.theme-toggle
+{
+  margin-left: 0;
+}
+
+@media (max-width: 600px) {
+  .main-page-navbar .button:not(.search):not(:last-child) {
+    margin: auto 3px;
+  }
+}

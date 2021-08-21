@@ -1,11 +1,30 @@
 /*Define colors` names here*/
 
-:root
+body
 {
-  --cyan: #7dd1c1;
-  --dark: #3f4760;
-  --purple: #615586;
-  --light: #aa95d1;
+  --pink: #E0B0FF;
+  --very-light-purple: #D0B0FF;
+  --light-purple: #AA95D1;
+  --purple: #A070B1;
+  --dark-purple: #705091;
+  --very-dark-purple: #402051;
+
+  --very-light-cyan: #E0FFE8;
+  --light-cyan: #A8E8D5;
+  --cyan: #7DD1C1;
+  --dark-cyan: #70B1A1;
+
+  --dark-green: #335049;
+  --sea-wave: #204050;
+
+  --text-primary: var(--dark-purple);
+  --text: var(--text-primary);
+
+  --background: var(--very-light-cyan);
+
+  --dropdown: var(--dark-purple);
+  --dropdown-text: var(--very-light-cyan);
+
 
   --content-d: var(--dark);
   --content-l: white;
@@ -28,4 +47,9 @@
 
   --title-d: var(--purple);
   --title-l: var(--cyan);
+}
+
+body.dark
+{
+  --background: var(--sea-wave);
 }

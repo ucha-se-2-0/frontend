@@ -1,12 +1,12 @@
 //Here are complex and often-used components that 
 //can be imported and simply used
 
-import React from "react"
+import { createContext, Component, useState, useContext } from "react"
 import VideoPlayer from "react-video-js-player"
 import { colors, theme } from './Style/Colors'
 import "./Style/Components.css"
 
-class Button extends React.Component {
+class Button extends Component {
   constructor(props) {
     super(props);
     this.state = { cursor: "default" }
@@ -44,64 +44,41 @@ function DropdownElement(props) {
   );
 }
 
-class Dropdown extends React.Component {
-  constructor(props) {
-    super(props)
-    this.dropdownEl = React.createRef()
-    this.state = { posLeft: 0 }
+function Dropdown(props) {
+  let options = props.options instanceof Array && props.options.map((el, i) => {
+    return <a key={i} onClick={el.onClick} href={el.link}>{el.name}</a>
+  })
 
-    window.addEventListener("resize", this.MoveMenu.bind(this))
-  }
-
-  componentDidMount() {
-    //              ???
-    setTimeout(this.MoveMenu.bind(this), 200)
-  }
-
-  MoveMenu() {
-    let dd = this.dropdownEl.current
-    if (dd) {
-      let button = dd.querySelector(".dropdown>.button")
-      let menu = dd.querySelector("ul")
-      let btnPos = button.getBoundingClientRect()
-      let offset = (menu.getBoundingClientRect().width - btnPos.width - 20) / 2;
-      this.setState({ posLeft: - offset + "px" })
-    }
-  }
-
-  render() {
-    let options = []
-    if (this.props.children instanceof Array) {
-      for (let i in this.props.children) {
-        if (this.props.children[i].type.name === "DropdownElement") {
-          options.push(this.props.children[i])
-        }
-      }
-    }
-
-    if (this.props.options) {
-      let key = 0
-      for (let opt of this.props.options) {
-        if (opt.name !== undefined && opt.link !== undefined) {
-          options.push(<DropdownElement key={key} name={opt.name} link={opt.link} />)
-        }
-
-        key++
-      }
-    }
-
-    return (
-      <div ref={this.dropdownEl} className="dropdown">
-        <Button name={this.props.name} />
-        <ul className="dropdown-options" style={{ left: this.state.posLeft }}>
-          {options}
-        </ul>
+  return (
+    <div className={"dropdown" + (props.className ? " " + props.className : "")}>
+      <button>{props.name}</button>
+      <div className="options">
+        {options}
+        {props.children}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-class SearchField extends React.Component {
+
+function ThemeToggle() {
+  let context = useContext(ThemeContext);
+
+  return (
+    <div className="theme-toggle">
+      <div className="dark" onClick = {context.ToggleTheme}>
+        <i className = "fas fa-moon" />
+      </div>
+      <i className = "light fas fa-sun" onClick = {context.ToggleTheme}/>
+    </div>
+  )
+}
+
+export const ThemeContext = createContext(null);
+
+
+
+class SearchField extends Component {
   constructor(props) {
     super(props);
     this.margin = this.props.margin ? this.props.margin : "10px"
@@ -133,27 +110,27 @@ class SearchField extends React.Component {
   render() {
     return (
       <>
-      <div className="search button" style={this.state.style.search} onClick={() => {
-        this.clickHandled = true
-        this.Expand()
-      }}>
-        <div className="button-content">
-          <i className="fa fa-search" onClick={() => {
-            if (!this.state.collapsed)
-              this.Search()
-          }} style={{ color: colors.cyan }}></i>
+        <div className="search button" style={this.state.style.search} onClick={() => {
+          this.clickHandled = true
+          this.Expand()
+        }}>
+          <div className="button-content">
+            <i className="fa fa-search" onClick={() => {
+              if (!this.state.collapsed)
+                this.Search()
+            }} style={{ color: colors.cyan }}></i>
 
-          <input type="text" placeholder={this.props.placeholder} onKeyUp={event => {
-            if (event.key === "Enter")
-              this.Search();
+            <input type="text" placeholder={this.props.placeholder} onKeyUp={event => {
+              if (event.key === "Enter")
+                this.Search();
 
-            this.searchRequest = event.target.value
-          }
-          } style={this.state.style.input} />
+              this.searchRequest = event.target.value
+            }
+            } style={this.state.style.input} />
+          </div>
+          <div className="button-background" style={this.state.style.buttonBackground} />
         </div>
-        <div className="button-background" style={this.state.style.buttonBackground} />
-      </div>
-      {this.state.searchResult}
+        {this.state.searchResult}
       </>
     );
   }
@@ -182,12 +159,12 @@ class SearchField extends React.Component {
   }
 
   Search() {
-    this.setState({searchResult: this.props.search(this.searchRequest)})
+    this.setState({ searchResult: this.props.search(this.searchRequest) })
     this.Collapse()
   }
 }
 
-class Footer extends React.Component {
+class Footer extends Component {
   render() {
     return (
       <div className="footer" style={theme === "dark" ? { backgroundColor: colors.footer.dark, color: colors.text.dark } : { backgroundColor: colors.footer.light, color: colors.text.light }}>
@@ -200,7 +177,7 @@ class Footer extends React.Component {
   }
 }
 
-class Navbar extends React.Component {
+class Navbar extends Component {
   render() {
     return (
       <div className="navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
@@ -216,7 +193,7 @@ class Navbar extends React.Component {
   }
 }
 
-class Header extends React.Component {
+class Header extends Component {
   render() {
     return (
       <div className="header" style={theme === "dark" ? { backgroundColor: colors.header.dark, color: colors.text.dark } : { backgroundColor: colors.header.light, color: colors.text.light }}>
@@ -246,4 +223,4 @@ function Video(props) {
     </div>)
 }
 
-export { Button, Dropdown, DropdownElement, SearchField, Footer, Navbar, Header, Title, Subtitle, Video };
+export { Button, Dropdown, DropdownElement, SearchField, Footer, Navbar, Header, Title, Subtitle, Video, ThemeToggle };

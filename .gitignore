@@ -1,7 +1,3 @@
 node_modules
-package.json
-package-lock.json
-SignIn.css
-SignIn.html
 .vscode
 npm
