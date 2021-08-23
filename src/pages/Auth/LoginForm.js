@@ -16,7 +16,7 @@ function Form() {
         <div className="form">
             <Link className="home" link = "/">
                 <img alt = "logo light" src="Images/LogoPurple.png" />
-                <img alt = "logo light" src="Images/LogoLightCyan.png" className="light" />
+                <img alt = "logo light" src="Images/LogoCyan.png" className="light" />
             </Link>
 
             <div className = "title">

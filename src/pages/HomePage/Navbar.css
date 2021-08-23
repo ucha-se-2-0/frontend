@@ -1,4 +1,4 @@
-.navbar {
+.home-page .navbar {
   position:static;
   flex-basis: 20%;
   display: flex;
@@ -8,48 +8,35 @@
 }
 
 
-.logo {
+.home-page .logo {
   width: calc(50px + 15vw);
   margin: 0 auto;
 }
 
-.dark .logo.light,
-.logo
+.dark .home-page .logo.light,
+.home-page .logo
 {
   display: block;
 }
 
-.dark .logo,
-.logo.light
+.dark .home-page .logo,
+.home-page .logo.light
 {
   display: none;
 }
 
-.dropdown.navigation button {
+.home-page .dropdown button {
   font-size: 30px;
-  flex-basis: 10%;
   display: inline;
   color: var(--button-primary);
 }
 
 
-.dropdown.navigation i,
-.dropdown.navigation button {
+.home-page .dropdown i,
+.home-page .dropdown button {
   display: block;
 }
 
-.navigation .options {
+.home-page .navigation .options {
   font-size: 20px;
-}
-
-.theme-toggle
-{
-  flex-basis: 10%;
-  justify-self: flex-end;
-}
-
-@media (max-width: 600px) {
-  .main-page-navbar .button:not(.search):not(:last-child) {
-    margin: auto 3px;
-  }
 }

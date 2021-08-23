@@ -11,9 +11,9 @@ function Form() {
 
     return (
         <div className="form">
-            <Link className="home" href="/">
-                <img src="Images/LogoPurple.png" />
-                <img src="Images/LogoLightCyan.png" className="light" />
+            <Link className="home" link="/">
+                <img alt = "logo dark" src="Images/LogoPurple.png" />
+                <img alt = "logo light" src="Images/LogoCyan.png" className="light" />
             </Link>
 
             <div className="title">

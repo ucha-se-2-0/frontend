@@ -35,15 +35,16 @@
 }
 
 .form .title {
-    color: var(--dark-purple);
+    color: var(--primary);
     font-size: 30px;
     margin: auto 0;
 }
 
 .form .input {
+    height: 60px;
     width: 90%;
-    font-size: 15px;
-    color: var(--text)
+    font-size: calc(10px + 1vw);
+    color: var(--text);
 }
 
 .form .checkbox
@@ -56,13 +57,14 @@
 .form .submit {
     padding: 10px 30px;
     margin: auto 0;
-    background-color: var(--very-dark-purple);
+    background-color: var(--primary);
+    color: var(--faded-primary)
 }
 
 .redirect {
     margin-bottom: 10px;
     margin-top: 30px;
-    color: var(--purple);
+    color: var(--primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,8 +75,8 @@
 .redirect .button {
     margin-left: 0px;
     margin-top: 10px;
-    background-color: var(--light-cyan);
-    color: var(--very-dark-purple);
+    background-color: var(--secondary);
+    color: var(--primary);
     padding: 5px 10px;
 }
 
@@ -87,11 +89,16 @@
         margin-left: 20px;
         margin-top: 0;
     }
+    
+    .form .input {
+        width: 80%;
+        font-size: 15px;
+    }
 }
 
 @media screen and (min-width: 600px) {
     .form {
-        background-color: var(--secondary);
+        background-color: var(--background);
         width: calc(270px + 20%);
         height: 80%;
         border-radius: 15px;
@@ -99,14 +106,19 @@
         margin: auto;
     }
 
+    .dark .form
+    {
+        /* box-shadow: 0 0 0 2px var(--very-light-cyan); */
+    }
+
     .form .title
     {
-        font-size: 36;
         margin: 0 0 30px;
     }
 
     .form .input {
         width: 80%;
+        height: 55px;
     }
 }
 

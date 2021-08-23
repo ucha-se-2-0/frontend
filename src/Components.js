@@ -130,9 +130,10 @@ function Dropdown(props) {
 
 function ThemeToggle() {
   let context = useContext(ThemeContext);
+  let [rot, setRot] = useState(180);
 
   return (
-    <div className="theme-toggle">
+    <div style = {{transform: `rotateZ(${rot}deg)`}} className="theme-toggle" onClick = {()=>{setRot(rot + 180)}}>
       <div className="dark" onClick={context.ToggleTheme}>
         <i className="fas fa-moon" />
       </div>
@@ -248,8 +249,8 @@ class Footer extends Component {
 function LegalityBar() {
   return (
     <div className="legality-bar">
-      <a href="/terms-and-conditions">Правила и условия</a>
-      <a href="/copyright"><i className="far fa-copyright" /> Julemy.bg</a>
+      <Link link="/terms-and-conditions">Правила и условия</Link>
+      <Link href="/copyright"><i className="far fa-copyright" /> Julemy.bg</Link>
     </div>
   )
 }

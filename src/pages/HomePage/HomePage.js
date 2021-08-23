@@ -1,21 +1,20 @@
 import React, { useEffect } from "react"
 import Navbar from './Navbar'
 import Content from './Content'
-import { Dropdown, DropdownElement, LegalityBar } from '../../Components'
+import { LegalityBar } from '../../Components'
 
 
+import "./Navbar.css";
+import "./Content.css";
+import "./HomePage.css";
 
 function HomePage() {
 
     useEffect(() => {
-        import("./Navbar.css");
-        import("./Header.css");
-        import("./Content.css");
-        import("./HomePage.css");
     }, [])
 
     return (
-        <div className = "page">
+        <div className = "page home-page">
             <img src="Images/Waves-unsLight.png" className="background" />
             <Navbar />
             
