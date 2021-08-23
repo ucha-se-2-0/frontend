@@ -4,7 +4,7 @@ import { Button, SearchField, Dropdown, DropdownElement, ThemeContext, ThemeTogg
 
 function Menu() {
   return (
-    <Dropdown className="navigation" name={<i class="fas fa-bars" />} options={[
+    <Dropdown offset = {20} className="navigation" name={<i className ="fas fa-bars" />} options={[
       { name: "Вход", link: "/login" },
       { name: "Регистрация", link: "/signup" },
       { name: "Уроци", link: "/lessons" }
@@ -18,7 +18,7 @@ function Navbar() {
       <div className = "navbar">
         <Menu />
         <img src="Images/GradientLogo.png" className="logo" />
-        
+        <img src="Images/GradientLogoLight.png" className="logo light" />
         <ThemeToggle />
       </div>
     );

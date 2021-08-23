@@ -1,15 +1,24 @@
 @import "../../Style/Colors.css";
-
-.subjects
-{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.content {
+    flex-basis: 50%;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 
-.subjects .button
-{
-    width: 200px;
-    height: 200px;
-    margin: 50px;
+.content .button {
+    margin: 20px 5vw;
+    padding: 10px 50px;
+    font-size: 24px;
+}
+
+@media screen and (min-width: 600px) {
+    .content {
+        flex-direction: row;
+    }
+
+    .content .button:nth-child(2) {
+        margin-right: 10vw;
+    }
 }

@@ -1,60 +1,127 @@
 //Here are complex and often-used components that 
 //can be imported and simply used
 
-import { createContext, Component, useState, useContext } from "react"
+import { createContext, Component, useState, useContext, useEffect, createRef } from "react"
 import VideoPlayer from "react-video-js-player"
-import { colors, theme } from './Style/Colors'
 import "./Style/Components.css"
 
-class Button extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { cursor: "default" }
-    if (this.props.link !== undefined) {
-      this.state.cursor = "pointer";
-    }
+
+function Link(props) {
+  let context = useContext(UrlContext)
+
+  return (
+    <div className = {"link" + (props.className ? " " + props.className : "")} onClick={e => {
+      props.onClick && props.onClick(e);
+      context.Redirect(props.link)
+    }}>
+      {props.name}
+      {props.children}
+    </div>
+  )
+}
+
+function Button(props) {
+  let className = "button"
+  className += props.className ? " " + props.className : "";
+  className += props.secondary ? " secondary" : "";
+  className += props.bold ? " bold" : "";
+
+  let context = useContext(UrlContext);
+
+  const OnClick = e => {
+    props.onClick && props.onClick(e);
+    context.Redirect(props.link)
   }
 
-  render() {
-    const style = {
-      width: this.props.width,
-      height: this.props.height,
-      cursor: this.state.cursor,
-      backgroundColor: theme === "dark" ? colors.button.light : colors.button.dark,
-      color: theme === "dark" ? colors.text.dark : colors.text.light
-    };
-    return (
-      <a className="button" href={this.props.link} style={style} onClick={this.props.onClick}>
-        <div className="button-content" style={{ cursor: this.state.cursor }}>
-          {this.props.name}
-          {this.props.title}
-          {this.props.content}
-        </div>
-        <div className="button-background"> </div>
-      </a>
-    );
+  return (
+    <div className={className} onClick={OnClick}>
+      {props.name}
+      {props.title}
+      {props.content}
+      {props.children}
+    </div>
+  );
+}
+
+function Input(props) {
+  let [hidden, Hide] = useState(true);
+  let [empty, IsEmpty] = useState(true);
+
+  let ref = createRef()
+
+  useEffect(() => {
+    ref.current.style.setProperty("--font-size", props.fontSize);
+  })
+
+  let showOrHide = null;
+
+  let label = props.placeholder;
+  let icon = props.icon;
+  let checkbox = null;
+
+  if (props.checkbox) {
+    label = props.label;
+    icon = null;
   }
+
+  if (props.password && !props.hidden) {
+    showOrHide = <i className={"show-or-hide fas fa-eye" + (hidden ? "" : "-slash")} onClick={Hide.bind(null, !hidden)} />
+  }
+
+  return (
+    <div ref={ref} className={"input" + (empty ? " empty" : "")
+      + (props.sharpCorners ? "" : " rounded")
+      + (props.fog ? " fog" : "")
+      + (props.checkbox ? " checkbox" : "")}
+      style={{ width: props.width }}>
+
+      <input type={(props.password && hidden) ? "password" : (props.checkbox ? "checkbox" : "")} onChange={e => {
+        props.onInput && props.onInput(e);
+        IsEmpty(!(e.target.value));
+      }} />
+
+      {props.checkbox &&
+        <div className="box">
+          <i className="fa fa-check" />
+        </div>
+      }
+
+      {icon}
+
+      <div className="input-label">
+        {label}
+      </div>
+
+      <div className="fog" />
+
+      {showOrHide}
+    </div>
+  )
 }
 
 function DropdownElement(props) {
   return (
-    <li style={{ backgroundColor: theme === "dark" ? colors.notSoDark : colors.notSoLight }}>
+    <li>
       <Button name={props.name} link={props.link} />
     </li>
   );
 }
 
+
+// to do: animations
 function Dropdown(props) {
   let options = props.options instanceof Array && props.options.map((el, i) => {
-    return <a key={i} onClick={el.onClick} href={el.link}>{el.name}</a>
+    return <Link key={i} onClick={el.onClick} link={el.link}>{el.name}</Link>
   })
 
   return (
     <div className={"dropdown" + (props.className ? " " + props.className : "")}>
       <button>{props.name}</button>
-      <div className="options">
-        {options}
-        {props.children}
+      <div className="options-wrapper" style={{ paddingTop: props.offset + "px" }}>
+        <div className="options">
+          {options}
+          {props.children}
+        </div>
       </div>
     </div>
   )
@@ -66,16 +133,18 @@ function ThemeToggle() {
 
   return (
     <div className="theme-toggle">
-      <div className="dark" onClick = {context.ToggleTheme}>
-        <i className = "fas fa-moon" />
+      <div className="dark" onClick={context.ToggleTheme}>
+        <i className="fas fa-moon" />
       </div>
-      <i className = "light fas fa-sun" onClick = {context.ToggleTheme}/>
+      <i className="light fas fa-sun" onClick={context.ToggleTheme} />
     </div>
   )
 }
 
 export const ThemeContext = createContext(null);
 
+
+export const UrlContext = createContext(window.location.pathname);
 
 
 class SearchField extends Component {
@@ -118,7 +187,7 @@ class SearchField extends Component {
             <i className="fa fa-search" onClick={() => {
               if (!this.state.collapsed)
                 this.Search()
-            }} style={{ color: colors.cyan }}></i>
+            }}></i>
 
             <input type="text" placeholder={this.props.placeholder} onKeyUp={event => {
               if (event.key === "Enter")
@@ -140,8 +209,7 @@ class SearchField extends Component {
       this.setState({
         collapsed: false,
         style: {
-          buttonBackground: { backgroundColor: colors.purple },
-          input: { visibility: "visible", backgroundColor: colors.purple },
+          input: { visibility: "visible" },
           search: {
             width: this.props.width ? this.props.width : "calc(100% - 20px)",
             marginLeft: this.margin,
@@ -167,7 +235,7 @@ class SearchField extends Component {
 class Footer extends Component {
   render() {
     return (
-      <div className="footer" style={theme === "dark" ? { backgroundColor: colors.footer.dark, color: colors.text.dark } : { backgroundColor: colors.footer.light, color: colors.text.light }}>
+      <div className="footer" >
         {/*TO DO*/}
         <p>
 
@@ -177,16 +245,25 @@ class Footer extends Component {
   }
 }
 
+function LegalityBar() {
+  return (
+    <div className="legality-bar">
+      <a href="/terms-and-conditions">Правила и условия</a>
+      <a href="/copyright"><i className="far fa-copyright" /> Julemy.bg</a>
+    </div>
+  )
+}
+
 class Navbar extends Component {
   render() {
     return (
-      <div className="navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
+      <div className="navbar">
         {this.props.content}
 
         <Button name="Вход" link="/Login" />
 
         <a href="/" className="home">
-          <img src={theme === "dark" ? "/Images/LogoLight.jpg" : "/Images/LogoDark.jpg"} alt="HOME"></img>
+          <img src="/Images/LogoLight.jpg" alt="HOME"></img>
         </a>
       </div>
     );
@@ -196,7 +273,7 @@ class Navbar extends Component {
 class Header extends Component {
   render() {
     return (
-      <div className="header" style={theme === "dark" ? { backgroundColor: colors.header.dark, color: colors.text.dark } : { backgroundColor: colors.header.light, color: colors.text.light }}>
+      <div className="header">
         {this.props.content}
       </div>
     );
@@ -205,7 +282,7 @@ class Header extends Component {
 
 function Title(props) {
   return (
-    <div className={"content-title" + (props.subtitle ? " content-subtitle" : "")} style={{ color: theme === "dark" ? colors.title.light : colors.title.dark }}>
+    <div className={"content-title" + (props.subtitle ? " content-subtitle" : "")}>
       {props.name}
       {props.title}
       {props.content}
@@ -223,4 +300,19 @@ function Video(props) {
     </div>)
 }
 
-export { Button, Dropdown, DropdownElement, SearchField, Footer, Navbar, Header, Title, Subtitle, Video, ThemeToggle };
+export {
+  Link,
+  Button,
+  Input,
+  Dropdown,
+  DropdownElement,
+  SearchField,
+  Footer,
+  Navbar,
+  Header,
+  Title,
+  Subtitle,
+  Video,
+  ThemeToggle,
+  LegalityBar
+};

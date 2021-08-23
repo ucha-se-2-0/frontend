@@ -1,14 +1,35 @@
 @import "../Style/Colors.css";
 /*BUTTON*/
 
+.link
+{
+  cursor: pointer;
+}
+
 .button {
   padding: 0 10px;
   position: relative;
   border-radius: 10px;
-  display: flex;
-  align-items: center;
-  text-decoration: none !important;
   text-align: center;
+  cursor: pointer;
+  text-decoration: none !important;
+
+  background-color: var(--button-primary);
+  color: var(--text-button-primary);
+
+  transition: color 1s, background-color 1s !important;
+}
+
+
+.button.bold
+{
+  font-weight: bolder;
+}
+
+.button.secondary
+{
+  background-color: var(--button-secondary);
+  color: var(--text-button-secondary);
 }
 
 .button * {
@@ -37,10 +58,194 @@
   border-radius: 10px;
 }
 
-.button:hover .button-background {
-  left: 0;
-  width: 100%;
+/* INPUT */
+
+.input
+{
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 4em;
 }
+
+.input.rounded input
+{
+  border-radius: 2em;
+}
+
+.input input
+{
+  width: 100%;
+  height: calc(100% - 1em - 10px);
+  padding-left: calc(1.5em + 15px);
+  margin-top: calc(1em + 10px);
+  outline: none;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  background-color: transparent;
+  box-sizing: border-box;
+
+  text-align: start;
+  
+  transition: margin-top 0.5s, height 0.5s;
+}
+
+.input.checkbox
+{
+  --font-size: 40px;
+  font-size: 0;
+  width: auto;
+  height: auto;
+}
+
+.input.checkbox .box,
+.input.checkbox input
+{
+  left: 0;
+  top: 0;
+}
+
+.input.checkbox .box
+{
+  position: absolute;
+  background-color: transparent;
+  color: transparent;
+  border: 1px solid var(--text);
+  border-radius: calc(1px + 0.2 * var(--font-size));
+
+  pointer-events: none;
+  width: var(--font-size);
+  height: var(--font-size);
+  left: 0;
+  top: 0;
+  padding: 0.2em;
+
+  display: block;
+}
+
+.input.checkbox .box i
+{
+  display: block;
+  font-size: calc(var(--font-size) * 0.5);
+  height: 100%;
+  top: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input.checkbox input
+{
+  /* !important to overwrite user agent stylesheet */
+  font-size: var(--font-size);
+  width: 1em;
+  height: 1em;
+  opacity: 0;
+  margin: 0;
+}
+
+.input input:checked~.box
+{
+  color: var(--text);
+}
+
+.input.fog .fog
+{
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  width: 100px;
+  height: calc(100% - 12px - 1em);
+  right: 1px;
+  top: calc(1px + 1em + 10px);
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+
+  transition: opacity 0.25s;
+  transition-delay: 0.25s;
+
+  background-image: linear-gradient(to left, white, #ffffff00 40px);
+}
+
+.input.rounded .fog
+{
+  border-bottom-right-radius: 2em;
+  border-top-right-radius: 2em;
+}
+
+
+.input input:focus~.fog,
+.input:not(.empty) .fog
+{
+  opacity: 0;
+  transition: opacity 0s;
+  transition-delay: 0s;
+}
+
+.input>i
+{
+  position: absolute;
+  display: inline;
+  left: 0.25em;
+  font-size: 1.5em;
+  top: calc(50% + 3px - 0.1em);
+  transition: top 0.5s;
+}
+
+.input .show-or-hide
+{
+  right: 0.4em;
+  left: auto;
+  top: calc(50% + 5px - 0.2em);
+  font-size: 20px;
+  z-index: 1;
+}
+
+.input .show-or-hide.fa-eye-slash
+{
+  right: 0.34em;
+}
+
+.input .input-label
+{
+  position: absolute;
+  top: calc(50% + 5px - 0.05em);
+  left: 1em;
+  width: calc(100% - 1em);
+  pointer-events: none;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: var(--font-size);
+  opacity: 0.7;
+
+  transition: top 0.5s, left 0.5s, opacity 0.5s;
+}
+
+.input.checkbox .input-label
+{
+  position: static;
+  display: inline-block;
+  width: auto;
+  margin-left: 10px;
+}
+
+.input i~.input-label
+{
+  left: calc(1.5em + 15px);
+  width: calc(100% - 2em);
+}
+
+.input input:focus~.input-label,
+.input:not(.empty) .input-label
+{
+  opacity: 1;
+  width: auto;
+  top: 0;
+  left: 0;
+}
+
 
 /* SEARCH FIELD */
 
@@ -112,7 +317,7 @@
 
 /*DEFAULT NAVBAR*/
 
-.home {
+/* .home {
   position: absolute;
   overflow: hidden;
   top: 10px;
@@ -137,7 +342,7 @@
   border-top-right-radius: 0px;
   border-bottom-right-radius: 15px;
   border-top-left-radius: 15px;
-}
+} */
 
 /* TITLE */
 
@@ -175,17 +380,22 @@
   color: var(--text-primary);
 }
 
-.dropdown .options {
-  background-color: var(--dropdown);
-  border-radius: 10px;
+.dropdown .options-wrapper {
   display: none;
   position: absolute;
   top: auto;
   left: 0;
 }
 
-.dropdown:hover .options,
-.dropdown button:focus~.options
+.dropdown .options
+{
+  background-color: var(--dropdown);
+  border-radius: 10px;
+  padding: 10px 0;
+}
+
+.dropdown:hover .options-wrapper,
+.dropdown button:focus~.options-wrapper
 {
   display: block;
 }
@@ -193,7 +403,7 @@
 .dropdown .options>* {
   color: var(--dropdown-text);
   cursor: pointer;
-  padding: 0 10px;
+  padding: 10px;
   margin: 0 10px;
   display: inline-block;
 }
@@ -216,12 +426,22 @@
 .theme-toggle .dark
 {
   display: flex;
+  margin-left: auto;
   align-items: center;
   justify-content: center;
   width: 1em;
   height: 1em;
   border-radius: 50%;
   background-color: var(--dark-purple);
+}
+
+.theme-toggle .light
+{
+  display: none;
+  margin-left: auto;
+  width: 1em;
+  height: 1em;
+  color: #ffee77;
 }
 
 .theme-toggle .dark i
@@ -231,16 +451,6 @@
   color: #ffeecc
 }
 
-.theme-toggle i.light
-{
-  color: #ffee77;
-}
-
-.theme-toggle .light
-{
-  display: none;
-}
-
 body.dark .theme-toggle .dark
 {
   display: none;
@@ -248,5 +458,37 @@ body.dark .theme-toggle .dark
 
 body.dark .theme-toggle .light
 {
-  display: block;
+  display: flex;
+}
+
+/* LEGALITY BAR */
+
+.legality-bar
+{
+  width: 100%;
+  padding: 20px;
+}
+
+.legality-bar a
+{
+  color: var(--text);
+}
+
+.legality-bar a:nth-child(2)
+{
+  float: right;
+}
+
+/* BACKGROUND */
+
+
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  object-fit: cover;
+  mix-blend-mode: multiply;
 }

@@ -17,39 +17,43 @@ body
   --dark-green: #335049;
   --sea-wave: #204050;
 
-  --text-primary: var(--dark-purple);
-  --text: var(--text-primary);
+  --primary: var(--very-dark-purple);
+  --secondary: var(--very-light-cyan);
+  --info: var(--purple);
 
-  --background: var(--very-light-cyan);
+  --text-primary: var(--primary);
+  --text: var(--text-primary);
+  --text-secondary: var(--secondary);
+  --text-info: var(--info);
+
+  --button-primary: var(--dark-purple);
+  --text-button-primary: var(--text-secondary);
+  --button-secondary: var(--dark-cyan);
+  --text-button-secondary: var(--text-primary);
+
+  --background: var(--secondary);
 
   --dropdown: var(--dark-purple);
-  --dropdown-text: var(--very-light-cyan);
+  --dropdown-text: var(--secondary);
 
 
   --content-d: var(--dark);
   --content-l: white;
-
-  --header-d: var(--dark);
-  --header-l: var(--cyan);
-
-  --footer-d: var(--dark);
-  --footer-l: var(--purple);
-
-  --navbar-d: var(--dark);
-  --navbar-l: var(--purple);
-
-  --button-d: var(--purple);
-  --button-l: var(--light);
-
-
-  --text-d: black;
-  --text-l: white;
-
-  --title-d: var(--purple);
-  --title-l: var(--cyan);
 }
 
 body.dark
 {
   --background: var(--sea-wave);
+  
+  --primary: var(--very-light-cyan);
+  --secondary: var(--very-dark-purple);
+
+  --info: var(--cyan);
+
+  --button-primary: var(--primary);
+  --text-button-primary: var(--dark-green);
+  --button-secondary: var(--dark-cyan);
+  --text-button-secondary: var(--text-primary);
+
+  --dropdown: var(--primary);
 }

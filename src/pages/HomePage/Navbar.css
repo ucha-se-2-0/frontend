@@ -1,19 +1,41 @@
 .navbar {
+  position:static;
+  flex-basis: 20%;
   display: flex;
   justify-content:flex-start;
+  align-items: flex-start;
   padding: 10px;
 }
 
+
 .logo {
-  width: 20vw;
+  width: calc(50px + 15vw);
   margin: 0 auto;
 }
 
-.navigation {
+.dark .logo.light,
+.logo
+{
+  display: block;
+}
+
+.dark .logo,
+.logo.light
+{
+  display: none;
+}
+
+.dropdown.navigation button {
   font-size: 30px;
-  justify-self: center;
-  flex-grow: 0;
-  flex-basis: 0;
+  flex-basis: 10%;
+  display: inline;
+  color: var(--button-primary);
+}
+
+
+.dropdown.navigation i,
+.dropdown.navigation button {
+  display: block;
 }
 
 .navigation .options {
@@ -22,7 +44,8 @@
 
 .theme-toggle
 {
-  margin-left: 0;
+  flex-basis: 10%;
+  justify-self: flex-end;
 }
 
 @media (max-width: 600px) {

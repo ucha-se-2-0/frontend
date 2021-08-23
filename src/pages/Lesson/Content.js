@@ -1,7 +1,6 @@
 import React from "react"
 import { Button, Video } from '../../Components'
 import { GetLesson } from '../../Assets'
-import { theme, colors } from '../../Style/Colors'
 
 var lesson = GetLesson(window.location.pathname);
 
@@ -25,7 +24,7 @@ class Comment extends React.Component {
             if (!this.props.reply) {
                 replies =
                     <div className="replies">
-                        <div className="collapse-replies" style={{ color: theme === "dark" ? colors.text.dark : colors.text.dark }}
+                        <div className="collapse-replies"
                             onClick={() => { this.setState({ repliesCollapsed: !this.state.repliesCollapsed }) }}>
                             {this.state.repliesCollapsed ?
                                 <><i className="fas fa-caret-down"></i>Покажи отговорите</> :
@@ -112,7 +111,7 @@ class Content extends React.Component {
 
     render() {
         return (
-            <div className="content" style={{ backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light }}>
+            <div className="content">
                 <Video src={"/julemy.mp4"} />
 
                 <span className="separator" />

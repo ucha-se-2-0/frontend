@@ -5,16 +5,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
-
 
 *
 {
+  box-sizing: border-box;
   font-family: 'Comfortaa';
-  user-select: none;
+}
+
+.button-content
+{
+  transition: color 0s, background-color 0s !important;
 }

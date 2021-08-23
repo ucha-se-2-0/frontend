@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import Navbar from './Navbar'
 import Content from './Content'
-import { Dropdown, DropdownElement } from '../../Components'
+import { Dropdown, DropdownElement, LegalityBar } from '../../Components'
 
 
 
@@ -15,13 +15,14 @@ function HomePage() {
     }, [])
 
     return (
-        <>
-            <img src="Images/vawes-unsLight.png" className="background" />
+        <div className = "page">
+            <img src="Images/Waves-unsLight.png" className="background" />
             <Navbar />
-
-            {/*<Content />
-            <Footer /> */}
-        </>
+            
+            <Content />
+            <LegalityBar />
+            {/*<Footer /> */}
+        </div>
     );
 }
 

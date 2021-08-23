@@ -1,0 +1,21 @@
+.dark .background.light,
+.background.dark
+{
+    display: none;
+}
+
+.dark .background.dark,
+.background.light
+{
+    display: block;
+}
+
+.page
+{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

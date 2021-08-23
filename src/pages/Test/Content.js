@@ -1,5 +1,4 @@
 import React from 'react'
-import { colors } from '../../Style/Colors';
 import { Button, Title } from '../../Components'
 import { GetNextLesson, GetLesson } from '../../Assets'
 
@@ -29,10 +28,10 @@ class Question extends React.Component {
         for (let i = 0; i < this.props.options.length; i++) {
             let checkboxStyle
             if (this.oneCorrectAnswer) {
-                checkboxStyle = { borderRadius: "50%", backgroundColor: this.state.selected === i ? colors.dark : "transparent" }
+                // checkboxStyle = { borderRadius: "50%", backgroundColor: this.state.selected === i ? colors.dark : "transparent" }
             }
             else {
-                checkboxStyle = { borderRadius: "2px", backgroundColor: this.state.selected[i] ? colors.dark : "transparent" }
+                // checkboxStyle = { borderRadius: "2px", backgroundColor: this.state.selected[i] ? colors.dark : "transparent" }
             }
 
             let optionBackground = null

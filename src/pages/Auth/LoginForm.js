@@ -1,9 +1,48 @@
-import React from "react"
-import {Button} from '../../Components'
-function Content(){
+import React, { useState } from "react"
+import { Button, Input, Link } from '../../Components'
+
+
+
+
+function Form() {
+    let [email, setEmail] = useState("");
+    let [password, setPassword] = useState("");
+
+    function Login() {
+
+    }
+
     return (
-        <div className="content">
-            <div className="main">
+        <div className="form">
+            <Link className="home" link = "/">
+                <img alt = "logo light" src="Images/LogoPurple.png" />
+                <img alt = "logo light" src="Images/LogoLightCyan.png" className="light" />
+            </Link>
+
+            <div className = "title">
+                Вход
+            </div>
+
+            <Input
+                placeholder="Имейл или потребителско име"
+                icon={<i className="material-icons">email</i>}
+            />
+
+            <Input
+                placeholder="Парола"
+                icon={<i className="material-icons">vpn_key</i>}
+                password
+            />
+
+            <Input checkbox fontSize = "15px" label = "Запомни ме"/>
+
+            <Button className = "submit" name="Вход" onClick={Login} />
+
+            <div className = "redirect">
+                Още нямате акаунт? <Button secondary name = "Регистрация" link = "/signup"/>
+            </div>
+
+            {/* <div className="main">
                 <form className="MyForm" action="" method="click">
                     <div className="user_box">
                         <input name="username" type="text" placeholder="имейл или потребителско име"></input>
@@ -33,7 +72,7 @@ function Content(){
                     <h4 className="register_text">Все още нямате акаунт?</h4>
                     <div className="link_contain"><a href="/">Регистрирай се!</a></div>
                 </div>
-            </div>
+            </div> */}
 
         </div>
 
@@ -44,7 +83,7 @@ var submit;
 const getData = () => {
     console.log("dadlad");
     const xhr = new XMLHttpRequest();
-    xhr.open("POST","http://localhost:3000/Login");
+    xhr.open("POST", "http://localhost:3000/Login");
 
     xhr.onload = () => {
         console.log(xhr.response);
@@ -53,4 +92,4 @@ const getData = () => {
 };
 
 
-export default Content;
+export default Form;

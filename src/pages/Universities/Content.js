@@ -47,10 +47,10 @@ function UniContent()
 function Content()
 {
     return(
-        <Router>
+        <>
             <Route path = "/universities" exact component = {UnisNavContent}/>
             <Route path = "/universities/*" exact component = {UniContent} />
-        </Router>
+        </>
     )
 }
 
