@@ -18,7 +18,7 @@ export default function Navbar() {
                 <img src="Images/LogoPurple.png" className="dark" />
                 <img src="Images/LogoCyan.png" className="light" />
             </Link>
-            <SearchField />
+            <SearchField placeholder = "Потърси урок" width = "80%"/>
             <Menu />
         </div>
     );

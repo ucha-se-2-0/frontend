@@ -10,7 +10,7 @@ function Link(props) {
   let context = useContext(UrlContext)
 
   return (
-    <div className = {"link" + (props.className ? " " + props.className : "")} onClick={e => {
+    <div className={"link" + (props.className ? " " + props.className : "")} onClick={e => {
       props.onClick && props.onClick(e);
       context.Redirect(props.link)
     }}>
@@ -50,8 +50,7 @@ function Input(props) {
   let ref = createRef()
 
   useEffect(() => {
-    if(props.fontSize)
-    {
+    if (props.fontSize) {
       ref.current.style.setProperty("--font-size", props.fontSize);
     }
   })
@@ -130,13 +129,13 @@ function Dropdown(props) {
   )
 }
 
-
+export const ThemeContext = createContext(null);
 function ThemeToggle() {
   let context = useContext(ThemeContext);
   let [rot, setRot] = useState(0);
 
   return (
-    <div style = {{transform: `rotateZ(${rot}deg)`}} className="theme-toggle" onClick = {()=>{setRot(rot + 180)}}>
+    <div style={{ transform: `rotateZ(${rot}deg)` }} className="theme-toggle" onClick={() => { setRot(rot + 180) }}>
       <div className="dark" onClick={context.ToggleTheme}>
         <i className="fas fa-moon" />
       </div>
@@ -145,92 +144,74 @@ function ThemeToggle() {
   )
 }
 
-export const ThemeContext = createContext(null);
+
+function SearchField(props) {
+  let [expanded, Expand] = useState(false);
+  let [keepExpanded, KeepExpanded] = useState(false);
+  let [searchRequest, SetSearchRequest] = useState("");
 
 
-export const UrlContext = createContext(window.location.pathname);
+  useEffect(() => {
+    document.addEventListener("click", ()=>{
+      KeepExpanded(false);
+      Expand(false);
+      SetSearchRequest("");
+    })
+  }, [])
 
-
-class SearchField extends Component {
-  constructor(props) {
-    super(props);
-    this.margin = this.props.margin ? this.props.margin : "10px"
-    this.stateWhenCollapsed = {
-      collapsed: true,
-      searchResult: <></>,
-      style: {
-        buttonBackground: { backgroundColor: "transparent" },
-        input: { visibility: "hidden", backgroundColor: "transperent" },
-        search: { width: "0%", borderColor: "transparent" }
-      }
-    }
-    this.state = this.stateWhenCollapsed;
-
-    this.searchRequest = ""
+  function OnHover()
+  {
+    Expand(true);
   }
 
-  componentDidMount() {
-    window.addEventListener('click', () => {
-      if (this.clickHandled) {
-        this.clickHandled = false
-      }
-      else {
-        this.Collapse()
-      }
-    });
-  }
-
-  render() {
-    return (
-      <>
-        <div className="search button" style={this.state.style.search} onClick={() => {
-          this.clickHandled = true
-          this.Expand()
-        }}>
-          <div className="button-content">
-            <i className="fa fa-search" onClick={() => {
-              if (!this.state.collapsed)
-                this.Search()
-            }}></i>
-
-            <input type="text" placeholder={this.props.placeholder} onKeyUp={event => {
-              if (event.key === "Enter")
-                this.Search();
-
-              this.searchRequest = event.target.value
-            }
-            } style={this.state.style.input} />
-          </div>
-          <div className="button-background" style={this.state.style.buttonBackground} />
-        </div>
-        {this.state.searchResult}
-      </>
-    );
-  }
-
-  Expand() {
-    if (this.state.collapsed) {
-      this.setState({
-        collapsed: false,
-        style: {
-          input: { visibility: "visible" },
-          search: {
-            width: this.props.width ? this.props.width : "calc(100% - 20px)",
-            marginLeft: this.margin,
-            borderColor: "white"
-          }
-        }
-      });
+  function OnMouseLeave()
+  {
+    if(!keepExpanded)
+    {
+      Expand(false);
     }
   }
 
-  Collapse() {
+  function OnClick(e)
+  {
+    Expand(true);
+    KeepExpanded(true);
+    e.stopPropagation();
+  }
+
+
+
+  return (
+    <div className = {"search" + (searchRequest ? "" : " empty") + (expanded ? " expanded" : "")} onMouseEnter = {OnHover} onMouseLeave = {OnMouseLeave} onClick = {OnClick} style = {{width: expanded ? props.width : "0px"}}>
+      <i className = "fas fa-search"/>
+      <input placeholder = {props.placeholder} value = {searchRequest} onInput = {e => {SetSearchRequest(e.target.value)}}/>
+      <i className = "fas fa-plus" onClick = {() => {SetSearchRequest("")}}/>
+    </div>
+  );
+
+  // function Expand() {
+  //   if (this.state.collapsed) {
+  //     this.setState({
+  //       collapsed: false,
+  //       style: {
+  //         input: { visibility: "visible" },
+  //         search: {
+  //           width: this.props.width ? this.props.width : "calc(100% - 20px)",
+  //           marginLeft: this.margin,
+  //           borderColor: "white"
+  //         }
+  //       }
+  //     });
+  //   }
+  // }
+
+  function Collapse() {
     if (!this.state.collapsed) {
       this.setState(this.stateWhenCollapsed);
     }
   }
 
-  Search() {
+  function Search() {
     this.setState({ searchResult: this.props.search(this.searchRequest) })
     this.Collapse()
   }
@@ -303,6 +284,9 @@ function Video(props) {
       <VideoPlayer {...props} className="vjs-fluid" />
     </div>)
 }
+
+
+export const UrlContext = createContext(window.location.pathname);
 
 export {
   Link,

@@ -9,7 +9,7 @@
     transition: all 0.5s;
 }
 
-.home {
+.auth-page .home {
     padding: 10px;
     box-sizing: border-box;
     width: auto;
@@ -21,7 +21,7 @@
     transition: all 0.35s;
 }
 
-.home img {
+.auth-page .home img {
     width: 70px;
 }
 

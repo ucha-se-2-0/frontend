@@ -10,7 +10,7 @@ function Auth(props) {
     }, [])
 
     return (
-        <div className = "page">
+        <div className = "page auth-page">
             <img alt = "background light" src="Images/Waves.png" className="background light" />
             <img alt = "background light" src="Images/WavesDarkBlue.png" className="background dark" />
 

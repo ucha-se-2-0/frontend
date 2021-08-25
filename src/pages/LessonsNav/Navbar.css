@@ -3,8 +3,7 @@
     flex-basis: 20%;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
-    padding: 10px;
+    align-items: center;
 }
 
 .lessons-page .home {
