@@ -6,7 +6,6 @@
     align-items: center;
     justify-content: start;
     margin: auto;
-
     transition: all 0.5s;
 }
 
@@ -35,48 +34,47 @@
 }
 
 .form .title {
+    display: none;
     color: var(--primary);
     font-size: 30px;
     margin: auto 0;
 }
 
 .form .input {
-    height: 60px;
     width: 90%;
-    font-size: calc(10px + 1vw);
+    --font-size: calc(10px + 0.5vw);
     color: var(--text);
 }
 
-.form .checkbox
-{
-    margin-top: 30px;
-    margin-left: 10px;
-    margin-bottom: 30px;
+.form .checkbox {
+    height: auto;
+    margin: 10% 0 1% 10px;
 }
 
 .form .submit {
-    padding: 10px 30px;
+    padding: calc(20px - 1vw) calc(50px - 2vw);
     margin: auto 0;
     background-color: var(--primary);
-    color: var(--faded-primary)
+    border-radius: calc(25px - 1.5vw);
 }
 
 .redirect {
     margin-bottom: 10px;
-    margin-top: 30px;
+    margin-top: 5%;
     color: var(--primary);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
+    text-align: center;
 }
 
 .redirect .button {
     margin-left: 0px;
     margin-top: 10px;
-    background-color: var(--secondary);
-    color: var(--primary);
+    background-color: var(--hidden);
+    color: var(--very-dark-purple);
     padding: 5px 10px;
 }
 
@@ -84,15 +82,12 @@
     .redirect {
         flex-direction: row;
     }
-
     .redirect .button {
         margin-left: 20px;
         margin-top: 0;
     }
-    
     .form .input {
         width: 80%;
-        font-size: 15px;
     }
 }
 
@@ -105,103 +100,23 @@
         box-shadow: 5px 0 30px 0px black;
         margin: auto;
     }
-
-    .dark .form
-    {
-        /* box-shadow: 0 0 0 2px var(--very-light-cyan); */
+    .dark .form {
+        box-shadow: 0 0 0 2px var(--very-light-cyan);
     }
-
-    .form .title
-    {
-        margin: 0 0 30px;
+    .form .title {
+        margin: 30px 0 50px;
     }
-
     .form .input {
         width: 80%;
-        height: 55px;
     }
 }
 
-/*
-
-*{
-    text-align:center;
+@media screen and (min-height: 400px) {
+    .form .title {
+        display: block;
+    }
+    .form .checkbox {
+        /* margin-top: 30px;
+        margin-bottom: 30px; */
+    }
 }
-.content{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 50%;
-    margin:10px 100px 100px 350px;
-    box-shadow: none;
-    align-self: center;
-}
-.register{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding:10px;
-    width: 100%;
-    margin:20px 95px 10px 15px;
-    box-shadow: 0px 10px 50px 0px #555555;
-}
-.register_text{
-    font-size:large;
-
-}
-.main{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding:10px;
-    margin:100px 440px 10px 360px;
-    box-shadow: 0px 10px 50px 0px #555555;
-}
-.user_box{
-    margin:10px 50px 5px 50px;
-    width: 75%;
-
-}
-.inside{
-    margin:10px 0px 0px 0px;
-    width:10%;
-    text-align:center;
-}
-.separate{
-    margin:35px 0px 0px 0px;
-    width: 33%;
-    height: 1px;
-    padding:1px;
-    background-color: black;
-    border:0.05em solid black;
-}
-input[type="text"],[type="password"]{
-    height: 40px;
-    width: 100%;
-    text-align: center;
-    font-size:medium;
-}
-.button_box{
-    margin:20px 180px 5px 80px;
-}
-.enter_button{
-    margin:5px 100px 0px 40px;
-    height: 45px;
-    width: 100%;
-    font-size:large;
-    font-weight: 600;
-}
-.link_contain{
-    width: 100%;
-    margin-top:10px;
-    margin-left:10px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-a:link,a:visited{
-    color:var(--darkcyan);
-}
-
-/* a:hover{
-    color:var(--darkpurple);
-} */

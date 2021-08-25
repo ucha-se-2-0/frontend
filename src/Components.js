@@ -50,7 +50,10 @@ function Input(props) {
   let ref = createRef()
 
   useEffect(() => {
-    ref.current.style.setProperty("--font-size", props.fontSize);
+    if(props.fontSize)
+    {
+      ref.current.style.setProperty("--font-size", props.fontSize);
+    }
   })
 
   let showOrHide = null;
@@ -115,7 +118,7 @@ function Dropdown(props) {
   })
 
   return (
-    <div className={"dropdown" + (props.className ? " " + props.className : "")}>
+    <div className={"dropdown" + (props.right ? " right" : "") + (props.className ? " " + props.className : "")}>
       <button>{props.name}</button>
       <div className="options-wrapper" style={{ paddingTop: props.offset + "px" }}>
         <div className="options">
@@ -130,7 +133,7 @@ function Dropdown(props) {
 
 function ThemeToggle() {
   let context = useContext(ThemeContext);
-  let [rot, setRot] = useState(180);
+  let [rot, setRot] = useState(0);
 
   return (
     <div style = {{transform: `rotateZ(${rot}deg)`}} className="theme-toggle" onClick = {()=>{setRot(rot + 180)}}>
@@ -158,7 +161,7 @@ class SearchField extends Component {
       style: {
         buttonBackground: { backgroundColor: "transparent" },
         input: { visibility: "hidden", backgroundColor: "transperent" },
-        search: { width: "0%", marginLeft: this.margin, borderColor: "transparent" }
+        search: { width: "0%", borderColor: "transparent" }
       }
     }
     this.state = this.stateWhenCollapsed;

@@ -13,8 +13,8 @@
   cursor: pointer;
   text-decoration: none !important;
 
-  background-color: var(--primary);
-  color: var(--faded-primary);
+  background-color: var(--button-primary);
+  color: var(--text-button-primary);
 
   transition: color 1s, background-color 1s !important;
 }
@@ -27,8 +27,8 @@
 
 .button.secondary
 {
-  background-color: var(--secondary);
-  color: var(--primary);
+  background-color: var(--button-secondary);
+  color: var(--text-button-secondary);
 }
 
 .button * {
@@ -64,7 +64,10 @@
   display: inline-block;
   position: relative;
   overflow: hidden;
-  height: 4em;
+  --font-size: 10px;
+  font-size: var(--font-size);
+  height: calc(4 * var(--font-size));
+
 }
 
 .input.rounded input
@@ -74,18 +77,21 @@
 
 .input input
 {
+  box-sizing: border-box;
   width: 100%;
-  height: calc(100% - 1em - 10px);
+  height: calc(100% - calc(var(--font-size) * 1.5));
   padding-left: calc(2em + 15px);
-  margin-top: calc(1em + 10px);
+  margin-top: calc(var(--font-size) * 1.5);
   outline: none;
   border: 1px solid var(--primary);
   border-radius: 10px;
+
   background-color: transparent;
   color: var(--text-primary);
-  box-sizing: border-box;
-
+  
+  font-size: var(--font-size);
   text-align: start;
+
   
   transition: margin-top 0.5s, height 0.5s;
 }
@@ -137,7 +143,6 @@
 
 .input.checkbox input
 {
-  font-size: var(--font-size);
   width: 1em;
   height: 1em;
   opacity: 0;
@@ -188,8 +193,8 @@
   position: absolute;
   display: inline;
   left: 0.5em;
-  font-size: 1.5em;
-  top: calc(50% + 3px - 0.1em);
+  font-size: calc(1.5 * var(--font-size));
+  top: calc(var(--font-size) * 2.75 - 0.5em);
   transition: top 0.5s;
 
   color: var(--primary);
@@ -199,7 +204,6 @@
 {
   right: 0.4em;
   left: auto;
-  top: calc(50% + 5px - 0.2em);
   font-size: 20px;
   z-index: 1;
 }
@@ -212,7 +216,7 @@
 .input .input-label
 {
   position: absolute;
-  top: calc(50% + 5px - 0.05em);
+  top: calc(var(--font-size) * 2.75 - 0.5em);
   left: 1em;
   width: calc(100% - 1em);
   pointer-events: none;
@@ -252,11 +256,9 @@
 /* SEARCH FIELD */
 
 .button.search {
-  position: absolute;
   display: inline-block;
   overflow: hidden;
   min-width: 40px;
-  top: 12px;
   border: 1px solid white;
   transition: border-color 0.5s, width 0.5s;
   left: 0px;
@@ -349,15 +351,11 @@
 /* TITLE */
 
 .content-title {
-  width: 100%;
   padding: 0px;
   margin: 10px 0;
   text-align: center;
   line-height: normal;
-  color: var(--text-d);
-}
-
-.content-title:not(.content-subtitle) {
+  color: var(--secondary);
   font-size: calc(45px + 3vw);
 }
 
@@ -379,7 +377,7 @@
   border: none;
   outline: none;
   background-color: transparent;
-  color: var(--text-primary);
+  color: var(--primary);
 }
 
 .dropdown .options-wrapper {
@@ -387,6 +385,12 @@
   position: absolute;
   top: auto;
   left: 0;
+}
+
+.dropdown.right .options-wrapper {
+  right: 0;
+  left: auto;
+  text-align: right;
 }
 
 .dropdown .options
@@ -403,11 +407,10 @@
 }
 
 .dropdown .options>* {
-  color: var(--faded-primary);
+  color: var(--text-dropdown);
   cursor: pointer;
   padding: 10px;
   margin: 0 10px;
-  display: inline-block;
 }
 
 /* VIDEO */
@@ -448,12 +451,12 @@
 
   left: 1em;
 
-  opacity: 0;
+  opacity: 1;
 }
 
 .theme-toggle .light
 {
-  opacity: 1;
+  opacity: 0;
   color: #ffee77;
   left: 0;
 }
@@ -461,7 +464,7 @@
 .theme-toggle .dark,
 .theme-toggle .light
 {
-  transition: all 0.5s;
+  transition: opacity 0.5s;
   position: absolute;
   top: 0;
   width: 1em;
@@ -477,12 +480,12 @@
 
 body.dark .theme-toggle .dark
 {
-  opacity: 1;
+  opacity: 0;
 }
 
 body.dark .theme-toggle .light
 {
-  opacity: 0;
+  opacity: 1;
 }
 
 /* LEGALITY BAR */
@@ -496,7 +499,7 @@ body.dark .theme-toggle .light
 .legality-bar .link
 {
   display: inline;
-  color: var(--primary);
+  color: var(--secondary);
 }
 
 .legality-bar .link:nth-child(2)

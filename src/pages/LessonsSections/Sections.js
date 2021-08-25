@@ -4,7 +4,6 @@ import Content from './Content'
 import { Navbar as Navbar, Header, SearchField, Footer } from '../../Components'
 
 import './Content.css'
-import './Navbar.css'
 
 class Sections extends React.Component {
     render() {

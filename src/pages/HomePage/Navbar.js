@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
-import { Button, SearchField, Dropdown, DropdownElement, ThemeContext, ThemeToggle } from '../../Components'
+import { Dropdown, ThemeToggle } from '../../Components'
 
 
 function Menu() {
   return (
-    <Dropdown offset = {20} className="navigation" name={<i className ="fas fa-bars" />} options={[
+    <Dropdown offset={20} className="navigation" name={<i className="fas fa-bars" />} options={[
       { name: "Вход", link: "/login" },
       { name: "Регистрация", link: "/signup" },
       { name: "Уроци", link: "/lessons" }
@@ -14,14 +13,16 @@ function Menu() {
 }
 
 function Navbar() {
-    return (
-      <div className = "navbar">
-        <Menu />
-        <img src="Images/GradientLogo.png" className="logo" />
-        <img src="Images/GradientLogoLight.png" className="logo light" />
+  return (
+    <div className="navbar">
+      <Menu />
+      <img src="Images/GradientLogo.png" className="logo" />
+      <img src="Images/GradientLogoLight.png" className="logo light" />
+      <div className="theme-toggle-wrapper">
         <ThemeToggle />
       </div>
-    );
+    </div>
+  );
 }
 
 export default Navbar;

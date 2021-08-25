@@ -1,18 +1,26 @@
 import { GetSection } from "../../Assets";
-import { Navbar as Navbar, Header, Footer } from "../../Components";
+import { Footer } from "../../Components";
+import Navbar from "./Navbar";
 import Content from './Content'
+import { useEffect } from "react";
 
-var section = GetSection(window.location.pathname.slice("/lessons/sections/".length))
+// var section = GetSection(window.location.pathname.slice("/lessons/sections/".length))
 
 
 function LessonsNav() {
+    useEffect(()=>{
+        import("./Navbar.css");
+        import("./LessonsNav.css");
+        import("./Content.css");
+    }, [])
+
     return (
-        <>
+        <div className = "page lessons-page">
             <Navbar />
-            <Header content = {section.sectionName} />
+            <div className = "header">Уроци</div>
             <Content />
-            <Footer />
-        </>
+            {/* <Footer /> */}
+        </div>
     )
 }
 

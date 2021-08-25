@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage/HomePage'
 import Universities from './pages/Universities/Universities'
 import Sections from './pages/LessonsSections/Sections'
 import LessonsNav from './pages/LessonsNav/LessonsNav'
-import Lesson from './pages/Lesson/Lesson'
+// import Lesson from './pages/Lesson/Lesson'
 import { Login, Signup } from './pages/Auth/Auth'
 import Test from './pages/Test/Test'
 
@@ -14,6 +14,7 @@ import './Style/Navbar.css'
 import './Style/Header.css'
 import './Style/Content.css'
 import './Style/Components.css'
+import './Style/Page.css'
 
 import './Style/Index.css'
 import { ThemeContext, UrlContext } from './Components';
@@ -63,10 +64,10 @@ export default function App() {
             <Switch>
               <Route path="/" exact component={HomePage} />
               <Route path="/universities" component={Universities} />
-              <Route path="/lessons/sections/*" exact component={LessonsNav} />
-              <Route path="/lessons/sections" exact> <Redirect to="/lessons" /> </Route>
-              <Route path="/lessons/" exact component={Sections} />
-              <Route path="/lessons/*" exact component={Lesson} />
+              {/* <Route path="/lessons/sections/*" exact component={LessonsNav} />
+              <Route path="/lessons/sections" exact> <Redirect to="/lessons" /> </Route> */}
+              <Route path="/lessons" exact component={LessonsNav} />
+              {/* <Route path="/lessons/*" exact component={Lesson} /> */}
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
               <Route path="/tests/*" component={() => <Redirect to={{ pathname: "/login" }} />} />

@@ -5,7 +5,7 @@ function Content() {
     return (
         <div className="content">
             <Button bold secondary name = "Университети"/>
-            <Button bold primary name = "Уроци"/>
+            <Button bold name = "Уроци"/>
         </div>
     );
 }

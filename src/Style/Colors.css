@@ -24,29 +24,22 @@ body
 
   /* From most to least contrasted */
   --primary: var(--very-dark-purple);
-  --secondary: var(--dark-cyan);
-  --faded-primary: var(--background);
-  --faded-secondary: var(--light-purple);
+  --secondary: var(--dark-purple);
+  --hidden: var(--light-cyan);
 
   --text-primary: var(--primary);
-  --text-primary-1: var(--primary-1);
-  --text-primary-2: var(--primary-2);
-  --text-secondary-2: var(--secondary-2);
-  --text-secondary-1: var(--secondary-1);
   --text-secondary: var(--secondary);
 
+
   --button-primary: var(--dark-purple);
-  --text-button-primary: var(--text-secondary);
+  --text-button-primary: var(--very-light-cyan);
+
   --button-secondary: var(--dark-cyan);
   --text-button-secondary: var(--text-primary);
 
 
-  --dropdown: var(--dark-purple);
-  --dropdown-text: var(--secondary);
-
-
-  --content-d: var(--dark);
-  --content-l: white;
+  --dropdown: var(--secondary);
+  --text-dropdown: var(--light-cyan);
 }
 
 body.dark
@@ -55,14 +48,20 @@ body.dark
 
   --primary: var(--very-light-cyan);
   --secondary: var(--dark-cyan);
+  --hidden: var(--dark-cyan);
+
   /* --faded-primary: var(--very-light-cyan); */
   --faded-secondary: var(--light-purple);
   /* --secondary: var(--very-dark-purple); */
 
+
   --button-primary: var(--primary);
   --text-button-primary: var(--dark-green);
+
   --button-secondary: var(--dark-cyan);
   --text-button-secondary: var(--text-primary);
 
-  --dropdown: var(--primary);
+
+  --dropdown: var(--light-cyan);
+  --text-dropdown: var(--dark-blue);
 }

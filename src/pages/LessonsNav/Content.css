@@ -1,0 +1,103 @@
+.lessons-page .background
+{
+    background-color: var(--background);
+    z-index: -1000;
+    margin: 0;
+}
+
+.lessons-navigation
+{
+    width: 100%;
+    font-size: 18px;
+    color: var(--primary);
+}
+
+.lessons-page .circle
+{
+    position: relative;
+    margin-right: 10px;
+    color: var(--secondary);
+    transition: transform 0.5s;
+}
+
+.lessons-page .arrow
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: inline-block;
+    height: 1em;
+}
+
+.lessons-page .content-subtitle
+{
+    text-align: left;
+    font-size: calc(10px + 3vw);
+    margin: 3vw 0 2vw 0;
+}
+
+.lessons-page .up
+{
+    transform: rotateZ(-90deg);
+}
+
+.lessons-page .arrow i{
+    display: block;
+    position: relative;
+    /* So stupid */
+    --scale: 0.7;
+    font-size: calc(1em * var(--scale));
+    left: -50%;
+    top: calc(-50% * var(--scale));
+    
+}
+
+.lessons-page .section
+{
+    border: 1px var(--primary) solid;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.lessons-page .section .content-wrapper
+{
+    transition: height 0.5s;
+}
+
+.lessons-page .section .content-wrapper>div
+{
+    margin-top: 10px;
+}
+
+.lessons-page .lessons-navigation>.section
+{
+    margin-left: 0;
+}
+
+.lessons-page .section>*
+{
+    overflow: hidden;
+}
+
+.lessons-page .section-button,
+.lessons-page .section .button
+{
+    cursor: pointer;
+    padding: 7px 10px;
+}
+
+
+.lessons-page .section,
+.lessons-page .section .button
+{
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.lessons-page .section input
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}

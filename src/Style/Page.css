@@ -1,0 +1,9 @@
+.page
+{
+    pointer-events: none;
+}
+
+.page *
+{
+    pointer-events: all;
+}

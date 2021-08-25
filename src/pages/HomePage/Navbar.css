@@ -40,3 +40,14 @@
 .home-page .navigation .options {
   font-size: 20px;
 }
+
+.home-page .navigation,
+.home-page .theme-toggle-wrapper
+{
+  flex-basis: 20%;
+}
+
+.home-page .theme-toggle
+{
+  float: right;
+}
