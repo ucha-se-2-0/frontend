@@ -14,7 +14,12 @@ body {
   font-family: 'Comfortaa';
 }
 
-.button-content
+#root
+{
+  /* min-height: 100vh; */
+}
+
+/* .button-content
 {
   transition: color 0s, background-color 0s !important;
-}
+} */

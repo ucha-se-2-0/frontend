@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {Footer, Navbar as Navbar, Header} from '../../Components'
+import {Footer, Header} from '../../Components'
 import { GetLesson } from '../../Assets';
 
 import {Content} from './Content' 
@@ -12,7 +12,6 @@ function Test()
     
     return(
         <>
-            <Navbar/>
             <Header content = {"Тест по тема \"" + GetLesson(window.location.pathname).title + '"'}/>
             <Content />
             <Footer/>

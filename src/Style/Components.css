@@ -67,7 +67,9 @@
   --font-size: 10px;
   font-size: var(--font-size);
   height: calc(4 * var(--font-size));
+  min-height: calc(4 * var(--font-size));
 
+  z-index: 0;
 }
 
 .input.rounded input
@@ -79,7 +81,7 @@
 {
   box-sizing: border-box;
   width: 100%;
-  height: calc(100% - calc(var(--font-size) * 1.5));
+  height: calc(var(--font-size) * 2.5);
   padding-left: calc(2em + 15px);
   margin-top: calc(var(--font-size) * 1.5);
   outline: none;
@@ -92,14 +94,16 @@
   font-size: var(--font-size);
   text-align: start;
 
+  z-index: 1;
+
   
   transition: margin-top 0.5s, height 0.5s;
 }
 
 .input.checkbox
 {
+  min-height: 1em;
   --font-size: 40px;
-  font-size: 0;
   width: auto;
   height: auto;
 }
@@ -114,6 +118,7 @@
 .input.checkbox .box
 {
   position: absolute;
+  z-index: -1;
   background-color: transparent;
   color: transparent;
   border: 1px solid var(--primary);
@@ -279,11 +284,13 @@
 {
   color: var(--secondary);
   font-size: 0.7em;
+  cursor: pointer;
 }
 
 .search.empty .fa-plus
 {
   opacity: 0;
+  display: none;
 }
 
 .search .fa-plus
@@ -296,7 +303,7 @@
   display: inline-block;
 
   height: 100%;
-  width: calc(100% - 0.7em - 20px);
+  width: 100%;
   padding: 0;
   padding-left: 10px;
   outline: none;
@@ -320,6 +327,7 @@
 .search input::-ms-input-placeholder {
   color: var(--primary);
 }
+
 
 /*FOOTER*/
 
@@ -360,6 +368,24 @@
   border-bottom-right-radius: 15px;
   border-top-left-radius: 15px;
 } */
+
+.navbar {
+  display: flex;
+  justify-content:flex-start;
+  align-items: center;
+}
+
+.dark .navbar .logo.light,
+.navbar .logo
+{
+  display: block;
+}
+
+.dark .navbar .logo,
+.navbar .logo.light
+{
+  display: none;
+}
 
 /* TITLE */
 

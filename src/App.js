@@ -4,7 +4,6 @@ import { useState } from "react"
 
 import HomePage from './pages/HomePage/HomePage'
 import Universities from './pages/Universities/Universities'
-import Sections from './pages/LessonsSections/Sections'
 import LessonsNav from './pages/LessonsNav/LessonsNav'
 // import Lesson from './pages/Lesson/Lesson'
 import { Login, Signup } from './pages/Auth/Auth'

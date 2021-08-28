@@ -37,6 +37,7 @@ body
   --button-secondary: var(--dark-cyan);
   --text-button-secondary: var(--text-primary);
 
+  --important: var(--dark-blue);
 
   --dropdown: var(--secondary);
   --text-dropdown: var(--light-cyan);
@@ -61,6 +62,7 @@ body.dark
   --button-secondary: var(--dark-cyan);
   --text-button-secondary: var(--text-primary);
 
+  --important: var(--primary);
 
   --dropdown: var(--light-cyan);
   --text-dropdown: var(--dark-blue);

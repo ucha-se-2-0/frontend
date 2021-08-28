@@ -1,3 +1,9 @@
+
+.lessons-page .content
+{
+    margin: 0;
+}
+
 .lessons-page .background
 {
     background-color: var(--background);
@@ -8,7 +14,7 @@
 .lessons-navigation
 {
     width: 100%;
-    font-size: 18px;
+    font-size: calc(12px + 0.5vw);
     color: var(--primary);
 }
 
@@ -32,8 +38,9 @@
 .lessons-page .content-subtitle
 {
     text-align: left;
-    font-size: calc(10px + 3vw);
-    margin: 3vw 0 2vw 0;
+    font-size: calc(18px + 1vw);
+    font-weight: bold;
+    margin: calc(20px + 1vw) 0;
 }
 
 .lessons-page .up
@@ -56,7 +63,7 @@
 {
     border: 1px var(--primary) solid;
     border-radius: 10px;
-    padding: 0 10px;
+    padding: 0 5px;
 }
 
 .lessons-page .section .content-wrapper
@@ -83,7 +90,7 @@
 .lessons-page .section .button
 {
     cursor: pointer;
-    padding: 7px 10px;
+    padding: 7px 1vw;
 }
 
 
@@ -91,7 +98,7 @@
 .lessons-page .section .button
 {
     margin-bottom: 20px;
-    margin-left: 20px;
+    margin-left: calc(5px + 2vw);
 }
 
 .lessons-page .section input

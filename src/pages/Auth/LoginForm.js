@@ -34,7 +34,7 @@ function Form() {
                 password
             />
 
-            <Input checkbox fontSize = "15px" label = "Запомни ме"/>
+            <Input checkbox fontSize = "calc(18px - 0.3vw)" label = "Запомни ме"/>
 
             <Button className = "submit" name="Вход" onClick={Login} />
 

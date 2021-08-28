@@ -6,11 +6,14 @@
     align-items: center;
     justify-content: start;
     margin: auto;
+    margin-top: 10%;
     transition: all 0.5s;
 }
 
 .auth-page .home {
-    padding: 10px;
+    display: none;
+    min-height: 60px;
+    padding: 1vh;
     box-sizing: border-box;
     width: auto;
     margin-right: auto;
@@ -18,11 +21,13 @@
     z-index: 10;
     border-bottom-left-radius: 15px;
     border-top-right-radius: 15px;
-    transition: all 0.35s;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .auth-page .home img {
-    width: 70px;
+    width: 50px;
 }
 
 .dark .home .light, .home img {
@@ -42,13 +47,13 @@
 
 .form .input {
     width: 90%;
-    --font-size: calc(10px + 0.5vw);
+    --font-size: calc(15px + 0vw);
     color: var(--text);
+    margin: 0;
 }
 
 .form .checkbox {
-    height: auto;
-    margin: 10% 0 1% 10px;
+    height: 1em
 }
 
 .form .submit {
@@ -59,8 +64,6 @@
 }
 
 .redirect {
-    margin-bottom: 10px;
-    margin-top: 5%;
     color: var(--primary);
     display: flex;
     justify-content: center;
@@ -109,14 +112,45 @@
     .form .input {
         width: 80%;
     }
+
+    .auth-page .home
+    {
+        position: static;
+    }
 }
 
+
+
 @media screen and (min-height: 400px) {
+
+    .form
+    {
+        margin-top: 0;
+    }
+
+    .auth-page .home
+    {
+        display: block;
+    }
+
     .form .title {
         display: block;
     }
+
+    .redirect {
+        margin-bottom: 10px;
+        margin-top: 5%;
+    }
+
     .form .checkbox {
-        /* margin-top: 30px;
-        margin-bottom: 30px; */
+        height: auto;
+        /* margin: 10% 0 1% 10px; */
+    }
+}
+
+@media screen and (min-height: 100px) {
+    .form .input
+    {
+        margin: 10px 0;
     }
 }

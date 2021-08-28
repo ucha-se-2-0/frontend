@@ -59,30 +59,36 @@ function Input(props) {
 
   let label = props.placeholder;
   let icon = props.icon;
-  let checkbox = null;
+  let checkbox = props.checkbox;
 
-  if (props.checkbox) {
+  if (checkbox) {
     label = props.label;
     icon = null;
   }
 
   if (props.password && !props.hidden) {
-    showOrHide = <i className={"show-or-hide fas fa-eye" + (hidden ? "" : "-slash")} onClick={Hide.bind(null, !hidden)} />
+    showOrHide = <i className={"show-or-hide fas fa-eye" + (hidden ? "" : "-slash")} onClick={e => {
+      e.preventDefault();
+      e.stopPropagation();
+      Hide(!hidden);
+    }} />
   }
+
 
   return (
     <div ref={ref} className={"input" + (empty ? " empty" : "")
       + (props.sharpCorners ? "" : " rounded")
       + (props.fog ? " fog" : "")
-      + (props.checkbox ? " checkbox" : "")}
+      + (checkbox ? " checkbox" : "")}
       style={{ width: props.width }}>
 
-      <input type={(props.password && hidden) ? "password" : (props.checkbox ? "checkbox" : "")} onChange={e => {
+      <input type={(props.password && hidden) ? "password" : (checkbox ? "checkbox" : "")} onChange={e => {
+        console.log(1);
         props.onInput && props.onInput(e);
         IsEmpty(!(e.target.value));
       }} />
 
-      {props.checkbox &&
+      {checkbox &&
         <div className="box">
           <i className="fa fa-check" />
         </div>
@@ -144,77 +150,82 @@ function ThemeToggle() {
   )
 }
 
+function DefaultSearchResultsDisplayer(props) {
+  return (
+    <div className="window">
+
+    </div>
+  )
+}
+
+function Search(request, constrictions) {
+  let results = [];
+
+  if (!constrictions.lessons) {
+
+  }
+
+  return results;
+}
 
 function SearchField(props) {
   let [expanded, Expand] = useState(false);
   let [keepExpanded, KeepExpanded] = useState(false);
   let [searchRequest, SetSearchRequest] = useState("");
+  let [searchResult, SetSearchResult] = useState(null);
 
 
   useEffect(() => {
-    document.addEventListener("click", ()=>{
+    document.addEventListener("click", () => {
       KeepExpanded(false);
       Expand(false);
       SetSearchRequest("");
     })
   }, [])
 
-  function OnHover()
-  {
+  function OnHover() {
     Expand(true);
   }
 
-  function OnMouseLeave()
-  {
-    if(!keepExpanded)
-    {
+  function OnMouseLeave() {
+    if (!keepExpanded) {
       Expand(false);
     }
   }
 
-  function OnClick(e)
-  {
+  function OnClick(e) {
     Expand(true);
     KeepExpanded(true);
     e.stopPropagation();
   }
 
+  function OnSearch() {
+    let results = window.Search(searchRequest);
 
+    props.onSearch && props.onSearch(results);
 
-  return (
-    <div className = {"search" + (searchRequest ? "" : " empty") + (expanded ? " expanded" : "")} onMouseEnter = {OnHover} onMouseLeave = {OnMouseLeave} onClick = {OnClick} style = {{width: expanded ? props.width : "0px"}}>
-      <i className = "fas fa-search"/>
-      <input placeholder = {props.placeholder} value = {searchRequest} onInput = {e => {SetSearchRequest(e.target.value)}}/>
-      <i className = "fas fa-plus" onClick = {() => {SetSearchRequest("")}}/>
-    </div>
-  );
-
-  // function Expand() {
-  //   if (this.state.collapsed) {
-  //     this.setState({
-  //       collapsed: false,
-  //       style: {
-  //         input: { visibility: "visible" },
-  //         search: {
-  //           width: this.props.width ? this.props.width : "calc(100% - 20px)",
-  //           marginLeft: this.margin,
-  //           borderColor: "white"
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
-
-  function Collapse() {
-    if (!this.state.collapsed) {
-      this.setState(this.stateWhenCollapsed);
+    if (props.SearchResultsDisplayer) {
+      SetSearchResult(<props.SearchResultsDisplayer results={results} />);
+    }
+    else {
+      SetSearchResult(<DefaultSearchResultsDisplayer results={results} />);
     }
   }
 
-  function Search() {
-    this.setState({ searchResult: this.props.search(this.searchRequest) })
-    this.Collapse()
-  }
+  return (
+    <div className={"search" + (searchRequest ? "" : " empty") + (expanded ? " expanded" : "")} onMouseEnter={OnHover} onMouseLeave={OnMouseLeave} onClick={OnClick} style={{ width: expanded ? props.width : "0px" }}>
+      <i className="fas fa-search" onClick={OnSearch} />
+      <input placeholder={props.placeholder} value={searchRequest} onKeyDown={e => { (e.key === "Enter") && OnSearch(); }} onInput={e => {
+        SetSearchRequest(e.target.value);
+      }} />
+      <i className="fas fa-plus" onClick={() => { SetSearchRequest("") }} />
+
+      <div className="search-results-window">
+        {searchResult}
+      </div>
+    </div>
+  );
+
 }
 
 class Footer extends Component {
@@ -237,22 +248,6 @@ function LegalityBar() {
       <Link href="/copyright"><i className="far fa-copyright" /> Julemy.bg</Link>
     </div>
   )
-}
-
-class Navbar extends Component {
-  render() {
-    return (
-      <div className="navbar">
-        {this.props.content}
-
-        <Button name="Вход" link="/Login" />
-
-        <a href="/" className="home">
-          <img src="/Images/LogoLight.jpg" alt="HOME"></img>
-        </a>
-      </div>
-    );
-  }
 }
 
 class Header extends Component {
@@ -296,7 +291,6 @@ export {
   DropdownElement,
   SearchField,
   Footer,
-  Navbar,
   Header,
   Title,
   Subtitle,

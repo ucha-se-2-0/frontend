@@ -1,4 +1,4 @@
-import { Button, Title, Video } from '../../Components'
+import { Button } from '../../Components'
 import React from "react"
 
 function Content() {
