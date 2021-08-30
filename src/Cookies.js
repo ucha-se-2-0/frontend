@@ -20,7 +20,7 @@ function DeleteCookie(name)
 
 function GetCookie(name)
 {
-    let match = document.cookie.match(name + /=[^;]*/);
+    let match = document.cookie.match(new RegExp(`${name}=[^;]*`));
     if(match)
         return match[0].slice(name.length + 1);
 }

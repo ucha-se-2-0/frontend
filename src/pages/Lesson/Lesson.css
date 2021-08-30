@@ -1,0 +1,9 @@
+.lesson-page
+{
+    background-color: var(--background);
+}
+
+.lesson-page .legality-bar
+{
+    /* margin-top: 20px; */
+}

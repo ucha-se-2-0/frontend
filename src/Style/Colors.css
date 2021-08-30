@@ -40,7 +40,12 @@ body
   --important: var(--dark-blue);
 
   --dropdown: var(--secondary);
-  --text-dropdown: var(--light-cyan);
+  --text-dropdown: var(--very-light-cyan);
+
+  --footer: var(--important);
+  --footer-1: var(--pink);
+  --footer-2: var(--very-light-cyan);
+  --footer-3: var(--cyan);
 }
 
 body.dark
@@ -51,9 +56,8 @@ body.dark
   --secondary: var(--dark-cyan);
   --hidden: var(--dark-cyan);
 
-  /* --faded-primary: var(--very-light-cyan); */
-  --faded-secondary: var(--light-purple);
-  /* --secondary: var(--very-dark-purple); */
+
+
 
 
   --button-primary: var(--primary);
@@ -66,4 +70,8 @@ body.dark
 
   --dropdown: var(--light-cyan);
   --text-dropdown: var(--dark-blue);
+
+  --footer-1: var(--dark-blue);
+  --footer-2: var(--very-dark-purple);
+  --footer-3: var(--dark-cyan);
 }

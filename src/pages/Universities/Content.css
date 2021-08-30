@@ -5,10 +5,6 @@
     scroll-behavior: smooth;
 }
 
-.unis-page .dropdown button
-{
-    font-size: calc(30px - 0.5vw);
-}
 
 .unis-page .dropdown .options
 {
@@ -17,10 +13,6 @@
 
 .unis-page .home {
     margin-right: auto;
-}
-
-.home img {
-    width: calc(50px - 0.5vw);
 }
 
 .dark .home .light, .home img {

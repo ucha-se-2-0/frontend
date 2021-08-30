@@ -5,7 +5,7 @@ function Content() {
     return (
         <div className="content">
             <Button bold link = "/universities" name = "Университети" secondary/>
-            <Button bold link = "/lessons" name = "Уроци"/>
+            <Button bold link = "/lessons" name = "Уроци" primary/>
         </div>
     );
 }

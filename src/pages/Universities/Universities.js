@@ -1,11 +1,10 @@
 import { Component, createRef, useEffect, useState } from "react"
-import { Header } from '../../Components'
 import { unis } from "../../Assets"
 
 import Content from './Content'
-import Navbar from './Navbar'
 
 import "./Content.css"
+import { DefaultNavbar } from "../../Components"
 
 
 class SideNavbar extends Component {
@@ -95,8 +94,8 @@ function Universities() {
 
     return (
         <div className="page unis-page">
-            <Navbar />
-            <Header content="Университети в България" />
+            <DefaultNavbar />
+            <div className = "header">Университети в България</div> 
             <SideNavbar />
             <Content />
         </div>

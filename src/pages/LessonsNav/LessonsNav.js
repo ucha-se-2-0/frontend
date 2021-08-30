@@ -1,6 +1,5 @@
 import { GetSection } from "../../Assets";
-import { Footer } from "../../Components";
-import Navbar from "./Navbar";
+import { DefaultNavbar, Footer, LegalityBar } from "../../Components";
 import Content from './Content'
 import { useEffect } from "react";
 
@@ -9,17 +8,17 @@ import { useEffect } from "react";
 
 function LessonsNav() {
     useEffect(()=>{
-        import("./Navbar.css");
         import("./LessonsNav.css");
         import("./Content.css");
     }, [])
 
     return (
         <div className = "page lessons-page">
-            <Navbar />
+            <DefaultNavbar search = {{placeholder: "Потърсете урок", width: "calc(100% - 150px)"}}/>
             <div className = "header">Уроци</div>
             <Content />
-            {/* <Footer /> */}
+            <Footer />
+            <LegalityBar />
         </div>
     )
 }

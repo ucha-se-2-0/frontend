@@ -105,7 +105,7 @@ const lessons = {
                 ]
             },
             {
-                title: "9 клас", section: [
+                title: "9 клас", sections: [
                     {
                         title: "Химичен състав на живата материя", lessons: [
                             { title: "Химичен състав на клетката", url: "himichen-sastav-na-kletkata" },
@@ -169,7 +169,10 @@ function FindLessonInSections(sections, url, next_lesson) {
         let res = FindLessonInSection(s, url, next_lesson)
         if (res === "eos")
             return { section: s }
-        return res
+        if(res !== undefined)
+        {
+            return res
+        }
     }
 }
 
@@ -180,7 +183,7 @@ function FindLessonInSection(section, url, next_lesson) {
                 if (next_lesson) {
                     if (parseInt(l) + 1 === section.lessons.length) {
                         //End of section
-                        console.log("eos")
+                        //console.log("eos")
                         return "eos"
                     }
 
@@ -209,8 +212,8 @@ function FindLesson(url, next_lesson) {
         return
     url = url.match(/[^/]+$/)[0];
 
-    for (let grade in lessons.biology) {
-        let l = FindLessonInSections(lessons.biology[grade], url, next_lesson)
+    for (let grade of lessons.biology) {
+        let l = FindLessonInSections(grade.sections, url, next_lesson)
         if (l) {
             return l
         }

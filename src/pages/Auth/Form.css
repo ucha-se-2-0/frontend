@@ -95,13 +95,13 @@
 }
 
 @media screen and (min-width: 600px) {
-    .form {
+    .auth-page .form {
         background-color: var(--background);
         width: calc(270px + 20%);
         height: 80%;
         border-radius: 15px;
         box-shadow: 5px 0 30px 0px black;
-        margin: auto;
+        margin-top: auto;
     }
     .dark .form {
         box-shadow: 0 0 0 2px var(--very-light-cyan);

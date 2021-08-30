@@ -7,6 +7,10 @@
   padding: 10px;
 }
 
+.home-page .navigation .button
+{
+  text-align: left;
+}
 
 .home-page .logo {
   width: calc(50px + 15vw);

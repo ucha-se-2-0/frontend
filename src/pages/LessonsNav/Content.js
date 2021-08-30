@@ -23,10 +23,7 @@ function Section(props) {
         if(!expanded)
         {
             Expanded(true);
-            SetHeight(getComputedStyle(content.current).height);
-            setTimeout(()=>{
-                AutoHeight(true);
-            }, 500);
+            SetHeight(parseInt(getComputedStyle(content.current).height) + 20 + "px");
         }
         else
         {
@@ -47,7 +44,7 @@ function Section(props) {
                 {props.title}
             </div>
 
-            <div className="content-wrapper" style={{ height: (expanded ? (autoHeight ? "auto" : height) : "0px") }}>
+            <div className="content-wrapper" onClick = {()=>{AutoHeight(true)}} style={{ height: (expanded ? (autoHeight ? "auto" : height) : "0px") }}>
                 <div ref={content}>
                     {props.children}
                 </div>
@@ -92,35 +89,7 @@ function Content() {
         let grades = []
 
         for (let grade in subject) {
-
             grades.push(Extract(subject[grade]))
-            /* for (let section of subject[grade]) {
-
-                let lessons = [];
-
-                let i = 0;
-                if(section.lessons)
-                {
-                    for (let lesson in section.lessons) {
-                        i++;
-                        lessons.push({ title: lesson.title, link: "/lessons/" + lesson.url });
-                    }
-                }
-                else if (section.subsections)
-                {
-                    for (let subsection in section.subsections) {
-                        i++;
-                        lessons.push({ title: lesson.title, lessons });
-                    }
-                }
-
-                grades[grades.length - 1].sections.push(
-                    {
-                        name: section.title,
-                        lessons: lessons
-                    }
-                )
-            }*/
         }
 
         function CreateNode(props) {
@@ -132,7 +101,7 @@ function Content() {
 
             if (section.sections[0].url) {
                 content = section.sections.map((lesson, i) => {
-                    return <Button key={i} name={lesson.title} link={"/lessons/" + lesson.url} />
+                    return <Button key={i} name={lesson.title} link={"/lessons/" + lesson.url} primary/>
                 })
             }
             else {

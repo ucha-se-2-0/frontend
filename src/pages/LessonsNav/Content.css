@@ -97,6 +97,7 @@
 .lessons-page .section,
 .lessons-page .section .button
 {
+    display: block;
     margin-bottom: 20px;
     margin-left: calc(5px + 2vw);
 }

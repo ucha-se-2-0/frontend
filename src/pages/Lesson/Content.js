@@ -1,13 +1,13 @@
 import React from "react"
-import { Button, Video } from '../../Components'
+import { Button, Video, Textarea } from '../../Components'
 import { GetLesson } from '../../Assets'
 
-var lesson = GetLesson(window.location.pathname);
 
 class Comment extends React.Component {
 
     constructor(props) {
         super(props)
+        this.lesson = GetLesson(window.location.pathname);
 
         this.state = { repliesCollapsed: true, liked: false, likes: this.props.comment.likes, disliked: false, dislikes: this.props.comment.dislikes }
     }
@@ -114,6 +114,11 @@ class Content extends React.Component {
             <div className="content">
                 <Video src={"/julemy.mp4"} />
 
+                <div className = "actions">
+                    <Button name="Mind map" secondary />
+                    <Button name="Тест" primary link={window.location.pathname.replace("lessons", "tests")} />
+                </div>
+
                 <span className="separator" />
 
                 <div className="content-text">
@@ -125,15 +130,9 @@ class Content extends React.Component {
                 <div id="compose-comment">
                     <div>
                         <img alt="icon" src="/Images/favicon.ico" />
-                        <div className="textarea-wrapper">
-                            <textarea placeholder="Оставете коментар" onInput={e => {
-                                this.setState({ newCommentValue: e.target.value })
-                                e.target.parentNode.dataset.value = e.target.value
-                            }}></textarea>
-                            <div style={{ visibility: "hidden" }}>{this.state.newCommentValue}</div>
-                        </div>
+                        <Textarea />
                     </div>
-                    <Button name="Публикувай" onClick={this.PostComment.bind(this, null)} />
+                    <Button name="Публикувай" onClick={this.PostComment.bind(this, null)} secondary />
                 </div>
 
 
@@ -154,7 +153,7 @@ class Content extends React.Component {
         request.onload = () => {
             this.LoadComments()
         }
-        request.send({ video_id: lesson.id, parent_id: parent_id, content: this.state.newCommentValue });
+        request.send({ video_id: this.lesson.id, parent_id: parent_id, content: this.state.newCommentValue });
     }
 
     GetCommentsElements(comments) {
@@ -190,7 +189,7 @@ class Content extends React.Component {
             this.setState({ commentsElements: this.GetCommentsElements(comments) });
         }
 
-        request.send({ video_id: lesson.id });
+        request.send({ video_id: this.props.lesson.id });
     }
 }
 

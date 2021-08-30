@@ -13,13 +13,3 @@ body {
   box-sizing: border-box;
   font-family: 'Comfortaa';
 }
-
-#root
-{
-  /* min-height: 100vh; */
-}
-
-/* .button-content
-{
-  transition: color 0s, background-color 0s !important;
-} */

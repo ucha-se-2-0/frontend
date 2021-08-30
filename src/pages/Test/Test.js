@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {Footer, Header} from '../../Components'
+import {Footer, LegalityBar, DefaultNavbar, DefaultMenu} from '../../Components'
 import { GetLesson } from '../../Assets';
 
 import {Content} from './Content' 
@@ -7,15 +7,18 @@ import {Content} from './Content'
 function Test()
 {
     useEffect(()=>{
-        import("./Content.css")
+        import("./Content.css");
+        import("./Test.css");
     }, [])
     
     return(
-        <>
-            <Header content = {"Тест по тема \"" + GetLesson(window.location.pathname).title + '"'}/>
+        <div className = "page test-page">
+            <DefaultNavbar />
+            <div className = "header">{"Тест по тема \"" + GetLesson(window.location.pathname).title + '"'}</div>
             <Content />
             <Footer/>
-        </>
+            <LegalityBar />
+        </div>
     );
 }
 

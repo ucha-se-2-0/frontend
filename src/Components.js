@@ -3,7 +3,7 @@
 
 import { createContext, Component, useState, useContext, useEffect, createRef } from "react"
 import VideoPlayer from "react-video-js-player"
-import "./Style/Components.css"
+import { GetCookie } from "./Cookies"
 
 
 function Link(props) {
@@ -23,8 +23,11 @@ function Link(props) {
 function Button(props) {
   let className = "button"
   className += props.className ? " " + props.className : "";
-  className += props.secondary ? " secondary" : "";
   className += props.bold ? " bold" : "";
+  className += props.secondary ? " secondary" : " ";
+  className += props.primary ? " primary" : " ";
+  className += props.shake ? " shake" : "";
+  className += props.lightning ? " lightning" : "";
 
   let context = useContext(UrlContext);
 
@@ -33,12 +36,24 @@ function Button(props) {
     context.Redirect(props.link)
   }
 
+  let lightning = null;
+
+  if (props.lightning) {
+    lightning =
+      <svg height="20" width="50">
+        <polyline points="0,10 5,5 20,0 30,20 40,10" />
+        <polyline points="0,10 5,20 20,0 30,0 40,10" />
+        <polyline points="0,10 5,0 20,10 30,10 40,10" />
+      </svg>
+  }
+
   return (
     <div className={className} onClick={OnClick}>
       {props.name}
       {props.title}
       {props.content}
       {props.children}
+      {lightning}
     </div>
   );
 }
@@ -60,6 +75,7 @@ function Input(props) {
   let label = props.placeholder;
   let icon = props.icon;
   let checkbox = props.checkbox;
+
 
   if (checkbox) {
     label = props.label;
@@ -107,6 +123,17 @@ function Input(props) {
   )
 }
 
+function Textarea(props) {
+  return (
+    <div className="textarea">
+      <textarea placeholder="Оставете коментар" onInput={e => {
+        props.OnInput && props.OnInput(e.target.value);
+        e.target.parentNode.dataset.value = e.target.value;
+      }}></textarea>
+    </div>
+  )
+}
+
 function DropdownElement(props) {
   return (
     <li>
@@ -116,7 +143,6 @@ function DropdownElement(props) {
 }
 
 
-// to do: animations
 function Dropdown(props) {
   let options = props.options instanceof Array && props.options.map((el, i) => {
     return <Link key={i} onClick={el.onClick} link={el.link}>{el.name}</Link>
@@ -135,17 +161,20 @@ function Dropdown(props) {
   )
 }
 
+
 export const ThemeContext = createContext(null);
 function ThemeToggle() {
   let context = useContext(ThemeContext);
-  let [rot, setRot] = useState(0);
+  let [rot, setRot] = useState(GetCookie("theme") === "dark" ? 180 : 0);
 
   return (
-    <div style={{ transform: `rotateZ(${rot}deg)` }} className="theme-toggle" onClick={() => { setRot(rot + 180) }}>
-      <div className="dark" onClick={context.ToggleTheme}>
-        <i className="fas fa-moon" />
+    <div className="theme-toggle">
+      <div style={{ transform: `rotateZ(${rot}deg)` }} onClick={() => { setRot(rot + 180) }}>
+        <div className="dark" onClick={context.ToggleTheme}>
+          <i className="fas fa-moon" />
+        </div>
+        <i className="light fas fa-sun" onClick={context.ToggleTheme} />
       </div>
-      <i className="light fas fa-sun" onClick={context.ToggleTheme} />
     </div>
   )
 }
@@ -228,37 +257,6 @@ function SearchField(props) {
 
 }
 
-class Footer extends Component {
-  render() {
-    return (
-      <div className="footer" >
-        {/*TO DO*/}
-        <p>
-
-        </p>
-      </div>
-    );
-  }
-}
-
-function LegalityBar() {
-  return (
-    <div className="legality-bar">
-      <Link link="/terms-and-conditions">Правила и условия</Link>
-      <Link href="/copyright"><i className="far fa-copyright" /> Julemy.bg</Link>
-    </div>
-  )
-}
-
-class Header extends Component {
-  render() {
-    return (
-      <div className="header">
-        {this.props.content}
-      </div>
-    );
-  }
-}
 
 function Title(props) {
   return (
@@ -281,20 +279,88 @@ function Video(props) {
 }
 
 
+function DefaultMenu(props) {
+  let options = [
+    { name: "Вход", link: "/login" },
+    { name: "Регистрация", link: "/signup" },
+    { name: <Button name="Pro акаунт" shake lightning />, link: "/pro" },
+    { name: "Уроци", link: "/lessons" },
+    { name: "Университети", link: "/universities" },
+  ]
+
+  if (props.themeToggle) {
+    options.push({ name: <ThemeToggle /> })
+  }
+
+  return (
+    <Dropdown right={props.right} offset={20} className="navigation" name={<i className="fas fa-bars" />} options={options}>
+    </Dropdown>
+  )
+}
+
+function Footer() {
+  return (
+    <div className="footer" >
+      <Link className="home">
+        <img src="/Images/LogoLightCyan.png" className="dark" />
+        <img src="/Images/LogoDark.png" className="light" />
+      </Link>
+
+      <div className="social">
+        <a href="#"><i className="fab fa-instagram" /></a>
+        <a href="#"><i className="fa fa-telegram" /></a>
+        <a href="#"><i className="fab fa-facebook" /></a>
+      </div>
+
+      <div className="links">
+        <Button name="Уроци" link="/lessons" />
+        <Button name="Университети" link="/universities" />
+        <Button name="За julemy" link="/about" />
+      </div>
+
+    </div>
+  );
+}
+
+function LegalityBar() {
+  return (
+    <div className="legality-bar">
+      <Link link="/terms-and-conditions">Правила и условия</Link>
+      <Link href="/copyright"><i className="far fa-copyright" /> Julemy.bg</Link>
+    </div>
+  )
+}
+
+function DefaultNavbar(props) {
+  return (
+    <div className="navbar">
+      <DefaultMenu themeToggle />
+      {props.search && <SearchField {...props.search} />}
+      <Link className="home" link="/">
+        <img alt="logo light" src="/Images/LogoDark.png" className="dark" />
+        <img alt="logo light" src="/Images/LogoLightCyan.png" className="light" />
+      </Link>
+    </div>
+  )
+}
+
 export const UrlContext = createContext(window.location.pathname);
 
 export {
   Link,
   Button,
   Input,
+  Textarea,
   Dropdown,
   DropdownElement,
   SearchField,
-  Footer,
-  Header,
   Title,
   Subtitle,
   Video,
   ThemeToggle,
-  LegalityBar
+
+  Footer,
+  LegalityBar,
+  DefaultMenu,
+  DefaultNavbar
 };

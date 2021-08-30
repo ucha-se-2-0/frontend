@@ -28,10 +28,10 @@ class Question extends React.Component {
         for (let i = 0; i < this.props.options.length; i++) {
             let checkboxStyle
             if (this.oneCorrectAnswer) {
-                // checkboxStyle = { borderRadius: "50%", backgroundColor: this.state.selected === i ? colors.dark : "transparent" }
+                checkboxStyle = { borderRadius: "50%", backgroundColor: this.state.selected === i ? "var(--primary)" : "transparent" }
             }
             else {
-                // checkboxStyle = { borderRadius: "2px", backgroundColor: this.state.selected[i] ? colors.dark : "transparent" }
+                checkboxStyle = { borderRadius: "2px", backgroundColor: this.state.selected[i] ? "var(--primary)" : "transparent" }
             }
 
             let optionBackground = null
