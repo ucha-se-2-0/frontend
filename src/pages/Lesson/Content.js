@@ -1,6 +1,7 @@
 import React from "react"
 import { Button, Video, Textarea } from '../../Components'
 import { GetLesson } from '../../Assets'
+import { GetAPIUrl } from "../../Utilities";
 
 
 class Comment extends React.Component {
@@ -39,7 +40,7 @@ class Comment extends React.Component {
         return (
             <div className="comment" >
                 <div>
-                    <img /*TO DO*/ alt="icon" src="/Images/favicon.ico"></img>
+                    <img /*TO DO*/ alt="icon" src="/Images/LogoCyan.png"></img>
                     <div>
                         <div className="author-name">{this.props.comment.author.username}</div>
                         <div className="text"> {this.props.comment.content} </div>
@@ -129,7 +130,7 @@ class Content extends React.Component {
 
                 <div id="compose-comment">
                     <div>
-                        <img alt="icon" src="/Images/favicon.ico" />
+                        <img alt="icon" src="/Images/LogoCyan.png" />
                         <Textarea />
                     </div>
                     <Button name="Публикувай" onClick={this.PostComment.bind(this, null)} secondary />
@@ -168,7 +169,7 @@ class Content extends React.Component {
 
     LoadComments() {
         var request = new XMLHttpRequest();
-        request.open("GET", "/comments");
+        request.open("GET", GetAPIUrl("/comments"));
 
         request.onload = () => {
             // let comments = request.response;

@@ -13,3 +13,10 @@ body {
   box-sizing: border-box;
   font-family: 'Comfortaa';
 }
+
+#root
+{
+  z-index: -1000; 
+  position:absolute; 
+  width: 100%;
+}

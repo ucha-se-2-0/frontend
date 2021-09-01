@@ -8,14 +8,18 @@ import LessonsNav from './pages/LessonsNav/LessonsNav'
 import Lesson from './pages/Lesson/Lesson'
 import { Login, Signup } from './pages/Auth/Auth'
 import Test from './pages/Test/Test'
+import Terms from './pages/Legality/Terms';
+import NotFound from './pages/NotFound/NotFound';
+import Privacy from './pages/Legality/Privacy';
 
 import './Style/Components.css'
 import './Style/Page.css'
 import './Style/Index.css'
 import './Style/Colors.css'
+import './Style/Icons.css'
 
 import { ThemeContext, UrlContext } from './Components';
-import { GetCookie, SetCookie } from './Cookies';
+import { GetCookie, SetCookie } from './Utilities';
 
 
 function ThemeProvider(props) {
@@ -48,18 +52,20 @@ function ThemeProvider(props) {
 }
 
 function UrlController(props) {
-  let [url, setUrl] = useState(window.location.pathnem);
+  let [url, setUrl] = useState(window.location.pathname);
 
   let redirect = null;
 
-  function MyRedirect(new_url) {
+  function Redirect_(new_url) {
+    sessionStorage.setItem("lastPage", url);
     window.history.pushState(null, "new page", new_url)
     setUrl(new_url);
   }
+
   redirect = (url && <Redirect to={url} />);
 
   return (
-    <UrlContext.Provider value={{ Redirect: MyRedirect }}>
+    <UrlContext.Provider value={{ Redirect: Redirect_ }}>
       {redirect}
       {props.children}
     </UrlContext.Provider>
@@ -74,14 +80,17 @@ export default function App() {
           <UrlController>
             <Switch>
               <Route path="/" exact component={HomePage} />
-              <Route path="/universities" component={Universities} />
+              <Route path="/universities" exact component={Universities} />
               {/* <Route path="/lessons/sections/*" exact component={LessonsNav} />
               <Route path="/lessons/sections" exact> <Redirect to="/lessons" /> </Route> */}
               <Route path="/lessons" exact component={LessonsNav} />
-              <Route path="/lessons/*" exact component={Lesson} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/tests/*" component={Test} />
+              <Route path="/lessons/*/" exact component={Lesson} />
+              <Route path="/login" exact component={Login} />
+              <Route path="/signup" exact component={Signup} />
+              <Route path="/tests/*/" exact component={Test} />
+              <Route path="/terms-and-conditions" exact component={Terms} />
+              <Route path="/privacy-policy" exact component={Privacy} />
+              <Route path="/*" component={NotFound} />
             </Switch>
           </UrlController>
         </Router>

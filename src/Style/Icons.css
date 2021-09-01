@@ -1,0 +1,13 @@
+.icon svg
+{
+    display: block;
+    width: 22px;
+    height: 22px;
+    transform: scale(var(--scale));
+}
+
+.icon
+{
+    --scale: 1;
+    display: inline;
+}

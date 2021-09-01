@@ -140,6 +140,11 @@
   height: calc(4 * var(--font-size));
   min-height: calc(4 * var(--font-size));
   z-index: 0;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .input.rounded input {
@@ -397,12 +402,13 @@
 .footer {
   display: flex;
   align-items: flex-end;
-  margin-top: 100px;
+  margin-top: auto;
   padding: 10px 2vw;
   width: 100%;
   max-height: 150px;
-  height: calc(10vw + 60px);
-  background-color: var(--important);
+  height: calc(10vw + 70px);
+  min-height: 100px;
+  background-color: var(--footer);
 }
 
 .footer .home {
@@ -421,23 +427,20 @@
   height: 100%;
   width: 50%;
   display: grid;
-  grid-template-rows: repeat(1fr, 3);
-  margin-left: auto;
-  margin-right: 10px;
+  flex-grow: 1;
+  margin: 0 2vw;
   font-size: calc(0.5vw + 10px);
 }
 
 .footer .social {
   font-size: calc(1.3vw + 20px);
-  margin: 0 auto;
-  height: 80%;
+  margin: 0;
+  height: 100%;
+  max-height: 100px;
+  width: auto;
   display: grid;
 }
 
-.footer .social>* {
-  grid-row: 1 / 2;
-  margin: 0 calc(3vw - 10px);
-}
 
 .footer .links>* {
   margin-right: 2vw;
@@ -452,12 +455,12 @@
 
 .footer .social>:nth-child(2) {
   color: var(--footer-2);
-  align-self: center;
+  justify-self: center;
 }
 
 .footer .social>:nth-child(3) {
   color: var(--footer-3);
-  align-self: flex-end;
+  justify-self: flex-end;
 }
 
 .footer>*>* {
@@ -483,6 +486,13 @@
   background-color: var(--footer-1);
 }
 
+@media screen and (min-width: 600px) {
+  .footer .social
+  {
+    width: 30%;
+  }
+}
+
 /*DEFAULT NAVBAR*/
 
 .navbar {
@@ -504,14 +514,13 @@
 .content-title {
   padding: 0px;
   margin: 10px 0;
-  text-align: center;
   line-height: normal;
   color: var(--secondary);
-  font-size: calc(45px + 3vw);
+  font-size: calc(15px + 1vw);
 }
 
 .content-subtitle {
-  font-size: calc(35px + 2vw);
+  font-size: calc(10px + 0.7vw);
 }
 
 /* DROPDOWN */
@@ -584,9 +593,9 @@
   box-shadow: black 0px 0px 50px 0px;
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 600px) {
   .video {
-    width: 80%;
+    width: calc(50% + 600px * 0.8 * 0.5);
   }
 }
 
@@ -650,18 +659,22 @@ body.dark .theme-toggle .light {
 /* LEGALITY BAR */
 
 .legality-bar {
+  display: flex;
   width: 100%;
-  padding: 20px;
+  padding: calc(1vw + 10px) 0;
   font-size: calc(0.3vw + 12px);
 }
 
-.legality-bar .link {
-  display: inline;
+.legality-bar>* {
+  margin: 0 auto;
   color: var(--secondary);
+  text-align: center;
 }
 
-.legality-bar .link:nth-child(2) {
-  float: right;
+.legality-bar :nth-child(3) {
+  opacity: 0.9;
+  cursor: default;
+  white-space: pre;
 }
 
 /* BACKGROUND */

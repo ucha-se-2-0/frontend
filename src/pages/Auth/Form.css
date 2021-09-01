@@ -56,11 +56,30 @@
     height: 1em
 }
 
+.auth-page .error
+{
+    color: var(--error);
+    font-weight: bold;
+    font-size: 12px;
+    width: 90%;
+    text-align: center;
+}
+
 .form .submit {
     padding: calc(20px - 1vw) calc(50px - 2vw);
     margin: auto 0;
     background-color: var(--primary);
     border-radius: calc(25px - 1.5vw);
+}
+
+.auth-page .form .loading
+{
+    opacity: 0.5;
+    --scale: 5;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 .redirect {
@@ -92,6 +111,10 @@
     .form .input {
         width: 80%;
     }
+    .auth-page .error
+    {
+        width: 80%;
+    }
 }
 
 @media screen and (min-width: 600px) {
@@ -105,9 +128,6 @@
     }
     .dark .form {
         box-shadow: 0 0 0 2px var(--very-light-cyan);
-    }
-    .form .title {
-        margin: 30px 0 50px;
     }
     .form .input {
         width: 80%;

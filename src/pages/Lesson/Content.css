@@ -1,24 +1,21 @@
 .lesson-page .content {
     color: var(--primary);
     font-size: calc(0.3vw + 12px);
+    align-items: center;
 }
 
 .lesson-page .content .actions
 {
-    width: 50%;
-    align-self: center;
+    width: 100%;
+    display: flex;
 }
 
 .lesson-page .content .actions>*
 {
-    padding: 5px 30px;
+    padding: 1vw 5vw;
+    margin: auto;
 }
 
-
-.lesson-page .content .actions :nth-child(2)
-{
-    float: right;
-}
 
 #compose-comment {
     width: 90%;
@@ -36,6 +33,11 @@
 #compose-comment>div {
     display: flex;
     width: 100%;
+}
+
+#compose-comment .textarea
+{
+    margin-left: 1vw;
 }
 
 
@@ -63,6 +65,7 @@ div#comments {
 }
 
 .comment {
+    user-select: text;
     display: flex;
     width: 90%;
     flex-direction: column;
@@ -103,6 +106,7 @@ div#comments {
 }
 
 .comment-like-dislike {
+    user-select: none;
     display: flex;
     margin-left: 30px;
     margin-top: 0;

@@ -26,3 +26,10 @@ function GetCookie(name)
 }
 
 export {SetCookie, GetCookie, DeleteCookie};
+
+function GetAPIUrl(endpoint)
+{
+    return "" + endpoint
+}
+
+export {GetAPIUrl}

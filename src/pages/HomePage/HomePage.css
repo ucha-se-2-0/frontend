@@ -9,6 +9,8 @@
     position: relative;
 
     transition: color 1s, background-color 1s;
+
+    overflow: hidden;
 }
 
 .home-page .dropdown>button
@@ -17,7 +19,7 @@
 }
 
 
-.legality-bar
+.home-page .legality-bar
 {
     margin-top: auto;
 }

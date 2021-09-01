@@ -1,0 +1,138 @@
+.page-not-found
+{
+    min-height: 100vh;
+    width: 100vw;    
+    display: grid;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: var(--background);
+    grid-template-rows: 50px;
+    overflow: hidden;
+}
+
+.page-not-found .navbar
+{
+    width: 100%;
+    background-color: transparent;
+}
+
+.page-not-found .header
+{
+    padding: 0;
+    box-sizing: content-box;
+    position: relative;
+    word-wrap: break-word;
+
+}
+
+.page-not-found .header div
+{
+    font-size: 10vw;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+
+
+
+.page-not-found .header div:nth-child(1)
+{
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 34%, 0% 34%);
+    animation: shake1 3s infinite;
+}
+
+.page-not-found .header div:nth-child(2)
+{
+    clip-path: polygon(0 33%, 100% 33%, 100% 61%, 0% 61%);
+    animation: shake2 5s infinite;
+}
+
+.page-not-found .header div:nth-child(3)
+{
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0% 100%);
+    animation: shake3 4s infinite;
+}
+
+@keyframes shake1 {
+    from{
+        transform: translate(0);
+    }
+
+    1%{
+        transform: translate(30px, 0px);
+    }
+
+    2%{
+        transform: translate(0);
+    }
+
+    50%
+    {   
+        transform: translate(0);
+    }
+
+    51%{
+        transform: translate(-10px, 0px);
+    }
+
+    52%{
+        transform: translate(0);
+    }
+
+    to{
+        transform: translate(0);
+    }
+}
+
+
+@keyframes shake2 {
+    from{
+        transform: translate(0);
+    }
+
+    1%{
+        transform: translate(-30px, 0px);
+    }
+
+    2%{
+        transform: translate(0);
+    }
+
+    to{
+        transform: translate(0);
+    }
+}
+
+
+@keyframes shake3 {
+    from{
+        transform: translate(0);
+    }
+
+    1%{
+        transform: translate(10px, 0px);
+    }
+
+    2%{
+        transform: translate(0);
+    }
+
+    50%
+    {   
+        transform: translate(0);
+    }
+
+    51%{
+        transform: translate(-10px, 0px);
+    }
+
+    52%{
+        transform: translate(0);
+    }
+
+    to{
+        transform: translate(0);
+    }
+}

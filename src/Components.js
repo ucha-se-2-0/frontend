@@ -3,7 +3,7 @@
 
 import { createContext, Component, useState, useContext, useEffect, createRef } from "react"
 import VideoPlayer from "react-video-js-player"
-import { GetCookie } from "./Cookies"
+import { GetCookie } from "./Utilities"
 
 
 function Link(props) {
@@ -12,6 +12,12 @@ function Link(props) {
   return (
     <div className={"link" + (props.className ? " " + props.className : "")} onClick={e => {
       props.onClick && props.onClick(e);
+
+      let url = window.location.pathname;
+      if (url != "/login" && url != "/signup") {
+        sessionStorage.setItem("lastPageBeforeAuth", url);
+      }
+
       context.Redirect(props.link)
     }}>
       {props.name}
@@ -95,12 +101,12 @@ function Input(props) {
     <div ref={ref} className={"input" + (empty ? " empty" : "")
       + (props.sharpCorners ? "" : " rounded")
       + (props.fog ? " fog" : "")
-      + (checkbox ? " checkbox" : "")}
+      + (checkbox ? " checkbox" : "")
+      + (props.password ? " password" : "")}
       style={{ width: props.width }}>
 
       <input type={(props.password && hidden) ? "password" : (checkbox ? "checkbox" : "")} onChange={e => {
-        console.log(1);
-        props.onInput && props.onInput(e);
+        props.OnInput && props.OnInput(e);
         IsEmpty(!(e.target.value));
       }} />
 
@@ -264,6 +270,7 @@ function Title(props) {
       {props.name}
       {props.title}
       {props.content}
+      {props.children}
     </div>)
 }
 
@@ -286,6 +293,9 @@ function DefaultMenu(props) {
     { name: <Button name="Pro акаунт" shake lightning />, link: "/pro" },
     { name: "Уроци", link: "/lessons" },
     { name: "Университети", link: "/universities" },
+    { name: "Правила и условия", link: "/terms-and-conditions" },
+    { name: <><i className="far fa-copyright" /> Julemy.bg</>, link: "/copyright" },
+    { name: "Съобщете за проблема", link: "/raise-a-problem" }
   ]
 
   if (props.themeToggle) {
@@ -326,7 +336,8 @@ function LegalityBar() {
   return (
     <div className="legality-bar">
       <Link link="/terms-and-conditions">Правила и условия</Link>
-      <Link href="/copyright"><i className="far fa-copyright" /> Julemy.bg</Link>
+      <Link link="/privacy-policy">Запазване на данни</Link>
+      <span><i className="far fa-copyright" /> Julemy.bg</span>
     </div>
   )
 }
@@ -344,7 +355,20 @@ function DefaultNavbar(props) {
   )
 }
 
-export const UrlContext = createContext(window.location.pathname);
+function DefaultPage(props) {
+  return (
+    <div className={"page " + (props.className ? props.className : "")}>
+      <DefaultNavbar />
+      <div className="content">
+        {props.children}
+      </div>
+      <Footer />
+      <LegalityBar />
+    </div>
+  )
+}
+
+export const UrlContext = createContext();
 
 export {
   Link,
@@ -362,5 +386,6 @@ export {
   Footer,
   LegalityBar,
   DefaultMenu,
-  DefaultNavbar
+  DefaultNavbar,
+  DefaultPage
 };

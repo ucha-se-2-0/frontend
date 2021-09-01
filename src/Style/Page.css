@@ -1,6 +1,10 @@
 .page
 {
     pointer-events: none;
+    background-color: var(--background);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .page *
@@ -14,15 +18,20 @@
 
 .content {
     background-color: transparent;
+    color: var(--primary);
     position: relative;
     margin: 0;
-    margin-top: 100px;
-    padding: 0px;
+    padding: 0px calc(5px + 3vw);
     line-height: 30px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     flex-direction: column;
+}
+
+.content>*
+{
+    width: 100%;
 }
 
 .content .video
@@ -58,8 +67,8 @@
     }
 
     .content {
-        margin: 0 5%;
-        padding: 10px;
+        /* margin: 0 5%; */
+        /* padding: 10px; */
     }
 
     .separator
@@ -113,7 +122,7 @@
   margin-bottom: 0;
 
   /* min-width: 5%; */
-  font-size: 20px;
+  font-size: 15px;
   text-decoration: none;
 }
 

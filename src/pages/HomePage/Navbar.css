@@ -5,6 +5,7 @@
   justify-content:flex-start;
   align-items: flex-start;
   padding: 10px;
+  background-color: transparent;
 }
 
 .home-page .navigation .button
@@ -36,13 +37,9 @@
 }
 
 
-.home-page .dropdown i,
+.home-page .dropdown button>i,
 .home-page .dropdown button {
   display: block;
-}
-
-.home-page .navigation .options {
-  font-size: 20px;
 }
 
 .home-page .navigation,

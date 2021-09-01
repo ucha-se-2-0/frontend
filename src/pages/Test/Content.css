@@ -1,12 +1,3 @@
-@import '../../Style/Colors.css';
-
-.content.test-content
-{
-    width: 90%;
-    padding: 10px;
-    color: var(--primary);
-}
-
 .question
 {
     width: 100%;
