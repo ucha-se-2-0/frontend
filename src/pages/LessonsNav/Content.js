@@ -1,5 +1,5 @@
 import { createRef, useEffect, useState } from "react";
-import { lessons } from "../../Assets";
+import { GetFormattedLessons, lessons } from "../../Assets";
 import { Button, Subtitle } from '../../Components'
 
 function Section(props) {
@@ -70,27 +70,7 @@ function Content() {
 
 
     function Links(subject) {
-        function Extract(section) {
-
-            let children = section[Object.keys(section)[1]]
-
-            if (Array.isArray(children)) {
-                return {
-                    title: section.title, sections: children.map(subsection => {
-                        return Extract(subsection);
-                    })
-                }
-            }
-
-            return section;
-        }
-
-
-        let grades = []
-
-        for (let grade in subject) {
-            grades.push(Extract(subject[grade]))
-        }
+        let grades = GetFormattedLessons(subject);
 
         function CreateNode(props) {
             let section = props.section;

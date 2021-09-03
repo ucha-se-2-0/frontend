@@ -3,6 +3,7 @@
 
 import { createContext, Component, useState, useContext, useEffect, createRef } from "react"
 import VideoPlayer from "react-video-js-player"
+import { GetFormattedLessons, lessons } from "./Assets"
 import { GetCookie } from "./Utilities"
 
 
@@ -11,12 +12,12 @@ function Link(props) {
 
   return (
     <div className={"link" + (props.className ? " " + props.className : "")} onClick={e => {
-      props.onClick && props.onClick(e);
-
       let url = window.location.pathname;
-      if (url != "/login" && url != "/signup") {
+      if (url !== "/login" && url !== "/signup") {
         sessionStorage.setItem("lastPageBeforeAuth", url);
       }
+
+      props.onClick && props.onClick(e);
 
       context.Redirect(props.link)
     }}>
@@ -46,7 +47,7 @@ function Button(props) {
 
   if (props.lightning) {
     lightning =
-      <svg height="20" width="50">
+      <svg height="100%" width="100%" viewBox="0 0 40 30">
         <polyline points="0,10 5,5 20,0 30,20 40,10" />
         <polyline points="0,10 5,20 20,0 30,0 40,10" />
         <polyline points="0,10 5,0 20,10 30,10 40,10" />
@@ -151,7 +152,7 @@ function DropdownElement(props) {
 
 function Dropdown(props) {
   let options = props.options instanceof Array && props.options.map((el, i) => {
-    return <Link key={i} onClick={el.onClick} link={el.link}>{el.name}</Link>
+    return <Button key={i} {...el} />
   })
 
   return (
@@ -185,20 +186,160 @@ function ThemeToggle() {
   )
 }
 
+
 function DefaultSearchResultsDisplayer(props) {
   return (
-    <div className="window">
-
-    </div>
+    <Window className="search-results" OnClose={() => { props.OnClose() }}>
+      <Subtitle title={"Резултати от търсенето"} />
+      {props.results.map((el, i) => {
+        el = el.section;
+        return <div key={i}>
+          {el.url ? <Link link={"/lessons/" + el.url} name={el.title} /> : <h4>{el.title}</h4>}
+          <div>{el.sections ? JSON.stringify(el.sections) : null}</div>
+        </div>
+      })}
+    </Window>
   )
 }
 
 function Search(request, constrictions) {
+
+  const k = { order: 0, exact: 1000, lengthDif: 0.5, length: 10, wordTreshold: 0.1, treshold: 1000, mistakeCost: 0.5 }
+
+
+  //Tries to match string1 in string2
+  function RelativeMatch(string1, string2) {
+    if (!string1.trim() || !string2.trim()) {
+      return 0;
+    }
+
+
+    if (string1.trim().toUpperCase() === string2.trim().toUpperCase()) {
+      //return k.exact;
+    }
+
+    string1 = string1.toUpperCase().split(" ");
+    string2 = string2.toUpperCase().split(" ");
+
+
+
+    let matches = [];
+
+    //w stands for word
+    for (let w1i in string1) {
+      let w1 = string1[w1i];
+      for (let w2i in string2) {
+
+        let w2 = string2[w2i];
+
+        let max_match = 0;
+
+        //To do: remove two similar loops
+
+        // o stands for offset
+        for (let o = w2.length - 1; o >= -w1.length; o--) {
+          let match = 0;
+          let lo = 0;
+
+          if (o > 0) {
+            for (let i = 0; i + lo < w1.length && i + o < w2.length; i++) {
+              if (w1[i + lo] === w2[i + o]) {
+                match++;
+              }
+              else {
+                match -= k.mistakeCost;
+
+                if (i && w1[i + lo - 1] === w2[i + o]) {
+                  lo--;
+                } else if (i + lo < w1.length - 1 && w1[i + lo + 1] === w2[i + o]) {
+                  lo++;
+                }
+              }
+            }
+          } else {
+            for (let i = 0; i - o < w1.length && i + lo < w2.length; i++) {
+              if (w1[i - o] === w2[i + lo]) {
+                match++;
+              }
+              else {
+                match -= k.mistakeCost;
+
+                if (i + lo && w1[i - o] === w2[i + lo - 1]) {
+                  lo--;
+                } else if (i + lo < w2.length - 1 && w1[i + o] === w2[i + lo + 1]) {
+                  lo++;
+                }
+              }
+            }
+          }
+
+          if (match > max_match) {
+            max_match = match;
+          }
+        }
+
+
+
+        let match = Math.pow(max_match, k.length) / w1.length;
+
+
+
+        if (matches.length && matches[matches.length - 1].string2 < w2i) {
+          match *= 1 + k.order;
+        }
+
+        if (match) {
+          console.log(w1, w2, max_match, match);
+        }
+
+        if (max_match / w1.length > k.wordTreshold) {
+          matches.push({ string1: w1i, string2: w2i, match });
+        }
+      }
+    }
+
+    //return matches;
+
+
+    return matches.reduce((sum, current, i) => {
+      // if(current.match === 1)
+      // {
+      //   return sum + k.full_word;
+      // }
+      return sum + current.match
+    }, 0) * (1 - k.lengthDif * Math.abs(string1.length - string2.length) / Math.max(string1.length, string2.length));
+  }
+
+
   let results = [];
 
-  if (!constrictions.lessons) {
+  function Match(section) {
 
+    let points = RelativeMatch(request, section.title);
+
+    if (points) {
+      results.push({ section, points });
+    }
+
+    if (section.sections instanceof Array) {
+      section.sections.forEach(Match);
+    }
   }
+
+
+
+  if (!constrictions) {
+    constrictions = {};
+  }
+
+  if (!constrictions.lessons) {
+    let grades = GetFormattedLessons(lessons.biology);
+
+    Match({ title: "Биология", sections: grades });
+  }
+
+  results.sort((first, second) => second.points - first.points);
+  results = results.filter(({points}) => points > k.treshold);
 
   return results;
 }
@@ -235,15 +376,16 @@ function SearchField(props) {
   }
 
   function OnSearch() {
-    let results = window.Search(searchRequest);
+    let results = Search(searchRequest);
+    console.log(results);
 
     props.onSearch && props.onSearch(results);
 
     if (props.SearchResultsDisplayer) {
-      SetSearchResult(<props.SearchResultsDisplayer results={results} />);
+      SetSearchResult(<props.SearchResultsDisplayer OnClose={() => { SetSearchResult(null) }} results={results} />);
     }
     else {
-      SetSearchResult(<DefaultSearchResultsDisplayer results={results} />);
+      SetSearchResult(<DefaultSearchResultsDisplayer OnClose={() => { SetSearchResult(null) }} results={results} />);
     }
   }
 
@@ -255,9 +397,7 @@ function SearchField(props) {
       }} />
       <i className="fas fa-plus" onClick={() => { SetSearchRequest("") }} />
 
-      <div className="search-results-window">
-        {searchResult}
-      </div>
+      {searchResult}
     </div>
   );
 
@@ -285,17 +425,33 @@ function Video(props) {
     </div>)
 }
 
+function Window(props) {
+
+  function Close() {
+    if (props.OnClose) {
+      props.OnClose();
+    }
+  }
+
+  return (
+    <div className="window">
+      <i className="fas fa-plus" onClick={() => { Close() }} />
+      {props.children}
+    </div>
+  )
+}
+
 
 function DefaultMenu(props) {
   let options = [
-    { name: "Вход", link: "/login" },
-    { name: "Регистрация", link: "/signup" },
-    { name: <Button name="Pro акаунт" shake lightning />, link: "/pro" },
-    { name: "Уроци", link: "/lessons" },
-    { name: "Университети", link: "/universities" },
-    { name: "Правила и условия", link: "/terms-and-conditions" },
-    { name: <><i className="far fa-copyright" /> Julemy.bg</>, link: "/copyright" },
-    { name: "Съобщете за проблема", link: "/raise-a-problem" }
+    { name: "Вход", link: "/login", className: "bold" },
+    { name: "Регистрация", link: "/signup", className: "bold" },
+    { name: "Pro акаунт", shake: true, lightning: true, link: "/pro", className: "bold" },
+    { name: "Уроци", link: "/lessons", className: "bold" },
+    { name: "Университети", link: "/universities", className: "bold" },
+    { name: "Правила и условия", link: "/terms-and-conditions", className: "light" },
+    { name: "Защита на данни", link: "/copyright", className: "light" },
+    { name: "Съобщете за проблема", link: "/raise-a-problem", className: "light" }
   ]
 
   if (props.themeToggle) {
@@ -312,8 +468,8 @@ function Footer() {
   return (
     <div className="footer" >
       <Link className="home">
-        <img src="/Images/LogoLightCyan.png" className="dark" />
-        <img src="/Images/LogoDark.png" className="light" />
+        <img src="/Images/LogoLightCyan.png" className="light" />
+        <img src="/Images/LogoDark.png" className="dark" />
       </Link>
 
       <div className="social">
@@ -368,6 +524,7 @@ function DefaultPage(props) {
   )
 }
 
+
 export const UrlContext = createContext();
 
 export {
@@ -387,5 +544,8 @@ export {
   LegalityBar,
   DefaultMenu,
   DefaultNavbar,
-  DefaultPage
+  DefaultPage,
+
+  //Next are exported for testing and shouldn't be used directly
+  Search
 };

@@ -142,7 +142,7 @@ div#comments {
 }
 
 .collapse-replies, .show-replies {
-    font-size: 15px;
+    /* font-size: 15px; */
     color: grey;
     margin-top: -10px;
     cursor: pointer;

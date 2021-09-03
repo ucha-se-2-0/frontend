@@ -240,10 +240,38 @@ function GetSection(url) {
     }
 }
 
+function GetFormattedLessons(subject)
+{
+    function Extract(section) {
+
+        let children = section[Object.keys(section)[1]]
+
+        if (Array.isArray(children)) {
+            return {
+                title: section.title, sections: children.map(subsection => {
+                    return Extract(subsection);
+                })
+            }
+        }
+
+        return section;
+    }
+
+
+    let grades = []
+
+    for (let grade in subject) {
+        grades.push(Extract(subject[grade]))
+    }
+
+    return grades;
+}
+
 export {
     GetLesson,
     GetNextLesson,
     GetSection,
+    GetFormattedLessons,
     lessons
 }
 

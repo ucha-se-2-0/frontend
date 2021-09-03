@@ -10,14 +10,6 @@
     margin-right: auto;
 }
 
-.dark .home .light, .home img {
-    display: block;
-}
-
-.dark .home img, .home .light {
-    display: none;
-}
-
 .uni
 {
     padding: 10px;

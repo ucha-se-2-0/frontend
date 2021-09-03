@@ -52,21 +52,25 @@ function ThemeProvider(props) {
 }
 
 function UrlController(props) {
-  let [url, setUrl] = useState(window.location.pathname);
+  let [url, SetUrl] = useState(window.location.pathname);
+  let [redirect, ShouldRedirect] = useState(false);
 
-  let redirect = null;
-
+    
   function Redirect_(new_url) {
-    sessionStorage.setItem("lastPage", url);
+    if(!new_url)
+      return;
+    
     window.history.pushState(null, "new page", new_url)
-    setUrl(new_url);
+    SetUrl(new_url);
+    ShouldRedirect(true);
   }
 
-  redirect = (url && <Redirect to={url} />);
+  redirect && setTimeout(()=>{ShouldRedirect(false);}, 0);
+
 
   return (
     <UrlContext.Provider value={{ Redirect: Redirect_ }}>
-      {redirect}
+      {redirect && <Redirect to={url} />}
       {props.children}
     </UrlContext.Provider>
   )

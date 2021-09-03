@@ -9,6 +9,9 @@ body
   --dark-purple: #705091;
   --very-dark-purple: #402051;
 
+  /* Replace dark purple with very dark purple? */
+  --dark-purple: var(--very-dark-purple);
+
   --very-light-cyan: #E0FFE8;
   --light-cyan: #A8E8D5;
   --cyan: #7DD1C1;
@@ -25,7 +28,6 @@ body
   --background: var(--very-light-cyan);
 
 
-  /* From most to least contrasted */
   --primary: var(--very-dark-purple);
   --secondary: var(--dark-purple);
   --hidden: var(--light-cyan);
@@ -46,10 +48,15 @@ body
   --dropdown: var(--secondary);
   --text-dropdown: var(--very-light-cyan);
 
-  --footer: var(--dark-blue);
-  --footer-1: var(--pink);
-  --footer-2: var(--very-light-cyan);
-  --footer-3: var(--cyan);
+  --navbar: var(--light-cyan);
+  --text-navbar: var(--primary);
+
+  --footer: var(--light-cyan);
+
+
+  --footer-1: var(--dark-blue);
+  --footer-3: var(--dark-purple);
+  --footer-2: var(--sea-wave);
 }
 
 body.dark
@@ -75,8 +82,10 @@ body.dark
   --dropdown: var(--light-cyan);
   --text-dropdown: var(--dark-blue);
 
-  --footer: var(--dark-cyan);
-  --footer-2: var(--dark-blue);
-  --footer-3: var(--dark-purple);
-  --footer-1: var(--very-dark-purple);
+  --navbar: var(--dark-blue);
+
+  --footer: var(--dark-blue);
+  --footer-1: var(--pink);
+  --footer-2: var(--very-light-cyan);
+  --footer-3: var(--cyan);
 }

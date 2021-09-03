@@ -2,8 +2,7 @@
 {
     width: 100%;
     border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 10px auto;
     font-size: calc(15px + 0.7vw);
 
 
@@ -63,7 +62,7 @@
 .option:hover
 {
     border: 1px #555555 dashed;
-    background-color: #aaaaaa;
+    background-color: var(--hidden);
 }
 
 .option p
@@ -103,4 +102,10 @@
     margin: 10px auto;
     width: 87%;
     display: none;
+}
+
+.test-content>.button
+{
+    padding: 10px 2vw;
+    margin: 10px 0;
 }

@@ -48,7 +48,8 @@
   position: absolute;
   left: 0;
   transform-origin: left;
-  transform: scaleX(3);
+  /* transform: scaleX(2); */
+  width: 100%;
 }
 
 .button.lightning svg polyline {
@@ -357,11 +358,10 @@
 }
 
 .search i {
-  font-size: 0.7em;
   cursor: pointer;
 }
 
-.search.empty .fa-plus {
+.search.empty>.fa-plus {
   opacity: 0;
   display: none;
 }
@@ -423,6 +423,14 @@
   height: 100%;
 }
 
+.dark .footer .light, .footer .dark {
+  display: block;
+}
+
+.dark .footer .dark, .footer .light {
+  display: none;
+}
+
 .footer .links {
   height: 100%;
   width: 50%;
@@ -433,12 +441,17 @@
 }
 
 .footer .social {
-  font-size: calc(1.3vw + 20px);
+  font-size: calc(1vw + 22px);
   margin: 0;
-  height: 100%;
-  max-height: 100px;
+  /* height: 100%;
+  max-height: 100px; */
   width: auto;
   display: grid;
+}
+
+.footer .social i
+{
+  /* display: block; */
 }
 
 
@@ -446,7 +459,7 @@
   margin-right: 2vw;
   align-self: center;
   padding: 5px 10px;
-  color: var(--primary);
+  color: var(--background);
 }
 
 .footer .social>:nth-child(1) {
@@ -501,11 +514,11 @@
   align-items: center;
 }
 
-.dark .navbar .logo.light, .navbar .logo {
+.dark .navbar img.light, .navbar img.dark {
   display: block;
 }
 
-.dark .navbar .logo, .navbar .logo.light {
+.dark .navbar img.dark, .navbar img.light {
   display: none;
 }
 
@@ -556,6 +569,10 @@
 .dropdown.right .options-wrapper {
   right: 0;
   left: auto;
+}
+
+.dropdown .options * {
+  text-align: left;
 }
 
 .dropdown.right .options * {
@@ -712,4 +729,41 @@ body.dark .theme-toggle .light {
 .navbar>:last-child:nth-child(2)
 {
   margin: 0 0 0 auto;
+}
+
+/* WIDNOW */
+.window
+{
+  position: fixed;
+  width: 80%;
+  height: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 20px;
+
+  background-color: var(--primary);
+  color: var(--background);
+
+  display: flex;
+  flex-direction: column;
+  padding: 5vw 10vw;
+
+  overflow-y: auto;
+}
+
+.window .fa-plus
+{
+  transform: rotateZ(45deg);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.window>*,
+.window>div>.link
+{
+  color: var(--background);
+  margin: 10px 0;
 }

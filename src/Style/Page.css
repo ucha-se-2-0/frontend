@@ -29,11 +29,6 @@
     flex-direction: column;
 }
 
-.content>*
-{
-    width: 100%;
-}
-
 .content .video
 {
     align-self: center;
@@ -112,8 +107,8 @@
 
   padding: 10px;
 
-  color: var(--primary);
-  background-color: var(--dark-cyan);
+  color: var(--text-navbar);
+  background-color: var(--navbar);
 }
 
 .navbar>*
@@ -121,7 +116,6 @@
   margin-top: 0;
   margin-bottom: 0;
 
-  /* min-width: 5%; */
   font-size: 15px;
   text-decoration: none;
 }
