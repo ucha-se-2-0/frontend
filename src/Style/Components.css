@@ -583,6 +583,9 @@
   background-color: var(--dropdown);
   border-radius: 10px;
   padding: 10px 0;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .dropdown:hover .options-wrapper, .dropdown button:focus~.options-wrapper {
