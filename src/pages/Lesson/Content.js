@@ -116,8 +116,8 @@ class Content extends React.Component {
                 <Video src={"/julemy.mp4"} />
 
                 <div className = "actions">
-                    <Button name="Mind map" secondary />
-                    <Button name="Тест" primary link={window.location.pathname.replace("lessons", "tests")} />
+                    <Button content="Mind map" secondary />
+                    <Button content="Тест" primary link={window.location.pathname.replace("lessons", "tests")} />
                 </div>
 
                 <span className="separator" />
@@ -133,7 +133,7 @@ class Content extends React.Component {
                         <img alt="icon" src="/Images/LogoCyan.png" />
                         <Textarea />
                     </div>
-                    <Button name="Публикувай" onClick={this.PostComment.bind(this, null)} secondary />
+                    <Button content="Публикувай" onClick={this.PostComment.bind(this, null)} secondary />
                 </div>
 
 

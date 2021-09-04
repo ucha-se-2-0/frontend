@@ -256,11 +256,11 @@ function Actions(props)
         return (<>
             <Title content = {"Резултат: " + props.result + "%"}/>
             {message}
-            <Button name="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} primary/>
-            <Button name={next_title} height="50px" link={next_link} primary/>
+            <Button content="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} primary/>
+            <Button content={next_title} height="50px" link={next_link} primary/>
         </>)
     }
-    return <Button name="Провери отговорите" onClick={props.CheckAnswers} primary/>
+    return <Button content="Провери отговорите" onClick={props.CheckAnswers} primary/>
 }
 
 class Content extends React.Component {

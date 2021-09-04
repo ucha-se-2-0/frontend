@@ -5,25 +5,15 @@ import { createContext, Component, useState, useContext, useEffect, createRef } 
 import VideoPlayer from "react-video-js-player"
 import { GetFormattedLessons, lessons } from "./Assets"
 import { GetCookie } from "./Utilities"
+import { NavLink } from "react-router-dom"
 
 
 function Link(props) {
-  let context = useContext(UrlContext)
-
   return (
-    <div className={"link" + (props.className ? " " + props.className : "")} onClick={e => {
-      let url = window.location.pathname;
-      if (url !== "/login" && url !== "/signup") {
-        sessionStorage.setItem("lastPageBeforeAuth", url);
-      }
-
-      props.onClick && props.onClick(e);
-
-      context.Redirect(props.link)
-    }}>
-      {props.name}
+    <NavLink to={props.link ? props.link : "/"} className={"link" + (props.className ? " " + props.className : "")}>
+      {props.content}
       {props.children}
-    </div>
+    </NavLink>
   )
 }
 
@@ -31,17 +21,10 @@ function Button(props) {
   let className = "button"
   className += props.className ? " " + props.className : "";
   className += props.bold ? " bold" : "";
-  className += props.secondary ? " secondary" : " ";
-  className += props.primary ? " primary" : " ";
+  className += props.secondary ? " secondary" : "";
+  className += props.primary ? " primary" : "";
   className += props.shake ? " shake" : "";
   className += props.lightning ? " lightning" : "";
-
-  let context = useContext(UrlContext);
-
-  const OnClick = e => {
-    props.onClick && props.onClick(e);
-    context.Redirect(props.link)
-  }
 
   let lightning = null;
 
@@ -55,13 +38,18 @@ function Button(props) {
   }
 
   return (
-    <div className={className} onClick={OnClick}>
-      {props.name}
-      {props.title}
-      {props.content}
-      {props.children}
-      {lightning}
-    </div>
+    props.onClick ?
+      <a className={className} onClick={e => { props.onClick(e) }}>
+        {props.content}
+        {props.children}
+        {lightning}
+      </a> :
+      <Link link={props.link} className={className} onClick={props}>
+        {props.content}
+        {props.children}
+        {lightning}
+      </Link>
+
   );
 }
 
@@ -157,7 +145,7 @@ function Dropdown(props) {
 
   return (
     <div className={"dropdown" + (props.right ? " right" : "") + (props.className ? " " + props.className : "")}>
-      <button>{props.name}</button>
+      <button>{props.content}</button>
       <div className="options-wrapper" style={{ paddingTop: props.offset + "px" }}>
         <div className="options">
           {options}
@@ -194,7 +182,7 @@ function DefaultSearchResultsDisplayer(props) {
       {props.results.map((el, i) => {
         el = el.section;
         return <div key={i}>
-          {el.url ? <Link link={"/lessons/" + el.url} name={el.title} /> : <h4>{el.title}</h4>}
+          {el.url ? <Link link={"/lessons/" + el.url} content={el.title} /> : <h4>{el.title}</h4>}
           <div>{el.sections ? JSON.stringify(el.sections) : null}</div>
         </div>
       })}
@@ -339,7 +327,7 @@ function Search(request, constrictions) {
   }
 
   results.sort((first, second) => second.points - first.points);
-  results = results.filter(({points}) => points > k.treshold);
+  results = results.filter(({ points }) => points > k.treshold);
 
   return results;
 }
@@ -444,22 +432,22 @@ function Window(props) {
 
 function DefaultMenu(props) {
   let options = [
-    { name: "Вход", link: "/login", className: "bold" },
-    { name: "Регистрация", link: "/signup", className: "bold" },
-    { name: "Pro акаунт", shake: true, lightning: true, link: "/pro", className: "bold" },
-    { name: "Уроци", link: "/lessons", className: "bold" },
-    { name: "Университети", link: "/universities", className: "bold" },
-    { name: "Правила и условия", link: "/terms-and-conditions", className: "light" },
-    { name: "Защита на данни", link: "/copyright", className: "light" },
-    { name: "Съобщете за проблема", link: "/raise-a-problem", className: "light" }
+    { content: "Вход", link: "/login", className: "bold" },
+    { content: "Регистрация", link: "/signup", className: "bold" },
+    { content: "Pro акаунт", shake: true, lightning: true, link: "/pro", className: "bold" },
+    { content: "Уроци", link: "/lessons", className: "bold" },
+    { content: "Университети", link: "/universities", className: "bold" },
+    { content: "Правила и условия", link: "/terms-and-conditions", className: "light" },
+    { content: "Защита на данни", link: "/copyright", className: "light" },
+    { content: "Съобщете за проблема", link: "/raise-a-problem", className: "light" }
   ]
 
   if (props.themeToggle) {
-    options.push({ name: <ThemeToggle /> })
+    options.push({ content: <ThemeToggle /> })
   }
 
   return (
-    <Dropdown right={props.right} offset={20} className="navigation" name={<i className="fas fa-bars" />} options={options}>
+    <Dropdown right={props.right} offset={20} className="navigation" content={<i className="fas fa-bars" />} options={options}>
     </Dropdown>
   )
 }
@@ -479,9 +467,9 @@ function Footer() {
       </div>
 
       <div className="links">
-        <Button name="Уроци" link="/lessons" />
-        <Button name="Университети" link="/universities" />
-        <Button name="За julemy" link="/about" />
+        <Button content="Уроци" link="/lessons" />
+        <Button content="Университети" link="/universities" />
+        <Button content="За julemy" link="/about" />
       </div>
 
     </div>
