@@ -17,11 +17,15 @@
   display: inline-block;
   position: relative;
   border-radius: 10px;
-  text-align: center;
+  border: none;
   cursor: pointer;
+  transition: color 1s, background-color 1s;
+
   text-decoration: none;
   color: var(--text-button-primary);
-  transition: color 1s, background-color 1s;
+  text-align: center;
+  line-height: inherit;
+  font-size: inherit;
 }
 
 .button.bold {
@@ -607,6 +611,19 @@
 }
 
 /* DEFAULT MENU */
+
+.default-menu .theme-toggle
+{
+  align-self: center;
+  padding-right: 40px;
+}
+
+.default-menu .theme-toggle i
+{
+  box-shadow: 0px 0px 10px 10px var(--dark-purple);
+  border-radius: 50%;
+  background-color: var(--dark-purple);
+}
 
 .dropdown.right .theme-toggle {
   margin: 0 auto;

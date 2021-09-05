@@ -1,13 +1,19 @@
-.form {
+.auth-page .form {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     margin: auto;
     margin-top: 10%;
     transition: all 0.5s;
+}
+
+.dark .auth-page .form
+{
+    border: 3px solid white;
+    z-index: 1;
 }
 
 .auth-page .home {
@@ -30,29 +36,32 @@
     width: 50px;
 }
 
-.dark .home .light, .home img {
+.dark .auth-page .home .light, 
+.auth-page .home .dark {
     display: block;
 }
 
-.dark .home img, .home .light {
+.dark .auth-page .home .dark, 
+.auth-page .home .light {
     display: none;
 }
 
-.form .title {
+.auth-page .form .title {
     display: none;
     color: var(--primary);
+    z-index: 0;
     font-size: 30px;
     margin: auto 0;
 }
 
-.form .input {
+.auth-page .form .input {
     width: 90%;
     --font-size: calc(15px + 0vw);
     color: var(--text);
     margin: 0;
 }
 
-.form .checkbox {
+.auth-page .form .checkbox {
     height: 1em
 }
 
@@ -65,7 +74,7 @@
     text-align: center;
 }
 
-.form .submit {
+.auth-page .form .submit {
     padding: calc(20px - 1vw) calc(50px - 2vw);
     margin: auto 0;
     background-color: var(--primary);
@@ -82,7 +91,7 @@
     transform: translate(-50%);
 }
 
-.redirect {
+.auth-page .redirect {
     color: var(--primary);
     display: flex;
     justify-content: center;
@@ -92,7 +101,7 @@
     text-align: center;
 }
 
-.redirect .button {
+.auth-page .redirect .button {
     margin-left: 0px;
     margin-top: 10px;
     background-color: var(--hidden);
@@ -101,14 +110,14 @@
 }
 
 @media screen and (min-width: 400px) {
-    .redirect {
+    .auth-page .redirect {
         flex-direction: row;
     }
-    .redirect .button {
+    .auth-page .redirect .button {
         margin-left: 20px;
         margin-top: 0;
     }
-    .form .input {
+    .auth-page .form .input {
         width: 80%;
     }
     .auth-page .error
@@ -119,17 +128,17 @@
 
 @media screen and (min-width: 600px) {
     .auth-page .form {
-        background-color: var(--background);
+        background-color: transparent;/*var(--background);*/
         width: calc(270px + 20%);
         height: 80%;
         border-radius: 15px;
         box-shadow: 5px 0 30px 0px black;
         margin-top: auto;
     }
-    .dark .form {
+    .auth-page .dark .form {
         box-shadow: 0 0 0 2px var(--very-light-cyan);
     }
-    .form .input {
+    .auth-page .form .input {
         width: 80%;
     }
 
@@ -142,34 +151,28 @@
 
 
 @media screen and (min-height: 400px) {
-
-    .form
-    {
-        margin-top: 0;
-    }
-
     .auth-page .home
     {
         display: block;
     }
 
-    .form .title {
+    .auth-page .form .title {
         display: block;
     }
 
-    .redirect {
+    .auth-page .redirect {
         margin-bottom: 10px;
         margin-top: 5%;
     }
 
-    .form .checkbox {
+    .auth-page .form .checkbox {
         height: auto;
         /* margin: 10% 0 1% 10px; */
     }
 }
 
 @media screen and (min-height: 100px) {
-    .form .input
+    .auth-page .form .input
     {
         margin: 10px 0;
     }

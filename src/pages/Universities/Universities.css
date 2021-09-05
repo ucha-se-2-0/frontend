@@ -1,7 +1,6 @@
 
-.unis-page
+.page.unis-page
 {
-    background-color: var(--background);
     display: grid;
     grid-template-columns: calc(50px + 10%) auto;
     scroll-behavior: smooth;
@@ -15,7 +14,7 @@
 
 .unis-page>.navigation
 {
-    padding-top: 10px;
+    padding: 10px 0;
 
 
     position: sticky;
@@ -29,15 +28,20 @@
     z-index: 10;
 }
 
-.unis-page .navigation>a
+.unis-page .navigation>button
 {
+    background-color: transparent;
+    color: var(--hidden);
+    word-wrap: break-word;
     display: block;
+    width: 100%;
     padding: 5px;
+    border: none;
     cursor: pointer;
     opacity: 0.8;
 }
 
-.unis-page .navigation>a:hover
+.unis-page .navigation>button:hover
 {
     opacity: 1;
 }

@@ -1,11 +1,8 @@
-import { useEffect } from "react";
 import { DefaultPage, Title } from "../../Components";
 
-export default function () {
-    useEffect(() => {
-        import('./Legality.css');
-    }, []);
+import './Legality.css';
 
+export default function Terms() {
     return (
         <DefaultPage className = "legality-page">
             <div className="header">ОБЩИ ПРАВИЛА И УСЛОВИЯ</div>

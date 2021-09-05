@@ -1,17 +1,14 @@
-import { useEffect } from "react";
 import { ThemeToggle, Link } from "../../Components";
 
-export default function NotFound() {
-    useEffect(() => {
-        import('./NotFound.css');
-    }, [])
+import './NotFound.css';
 
+export default function NotFound() {
     return (
         <div className="page page-not-found">
             <div className="navbar">
-                <Link link="/" className = "home">
-                <img src = "/Images/LogoLightCyan.png" className = "light"></img>
-                <img src = "/Images/LogoPurple.png" className = "dark"></img>
+                <Link link="/" className="home">
+                    <img alt="logo" src="/Images/LogoLightCyan.png" className="light"></img>
+                    <img alt="logo" src="/Images/LogoPurple.png" className="dark"></img>
                 </Link>
                 <ThemeToggle />
             </div>

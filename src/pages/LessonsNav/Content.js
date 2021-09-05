@@ -1,6 +1,6 @@
 import { createRef, useEffect, useState } from "react";
 import { GetFormattedLessons, lessons } from "../../Assets";
-import { Button, Subtitle } from '../../Components'
+import { Link, Subtitle } from '../../Components'
 
 function Section(props) {
     let [expanded, Expanded] = useState(false);
@@ -16,7 +16,7 @@ function Section(props) {
             ShouldCollapse(false);
             Expanded(false);
         }
-    })
+    }, [expanded, shouldCollapse])
 
     function OnClick(e) {
         
@@ -81,7 +81,7 @@ function Content() {
 
             if (section.sections[0].url) {
                 content = section.sections.map((lesson, i) => {
-                    return <Button key={i} content={lesson.title} link={"/lessons/" + lesson.url} primary/>
+                    return <Link key={i} content={lesson.title} link={"/lessons/" + lesson.url} primary/>
                 })
             }
             else {

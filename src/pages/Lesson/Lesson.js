@@ -17,10 +17,6 @@ function Lesson() {
         SetLesson(lesson);
     }
 
-    useEffect(() => {
-        import('./Lesson.css');
-    }, [])
-
     return (
         <div className="page lesson-page">
             <DefaultNavbar/>

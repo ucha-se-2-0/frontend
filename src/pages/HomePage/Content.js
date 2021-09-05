@@ -1,11 +1,11 @@
-import { Button } from '../../Components'
+import { Link } from '../../Components'
 import React from "react"
 
 function Content() {
     return (
         <div className="content">
-            <Button bold link = "/universities" content = "Университети" secondary/>
-            <Button bold link = "/lessons" content = "Уроци" primary/>
+            <Link bold link = "/universities" content = "Университети" secondary/>
+            <Link bold link = "/lessons" content = "Уроци" primary/>
         </div>
     );
 }

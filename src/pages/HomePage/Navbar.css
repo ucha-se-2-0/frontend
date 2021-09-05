@@ -13,19 +13,15 @@
   text-align: left;
 }
 
-.home-page .logo {
-  width: calc(50px + 15vw);
-  margin: 0 auto;
-}
 
-.dark .home-page .logo.light,
-.home-page .logo
+.dark .home-page .logo .light,
+.home-page .logo .dark
 {
   display: block;
 }
 
-.dark .home-page .logo,
-.home-page .logo.light
+.dark .home-page .logo .dark,
+.home-page .logo .light
 {
   display: none;
 }
@@ -42,7 +38,7 @@
   display: block;
 }
 
-.home-page .navigation,
+.home-page .default-menu,
 .home-page .theme-toggle-wrapper
 {
   flex-basis: 20%;

@@ -1,15 +1,3 @@
-.dark .background.light,
-.background.dark
-{
-    display: none;
-}
-
-.dark .background.dark,
-.background.light
-{
-    display: block;
-}
-
 .auth-page
 {
     width: 100%;
@@ -18,4 +6,24 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    isolation: isolate;
+    background-color: transparent;
 }
+
+.auth-page .background
+{
+    z-index: 0;
+}
+
+.dark .auth-page .background.light,
+.auth-page .background.dark
+{
+    display: none;
+}
+
+.dark .auth-page .background.dark,
+.auth-page .background.light
+{
+    display: block;
+}
+

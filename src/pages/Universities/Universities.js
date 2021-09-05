@@ -1,71 +1,67 @@
-import { Component, createRef, useEffect, useState } from "react"
+import { Component } from "react"
 import { unis } from "../../Assets"
 
 import Content from './Content'
 
 import "./Content.css"
-import { DefaultNavbar } from "../../Components"
+import { DefaultNavbar, Footer } from "../../Components"
 
+import './Content.css';
+import './Universities.css';
 
 class SideNavbar extends Component {
 
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
 
-        this.state = {active: 0, scroll: 0};
+        this.state = { active: 0, scroll: 0 };
 
         this.OnScroll = this.OnScroll.bind(this);
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         document.addEventListener("scroll", this.OnScroll);
 
         this.content = document.getElementsByClassName("content")[0].childNodes;
     }
 
-    componentDidUpdate()
-    {
+    componentDidUpdate() {
         this.content = document.getElementsByClassName("content")[0].childNodes;
     }
 
-    componentWillUnmount()
-    {
+    componentWillUnmount() {
         document.removeEventListener("scroll", this.OnScroll);
     }
 
-    
+
     OnScroll(e) {
         //console.log("Before", this.state.scroll);
-        if(this.state.scroll - window.scrollY > window.innerHeight / 2 + 150)
-        {
-            this.setState({active: this.state.active - 1, scroll: this.state.scroll - parseInt(getComputedStyle(this.content[this.state.active - 1]).height) - 20});
+        if (this.state.scroll - window.scrollY > window.innerHeight / 2 + 150) {
+            this.setState({ active: this.state.active - 1, scroll: this.state.scroll - parseInt(getComputedStyle(this.content[this.state.active - 1]).height) - 20 });
         }
-        
+
         let height = parseInt(getComputedStyle(this.content[this.state.active]).height)
-        if(window.scrollY - this.state.scroll > height - window.innerHeight / 2 + 150)
-        {
-            this.setState({active: this.state.active + 1, scroll: this.state.scroll + height + 20});
+        if (window.scrollY - this.state.scroll > height - window.innerHeight / 2 + 150) {
+            this.setState({ active: this.state.active + 1, scroll: this.state.scroll + height + 20 });
         }
 
         //console.log("After", this.state.scroll);
     }
 
     NavigateTo(uni) {
-        this.setState({active: uni})
-        
+        this.setState({ active: uni })
+
         if (uni === 0) {
-            this.setState({scroll: 0});
+            this.setState({ scroll: 0 });
             window.scrollTo(0, 0);
             return;
         }
-        
+
         let height = 0;
 
         for (let u = 0; u < this.content.length; u++) {
             if (u === uni) {
-                this.setState({scroll: height + 150})
+                this.setState({ scroll: height + 150 })
                 window.scrollTo(0, height + 150);
                 break;
             }
@@ -74,30 +70,25 @@ class SideNavbar extends Component {
             }
         }
     }
-    
+
 
     render() {
         return (
             <div className="navigation">
-                {unis.map((uni, i) => <a onClick={() => { this.NavigateTo(i) }} key={i} className={this.state.active === i ? "active" : ""}>{uni.name}</a>)}
+                {unis.map((uni, i) => <button onClick={() => { this.NavigateTo(i) }} key={i} className={this.state.active === i ? "active" : ""}>{uni.name}</button>)}
             </div>
         )
     }
 }
 
 function Universities() {
-    useEffect(() => {
-        import('./Content.css');
-        import('./Universities.css');
-
-    }, [])
-
     return (
         <div className="page unis-page">
             <DefaultNavbar />
-            <div className = "header">Университети в България</div> 
+            <div className="header">Университети в България</div>
             <SideNavbar />
             <Content />
+            <Footer />
         </div>
     );
 }

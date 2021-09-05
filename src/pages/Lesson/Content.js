@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, Video, Textarea } from '../../Components'
+import { Button, Video, Textarea, Link } from '../../Components'
 import { GetLesson } from '../../Assets'
 import { GetAPIUrl } from "../../Utilities";
 
@@ -116,8 +116,8 @@ class Content extends React.Component {
                 <Video src={"/julemy.mp4"} />
 
                 <div className = "actions">
-                    <Button content="Mind map" secondary />
-                    <Button content="Тест" primary link={window.location.pathname.replace("lessons", "tests")} />
+                    <Button content="Mind map" secondary onClick = {()=>{}} />
+                    <Link content="Тест" primary link={window.location.pathname.replace("lessons", "tests")} />
                 </div>
 
                 <span className="separator" />

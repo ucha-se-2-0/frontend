@@ -10,7 +10,7 @@ function Content() {
                 </div>
 
                 <div className="uni-general">
-                    <img src={uni.img} />
+                    <img alt = "university logo" src={uni.img} />
                     <div className="description">
                         {uni.description}
                     </div>

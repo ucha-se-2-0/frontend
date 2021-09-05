@@ -1,23 +1,14 @@
 //Here are complex and often-used components that 
 //can be imported and simply used
 
-import { createContext, Component, useState, useContext, useEffect, createRef } from "react"
+import React, { createContext, useState, useContext, useEffect, createRef } from "react"
 import VideoPlayer from "react-video-js-player"
 import { GetFormattedLessons, lessons } from "./Assets"
-import { GetCookie } from "./Utilities"
-import { NavLink } from "react-router-dom"
+import { GetCookie, SetCookie, ThemeContext } from "./Utilities"
+import { NavLink, withRouter } from "react-router-dom"
 
 
-function Link(props) {
-  return (
-    <NavLink to={props.link ? props.link : "/"} className={"link" + (props.className ? " " + props.className : "")}>
-      {props.content}
-      {props.children}
-    </NavLink>
-  )
-}
-
-function Button(props) {
+function ButtonOrLink(props) {
   let className = "button"
   className += props.className ? " " + props.className : "";
   className += props.bold ? " bold" : "";
@@ -37,20 +28,77 @@ function Button(props) {
       </svg>
   }
 
-  return (
-    props.onClick ?
-      <a className={className} onClick={e => { props.onClick(e) }}>
-        {props.content}
-        {props.children}
-        {lightning}
-      </a> :
-      <Link link={props.link} className={className} onClick={props}>
-        {props.content}
-        {props.children}
-        {lightning}
-      </Link>
+  let innerContent =
+    <>
+      {props.content}
+      {props.children}
+      {lightning}
+    </>
 
-  );
+  let el = null;
+
+  if (props.link) {
+    className += " link";
+
+    if (props.onClick) {
+      console.warn("'onClick' event listenner for Button component will be ignored as 'link' property is set")
+    }
+
+    let url = window.location.pathname;
+    el =
+      <NavLink onClick={() => {
+        if (url !== "/login" && url !== "/signup") {
+          sessionStorage.setItem("lastPageBeforeAuth", url);
+          console.log(url)
+        }
+      }} to={props.link} className={className}>
+        {innerContent}
+      </NavLink>;
+  }
+  else {
+    if (props.onClick) {
+      el =
+        <button className={className} onClick={e => { props.onClick(e) }}>
+          {innerContent}
+        </button>
+    }
+    else {
+      console.error("Button must have eihter 'link' on 'onClick' property")
+    }
+  }
+
+  return el;
+}
+
+function Button(props) {
+  if (!props.onClick) {
+    console.warn("'Button' component should have 'onClick' event listenner");
+  }
+  return <ButtonOrLink {...props} />
+}
+
+function Link(props) {
+  if (!props.link) {
+    console.error("'Link' component must have 'link' property set");
+    return null;
+  }
+  return (<ButtonOrLink {...props} />)
+}
+
+function Img(props) {
+  let [src, SetSource] = useState("");
+
+  useEffect(() => {
+    let img = new Image(props.width, props.height)
+    img.src = props.src;
+    img.onload = e => {
+      SetSource(img.src);
+    }
+  }, [])
+
+  return (
+    <img alt={props.alt} className={props.className} src={src} />
+  )
 }
 
 function Input(props) {
@@ -137,10 +185,19 @@ function DropdownElement(props) {
   );
 }
 
-
 function Dropdown(props) {
   let options = props.options instanceof Array && props.options.map((el, i) => {
-    return <Button key={i} {...el} />
+    if (el.link) {
+      return <Link key={i} {...el} />
+    }
+    if (el.onClick) {
+      return <Button key={i} {...el} />
+    }
+    if (React.isValidElement(el)) {
+      return React.cloneElement(el, { key: i });
+    }
+    console.log(React.isValidElement(el));
+    return null;
   })
 
   return (
@@ -157,7 +214,6 @@ function Dropdown(props) {
 }
 
 
-export const ThemeContext = createContext(null);
 function ThemeToggle() {
   let context = useContext(ThemeContext);
   let [rot, setRot] = useState(GetCookie("theme") === "dark" ? 180 : 0);
@@ -443,11 +499,11 @@ function DefaultMenu(props) {
   ]
 
   if (props.themeToggle) {
-    options.push({ content: <ThemeToggle /> })
+    options.push(<ThemeToggle />);
   }
 
   return (
-    <Dropdown right={props.right} offset={20} className="navigation" content={<i className="fas fa-bars" />} options={options}>
+    <Dropdown right={props.right} offset={20} className="default-menu" content={<i className="fas fa-bars" />} options={options}>
     </Dropdown>
   )
 }
@@ -455,21 +511,21 @@ function DefaultMenu(props) {
 function Footer() {
   return (
     <div className="footer" >
-      <Link className="home">
-        <img src="/Images/LogoLightCyan.png" className="light" />
-        <img src="/Images/LogoDark.png" className="dark" />
+      <Link className="home" link="/">
+        <img alt="logo" src="/Images/LogoLightCyan.png" className="light" />
+        <img alt="logo" src="/Images/LogoDark.png" className="dark" />
       </Link>
 
       <div className="social">
-        <a href="#"><i className="fab fa-instagram" /></a>
-        <a href="#"><i className="fa fa-telegram" /></a>
-        <a href="#"><i className="fab fa-facebook" /></a>
+        <a target="_blank" rel="external noopener noreferrer" href="https://instagram.com/"><i className="fab fa-instagram" /></a>
+        <a target="_blank" rel="external noopener noreferrer" href="https://web.telegram.org/"><i className="fa fa-telegram" /></a>
+        <a target="_blank" rel="external noopener noreferrer" href="https://facebook"><i className="fab fa-facebook" /></a>
       </div>
 
       <div className="links">
-        <Button content="Уроци" link="/lessons" />
-        <Button content="Университети" link="/universities" />
-        <Button content="За julemy" link="/about" />
+        <Link content="Уроци" link="/lessons" />
+        <Link content="Университети" link="/universities" />
+        <Link content="За julemy" link="/about" />
       </div>
 
     </div>
@@ -512,13 +568,11 @@ function DefaultPage(props) {
   )
 }
 
-
-export const UrlContext = createContext();
-
 export {
   Link,
   Button,
   Input,
+  Img,
   Textarea,
   Dropdown,
   DropdownElement,

@@ -11,8 +11,8 @@ function Auth(props) {
 
     return (
         <div className = "page auth-page">
-            <img alt = "background light" src="Images/Waves.png" className="background light" />
-            <img alt = "background light" src="Images/WavesDarkBlue.png" className="background dark" />
+            <img alt = "background" src="Images/Waves.png" className="background light" />
+            <img alt = "background" src="Images/WavesDarkBlue.png" className="background dark" />
 
             {props.login ? <LoginForm/> : null}
             {props.signup ? <SignupForm/> : null}

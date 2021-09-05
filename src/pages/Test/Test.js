@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react'
-import {Footer, LegalityBar, DefaultNavbar, DefaultMenu} from '../../Components'
+import {Footer, LegalityBar, DefaultNavbar} from '../../Components'
 import { GetLesson } from '../../Assets';
 
 import {Content} from './Content' 
 
+import "./Content.css";
+
 function Test()
-{
-    useEffect(()=>{
-        import("./Content.css");
-        import("./Test.css");
-    }, [])
-    
+{    
     return(
         <div className = "page test-page">
             <DefaultNavbar />

@@ -1,4 +1,4 @@
-.question
+.test-page .question
 {
     width: 100%;
     border-radius: 10px;
@@ -11,7 +11,7 @@
     align-content: center;
 }
 
-.question input
+.test-page .question input
 {
     width: 90%;
     padding: 5px;
@@ -25,20 +25,20 @@
     resize: none;
 }
 
-.question>p
+.test-page .question>p
 {
     margin: 20px 10px 30px 10px;
     cursor: default;
 }
 
-.question input::-webkit-outer-spin-button,
-.question input::-webkit-inner-spin-button {
+.test-page .question input::-webkit-outer-spin-button,
+.test-page .question input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
 @media screen and (min-width: 600px)
 {
-    .question
+    .test-page .question
     {
         width: 80%;
     }
@@ -46,7 +46,7 @@
 
 
 
-.option
+.test-page .option
 {
     cursor: pointer;
     min-height: 50px;
@@ -59,24 +59,24 @@
     transition: background-color 0.5s;
 }
 
-.option:hover
+.test-page .option:hover
 {
     border: 1px #555555 dashed;
     background-color: var(--hidden);
 }
 
-.option p
+.test-page .option p
 {
     margin-top:auto;
     margin-bottom:auto;
 }
 
-.option *
+.test-page .option *
 {
     display: inline-block;
 }
 
-.checkbox
+.test-page .checkbox
 {
     overflow: hidden;
     border-radius: 50%;
@@ -88,13 +88,13 @@
 }
 
 
-#result
+.test-page #result
 {
     font-size: calc(5vw + 10px);
     margin: 50px;
 }
 
-.free-answer .correctAnswer
+.test-page .free-answer .correctAnswer
 {
     background-color: #77ff55;
     border-radius: 5px;
@@ -104,7 +104,7 @@
     display: none;
 }
 
-.test-content>.button
+.test-page .test-content>.button
 {
     padding: 10px 2vw;
     margin: 10px 0;

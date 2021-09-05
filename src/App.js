@@ -1,5 +1,5 @@
 import { React, StrictMode, useEffect } from 'react';
-import { Route, Switch, BrowserRouter as Router, Redirect } from "react-router-dom"
+import { Route, Switch, BrowserRouter as Router, Redirect, useHistory } from "react-router-dom"
 import { useState } from "react"
 
 import HomePage from './pages/HomePage/HomePage'
@@ -18,8 +18,7 @@ import './Style/Index.css'
 import './Style/Colors.css'
 import './Style/Icons.css'
 
-import { ThemeContext, UrlContext } from './Components';
-import { GetCookie, SetCookie } from './Utilities';
+import { GetCookie, SetCookie, ThemeContext } from './Utilities';
 
 
 function ThemeProvider(props) {
@@ -51,42 +50,18 @@ function ThemeProvider(props) {
   )
 }
 
-function UrlController(props) {
-  let [url, SetUrl] = useState(window.location.pathname);
-  let [redirect, ShouldRedirect] = useState(false);
-
-    
-  function Redirect_(new_url) {
-    if(!new_url)
-      return;
-    
-    window.history.pushState(null, "new page", new_url)
-    SetUrl(new_url);
-    ShouldRedirect(true);
-  }
-
-  redirect && setTimeout(()=>{ShouldRedirect(false);}, 0);
-
-
-  return (
-    <UrlContext.Provider value={{ Redirect: Redirect_ }}>
-      {redirect && <Redirect to={url} />}
-      {props.children}
-    </UrlContext.Provider>
-  )
-}
-
 export default function App() {
+  useEffect(()=>{
+    SetCookie("notFirstSiteVisit", true, 24 * 30);
+  }, [])
+
   return (
     <StrictMode>
       <ThemeProvider>
         <Router forceRefresh={false}>
-          <UrlController>
             <Switch>
               <Route path="/" exact component={HomePage} />
               <Route path="/universities" exact component={Universities} />
-              {/* <Route path="/lessons/sections/*" exact component={LessonsNav} />
-              <Route path="/lessons/sections" exact> <Redirect to="/lessons" /> </Route> */}
               <Route path="/lessons" exact component={LessonsNav} />
               <Route path="/lessons/*/" exact component={Lesson} />
               <Route path="/login" exact component={Login} />
@@ -96,7 +71,6 @@ export default function App() {
               <Route path="/privacy-policy" exact component={Privacy} />
               <Route path="/*" component={NotFound} />
             </Switch>
-          </UrlController>
         </Router>
       </ThemeProvider>
     </StrictMode>

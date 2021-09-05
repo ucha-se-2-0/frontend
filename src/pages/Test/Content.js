@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Title } from '../../Components'
+import { Button, Link, Title } from '../../Components'
 import { GetNextLesson, GetLesson } from '../../Assets'
 
 
@@ -104,7 +104,7 @@ class Question extends React.Component {
             for (let o in this.props.options) {
                 let option_correct = false
                 for (let c of this.props.correct) {
-                    if (c == o) {
+                    if (c === o) {
                         option_correct = true
                         break
                     }
@@ -256,8 +256,8 @@ function Actions(props)
         return (<>
             <Title content = {"Резултат: " + props.result + "%"}/>
             {message}
-            <Button content="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} primary/>
-            <Button content={next_title} height="50px" link={next_link} primary/>
+            <Link content="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} primary/>
+            <Link content={next_title} height="50px" link={next_link} primary/>
         </>)
     }
     return <Button content="Провери отговорите" onClick={props.CheckAnswers} primary/>

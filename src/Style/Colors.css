@@ -61,7 +61,7 @@ body
 
 body.dark
 {
-  --background: var(--sea-wave);
+  --background: var(--dark-blue);
 
   --primary: var(--very-light-cyan);
   --secondary: var(--dark-cyan);

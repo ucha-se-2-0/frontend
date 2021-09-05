@@ -1,6 +1,6 @@
 import { useState, useContext } from "react"
-import { Link } from "../../Components";
-import { Button, Input, UrlContext } from '../../Components'
+import { Redirect, useHistory, withRouter } from "react-router-dom";
+import { Button, Input, UrlContext, Link } from '../../Components'
 import { Loading } from "../../Icons";
 import { GetAPIUrl } from "../../Utilities";
 
@@ -14,14 +14,13 @@ function Form() {
 
     let [loading, IsLoading] = useState(false);
     let [error, SetError] = useState(null);
-    let [redirect, Redirect] = useState(false);
+    let [redirect, ShouldRedirect] = useState(false);
 
-    let context = useContext(UrlContext);
+    const history = useHistory()
 
     if (redirect) {
-        setTimeout(() => { context.Redirect(sessionStorage.getItem("lastPageBeforeAuth")) }, 0);
+        setTimeout(() => { history.push(sessionStorage.getItem("lastPageBeforeAuth")) }, 0);
     }
-
 
 
     if (error === null) {
@@ -80,20 +79,20 @@ function Form() {
             switch (xhr.status) {
                 case 200:
                     {
-                        Redirect(true);
+                        ShouldRedirect(true);
                         break;
                     }
                 case 400:
                     {
                         if (xhr.response.error === "emailAlreadyInUseException") {
-                            SetError({email: "Акаунт с този имейл вече съществува"});
+                            SetError({ email: "Акаунт с този имейл вече съществува" });
                         }
-                        else if(xhr.response.error === "usernameNotAvailableException")
-                        {
-                            SetError({username: "Това потребителско име вече е заето"});
+                        else if (xhr.response.error === "usernameNotAvailableException") {
+                            SetError({ username: "Това потребителско име вече е заето" });
                         }
                         break;
                     }
+                default: SetError({});
             }
         }
 
@@ -104,75 +103,82 @@ function Form() {
         return <div className="error">{msg}</div>
     }
 
+
+    let prevLocation = sessionStorage.getItem("lastPageBeforeAuth");
+    if (!prevLocation)
+        prevLocation = "/";
+
     return (
-        <div className="form">
-            <Link className="home" link="/">
-                <img alt="logo dark" src="Images/LogoPurple.png" />
-                <img alt="logo light" src="Images/LogoCyan.png" className="light" />
-            </Link>
+        redirect ?
+            <Redirect to={prevLocation} /> :
+            <div className="form">
+                <Link className="home" link="/">
+                    <img alt="logo" src="Images/LogoLightCyan.png" className="light" />
+                    <img alt="logo" src="Images/LogoDark.png" className="dark" />
+                </Link>
 
-            <div className="title">
-                Регистрация
+                <div className="title">
+                    Регистрация
+                </div>
+
+                <Input
+                    placeholder="Имейл"
+                    icon={<i className="material-icons">email</i>}
+                    OnInput={e => {
+                        SetEmail(e.target.value);
+                        error && error.email && SetError(null);
+                    }}
+                />
+
+                {error && error.email && ErrorNode(error.email)}
+
+                <Input
+                    placeholder="Потребителско име"
+                    icon={<i className="fas fa-user-alt" />}
+                    OnInput={e => {
+                        SetUsername(e.target.value);
+                        error && error.username && SetError(null);
+                    }}
+                />
+
+                {error && error.username && ErrorNode(error.username)}
+
+
+                <Input
+                    placeholder="Парола"
+                    icon={<i className="material-icons">vpn_key</i>}
+                    password
+                    OnInput={e => {
+                        SetPassword(e.target.value);
+                        error && error.password && SetError(null);
+                    }}
+                />
+
+                {error && error.password && ErrorNode(error.password)}
+
+
+                <Input
+                    placeholder="Подтвърдете паролата"
+                    icon={<i className="material-icons">vpn_key</i>}
+                    password
+                    OnInput={e => {
+                        SetPasswordV(e.target.value);
+                        error && error.passwordV && SetError(null);
+                    }}
+                />
+
+                {error && error.passwordV && ErrorNode(error.passwordV)}
+
+                <Input checkbox fontSize="15px" label="Запомни ме" OnInput={e => { Remember(e.target.checked) }} />
+
+                <Button className="submit" content="Регистрация" onClick={() => { SetError(Signup()) }} />
+
+                <div className="redirect">
+                    Вече имате акаунт? <Link secondary content="Вход" link="/login" />
+                </div>
+
+                {loading && <Loading />}
             </div>
-
-            <Input
-                placeholder="Имейл"
-                icon={<i className="material-icons">email</i>}
-                OnInput={e => {
-                    SetEmail(e.target.value);
-                    error && error.email && SetError(null);
-                }}
-            />
-
-            {error && error.email && ErrorNode(error.email)}
-
-            <Input
-                placeholder="Потребителско име"
-                icon={<i className="fas fa-user-alt" />}
-                OnInput={e => {
-                    SetUsername(e.target.value);
-                    error && error.username && SetError(null);
-                }}
-            />
-
-            {error && error.username && ErrorNode(error.username)}
-
-
-            <Input
-                placeholder="Парола"
-                icon={<i className="material-icons">vpn_key</i>}
-                password
-                OnInput={e => {
-                    SetPassword(e.target.value);
-                    error && error.password && SetError(null);
-                }}
-            />
-
-            {error && error.password && ErrorNode(error.password)}
-
-
-            <Input
-                placeholder="Подтвърдете паролата"
-                icon={<i className="material-icons">vpn_key</i>}
-                password
-                OnInput={e => {
-                    SetPasswordV(e.target.value);
-                    error && error.passwordV && SetError(null);
-                }}
-            />
-
-            {error && error.passwordV && ErrorNode(error.passwordV)}
-
-            <Input checkbox fontSize="15px" label="Запомни ме" OnInput={e => { Remember(e.target.checked) }} />
-
-            <Button className="submit" name="Регистрация" onClick={()=>{SetError(Signup())}} />
-
-            <div className="redirect">
-                Вече имате акаунт? <Button secondary name="Вход" link="/login" />
-            </div>
-
-            {loading && <Loading />}
-        </div>
 
     );
 }

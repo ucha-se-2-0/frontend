@@ -30,3 +30,15 @@
     font-size: calc(0.7vw + 15px);
     text-transform: capitalize;
 }
+
+.legality-page .content-title
+{
+    line-height: 2em;
+    margin: 20px;
+    text-align: center;
+}
+
+.legality-page .content
+{
+    margin-bottom: 10vw;
+}

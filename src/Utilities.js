@@ -1,3 +1,5 @@
+import {createContext} from "react"
+
 //Expiration time is in hours
 function SetCookie(name, value, exp_time)
 {
@@ -33,3 +35,5 @@ function GetAPIUrl(endpoint)
 }
 
 export {GetAPIUrl}
+
+export const ThemeContext = createContext(null);
