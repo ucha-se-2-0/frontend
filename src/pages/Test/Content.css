@@ -1,27 +1,17 @@
-@import '../../Style/Colors.css';
-
-.content.test-content
-{
-    flex-direction: column;
-    width: 90%;
-    margin-left: 5%;
-    padding: 10px;
-}
-
-.question
+.test-page .question
 {
     width: 100%;
     border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 10px auto;
     font-size: calc(15px + 0.7vw);
+
 
     display: flex;
     flex-direction: column;
     align-content: center;
 }
 
-.question input
+.test-page .question input
 {
     width: 90%;
     padding: 5px;
@@ -35,19 +25,20 @@
     resize: none;
 }
 
-.question>p
+.test-page .question>p
 {
     margin: 20px 10px 30px 10px;
+    cursor: default;
 }
 
-.question input::-webkit-outer-spin-button,
-.question input::-webkit-inner-spin-button {
+.test-page .question input::-webkit-outer-spin-button,
+.test-page .question input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
 @media screen and (min-width: 600px)
 {
-    .question
+    .test-page .question
     {
         width: 80%;
     }
@@ -55,8 +46,9 @@
 
 
 
-.option
+.test-page .option
 {
+    cursor: pointer;
     min-height: 50px;
     position: relative;
     margin: 10px auto;
@@ -67,42 +59,42 @@
     transition: background-color 0.5s;
 }
 
-.option:hover
+.test-page .option:hover
 {
     border: 1px #555555 dashed;
-    background-color: #aaaaaa;
+    background-color: var(--hidden);
 }
 
-.option p
+.test-page .option p
 {
     margin-top:auto;
     margin-bottom:auto;
 }
 
-.option *
+.test-page .option *
 {
     display: inline-block;
 }
 
-.checkbox
+.test-page .checkbox
 {
     overflow: hidden;
     border-radius: 50%;
     width: 15px;
     height: 15px;
-    border: 1px solid black;
+    border: 1px solid var(--secondary);
     display: flex;
     margin: auto 10px;
 }
 
 
-#result
+.test-page #result
 {
     font-size: calc(5vw + 10px);
     margin: 50px;
 }
 
-.free-answer .correctAnswer
+.test-page .free-answer .correctAnswer
 {
     background-color: #77ff55;
     border-radius: 5px;
@@ -110,4 +102,10 @@
     margin: 10px auto;
     width: 87%;
     display: none;
+}
+
+.test-page .test-content>.button
+{
+    padding: 10px 2vw;
+    margin: 10px 0;
 }

@@ -1,50 +1,54 @@
-import React from "react";
-import { GetSection } from "../../Assets";
-import { Button, Subtitle } from '../../Components'
+import { GetFormattedLessons, lessons } from "../../Assets";
+import { Link, Title } from '../../Components'
+import {Section} from "../../Components"
 
-var section = GetSection(window.location.pathname.slice("/lessons/sections/".length))
+function Content() {
+    return (
+        <div className="content">
+            <div className="background">
 
-class Content extends React.Component {
-    render() {
-        return (
-            <div className="content">
-                {this.GenLessonsLinks()}
             </div>
-        )
-    }
+            <div className="lessons-navigation">
+                <Title title="Биология" />
+                {Links(lessons.biology)}
+                <Title title="Химия" />
+                {Links(lessons.chemistry)}
+            </div>
+        </div>
+    )
 
-    GenLessonsLinks() {
-        let res = []
 
-        if (section.lessons) {
-            let links = []
-            let key = 0
+    function Links(subject) {
+        let grades = GetFormattedLessons(subject);
 
-            for (let l of section.lessons) {
-                key++
-                links.push(<Button key={key} name={l.title} link={"/lessons/" + l.url} />)
+        function CreateNode(props) {
+            let section = props.section;
+            let content;
+            if (section.sections === undefined) {
+                return null;
             }
 
-            res.push(<div className = "lessons-links" key = {0}>{links}</div>)
-        }
-        else if (section.subsections) {
-            let key = 0
-
-            for (let ss of section.subsections) {
-                let links = []
-
-                res.push(<Subtitle name = {ss.title} key = {key}/>)
-
-                for (let l of ss.lessons) {
-                    key++
-                    links.push(<Button key={key} name={l.title} link={"/lessons/" + l.url} />)
-                }
-
-                res.push(<div className = "lessons-links" key = {key + 1}>{links}</div>)
+            if (section.sections[0].url) {
+                content = section.sections.map((lesson, i) => {
+                    return <Link key={i} content={lesson.title} link={"/lessons/" + lesson.url} primary/>
+                })
             }
+            else {
+                content = section.sections.map((section, i) => {
+                    return <CreateNode key={i} section={section} />;
+                })
+            }
+
+            return (
+                <Section title={section.title}>
+                    {content}
+                </Section>
+            )
         }
 
-        return res
+        grades = grades.map((grade, i) => <CreateNode key={i} section={grade} />)
+
+        return grades
     }
 }
 

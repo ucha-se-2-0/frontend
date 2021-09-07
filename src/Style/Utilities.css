@@ -1,0 +1,21 @@
+/* This file has nothing to do with Utilities.js */
+/* Here are general css classes not related to specific components or pages  */
+
+/* HOVERABLE */
+
+.hoverable {
+    transition: opacity 0.25s;
+}
+
+/* if .hoverable is inside another .hoverable it must be 
+transparent (relatively) only if the ancestor is opaque (i.e hovered) */
+.hoverable, .hoverable:hover .hoverable {
+    opacity: 0.8;
+}
+
+/* .hoverable inside not hovered .hoverable will always be opaque (relatively) */
+.hoverable .hoverable, .hoverable:hover, .hoverable .hoverable:hover {
+    opacity: 1
+}
+
+/*  */

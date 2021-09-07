@@ -1,6 +1,5 @@
 import React from 'react'
-import { colors } from '../../Style/Colors';
-import { Button, Title } from '../../Components'
+import { Button, Link, Title } from '../../Components'
 import { GetNextLesson, GetLesson } from '../../Assets'
 
 
@@ -13,7 +12,7 @@ class Question extends React.Component {
 
         this.state = { selected: [] }
         if (this.oneCorrectAnswer) {
-            this.state.selected = -1
+            this.state.selected = -1;
         }
     }
 
@@ -29,10 +28,10 @@ class Question extends React.Component {
         for (let i = 0; i < this.props.options.length; i++) {
             let checkboxStyle
             if (this.oneCorrectAnswer) {
-                checkboxStyle = { borderRadius: "50%", backgroundColor: this.state.selected === i ? colors.dark : "transparent" }
+                checkboxStyle = { borderRadius: "50%", backgroundColor: this.state.selected === i ? this.props.turnedIn ? "var(--dark-blue)" : "var(--primary)" : "transparent" }
             }
             else {
-                checkboxStyle = { borderRadius: "2px", backgroundColor: this.state.selected[i] ? colors.dark : "transparent" }
+                checkboxStyle = { borderRadius: "2px", backgroundColor: this.state.selected[i] ? this.props.turnedIn ? "var(--dark-blue)" : "var(--primary)" : "transparent" }
             }
 
             let optionBackground = null
@@ -60,7 +59,6 @@ class Question extends React.Component {
 
                             if (!this.state.selected[i]) {
                                 anyError = true
-                                console.log(i)
                             }
 
                             break
@@ -80,8 +78,8 @@ class Question extends React.Component {
 
             options.push(
                 <div className="option" key={i} style={{ backgroundColor: optionBackground }} onClick={() => { this.OnClick(i) }}>
-                    <div className="checkbox" style={checkboxStyle}>
-                    </div>
+                    <div className="checkbox" style={checkboxStyle} />
+
                     <p>{this.props.options[i]}</p>
                 </div>
             );
@@ -89,7 +87,7 @@ class Question extends React.Component {
 
 
         return (
-            <div className="question" style={{ backgroundColor: this.props.turnedIn ? anyError ? "#ffddcc" : "#ddffbb" : "transparent" }}>
+            <div className="question" style={{ backgroundColor: this.props.turnedIn ? anyError ? "#ffddcc" : "#ddffbb" : "transparent", color: this.props.turnedIn ? "var(--dark-blue)" : "" }}>
                 <p>{this.props.question}</p>
                 {options}
             </div>
@@ -106,7 +104,7 @@ class Question extends React.Component {
             for (let o in this.props.options) {
                 let option_correct = false
                 for (let c of this.props.correct) {
-                    if (c == o) {
+                    if (c === o) {
                         option_correct = true
                         break
                     }
@@ -225,6 +223,45 @@ class FreeAnswerQuestion extends React.Component {
     }
 }
 
+function Actions(props)
+{
+    if (props.turnedIn) {
+        let next = GetNextLesson(window.location.pathname)
+        let next_title, next_link, message
+        if (next.title) {
+            next_title = "Към следващия урок (" + next.title + ")"
+            next_link = "/lessons/" + next.url
+        }
+        else {
+            console.log(next)
+            if(next.subsection)
+            {
+                message = "Това беше последният урок от подраздела \"" + next.subsection.title + '"'
+                next_title = "Към раздел \"" + next.section.sectionName + '"'
+                next_link = "/lessons/sections/" + next.section.url
+            }
+            else
+            {
+                message = "Това беше последният урок от раздела \"" + next.section.sectionName + '"'
+                next_title = "Към уроците"
+                next_link = "/lessons"
+            }
+
+        }
+
+        if (message) {
+            message = <div style = {{textAlign: "center"}} className = "content-text">{message}</div>
+        }
+
+        return (<>
+            <Title content = {"Резултат: " + props.result + "%"}/>
+            {message}
+            <Link content="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} primary/>
+            <Link content={next_title} height="50px" link={next_link} primary/>
+        </>)
+    }
+    return <Button content="Провери отговорите" onClick={props.CheckAnswers} primary/>
+}
 
 class Content extends React.Component {
     constructor(props) {
@@ -242,7 +279,7 @@ class Content extends React.Component {
 
                 {this.GetQuestions()}
 
-                {this.GetActions()}
+                {<Actions CheckAnswers = {this.CheckAnswers.bind(this)} {...this.state}/>}
             </div>
         );
     }
@@ -251,44 +288,6 @@ class Content extends React.Component {
         this.turnInCallbacks.push(callback)
     }
 
-    GetActions() {
-        if (this.state.turnedIn) {
-            let next = GetNextLesson(window.location.pathname)
-            let next_title, next_link, message
-            if (next.title) {
-                next_title = "Към следващия урок (" + next.title + ")"
-                next_link = "/lessons/" + next.url
-            }
-            else {
-                console.log(next)
-                if(next.subsection)
-                {
-                    message = "Това беше последният урок от подраздела \"" + next.subsection.title + '"'
-                    next_title = "Към раздел \"" + next.section.sectionName + '"'
-                    next_link = "/lessons/sections/" + next.section.url
-                }
-                else
-                {
-                    message = "Това беше последният урок от раздела \"" + next.section.sectionName + '"'
-                    next_title = "Към уроците"
-                    next_link = "/lessons"
-                }
-
-            }
-
-            if (message) {
-                message = <div style = {{textAlign: "center"}} className = "content-text">{message}</div>
-            }
-
-            return (<>
-                <Title subtitle content = {"Резултат: " + this.state.result + "%"} />
-                {message}
-                <Button name="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} />
-                <Button name={next_title} height="50px" link={next_link} />
-            </>)
-        }
-        return <Button name="Провери отговорите" height="50px" onClick={this.CheckAnswers.bind(this)} />
-    }
 
     GetQuestions() {
         let questions = []

@@ -1,30 +1,85 @@
-import React from "react"
+import { Component } from "react"
+import { unis } from "../../Assets"
+
 import Content from './Content'
-import { Navbar as Navbar, Footer, Header } from '../../Components'
-import { GetUni } from "../../Assets"
 
 import "./Content.css"
+import { DefaultNavbar, Footer } from "../../Components"
 
-function Universities() {
-    let uni = GetUni(window.location.pathname)
+import './Content.css';
+import './Universities.css';
 
-    let headerContent = <div>Julemy ще Ви помогне да изберете най-подходящ университет (или нещо такова)</div>
-    if (uni) {
-        headerContent = <a
-        style = {{color: "white"}}
-            href = {uni.link}
-            data-toggle="tooltip"
-            data-placement="bottom"
-            title="Посетете официалния сайт"> {uni.name} </a>
+class SideNavbar extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = { active: 0 };
+
+        this.OnScroll = this.OnScroll.bind(this);
     }
 
+    componentDidMount() {
+        document.addEventListener("scroll", this.OnScroll);
+    }
+    componentWillUnmount() {
+        document.removeEventListener("scroll", this.OnScroll);
+    }
+
+
+    OnScroll(e) {
+        let content = document.getElementsByClassName("content")[0].childNodes;
+
+        for(let u in content)
+        {
+            if(typeof content[u] !== "object")
+            {
+                break;
+            }
+            
+            let rect = content[u].getBoundingClientRect();
+
+            if(rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2)
+            {
+                this.setState({active: parseInt(u)});
+                break;
+            }
+        }
+    }
+
+    NavigateTo(uni) {
+        this.setState({ active: uni })
+
+        if (uni === 0) {
+            window.scrollTo(0, 0);
+            return;
+        }
+
+        let content = document.getElementsByClassName("content")[0];
+
+        window.scrollTo(0, - content.getBoundingClientRect().top + content.childNodes[uni].getBoundingClientRect().top + 140);     
+    }
+
+
+    
+    render() {
+        return (
+            <div className="navigation">
+                {unis.map((uni, i) => <button onClick={() => { this.NavigateTo(i) }} key={i} className={this.state.active === i ? "active" : ""}>{uni.name}</button>)}
+            </div>
+        )
+    }
+}
+
+function Universities() {
     return (
-        <React.StrictMode>
-            <Header content={headerContent} />
-            <Navbar />
+        <div className="page unis-page">
+            <DefaultNavbar />
+            <div className="header">Университети в България</div>
+            <SideNavbar />
             <Content />
             <Footer />
-        </React.StrictMode>
+        </div>
     );
 }
 

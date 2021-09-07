@@ -1,243 +1,647 @@
 //Here are complex and often-used components that 
 //can be imported and simply used
 
-import React from "react"
+import React, { useState, useContext, useEffect, createRef } from "react"
 import VideoPlayer from "react-video-js-player"
-import { colors, theme } from './Style/Colors'
-import "./Style/Components.css"
+import { GetAllLessons, GetFormattedLessons, lessons } from "./Assets"
+import { GetCookie, ThemeContext } from "./Utilities"
+import { NavLink } from "react-router-dom"
 
-class Button extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { cursor: "default" }
-    if (this.props.link !== undefined) {
-      this.state.cursor = "pointer";
-    }
-  }
-
-  render() {
-    const style = {
-      width: this.props.width,
-      height: this.props.height,
-      cursor: this.state.cursor,
-      backgroundColor: theme === "dark" ? colors.button.light : colors.button.dark,
-      color: theme === "dark" ? colors.text.dark : colors.text.light
-    };
-    return (
-      <a className="button" href={this.props.link} style={style} onClick={this.props.onClick}>
-        <div className="button-content" style={{ cursor: this.state.cursor }}>
-          {this.props.name}
-          {this.props.title}
-          {this.props.content}
-        </div>
-        <div className="button-background"> </div>
-      </a>
-    );
-  }
-}
-
-function DropdownElement(props) {
+function Lightning(props) {
   return (
-    <li style={{ backgroundColor: theme === "dark" ? colors.notSoDark : colors.notSoLight }}>
-      <Button name={props.name} link={props.link} />
-    </li>
-  );
+    <svg height="100%" width="100%" viewBox="0 0 40 30">
+      <polyline points="0,10 5,5 20,0 30,20 40,10" />
+      <polyline points="0,10 5,20 20,0 30,0 40,10" />
+      <polyline points="0,10 5,0 20,10 30,10 40,10" />
+    </svg>
+  )
 }
 
-class Dropdown extends React.Component {
-  constructor(props) {
-    super(props)
-    this.dropdownEl = React.createRef()
-    this.state = { posLeft: 0 }
-
-    window.addEventListener("resize", this.MoveMenu.bind(this))
-  }
-
-  componentDidMount() {
-    //              ???
-    setTimeout(this.MoveMenu.bind(this), 200)
-  }
-
-  MoveMenu() {
-    let dd = this.dropdownEl.current
-    if (dd) {
-      let button = dd.querySelector(".dropdown>.button")
-      let menu = dd.querySelector("ul")
-      let btnPos = button.getBoundingClientRect()
-      let offset = (menu.getBoundingClientRect().width - btnPos.width - 20) / 2;
-      this.setState({ posLeft: - offset + "px" })
-    }
-  }
-
-  render() {
-    let options = []
-    if (this.props.children instanceof Array) {
-      for (let i in this.props.children) {
-        if (this.props.children[i].type.name === "DropdownElement") {
-          options.push(this.props.children[i])
-        }
-      }
-    }
-
-    if (this.props.options) {
-      let key = 0
-      for (let opt of this.props.options) {
-        if (opt.name !== undefined && opt.link !== undefined) {
-          options.push(<DropdownElement key={key} name={opt.name} link={opt.link} />)
-        }
-
-        key++
-      }
-    }
-
-    return (
-      <div ref={this.dropdownEl} className="dropdown">
-        <Button name={this.props.name} />
-        <ul className="dropdown-options" style={{ left: this.state.posLeft }}>
-          {options}
-        </ul>
-      </div>
-    )
-  }
+function Gate(props) {
+  return (
+    <div className="gate-wrapper">
+      <div>{props.content}{props.children}</div>
+      <div>{props.content}{props.children}</div>
+    </div>
+  )
 }
 
-class SearchField extends React.Component {
-  constructor(props) {
-    super(props);
-    this.margin = this.props.margin ? this.props.margin : "10px"
-    this.stateWhenCollapsed = {
-      collapsed: true,
-      searchResult: <></>,
-      style: {
-        buttonBackground: { backgroundColor: "transparent" },
-        input: { visibility: "hidden", backgroundColor: "transperent" },
-        search: { width: "0%", marginLeft: this.margin, borderColor: "transparent" }
-      }
-    }
-    this.state = this.stateWhenCollapsed;
+function Typing(props) {
+  let [currentText, SetCurrentText] = useState(props.onHover ? props.text : "");
+  let [timer, SetTimer] = useState(null);
+  let [playingBackwards, PlayBackwards] = useState(false);
+  let [playing, ShouldPlay] = useState(false);
 
-    this.searchRequest = ""
-  }
+  useEffect(() => {
+    return () => { timer !== null && clearTimeout(timer) }
+  }, [])
 
-  componentDidMount() {
-    window.addEventListener('click', () => {
-      if (this.clickHandled) {
-        this.clickHandled = false
+  useEffect(() => {
+    if (!playing)
+      return;
+
+    if (playingBackwards) {
+      if (currentText) {
+        SetTimer(setTimeout(() => { SetCurrentText(currentText.slice(0, -1)); }, 100 / (props.speed > 0 ? props.speed : 1)));
       }
       else {
-        this.Collapse()
+        PlayBackwards(false);
       }
-    });
+    }
+    else {
+      if (currentText.length < props.text.length) {
+        SetTimer(setTimeout(() => { SetCurrentText(currentText + props.text[currentText.length]); }, 150 / (props.speed > 0 ? props.speed : 1)));
+      }
+    }
+  }, [currentText, playing, playingBackwards])
+
+  if (typeof props.text !== "string") {
+    console.error("Typing component must receive 'text' of type String, " + props.text + " given");
+    return null;
   }
 
-  render() {
-    return (
-      <>
-      <div className="search button" style={this.state.style.search} onClick={() => {
-        this.clickHandled = true
-        this.Expand()
-      }}>
-        <div className="button-content">
-          <i className="fa fa-search" onClick={() => {
-            if (!this.state.collapsed)
-              this.Search()
-          }} style={{ color: colors.cyan }}></i>
 
-          <input type="text" placeholder={this.props.placeholder} onKeyUp={event => {
-            if (event.key === "Enter")
-              this.Search();
+  function Play() {
+    console.log("playing");
+    PlayBackwards(props.back);
+    SetCurrentText(props.back ? props.text : "");
+    ShouldPlay(true);
+  }
 
-            this.searchRequest = event.target.value
-          }
-          } style={this.state.style.input} />
-        </div>
-        <div className="button-background" style={this.state.style.buttonBackground} />
+  function Stop() {
+    clearTimeout(timer);
+    SetCurrentText(props.text);
+    ShouldPlay(false);
+  }
+
+  return (
+    <div className="typing" onMouseEnter={props.onHover && Play} onMouseLeave={props.onHover && Stop}>
+      <div className="full-text">
+        {props.text}
       </div>
-      {this.state.searchResult}
-      </>
-    );
+      <div className="current-text">
+        {currentText}
+      </div>
+    </div>
+  )
+}
+
+function StyledButtonOrLink(props) {
+  let className = "";
+
+  className += props.className ? props.className : "";
+  className += props.bold ? " bold" : "";
+  className += props.secondary ? " secondary" : "";
+  className += props.primary ? " primary" : "";
+  className += props.shake ? " shake" : "";
+  className += props.lightning ? " lightning" : "";
+  className += props.gate ? " gate" : "";
+
+  let content = [];
+
+  if (props.lightning) {
+    content.push(<Lightning key={content.length} />);
   }
 
-  Expand() {
-    if (this.state.collapsed) {
-      this.setState({
-        collapsed: false,
-        style: {
-          buttonBackground: { backgroundColor: colors.purple },
-          input: { visibility: "visible", backgroundColor: colors.purple },
-          search: {
-            width: this.props.width ? this.props.width : "calc(100% - 20px)",
-            marginLeft: this.margin,
-            borderColor: "white"
+  if (props.gate) {
+    content.push(<Gate key={content.length}>{props.content}{props.children}</Gate>);
+  }
+  else if (props.typing) {
+    content.push(<Typing key={content.length} onHover={props.onHover} back={props.back} speed={props.typingSpeed} text={props.content} />)
+  }
+  else {
+    content.push(props.content);
+    content.push(props.children);
+  }
+
+
+  return (
+    <ButtonOrLink className={className} onClick={props.onClick} link={props.link}>
+      {content}
+    </ButtonOrLink>
+  )
+}
+
+function ButtonOrLink(props) {
+  let className = "button " + (props.className ? props.className : "");
+
+  let el = null;
+
+  if (props.link) {
+    className += " link";
+
+    if (props.onClick) {
+      console.warn("'onClick' event listenner for Button component will be ignored as 'link' property is set")
+    }
+
+    let url = window.location.pathname;
+    el =
+      <NavLink onClick={() => {
+        if (url !== "/login" && url !== "/signup") {
+          sessionStorage.setItem("lastPageBeforeAuth", url);
+          console.log(url)
+        }
+      }} to={props.link} className={className}>
+        {props.children}
+      </NavLink>;
+  }
+  else {
+    if (props.onClick) {
+      el =
+        <button className={className} onClick={e => { props.onClick(e) }}>
+          {props.children}
+        </button>
+    }
+    else {
+      console.error("Button must have eihter 'link' on 'onClick' property")
+    }
+  }
+
+  return el;
+}
+
+function Button(props) {
+  if (!props.onClick) {
+    console.warn("'Button' component should have 'onClick' event listenner");
+  }
+  return <StyledButtonOrLink {...props} />
+}
+
+function Link(props) {
+  if (!props.link) {
+    console.error("'Link' component must have 'link' property set");
+    return null;
+  }
+  return (<StyledButtonOrLink {...props} />)
+}
+
+function Img(props) {
+  let [src, SetSource] = useState("");
+
+  useEffect(() => {
+    let img = new Image(props.width, props.height)
+    img.src = props.src;
+    img.onload = e => {
+      SetSource(img.src);
+    }
+  }, [])
+
+  return (
+    <img alt={props.alt} className={props.className} src={src} />
+  )
+}
+
+function Input(props) {
+  let [hidden, Hide] = useState(true);
+  let [empty, IsEmpty] = useState(true);
+
+  let ref = createRef()
+
+  useEffect(() => {
+    if (props.fontSize) {
+      ref.current.style.setProperty("--font-size", props.fontSize);
+    }
+  })
+
+  let showOrHide = null;
+
+  let label = props.placeholder;
+  let icon = props.icon;
+  let checkbox = props.checkbox;
+
+
+  if (checkbox) {
+    label = props.label;
+    icon = null;
+  }
+
+  if (props.password && !props.hidden) {
+    showOrHide = <i className={"show-or-hide fas fa-eye" + (hidden ? "" : "-slash")} onClick={e => {
+      e.preventDefault();
+      e.stopPropagation();
+      Hide(!hidden);
+    }} />
+  }
+
+
+  return (
+    <div ref={ref} className={"input" + (empty ? " empty" : "")
+      + (props.sharpCorners ? "" : " rounded")
+      + (props.fog ? " fog" : "")
+      + (checkbox ? " checkbox" : "")
+      + (props.password ? " password" : "")}
+      style={{ width: props.width }}>
+
+      <input type={(props.password && hidden) ? "password" : (checkbox ? "checkbox" : "")} onChange={e => {
+        props.OnInput && props.OnInput(e);
+        IsEmpty(!(e.target.value));
+      }} />
+
+      {checkbox &&
+        <div className="box">
+          <i className="fa fa-check" />
+        </div>
+      }
+
+      {icon}
+
+      <div className="input-label">
+        {label}
+      </div>
+
+      <div className="fog" />
+
+      {showOrHide}
+    </div>
+  )
+}
+
+function Textarea(props) {
+  return (
+    <div className="textarea">
+      <textarea placeholder="Оставете коментар" onInput={e => {
+        props.OnInput && props.OnInput(e.target.value);
+        e.target.parentNode.dataset.value = e.target.value;
+      }}></textarea>
+    </div>
+  )
+}
+
+
+function Section(props) {
+  let [expanded, Expanded] = useState(false);
+  let [height, SetHeight] = useState(0);
+  let [autoHeight, AutoHeight] = useState(false);
+  let [shouldCollapse, ShouldCollapse] = useState(false);
+  let [timer, SetTimer] = useState(null);
+
+  let content = createRef();
+
+  useEffect(() => {
+    if (expanded && shouldCollapse) {
+      ShouldCollapse(false);
+      Expanded(false);
+    }
+
+    return clearTimeout.bind(null, timer);
+  }, [expanded, shouldCollapse])
+
+  function OnClick(e) {
+
+    if (!expanded) {
+      Expanded(true);
+      // console.log(getComputedStyle(content.current))
+      SetHeight(parseFloat(getComputedStyle(content.current).height) + 10 + "px");
+      SetTimer(setTimeout(() => { AutoHeight(true) }, 500));
+    }
+    else {
+      AutoHeight(false);
+      ShouldCollapse(true);
+    }
+  }
+
+  return (
+    <div className={"section" + (expanded ? " expanded" : "") + (props.className ? " " + props.className : "")}>
+      <div className="section-button" onClick={OnClick}>
+        <i className={"far fa-circle circle" + (expanded ? " up" : "")}>
+          <div className="arrow">
+            <i className="fa fa-angle-down" />
+          </div>
+        </i>
+
+        {props.title}
+      </div>
+
+      <div className="content-wrapper" onClick={() => { AutoHeight(true) }} style={{ height: (expanded ? (autoHeight ? "auto" : height) : "0px") }}>
+        <div ref={content}>
+          {props.children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
+function Dropdown(props) {
+  let options = props.options instanceof Array && props.options.map((el, i) => {
+    if (el.link) {
+      return <Link key={i} {...el} />
+    }
+    if (el.onClick) {
+      return <Button key={i} {...el} />
+    }
+    if (React.isValidElement(el)) {
+      return React.cloneElement(el, { key: i });
+    }
+    console.log(React.isValidElement(el));
+    return null;
+  })
+
+  return (
+    <div className={"dropdown" + (props.right ? " right" : "") + (props.className ? " " + props.className : "")}>
+      <button>{props.content}</button>
+      <div className="options-wrapper" style={{ paddingTop: props.offset + "px" }}>
+        <div className="options">
+          {options}
+          {props.children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
+function ThemeToggle() {
+  let context = useContext(ThemeContext);
+  let [rot, setRot] = useState(GetCookie("theme") === "dark" ? 180 : 0);
+
+  return (
+    <div className="theme-toggle">
+      <div style={{ transform: `rotateZ(${rot}deg)` }} onClick={() => { setRot(rot + 180) }}>
+        <div className="dark" onClick={context.ToggleTheme}>
+          <i className="fas fa-moon" />
+        </div>
+        <i className="light fas fa-sun" onClick={context.ToggleTheme} />
+      </div>
+    </div>
+  )
+}
+
+
+function DefaultSearchResultsDisplayer(props) {
+  let res = props.results.map((el, i) => {
+    el = el.section;
+
+    if (el.sections) {
+      return (
+        <Section className="hoverable" key={i} title={el.title}>{GetAllLessons(el).map((l, li) =>
+          <React.Fragment key={li}>
+            <Link className="hoverable" link={"/lessons/" + l.url} content={l.title} />
+          </React.Fragment>)}
+        </Section>
+      )
+    }
+
+    return (
+      <React.Fragment key={i}>
+        <Link className="hoverable" link={"/lessons/" + el.url} content={el.title} />
+      </React.Fragment>)
+  })
+
+  return (
+    <Window className="search-results" OnClose={() => { props.OnClose() }}>
+      <Subtitle title={"Резултати от търсенето"} />
+      {res.length ? res : "Няма намерени резултати"}
+    </Window>
+  )
+}
+
+function Search(request, constrictions) {
+
+  const k = { order: 0, exact: 1000, lengthDif: 0.01, length: 5, wordTreshold: 3, relWordTreshold: 0.5, treshold: 0.0, mistakeCost: 0.5 }
+
+
+  //Tries to match string1 in string2
+  function RelativeMatch(string1, string2) {
+    if (!string1.trim() || !string2.trim()) {
+      return 0;
+    }
+
+
+    if (string1.trim().toUpperCase() === string2.trim().toUpperCase()) {
+      //return k.exact;
+    }
+
+    let words1 = string1.toUpperCase().split(" ");
+    let words2 = string2.toUpperCase().split(" ");
+
+
+
+    let matches = [];
+
+    //w stands for word
+    for (let w1i in words1) {
+      let w1 = words1[w1i];
+
+      for (let w2i in words2) {
+        let w2 = words2[w2i];
+
+        let max_match = 0;
+
+        //To do: remove two similar loops
+
+        // o stands for offset
+        for (let o = w2.length - 1; o >= -w1.length; o--) {
+          let match = 0;
+          let lo = 0;
+
+          if (o > 0) {
+            for (let i = 0; i + lo < w1.length && i + o < w2.length; i++) {
+              if (w1[i + lo] === w2[i + o]) {
+                match++;
+              }
+              else {
+                match -= k.mistakeCost;
+
+                if (i + o + 1 < w2.length && w1[i + lo] === w2[i + o + 1]) {
+                  lo--;
+                } else if (i + lo + 1 < w1.length && w1[i + lo + 1] === w2[i + o]) {
+                  lo++;
+                  match++;
+                }
+              }
+            }
+          } else {
+            for (let i = 0; i - o < w1.length && i + lo < w2.length; i++) {
+              if (w1[i - o] === w2[i + lo]) {
+                match++;
+              }
+              else {
+                match -= k.mistakeCost;
+
+                if (i - o + 1 < w1.length && w1[i - o + 1] === w2[i + lo]) {
+                  lo--;
+                } else if (i + lo + 1 < w2.length && w1[i + o] === w2[i + lo + 1]) {
+                  lo++;
+                  match++;
+                }
+              }
+            }
+          }
+
+          if (match > max_match) {
+            max_match = match;
           }
         }
-      });
+
+
+
+        let match = Math.pow(max_match, k.length) / w1.length;
+
+
+
+        if (matches.length && matches[matches.length - 1].string2 < w2i) {
+          match *= 1 + k.order;
+        }
+
+        if (match) {
+          console.log(w1, w2, max_match, match);
+        }
+
+        if (max_match / w1.length > k.relWordTreshold || max_match > k.wordTreshold) {
+          matches.push({ string1: w1i, string2: w2i, match });
+        }
+      }
+    }
+
+    //return matches;
+
+
+    return matches.reduce((sum, current, i) => {
+      return sum + current.match
+    }, 0) * (1 - k.lengthDif * Math.abs(string1.length - string2.length) / string1.length);
+  }
+
+
+  let results = [];
+
+  function Match(section) {
+
+    let points = RelativeMatch(request, section.title);
+
+    if (points) {
+      results.push({ section, points });
+    }
+
+    if (section.sections instanceof Array) {
+      section.sections.forEach(Match);
     }
   }
 
-  Collapse() {
-    if (!this.state.collapsed) {
-      this.setState(this.stateWhenCollapsed);
+
+
+  if (!constrictions) {
+    constrictions = {};
+  }
+
+  if (!constrictions.lessons) {
+    let grades = GetFormattedLessons(lessons.biology);
+
+    Match({ title: "Биология", sections: grades });
+  }
+
+  results.sort((first, second) => second.points - first.points);
+  results = results.filter(({ points }) => points > k.treshold);
+
+  return results;
+}
+
+function SearchField(props) {
+  let [expanded, Expand] = useState(false);
+  let [keepExpanded, KeepExpanded] = useState(false);
+  let [searchRequest, SetSearchRequest] = useState("");
+  let [searchResult, SetSearchResult] = useState(null);
+  let [mousePressed, MouseIsPressed] = useState(false);
+
+
+  useEffect(() => {
+    document.addEventListener("mousedown", e => {
+      KeepExpanded(false);
+      //console.log(mousePressed);
+
+      Expand(false);
+      SetSearchRequest("");
+    })
+
+    document.addEventListener("mouseup", e => {
+      //console.log("mouseup");
+      MouseIsPressed(false);
+    })
+
+  }, [])
+
+  function OnHover() {
+    Expand(true);
+  }
+
+  function OnMouseLeave(e) {
+    //console.log("mouse leaved")
+    if(mousePressed)
+      return;
+    //console.log(mousePressed, e);
+    
+    if (!keepExpanded) {
+      Expand(false);
     }
   }
 
-  Search() {
-    this.setState({searchResult: this.props.search(this.searchRequest)})
-    this.Collapse()
+  function OnClick(e) {
+    KeepExpanded(true);
+    MouseIsPressed(true);
+    //console.log("Clicked");
+
+    e.stopPropagation();
   }
+
+  function OnMouseUp(e)
+  {
+    console.log("Mouse up on search field");
+
+    MouseIsPressed(false);
+
+    e.stopPropagation();
+  }
+
+  function OnSearch() {
+    if(!expanded || searchRequest.length === 0)
+    {
+      return;
+    }
+    
+    let results = Search(searchRequest);
+    console.log(results);
+
+    props.onSearch && props.onSearch(results);
+
+    if (props.SearchResultsDisplayer) {
+      SetSearchResult(<props.SearchResultsDisplayer OnClose={() => { SetSearchResult(null) }} results={results} />);
+    }
+    else {
+      SetSearchResult(<DefaultSearchResultsDisplayer OnClose={() => { SetSearchResult(null) }} results={results} />);
+    }
+  }
+
+  return (
+    <div
+      className={"search" + (searchRequest ? "" : " empty") + (expanded ? " expanded" : "")}
+      onMouseEnter={OnHover} onMouseLeave={OnMouseLeave}
+      onMouseDown={OnClick}
+      onMouseUp = {OnMouseUp}
+      style={{ width: expanded ? props.width : "0px" }}>
+
+      <i className="fas fa-search" onClick={OnSearch} />
+      <input spellCheck={false} placeholder={props.placeholder} value={searchRequest} onKeyDown={e => { (e.key === "Enter") && OnSearch(); }} onInput={e => {
+        SetSearchRequest(e.target.value);
+      }} />
+      <i className="fas fa-plus" onClick={() => { SetSearchRequest("") }} />
+
+      {searchResult}
+    </div>
+  );
+
 }
 
-class Footer extends React.Component {
-  render() {
-    return (
-      <div className="footer" style={theme === "dark" ? { backgroundColor: colors.footer.dark, color: colors.text.dark } : { backgroundColor: colors.footer.light, color: colors.text.light }}>
-        {/*TO DO*/}
-        <p>
-
-        </p>
-      </div>
-    );
-  }
-}
-
-class Navbar extends React.Component {
-  render() {
-    return (
-      <div className="navbar" style={{ backgroundColor: theme === "dark" ? colors.navbar.dark : colors.navbar.light }}>
-        {this.props.content}
-
-        <Button name="Вход" link="/Login" />
-
-        <a href="/" className="home">
-          <img src={theme === "dark" ? "/Images/LogoLight.jpg" : "/Images/LogoDark.jpg"} alt="HOME"></img>
-        </a>
-      </div>
-    );
-  }
-}
-
-class Header extends React.Component {
-  render() {
-    return (
-      <div className="header" style={theme === "dark" ? { backgroundColor: colors.header.dark, color: colors.text.dark } : { backgroundColor: colors.header.light, color: colors.text.light }}>
-        {this.props.content}
-      </div>
-    );
-  }
-}
 
 function Title(props) {
   return (
-    <div className={"content-title" + (props.subtitle ? " content-subtitle" : "")} style={{ color: theme === "dark" ? colors.title.light : colors.title.dark }}>
-      {props.name}
+    <div className={"content-title" + (props.subtitle ? " content-subtitle" : "")}>
       {props.title}
-      {props.content}
+      {props.children}
     </div>)
 }
 
-function Subtitle(props) {
-  return (<Title subtitle {...props} />)
-}
+const Subtitle = props => <Title subtitle {...props} />;
+
 
 function Video(props) {
   return (
@@ -246,4 +650,123 @@ function Video(props) {
     </div>)
 }
 
-export { Button, Dropdown, DropdownElement, SearchField, Footer, Navbar, Header, Title, Subtitle, Video };
+function Window(props) {
+
+  function Close() {
+    if (props.OnClose) {
+      props.OnClose();
+    }
+  }
+
+  return (
+    <div className="window">
+      <i className="fas fa-plus" onClick={() => { Close() }} />
+      {props.children}
+    </div>
+  )
+}
+
+
+function DefaultMenu(props) {
+  let options = [
+    { content: "Вход", link: "/login", bold: true },
+    { content: "Регистрация", link: "/signup", bold: true },
+    { content: "Pro акаунт", link: "/pro", lightning: true, bold: true },
+    { content: "Уроци", link: "/lessons", typing: true, onHover: true, back: true, bold: true },
+    { content: "Университети", link: "/universities", bold: true },
+    { content: "Правила и условия", link: "/terms-and-conditions" },
+    { content: "Защита на данни", link: "/copyright" },
+    { content: "Съобщете за проблема", link: "/raise-a-problem" }
+  ]
+
+  return (
+    <Dropdown right={props.right} offset={20} className="default-menu" content={<i className="fas fa-bars" />}>
+      {options.map((el, i) => <Link key={i} shake {...el} />)}
+      {props.themeToggle ? <ThemeToggle /> : null}
+    </Dropdown>
+  )
+}
+
+function Footer() {
+  return (
+    <div className="footer" >
+      <Link className="home" link="/">
+        <img alt="logo" src="/Images/LogoLightCyan.png" className="light" />
+        <img alt="logo" src="/Images/LogoDark.png" className="dark" />
+      </Link>
+
+      <div className="social">
+        <a target="_blank" rel="external noopener noreferrer" href="https://instagram.com/"><i className="fab fa-instagram" /></a>
+        <a target="_blank" rel="external noopener noreferrer" href="https://web.telegram.org/"><i className="fa fa-telegram" /></a>
+        <a target="_blank" rel="external noopener noreferrer" href="https://facebook"><i className="fab fa-facebook" /></a>
+      </div>
+
+      <div className="links">
+        <Link content="Уроци" link="/lessons" />
+        <Link content="Университети" link="/universities" />
+        <Link content="За julemy" link="/about" />
+      </div>
+
+    </div>
+  );
+}
+
+function LegalityBar() {
+  return (
+    <div className="legality-bar">
+      <Link link="/terms-and-conditions">Правила и условия</Link>
+      <Link link="/privacy-policy">Запазване на данни</Link>
+      <span><i className="far fa-copyright" /> Julemy.bg</span>
+    </div>
+  )
+}
+
+function DefaultNavbar(props) {
+  return (
+    <div className="navbar">
+      <DefaultMenu themeToggle />
+      {props.search && <SearchField {...props.search} />}
+      <Link className="home" link="/">
+        <img alt="logo light" src="/Images/LogoDark.png" className="dark" />
+        <img alt="logo light" src="/Images/LogoLightCyan.png" className="light" />
+      </Link>
+    </div>
+  )
+}
+
+function DefaultPage(props) {
+  return (
+    <div className={"page " + (props.className ? props.className : "")}>
+      <DefaultNavbar />
+      <div className="content">
+        {props.children}
+      </div>
+      <Footer />
+      <LegalityBar />
+    </div>
+  )
+}
+
+export {
+  Link,
+  Button,
+  Input,
+  Img,
+  Textarea,
+  Dropdown,
+  Section,
+  SearchField,
+  Title,
+  Subtitle,
+  Video,
+  ThemeToggle,
+
+  Footer,
+  LegalityBar,
+  DefaultMenu,
+  DefaultNavbar,
+  DefaultPage,
+
+  //Next are exported for testing and shouldn't be used directly
+  Search
+};

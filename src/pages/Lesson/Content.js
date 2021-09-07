@@ -1,14 +1,14 @@
 import React from "react"
-import { Button, Video } from '../../Components'
+import { Button, Video, Textarea, Link } from '../../Components'
 import { GetLesson } from '../../Assets'
-import { theme, colors } from '../../Style/Colors'
+import { GetAPIUrl } from "../../Utilities";
 
-var lesson = GetLesson(window.location.pathname);
 
 class Comment extends React.Component {
 
     constructor(props) {
         super(props)
+        this.lesson = GetLesson(window.location.pathname);
 
         this.state = { repliesCollapsed: true, liked: false, likes: this.props.comment.likes, disliked: false, dislikes: this.props.comment.dislikes }
     }
@@ -25,7 +25,7 @@ class Comment extends React.Component {
             if (!this.props.reply) {
                 replies =
                     <div className="replies">
-                        <div className="collapse-replies" style={{ color: theme === "dark" ? colors.text.dark : colors.text.dark }}
+                        <div className="collapse-replies"
                             onClick={() => { this.setState({ repliesCollapsed: !this.state.repliesCollapsed }) }}>
                             {this.state.repliesCollapsed ?
                                 <><i className="fas fa-caret-down"></i>Покажи отговорите</> :
@@ -40,7 +40,7 @@ class Comment extends React.Component {
         return (
             <div className="comment" >
                 <div>
-                    <img /*TO DO*/ alt="icon" src="/Images/favicon.ico"></img>
+                    <img /*TO DO*/ alt="icon" src="/Images/LogoCyan.png"></img>
                     <div>
                         <div className="author-name">{this.props.comment.author.username}</div>
                         <div className="text"> {this.props.comment.content} </div>
@@ -112,8 +112,13 @@ class Content extends React.Component {
 
     render() {
         return (
-            <div className="content" style={{ backgroundColor: theme === "dark" ? colors.content.dark : colors.content.light }}>
+            <div className="content">
                 <Video src={"/julemy.mp4"} />
+
+                <div className = "actions">
+                    <Button content="Mind map" secondary onClick = {()=>{}} />
+                    <Link content="Тест" primary link={window.location.pathname.replace("lessons", "tests")} />
+                </div>
 
                 <span className="separator" />
 
@@ -125,16 +130,10 @@ class Content extends React.Component {
 
                 <div id="compose-comment">
                     <div>
-                        <img alt="icon" src="/Images/favicon.ico" />
-                        <div className="textarea-wrapper">
-                            <textarea placeholder="Оставете коментар" onInput={e => {
-                                this.setState({ newCommentValue: e.target.value })
-                                e.target.parentNode.dataset.value = e.target.value
-                            }}></textarea>
-                            <div style={{ visibility: "hidden" }}>{this.state.newCommentValue}</div>
-                        </div>
+                        <img alt="icon" src="/Images/LogoCyan.png" />
+                        <Textarea />
                     </div>
-                    <Button name="Публикувай" onClick={this.PostComment.bind(this, null)} />
+                    <Button content="Публикувай" onClick={this.PostComment.bind(this, null)} secondary />
                 </div>
 
 
@@ -155,7 +154,7 @@ class Content extends React.Component {
         request.onload = () => {
             this.LoadComments()
         }
-        request.send({ video_id: lesson.id, parent_id: parent_id, content: this.state.newCommentValue });
+        request.send({ video_id: this.lesson.id, parent_id: parent_id, content: this.state.newCommentValue });
     }
 
     GetCommentsElements(comments) {
@@ -170,7 +169,7 @@ class Content extends React.Component {
 
     LoadComments() {
         var request = new XMLHttpRequest();
-        request.open("GET", "/comments");
+        request.open("GET", GetAPIUrl("/comments"));
 
         request.onload = () => {
             // let comments = request.response;
@@ -191,7 +190,7 @@ class Content extends React.Component {
             this.setState({ commentsElements: this.GetCommentsElements(comments) });
         }
 
-        request.send({ video_id: lesson.id });
+        request.send({ video_id: this.props.lesson.id });
     }
 }
 

@@ -1,243 +1,561 @@
-@import "../Style/Colors.css";
+/* INPUT */
 
-/*BUTTON*/
-
-.button {
-  padding: 0 10px;
+.input {
+  display: inline-block;
   position: relative;
+  overflow: hidden;
+  --font-size: 10px;
+  font-size: var(--font-size);
+  height: calc(4 * var(--font-size));
+  min-height: calc(4 * var(--font-size));
+  z-index: 0;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.input.rounded input {
+  border-radius: 2em;
+}
+
+.input input {
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(var(--font-size) * 2.5);
+  padding-left: calc(2em + 15px);
+  margin-top: calc(var(--font-size) * 1.5);
+  outline: none;
+  border: 1px solid var(--primary);
   border-radius: 10px;
+  background-color: transparent;
+  color: var(--text-primary);
+  font-size: var(--font-size);
+  text-align: start;
+  z-index: 1;
+  transition: margin-top 0.5s, height 0.5s;
+}
+
+.input.checkbox {
+  min-height: 1em;
+  --font-size: 40px;
+  width: auto;
+  height: auto;
+}
+
+.input.checkbox .box, .input.checkbox input {
+  left: 0;
+  top: 0;
+}
+
+.input.checkbox .box {
+  position: absolute;
+  z-index: -1;
+  background-color: transparent;
+  color: transparent;
+  border: 1px solid var(--primary);
+  border-radius: calc(1px + 0.2 * var(--font-size));
+  pointer-events: none;
+  width: var(--font-size);
+  height: var(--font-size);
+  left: 0;
+  top: 0;
+  padding: 0.2em;
+  display: block;
+}
+
+.input.checkbox .box i {
+  display: block;
+  font-size: calc(var(--font-size) * 0.5);
+  height: 100%;
+  top: 0;
+  text-align: center;
   display: flex;
   align-items: center;
-
-  text-decoration: none !important;
-  text-align: center;
+  justify-content: center;
 }
 
-.button * {
-  margin: auto;
+.input.checkbox input {
+  width: 1em;
+  height: 1em;
+  opacity: 0;
+  margin: 0;
 }
 
-.button-content {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  z-index: 10;
-  transition: color 0.5s;
+.input input:checked~.box {
+  color: var(--primary);
 }
 
-.button-background {
+.input.fog .fog {
+  pointer-events: none;
   position: absolute;
-  display: inline-block;
-  margin: auto;
-  padding: 0;
-  height: 100%;
-  left: 50%;
-  bottom: 0;
-  width: 0;
-  transition: width 0.25s, left 0.25s;
-  background-color: var(--cyan);
-  border-radius: 10px;
+  z-index: 1;
+  display: block;
+  width: 100px;
+  height: calc(100% - 12px - 1em);
+  right: 1px;
+  top: calc(1px + 1em + 10px);
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  transition: opacity 0.25s;
+  transition-delay: 0.25s;
+  background-image: linear-gradient(to left, white, #ffffff00 40px);
 }
 
-.button:hover .button-background {
+.input.rounded .fog {
+  border-bottom-right-radius: 2em;
+  border-top-right-radius: 2em;
+}
+
+.input input:focus~.fog, .input:not(.empty) .fog {
+  opacity: 0;
+  transition: opacity 0s;
+  transition-delay: 0s;
+}
+
+.input>i {
+  position: absolute;
+  display: inline;
+  left: 0.5em;
+  font-size: calc(1.5 * var(--font-size));
+  top: calc(var(--font-size) * 2.75 - 0.5em);
+  transition: top 0.5s;
+  color: var(--primary);
+}
+
+.input .show-or-hide {
+  right: 0.4em;
+  left: auto;
+  font-size: 20px;
+  z-index: 1;
+}
+
+.input .show-or-hide.fa-eye-slash {
+  right: 0.34em;
+}
+
+.input .input-label {
+  position: absolute;
+  top: calc(var(--font-size) * 2.75 - 0.5em);
+  left: 1em;
+  width: calc(100% - 1em);
+  pointer-events: none;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: var(--font-size);
+  opacity: 0.7;
+  color: var(--text-primary);
+  transition: top 0.5s, left 0.5s, opacity 0.5s;
+}
+
+.input.checkbox .input-label {
+  position: static;
+  display: inline-block;
+  width: auto;
+  margin-left: 10px;
+}
+
+.input i~.input-label {
+  left: calc(2em + 15px);
+  width: calc(100% - 2em);
+}
+
+.input input:focus~.input-label, .input:not(.empty) .input-label {
+  opacity: 1;
+  width: auto;
+  top: 0;
   left: 0;
+}
+
+/* TEXTAREA */
+
+.textarea textarea {
+  overflow: hidden;
+  resize: none;
+  border-radius: 5px;
+  outline: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.textarea::after {
+  content: attr(data-value) " ";
+  visibility: hidden;
+}
+
+.textarea textarea, .textarea::after {
+  box-sizing: border-box;
+  padding: 5px;
+  line-height: normal;
+  font-size: inherit;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-wrap;
+  display: block;
   width: 100%;
+  height: 100%;
+}
+
+.textarea {
+  width: 100%;
+  position: relative;
+}
+
+.textarea textarea:focus {
+  border-color: black;
 }
 
 /* SEARCH FIELD */
 
-.button.search {
-  position: absolute;
-  display: inline-block;
+.search {
+  display: flex;
+  align-items: center;
+  box-sizing: content-box;
+  min-width: 0.7em;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
   overflow: hidden;
-  min-width: 40px;
-  top: 12px;
-
-  border: 1px solid white;
   transition: border-color 0.5s, width 0.5s;
-  
-  left: 0px;
-  z-index: 100;
 }
 
-.search .button-content {
-  display: inline-flex;
-  width: 100%;
-  float: left;
+.search.expanded {
+  border-color: var(--primary);
 }
 
-.search .button-content i {
-  font-size: 25px;
+.search * {
+  text-align: left;
+}
+
+.search .section, .search .link {
+  border: 1px solid var(--hidden);
+  padding: 5px 10px;
+}
+
+.search .section-button {
+  padding: 0;
+}
+
+.search i {
+  cursor: pointer;
+}
+
+.search.empty>.fa-plus {
+  opacity: 0;
+  display: none;
+}
+
+.search .fa-plus {
+  transform: rotateZ(45deg);
+  transition: opacity 0.25s;
 }
 
 .search input {
-  font-size: 20px;
-  color: var(--text-l);
-  background-color: var(--purple);
-
   display: inline-block;
   height: 100%;
   width: 100%;
   padding: 0;
-  margin-left: 10px;
-  border: 0;
+  padding-left: 10px;
   outline: none;
-}
-
-.search .button-background {
-  width: 100%;
+  border: none;
+  font-size: calc(10px + 0.5vw);
+  color: var(--primary);
+  text-decoration: none;
   background-color: transparent;
-  transition: background-color 0.5s;
-  left: 0%;
 }
 
-.search input::placeholder 
-{
-  color: #cccccc;
-  opacity: 1;
+.search input::placeholder {
+  color: var(--primary);
+  opacity: 0.5;
 }
 
-.search input:-ms-input-placeholder
-{
-  color: #cccccc;
+.search input:-ms-input-placeholder {
+  color: var(--primary);
 }
 
-.search input::-ms-input-placeholder
-{
-  color: #cccccc;
-}
-
-
-/*FOOTER*/
-
-.footer {
-  margin-top: 100px;
-  position: static;
-  bottom: 0px;
-  width: 100%;
-  height: 300px;
-  background-color: var(--footer-d);
-}
-
-/*DEFAULT NAVBAR*/
-
-.home {
-  position: absolute;
-  overflow: hidden;
-  top: 10px;
-  left: 10px;
-  height: 40px;
-  width: 45px;
-  min-width: 0 !important;
-  background-color: transparent !important;
-  z-index: 10;
-  border-bottom-left-radius: 15px;
-  border-top-right-radius: 15px;
-  transition: all 0.35s;
-}
-
-.home img {
-  height: 100%;
-  width: 100%;
-}
-
-.home:hover {
-  border-bottom-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 15px;
-  border-top-left-radius: 15px;
+.search input::-ms-input-placeholder {
+  color: var(--primary);
 }
 
 /* TITLE */
 
 .content-title {
-  width: 100%;
   padding: 0px;
   margin: 10px 0;
-  
-  text-align: center;
   line-height: normal;
-  color: var(--text-d);
+  color: var(--secondary);
+  font-size: calc(15px + 1vw);
 }
 
-.content-title:not(.content-subtitle)
-{
-  font-size: calc(45px + 3vw);
-}
-
-.content-subtitle
-{
-  font-size: calc(35px + 2vw);
+.content-subtitle {
+  font-size: calc(10px + 0.7vw);
 }
 
 /* DROPDOWN */
 
 .dropdown {
-  margin-top: auto;
-  margin-bottom: auto;
-  cursor: default !important;
-  height: auto;
   padding: 0;
-  display: flex;
+  position: relative;
+  display: inline-block;
+  z-index: 100;
 }
 
-.dropdown>.button {
-  z-index: 1;
+.dropdown>button {
+  opacity: 0.8;
+  transition: opacity 0.5s;
+  cursor: default;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: inherit;
 }
 
-.dropdown-options {
+.dropdown:hover button, .dropdown button:focus {
+  opacity: 1;
+}
+
+.dropdown .options-wrapper {
+  display: none;
   position: absolute;
-  overflow: hidden;
-  padding: 0;
-  margin: calc(14px + 2.5vw) 0;
-  height: 0px;
-  transition: height 0.5s;
+  top: auto;
+  left: 0;
+}
+
+.dropdown.right .options-wrapper {
+  right: 0;
+  left: auto;
+}
+
+.dropdown .options * {
+  text-align: left;
+}
+
+.dropdown .options {
+  background-color: var(--dropdown);
   border-radius: 10px;
-  text-decoration: none;
-  list-style-type: none;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.dropdown:hover .dropdown-options {
-  height: 500px;
-  z-index: 0;
+.dropdown.right .options {
+  align-items: flex-end;
 }
 
-.dropdown-options li {
-  padding: 0 10px;
-  margin: 0 10px;
-  background-color: var(--purple);
+.dropdown:hover .options-wrapper, .dropdown button:focus~.options-wrapper {
+  display: block;
 }
 
-.dropdown-options li:first-child {
-  padding-top: 20px;
-}
-
-.dropdown-options li:last-child {
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.dropdown-options li:last-child .button {
-  margin-bottom: 10px;
-}
-
-.dropdown-options li .button {
-  width: 100%;
+.dropdown .options>* {
+  color: var(--text-dropdown);
+  cursor: pointer;
   padding: 10px;
-  margin: 0;
+  margin: 0 10px;
+}
+
+.dropdown.right .options>* {
+  text-align: right;
+}
+
+/* SECTION */
+
+.section {
+  border: 1px var(--primary) solid;
+  border-radius: 10px;
+  padding: 0 5px;
+}
+
+.section * {
+  text-align: left;
+}
+
+.section .circle {
+  position: relative;
+  margin-right: 10px;
+  transition: transform 0.5s;
+}
+
+.section .arrow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: inline-block;
+  height: 1em;
+}
+
+.section .up {
+  transform: rotateZ(-90deg);
+}
+
+.section .arrow i {
+  display: block;
+  position: relative;
+  /* So stupid */
+  --scale: 0.7;
+  font-size: calc(1em * var(--scale));
+  left: -50%;
+  top: calc(-50% * var(--scale));
+}
+
+.section .content-wrapper {
+  transition: height 0.5s;
+}
+
+.section .content-wrapper>div {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.lessons-page .lessons-navigation>.section {
+  margin-left: 0;
+}
+
+.section>* {
+  overflow: hidden;
+}
+
+.section-button, .section .button {
+  cursor: pointer;
+  padding: 7px 1vw;
+}
+
+.section, .section .button {
+  display: block;
+  margin: 15px;
+  margin-left: calc(5px + 2vw);
+}
+
+.section input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
 }
 
 /* VIDEO */
 
-.video
-{
-    width: 100%;
-    box-shadow: black 0px 0px 50px 0px;
+.video {
+  width: 100%;
+  box-shadow: black 0px 0px 50px 0px;
 }
 
-@media screen and (min-width: 700px) {
-  .video
-  {
-      width: 80%;
+@media screen and (min-width: 600px) {
+  .video {
+    width: calc(50% + 600px * 0.8 * 0.5);
   }
+}
+
+/* THEME TOGGLE */
+
+.theme-toggle {
+  display: flex;
+  justify-content: center;
+}
+
+.theme-toggle>div {
+  font-size: 30px;
+  position: relative;
+  cursor: pointer;
+  width: 2em;
+  height: 1em;
+  display: block;
+  justify-self: flex-end;
+  transform-origin: center;
+  left: -25%;
+  transition: transform 0.5s;
+}
+
+.theme-toggle .dark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--dark-purple);
+  left: 1em;
+  opacity: 1;
+}
+
+.theme-toggle .light {
+  opacity: 0;
+  color: #ffee77;
+  left: 0;
+}
+
+.theme-toggle .dark, .theme-toggle .light {
+  transition: opacity 0.5s;
+  position: absolute;
+  top: 0;
+  width: 1em;
+  height: 1em;
+}
+
+.theme-toggle .dark i {
+  text-align: center;
+  font-size: 0.6em;
+  color: #ffeecc
+}
+
+body.dark .theme-toggle .dark {
+  opacity: 0;
+}
+
+body.dark .theme-toggle .light {
+  opacity: 1;
+}
+
+/* BACKGROUND */
+
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+
+/* WINDOW */
+
+.window {
+  position: fixed;
+  width: 100%;
+  height: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  background-color: var(--primary);
+  color: var(--background);
+  display: flex;
+  flex-direction: column;
+  padding: 5vw calc(10vw - 20px);
+  overflow-y: scroll;
+}
+
+.window::-webkit-scrollbar
+{
+  visibility: hidden;
+}
+
+@media screen and (min-width: 600px) {
+  .window {
+    width: 80%;
+  }
+}
+
+.window .fa-plus {
+  transform: rotateZ(45deg);
+  position: absolute;
+  margin: 0;
+  top: 10px;
+  right: 10px;
+}
+
+.window>* {
+  color: var(--background);
+  margin: 10px 0;
 }

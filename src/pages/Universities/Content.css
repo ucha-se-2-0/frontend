@@ -1,6 +1,90 @@
-@import '../../Style/Colors.css';
-
-.uni
+.unis-page .content
 {
-    margin: 30px;
+    z-index: 1;
+    padding: 0;
+    scroll-behavior: smooth;
 }
+
+
+.unis-page .home {
+    margin-right: auto;
+}
+
+.unis-page .uni
+{
+    padding: 10px;
+    padding-bottom: 30px;
+    color: var(--primary);
+    font-weight: bold;
+    border: 3px solid var(--primary);
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.unis-page .uni:last-of-type
+{
+    margin: 0;
+}
+
+.unis-page .uni .title
+{
+    color: var(--secondary);
+    font-size: 20px;
+    margin: 25px 30%;
+    font-weight: bold;
+}
+
+.unis-page .uni a
+{
+    display: block;
+    color: var(--secondary);
+}
+
+.unis-page .uni-general
+{
+    align-items: center;
+    margin: 0;
+}
+
+.unis-page .uni-general::after
+{
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.unis-page .uni-general img
+{
+    width: 40%;
+    max-width: 300px;
+    margin-right: 4vw;
+    float: left;
+}
+
+
+.unis-page .uni-general .description
+{
+    font-size: calc(10px + 0.5vw);
+    width: 100%;
+}
+
+.unis-page .uni .separator
+{
+    height: 2px;
+    width: 90%;
+    background-color: var(--primary);
+    margin: 20px auto;
+}
+
+.unis-page .uni .spec li
+{
+    text-align: start;
+}
+
+/* @media screen and (min-width: 600px) {
+    .unis-page .uni-general
+    {
+        display: flex;
+    }
+} */

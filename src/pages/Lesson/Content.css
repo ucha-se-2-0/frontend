@@ -1,152 +1,112 @@
-#compose-comment
+.lesson-page .content {
+    color: var(--primary);
+    font-size: calc(0.3vw + 12px);
+    align-items: center;
+}
+
+.lesson-page .content .actions
 {
+    width: 100%;
+    display: flex;
+}
+
+.lesson-page .content .actions>*
+{
+    padding: 1vw 5vw;
+    margin: auto;
+}
+
+
+.lesson-page #compose-comment {
     width: 90%;
     margin-top: 30px;
     user-select: text;
 }
 
-#compose-comment .button
-{
+.lesson-page #compose-comment .button {
     float: right;
-    padding: 10px;
+    padding: 2px 10px;
     margin-top: 20px;
+    width: auto;
 }
 
-#compose-comment>div
-{
+.lesson-page #compose-comment>div {
     display: flex;
     width: 100%;
 }
 
-#compose-comment textarea
+.lesson-page #compose-comment .textarea
 {
-    overflow: hidden;
-    resize: none;
-    border: 1px solid #dddddd;
-    border-radius: 5px;
-    outline: none;
+    margin-left: 1vw;
 }
 
-#compose-comment .textarea-wrapper::after
-{
-    content: attr(data-value) "  ";
-    visibility: hidden;
-}
 
-#compose-comment textarea,
-#compose-comment .textarea-wrapper::after
-{
-    padding: 5px;
-    grid-area: 1 / 1 / 2 / 2;
-    font-size: 20px;
-    word-wrap: break-word;
-    word-break: break-all;
-    white-space: pre-wrap;
-    width: 100%;
-}
 
-.textarea-wrapper
-{
-    width: 100%;
-    margin-left: 10px;
-    display: grid;
-}
-
-#compose-comment textarea:focus
-{
-    border-color: black;
-}
-
-.textarea-wrapper>div
-{
-    background-color: grey;
-    width: 96%;
-    height: 1px;
-    margin: 0 auto;
-}
-
-.textarea-wrapper textarea:focus+div
-{
-    background-color: black;
-}
-
-div#comments
-{
-    font-size: 20px;
+.lesson-page div#comments {
     width: 90%;
     display: flex;
     flex-direction: column;
 }
 
-#comments a:visited
-{
+.lesson-page #comments a:visited {
     color: black;
-} 
+}
 
-#comments>*
-{
+.lesson-page #comments>* {
     margin-left: 0px;
 }
 
-.replies
-{
+.lesson-page .replies {
     margin-left: 40px;
 }
 
-.replies .replies
-{
+.lesson-page .replies .replies {
     margin-left: 0px;
 }
 
-.comment
-{
+.lesson-page .comment {
+    user-select: text;
     display: flex;
     width: 90%;
     flex-direction: column;
 }
 
-.comment img,
-#compose-comment img
-{
+.lesson-page .comment img, .lesson-page #compose-comment img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
 
-.comment .text
-{
+.lesson-page .comment .text {
     display: inline-block;
     margin: auto 0 auto 20px;
     word-wrap: break-word;
+    font-weight: 100;
     max-width: 90%;
     user-select: text;
 }
 
-.comment .author-name
-{
+.lesson-page .comment .author-name {
     display: block;
     width: 100%;
+    font-weight: bold;
     margin-left: 20px;
-    font-size: 20px;
-    font-weight: 1000;
     user-select: text;
 }
 
-.comment>div:first-of-type
-{
+.lesson-page .comment>div:first-of-type {
     display: flex;
     margin: 15px 0;
 }
 
-.comment>div:first-of-type>div
-{
+.lesson-page .comment>div:first-of-type>div {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.comment-like-dislike
-{
+.lesson-page .comment-like-dislike {
+    user-select: none;
     display: flex;
     margin-left: 30px;
     margin-top: 0;
@@ -155,55 +115,31 @@ div#comments
     cursor: default;
 }
 
-.dislike-comment,
-.like-comment
-{
+.lesson-page .dislike-comment, .lesson-page .like-comment {
     font-size: 15px;
     margin-right: 10px;
 }
 
-.dislike-comment[color = black],
-.like-comment[color = black]
-{
-    color: black;
-}
-
-.dislike-comment[color = grey],
-.like-comment[color = grey]
-{
-    color: grey;
-}
-
-.like-comment:hover,
-.dislike-comment:hover
-{
-
+.lesson-page .like-comment:hover, .lesson-page .dislike-comment:hover {
     cursor: default;
     color: black;
 }
 
-.comment-likes
-{
+.lesson-page .comment-likes {
     margin-right: 20px;
 }
 
-.comment-likes,
-.comment-dislikes
-{
+.lesson-page .comment-likes, .lesson-page .comment-dislikes {
     min-width: 10px;
 }
 
-.collapse-replies,
-.show-replies
-{
-    font-size: 15px;
+.lesson-page .collapse-replies, .lesson-page .show-replies {
     color: grey;
     margin-top: -10px;
+    cursor: pointer;
 }
 
-.collapse-replies i,
-.show-replies i
-{
+.lesson-page .collapse-replies i, .lesson-page .show-replies i {
     font-family: 'Font Awesome 5 Free';
     margin-right: 10px;
 }

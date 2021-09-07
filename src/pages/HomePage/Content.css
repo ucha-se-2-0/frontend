@@ -1,0 +1,23 @@
+.home-page .content {
+    flex-basis: 50%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.home-page .content .button {
+    margin: 20px 5vw;
+    padding: 10px calc(20px + 2vw);
+    font-size: 17px;
+}
+
+@media screen and (min-width: 600px) {
+    .home-page .content {
+        flex-direction: row;
+    }
+
+    .home-page .content .button:nth-child(2) {
+        margin-right: 10vw;
+    }
+}

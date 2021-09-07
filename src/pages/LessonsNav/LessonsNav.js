@@ -1,18 +1,17 @@
-import { GetSection } from "../../Assets";
-import { Navbar as Navbar, Header, Footer } from "../../Components";
+import { DefaultNavbar, Footer, LegalityBar } from "../../Components";
 import Content from './Content'
 
-var section = GetSection(window.location.pathname.slice("/lessons/sections/".length))
-
+import "./Content.css";
 
 function LessonsNav() {
     return (
-        <>
-            <Navbar />
-            <Header content = {section.sectionName} />
+        <div className = "page lessons-page">
+            <DefaultNavbar search = {{placeholder: "Потърсете урок", width: "calc(100% - 150px)"}}/>
+            <div className = "header">Уроци</div>
             <Content />
             <Footer />
-        </>
+            <LegalityBar />
+        </div>
     )
 }
 

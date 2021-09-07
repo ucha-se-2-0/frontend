@@ -1,0 +1,29 @@
+.auth-page
+{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    isolation: isolate;
+    background-color: transparent;
+}
+
+.auth-page .background
+{
+    z-index: 0;
+}
+
+.dark .auth-page .background.light,
+.auth-page .background.dark
+{
+    display: none;
+}
+
+.dark .auth-page .background.dark,
+.auth-page .background.light
+{
+    display: block;
+}
+

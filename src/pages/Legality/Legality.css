@@ -1,0 +1,44 @@
+.legality-page
+{
+    font-size: 15px;
+}
+
+.legality-page .header
+{
+    padding-bottom: 0;
+}
+
+.legality-page .last-update
+{
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.legality-page .last-update>*
+{
+    color: var(--secondary);
+}
+
+.legality-page .title,
+.legality-page .margin
+{
+    margin: 20px 0;
+}
+
+.legality-page .title
+{
+    font-size: calc(0.7vw + 15px);
+    text-transform: capitalize;
+}
+
+.legality-page .content-title
+{
+    line-height: 2em;
+    margin: 20px;
+    text-align: center;
+}
+
+.legality-page .content
+{
+    margin-bottom: 10vw;
+}
