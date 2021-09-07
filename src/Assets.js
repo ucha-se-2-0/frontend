@@ -5,9 +5,11 @@ const lessons = {
                 title: "8 клас", sections: [
                     {
                         title: "Структурна организация на човешкия организъм", lessons: [
-                            {title: "Клетка", url: "kletka", test: [
+                            {
+                                title: "Клетка", url: "kletka", test: [
                                     { q: "Коя е най-малката структурна и функционална единица на многоклетъчните организми?", opt: ["атом", "молекула", "клетка", "тъкан"], ans: 2 },
-                                    { q: "Органичните вещества, които влизат в състава на клетки-те са: ", opt: ["вода", "въглехидрати", "белтъци", "минерални соли", "мазнини", "нуклеинови киселини"], ans: [1, 2, 4, 5] },]},
+                                    { q: "Органичните вещества, които влизат в състава на клетки-те са: ", opt: ["вода", "въглехидрати", "белтъци", "минерални соли", "мазнини", "нуклеинови киселини"], ans: [1, 2, 4, 5] },]
+                            },
                             { title: "Епителна и съединителна тъкан", url: "epitelna-i-saedinitelna-takan", test: [{ question: "aaa", ans: 1.5, precision: 3 }] },
                             { title: "Мускулна и нервна тъкан", url: "muskulna-i-nervna-takan", test: [{}, {}] },
                             { title: "Организмът - единно цяло", url: "organizmat-edinno-tsyalo", test: [{}, {}] },
@@ -132,7 +134,7 @@ const lessons = {
                             { title: "Клетъчна мембрана. Мембранен транспорт", url: "kletachna-membrana" },
                             { title: "Едномембранни органели", url: "ednomembranni-organeli" },
                             { title: "Двумембранни и немембранни органели", url: "dvumembranni-i-nemembranni-organeli" },
-                            { title: "Устройство на клетката (екперимент)", url: "ustroystvo-na-kletkata-ekperiment" },
+                            { title: "Устройство на клетката (експеримент)", url: "ustroystvo-na-kletkata-ekperiment" },
                             { title: "Метаболизъм. Катаболитни процеси", url: "metabolizam-katabolitni-protsesi" },
                             { title: "Анаболитни проциси. Фотосинтеза", url: "anabolitni-protsisi-fotosinteza" },
                             { title: "Генетични процесил Репликация", url: "genetichni-protsesil-replikatsiya" },
@@ -169,8 +171,7 @@ function FindLessonInSections(sections, url, next_lesson) {
         let res = FindLessonInSection(s, url, next_lesson)
         if (res === "eos")
             return { section: s }
-        if(res !== undefined)
-        {
+        if (res !== undefined) {
             return res
         }
     }
@@ -240,8 +241,7 @@ function GetSection(url) {
     }
 }
 
-function GetFormattedLessons(subject)
-{
+function GetFormattedLessons(subject) {
     function Extract(section) {
 
         let children = section[Object.keys(section)[1]]
@@ -267,11 +267,24 @@ function GetFormattedLessons(subject)
     return grades;
 }
 
+function GetAllLessons(section) {
+    return section.sections.reduce((res, s) => {
+        if (s.sections) {
+            res.push(...GetAllLessons(s))
+            return res;
+        }
+
+        res.push(s);
+        return res;
+    }, [])
+}
+
 export {
     GetLesson,
     GetNextLesson,
     GetSection,
     GetFormattedLessons,
+    GetAllLessons,
     lessons
 }
 

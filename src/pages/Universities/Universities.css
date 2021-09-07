@@ -14,31 +14,33 @@
 
 .unis-page>.navigation
 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     padding: 10px 0;
-
+    border-radius: 0 0 10px 10px;
 
     position: sticky;
-    top: 60px;
+    top: 70px;
     align-self: baseline;
     
-    background-color: var(--important);
+    background-color: var(--dark-purple);
     color: var(--text-button-primary);
-    font-size: 12px;
-
-    z-index: 10;
+    
+    z-index: 5;
 }
 
 .unis-page .navigation>button
 {
+    display: block;
+    padding: 5px;
+    border: none;
+    font-size: 10px;
+
+    cursor: pointer;
+    opacity: 0.8;
     background-color: transparent;
     color: var(--hidden);
     word-wrap: break-word;
-    display: block;
-    width: 100%;
-    padding: 5px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
 }
 
 .unis-page .navigation>button:hover
@@ -56,6 +58,11 @@
 
 @media screen and (min-width: 600px)
 {
+    .unis-page .header
+    {
+        grid-column: 2 / 3;
+    }
+
     .unis-page .content
     {
         grid-column: 2 / 3;
@@ -63,9 +70,14 @@
 
     .unis-page>.navigation
     {
-        border-bottom-right-radius: 10px;
-        border-top-right-radius: 10px;
         grid-column: 1 / 2;
-        top: 100px;
+        border-radius: 0 10px 10px 0;
+        top: 70px;
+    }
+    
+    .unis-page .navigation>button
+    {
+        font-size: 12px;
+        width: 100%;
     }
 }

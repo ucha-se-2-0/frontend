@@ -14,64 +14,54 @@ class SideNavbar extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { active: 0, scroll: 0 };
+        this.state = { active: 0 };
 
         this.OnScroll = this.OnScroll.bind(this);
     }
 
     componentDidMount() {
         document.addEventListener("scroll", this.OnScroll);
-
-        this.content = document.getElementsByClassName("content")[0].childNodes;
     }
-
-    componentDidUpdate() {
-        this.content = document.getElementsByClassName("content")[0].childNodes;
-    }
-
     componentWillUnmount() {
         document.removeEventListener("scroll", this.OnScroll);
     }
 
 
     OnScroll(e) {
-        //console.log("Before", this.state.scroll);
-        if (this.state.scroll - window.scrollY > window.innerHeight / 2 + 150) {
-            this.setState({ active: this.state.active - 1, scroll: this.state.scroll - parseInt(getComputedStyle(this.content[this.state.active - 1]).height) - 20 });
-        }
+        let content = document.getElementsByClassName("content")[0].childNodes;
 
-        let height = parseInt(getComputedStyle(this.content[this.state.active]).height)
-        if (window.scrollY - this.state.scroll > height - window.innerHeight / 2 + 150) {
-            this.setState({ active: this.state.active + 1, scroll: this.state.scroll + height + 20 });
-        }
+        for(let u in content)
+        {
+            if(typeof content[u] !== "object")
+            {
+                break;
+            }
+            
+            let rect = content[u].getBoundingClientRect();
 
-        //console.log("After", this.state.scroll);
+            if(rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2)
+            {
+                this.setState({active: parseInt(u)});
+                break;
+            }
+        }
     }
 
     NavigateTo(uni) {
         this.setState({ active: uni })
 
         if (uni === 0) {
-            this.setState({ scroll: 0 });
             window.scrollTo(0, 0);
             return;
         }
 
-        let height = 0;
+        let content = document.getElementsByClassName("content")[0];
 
-        for (let u = 0; u < this.content.length; u++) {
-            if (u === uni) {
-                this.setState({ scroll: height + 150 })
-                window.scrollTo(0, height + 150);
-                break;
-            }
-            else {
-                height += parseInt(getComputedStyle(this.content[u]).height) + 20;
-            }
-        }
+        window.scrollTo(0, - content.getBoundingClientRect().top + content.childNodes[uni].getBoundingClientRect().top + 140);     
     }
 
 
+    
     render() {
         return (
             <div className="navigation">

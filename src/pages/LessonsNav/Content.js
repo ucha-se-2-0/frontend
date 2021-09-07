@@ -1,57 +1,6 @@
-import { createRef, useEffect, useState } from "react";
 import { GetFormattedLessons, lessons } from "../../Assets";
-import { Link, Subtitle } from '../../Components'
-
-function Section(props) {
-    let [expanded, Expanded] = useState(false);
-    let [height, SetHeight] = useState(0);
-    let [autoHeight, AutoHeight] = useState(false);
-    let [shouldCollapse, ShouldCollapse] = useState(false);
-
-    let content = createRef();
-
-    useEffect(() => {
-        if(expanded && shouldCollapse)
-        {
-            ShouldCollapse(false);
-            Expanded(false);
-        }
-    }, [expanded, shouldCollapse])
-
-    function OnClick(e) {
-        
-        if(!expanded)
-        {
-            Expanded(true);
-            SetHeight(parseInt(getComputedStyle(content.current).height) + 20 + "px");
-        }
-        else
-        {
-            AutoHeight(false);
-            ShouldCollapse(true);
-        }
-    }
-
-    return (
-        <div className={"section" + (expanded ? " expanded" : "")}>
-            <div className="section-button" onClick={OnClick}>
-                <i className={"far fa-circle circle" + (expanded ? " up" : "")}>
-                    <div className="arrow">
-                        <i className="fa fa-angle-down" />
-                    </div>
-                </i>
-
-                {props.title}
-            </div>
-
-            <div className="content-wrapper" onClick = {()=>{AutoHeight(true)}} style={{ height: (expanded ? (autoHeight ? "auto" : height) : "0px") }}>
-                <div ref={content}>
-                    {props.children}
-                </div>
-            </div>
-        </div>
-    )
-}
+import { Link, Title } from '../../Components'
+import {Section} from "../../Components"
 
 function Content() {
     return (
@@ -60,9 +9,9 @@ function Content() {
 
             </div>
             <div className="lessons-navigation">
-                <Subtitle title="Биология" />
+                <Title title="Биология" />
                 {Links(lessons.biology)}
-                <Subtitle title="Химия" />
+                <Title title="Химия" />
                 {Links(lessons.chemistry)}
             </div>
         </div>

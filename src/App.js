@@ -12,11 +12,7 @@ import Terms from './pages/Legality/Terms';
 import NotFound from './pages/NotFound/NotFound';
 import Privacy from './pages/Legality/Privacy';
 
-import './Style/Components.css'
-import './Style/Page.css'
-import './Style/Index.css'
-import './Style/Colors.css'
-import './Style/Icons.css'
+import './Style/Style.css'
 
 import { GetCookie, SetCookie, ThemeContext } from './Utilities';
 
@@ -52,7 +48,7 @@ function ThemeProvider(props) {
 
 export default function App() {
   useEffect(()=>{
-    SetCookie("notFirstSiteVisit", true, 24 * 30);
+    //SetCookie("notFirstSiteVisit", true, 24 * 30);
   }, [])
 
   return (

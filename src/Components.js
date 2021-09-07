@@ -1,39 +1,129 @@
 //Here are complex and often-used components that 
 //can be imported and simply used
 
-import React, { createContext, useState, useContext, useEffect, createRef } from "react"
+import React, { useState, useContext, useEffect, createRef } from "react"
 import VideoPlayer from "react-video-js-player"
-import { GetFormattedLessons, lessons } from "./Assets"
-import { GetCookie, SetCookie, ThemeContext } from "./Utilities"
-import { NavLink, withRouter } from "react-router-dom"
+import { GetAllLessons, GetFormattedLessons, lessons } from "./Assets"
+import { GetCookie, ThemeContext } from "./Utilities"
+import { NavLink } from "react-router-dom"
+
+function Lightning(props) {
+  return (
+    <svg height="100%" width="100%" viewBox="0 0 40 30">
+      <polyline points="0,10 5,5 20,0 30,20 40,10" />
+      <polyline points="0,10 5,20 20,0 30,0 40,10" />
+      <polyline points="0,10 5,0 20,10 30,10 40,10" />
+    </svg>
+  )
+}
+
+function Gate(props) {
+  return (
+    <div className="gate-wrapper">
+      <div>{props.content}{props.children}</div>
+      <div>{props.content}{props.children}</div>
+    </div>
+  )
+}
+
+function Typing(props) {
+  let [currentText, SetCurrentText] = useState(props.onHover ? props.text : "");
+  let [timer, SetTimer] = useState(null);
+  let [playingBackwards, PlayBackwards] = useState(false);
+  let [playing, ShouldPlay] = useState(false);
+
+  useEffect(() => {
+    return () => { timer !== null && clearTimeout(timer) }
+  }, [])
+
+  useEffect(() => {
+    if (!playing)
+      return;
+
+    if (playingBackwards) {
+      if (currentText) {
+        SetTimer(setTimeout(() => { SetCurrentText(currentText.slice(0, -1)); }, 100 / (props.speed > 0 ? props.speed : 1)));
+      }
+      else {
+        PlayBackwards(false);
+      }
+    }
+    else {
+      if (currentText.length < props.text.length) {
+        SetTimer(setTimeout(() => { SetCurrentText(currentText + props.text[currentText.length]); }, 150 / (props.speed > 0 ? props.speed : 1)));
+      }
+    }
+  }, [currentText, playing, playingBackwards])
+
+  if (typeof props.text !== "string") {
+    console.error("Typing component must receive 'text' of type String, " + props.text + " given");
+    return null;
+  }
 
 
-function ButtonOrLink(props) {
-  let className = "button"
-  className += props.className ? " " + props.className : "";
+  function Play() {
+    console.log("playing");
+    PlayBackwards(props.back);
+    SetCurrentText(props.back ? props.text : "");
+    ShouldPlay(true);
+  }
+
+  function Stop() {
+    clearTimeout(timer);
+    SetCurrentText(props.text);
+    ShouldPlay(false);
+  }
+
+  return (
+    <div className="typing" onMouseEnter={props.onHover && Play} onMouseLeave={props.onHover && Stop}>
+      <div className="full-text">
+        {props.text}
+      </div>
+      <div className="current-text">
+        {currentText}
+      </div>
+    </div>
+  )
+}
+
+function StyledButtonOrLink(props) {
+  let className = "";
+
+  className += props.className ? props.className : "";
   className += props.bold ? " bold" : "";
   className += props.secondary ? " secondary" : "";
   className += props.primary ? " primary" : "";
   className += props.shake ? " shake" : "";
   className += props.lightning ? " lightning" : "";
+  className += props.gate ? " gate" : "";
 
-  let lightning = null;
+  let content = [];
 
   if (props.lightning) {
-    lightning =
-      <svg height="100%" width="100%" viewBox="0 0 40 30">
-        <polyline points="0,10 5,5 20,0 30,20 40,10" />
-        <polyline points="0,10 5,20 20,0 30,0 40,10" />
-        <polyline points="0,10 5,0 20,10 30,10 40,10" />
-      </svg>
+    content.push(<Lightning key={content.length} />);
   }
 
-  let innerContent =
-    <>
-      {props.content}
-      {props.children}
-      {lightning}
-    </>
+  if (props.gate) {
+    content.push(<Gate key={content.length}>{props.content}{props.children}</Gate>);
+  }
+  else if (props.typing) {
+    content.push(<Typing key={content.length} onHover={props.onHover} back={props.back} speed={props.typingSpeed} text={props.content} />)
+  }
+  else {
+    content.push(props.content);
+    content.push(props.children);
+  }
+
+
+  return (
+    <ButtonOrLink className={className} onClick={props.onClick} link={props.link}>
+      {content}
+    </ButtonOrLink>
+  )
+}
+
+function ButtonOrLink(props) {
+  let className = "button " + (props.className ? props.className : "");
 
   let el = null;
 
@@ -52,14 +142,14 @@ function ButtonOrLink(props) {
           console.log(url)
         }
       }} to={props.link} className={className}>
-        {innerContent}
+        {props.children}
       </NavLink>;
   }
   else {
     if (props.onClick) {
       el =
         <button className={className} onClick={e => { props.onClick(e) }}>
-          {innerContent}
+          {props.children}
         </button>
     }
     else {
@@ -74,7 +164,7 @@ function Button(props) {
   if (!props.onClick) {
     console.warn("'Button' component should have 'onClick' event listenner");
   }
-  return <ButtonOrLink {...props} />
+  return <StyledButtonOrLink {...props} />
 }
 
 function Link(props) {
@@ -82,7 +172,7 @@ function Link(props) {
     console.error("'Link' component must have 'link' property set");
     return null;
   }
-  return (<ButtonOrLink {...props} />)
+  return (<StyledButtonOrLink {...props} />)
 }
 
 function Img(props) {
@@ -177,13 +267,60 @@ function Textarea(props) {
   )
 }
 
-function DropdownElement(props) {
+
+function Section(props) {
+  let [expanded, Expanded] = useState(false);
+  let [height, SetHeight] = useState(0);
+  let [autoHeight, AutoHeight] = useState(false);
+  let [shouldCollapse, ShouldCollapse] = useState(false);
+  let [timer, SetTimer] = useState(null);
+
+  let content = createRef();
+
+  useEffect(() => {
+    if (expanded && shouldCollapse) {
+      ShouldCollapse(false);
+      Expanded(false);
+    }
+
+    return clearTimeout.bind(null, timer);
+  }, [expanded, shouldCollapse])
+
+  function OnClick(e) {
+
+    if (!expanded) {
+      Expanded(true);
+      // console.log(getComputedStyle(content.current))
+      SetHeight(parseFloat(getComputedStyle(content.current).height) + 10 + "px");
+      SetTimer(setTimeout(() => { AutoHeight(true) }, 500));
+    }
+    else {
+      AutoHeight(false);
+      ShouldCollapse(true);
+    }
+  }
+
   return (
-    <li>
-      <Button name={props.name} link={props.link} />
-    </li>
-  );
+    <div className={"section" + (expanded ? " expanded" : "") + (props.className ? " " + props.className : "")}>
+      <div className="section-button" onClick={OnClick}>
+        <i className={"far fa-circle circle" + (expanded ? " up" : "")}>
+          <div className="arrow">
+            <i className="fa fa-angle-down" />
+          </div>
+        </i>
+
+        {props.title}
+      </div>
+
+      <div className="content-wrapper" onClick={() => { AutoHeight(true) }} style={{ height: (expanded ? (autoHeight ? "auto" : height) : "0px") }}>
+        <div ref={content}>
+          {props.children}
+        </div>
+      </div>
+    </div>
+  )
 }
+
 
 function Dropdown(props) {
   let options = props.options instanceof Array && props.options.map((el, i) => {
@@ -232,23 +369,36 @@ function ThemeToggle() {
 
 
 function DefaultSearchResultsDisplayer(props) {
+  let res = props.results.map((el, i) => {
+    el = el.section;
+
+    if (el.sections) {
+      return (
+        <Section className="hoverable" key={i} title={el.title}>{GetAllLessons(el).map((l, li) =>
+          <React.Fragment key={li}>
+            <Link className="hoverable" link={"/lessons/" + l.url} content={l.title} />
+          </React.Fragment>)}
+        </Section>
+      )
+    }
+
+    return (
+      <React.Fragment key={i}>
+        <Link className="hoverable" link={"/lessons/" + el.url} content={el.title} />
+      </React.Fragment>)
+  })
+
   return (
     <Window className="search-results" OnClose={() => { props.OnClose() }}>
       <Subtitle title={"Резултати от търсенето"} />
-      {props.results.map((el, i) => {
-        el = el.section;
-        return <div key={i}>
-          {el.url ? <Link link={"/lessons/" + el.url} content={el.title} /> : <h4>{el.title}</h4>}
-          <div>{el.sections ? JSON.stringify(el.sections) : null}</div>
-        </div>
-      })}
+      {res.length ? res : "Няма намерени резултати"}
     </Window>
   )
 }
 
 function Search(request, constrictions) {
 
-  const k = { order: 0, exact: 1000, lengthDif: 0.5, length: 10, wordTreshold: 0.1, treshold: 1000, mistakeCost: 0.5 }
+  const k = { order: 0, exact: 1000, lengthDif: 0.01, length: 5, wordTreshold: 3, relWordTreshold: 0.5, treshold: 0.0, mistakeCost: 0.5 }
 
 
   //Tries to match string1 in string2
@@ -262,19 +412,19 @@ function Search(request, constrictions) {
       //return k.exact;
     }
 
-    string1 = string1.toUpperCase().split(" ");
-    string2 = string2.toUpperCase().split(" ");
+    let words1 = string1.toUpperCase().split(" ");
+    let words2 = string2.toUpperCase().split(" ");
 
 
 
     let matches = [];
 
     //w stands for word
-    for (let w1i in string1) {
-      let w1 = string1[w1i];
-      for (let w2i in string2) {
+    for (let w1i in words1) {
+      let w1 = words1[w1i];
 
-        let w2 = string2[w2i];
+      for (let w2i in words2) {
+        let w2 = words2[w2i];
 
         let max_match = 0;
 
@@ -293,10 +443,11 @@ function Search(request, constrictions) {
               else {
                 match -= k.mistakeCost;
 
-                if (i && w1[i + lo - 1] === w2[i + o]) {
+                if (i + o + 1 < w2.length && w1[i + lo] === w2[i + o + 1]) {
                   lo--;
-                } else if (i + lo < w1.length - 1 && w1[i + lo + 1] === w2[i + o]) {
+                } else if (i + lo + 1 < w1.length && w1[i + lo + 1] === w2[i + o]) {
                   lo++;
+                  match++;
                 }
               }
             }
@@ -308,10 +459,11 @@ function Search(request, constrictions) {
               else {
                 match -= k.mistakeCost;
 
-                if (i + lo && w1[i - o] === w2[i + lo - 1]) {
+                if (i - o + 1 < w1.length && w1[i - o + 1] === w2[i + lo]) {
                   lo--;
-                } else if (i + lo < w2.length - 1 && w1[i + o] === w2[i + lo + 1]) {
+                } else if (i + lo + 1 < w2.length && w1[i + o] === w2[i + lo + 1]) {
                   lo++;
+                  match++;
                 }
               }
             }
@@ -336,7 +488,7 @@ function Search(request, constrictions) {
           console.log(w1, w2, max_match, match);
         }
 
-        if (max_match / w1.length > k.wordTreshold) {
+        if (max_match / w1.length > k.relWordTreshold || max_match > k.wordTreshold) {
           matches.push({ string1: w1i, string2: w2i, match });
         }
       }
@@ -346,12 +498,8 @@ function Search(request, constrictions) {
 
 
     return matches.reduce((sum, current, i) => {
-      // if(current.match === 1)
-      // {
-      //   return sum + k.full_word;
-      // }
       return sum + current.match
-    }, 0) * (1 - k.lengthDif * Math.abs(string1.length - string2.length) / Math.max(string1.length, string2.length));
+    }, 0) * (1 - k.lengthDif * Math.abs(string1.length - string2.length) / string1.length);
   }
 
 
@@ -393,33 +541,63 @@ function SearchField(props) {
   let [keepExpanded, KeepExpanded] = useState(false);
   let [searchRequest, SetSearchRequest] = useState("");
   let [searchResult, SetSearchResult] = useState(null);
+  let [mousePressed, MouseIsPressed] = useState(false);
 
 
   useEffect(() => {
-    document.addEventListener("click", () => {
+    document.addEventListener("mousedown", e => {
       KeepExpanded(false);
+      //console.log(mousePressed);
+
       Expand(false);
       SetSearchRequest("");
     })
+
+    document.addEventListener("mouseup", e => {
+      //console.log("mouseup");
+      MouseIsPressed(false);
+    })
+
   }, [])
 
   function OnHover() {
     Expand(true);
   }
 
-  function OnMouseLeave() {
+  function OnMouseLeave(e) {
+    //console.log("mouse leaved")
+    if(mousePressed)
+      return;
+    //console.log(mousePressed, e);
+    
     if (!keepExpanded) {
       Expand(false);
     }
   }
 
   function OnClick(e) {
-    Expand(true);
     KeepExpanded(true);
+    MouseIsPressed(true);
+    //console.log("Clicked");
+
+    e.stopPropagation();
+  }
+
+  function OnMouseUp(e)
+  {
+    console.log("Mouse up on search field");
+
+    MouseIsPressed(false);
+
     e.stopPropagation();
   }
 
   function OnSearch() {
+    if(!expanded || searchRequest.length === 0)
+    {
+      return;
+    }
+    
     let results = Search(searchRequest);
     console.log(results);
 
@@ -434,9 +612,15 @@ function SearchField(props) {
   }
 
   return (
-    <div className={"search" + (searchRequest ? "" : " empty") + (expanded ? " expanded" : "")} onMouseEnter={OnHover} onMouseLeave={OnMouseLeave} onClick={OnClick} style={{ width: expanded ? props.width : "0px" }}>
+    <div
+      className={"search" + (searchRequest ? "" : " empty") + (expanded ? " expanded" : "")}
+      onMouseEnter={OnHover} onMouseLeave={OnMouseLeave}
+      onMouseDown={OnClick}
+      onMouseUp = {OnMouseUp}
+      style={{ width: expanded ? props.width : "0px" }}>
+
       <i className="fas fa-search" onClick={OnSearch} />
-      <input placeholder={props.placeholder} value={searchRequest} onKeyDown={e => { (e.key === "Enter") && OnSearch(); }} onInput={e => {
+      <input spellCheck={false} placeholder={props.placeholder} value={searchRequest} onKeyDown={e => { (e.key === "Enter") && OnSearch(); }} onInput={e => {
         SetSearchRequest(e.target.value);
       }} />
       <i className="fas fa-plus" onClick={() => { SetSearchRequest("") }} />
@@ -451,16 +635,13 @@ function SearchField(props) {
 function Title(props) {
   return (
     <div className={"content-title" + (props.subtitle ? " content-subtitle" : "")}>
-      {props.name}
       {props.title}
-      {props.content}
       {props.children}
     </div>)
 }
 
-function Subtitle(props) {
-  return (<Title subtitle {...props} />)
-}
+const Subtitle = props => <Title subtitle {...props} />;
+
 
 function Video(props) {
   return (
@@ -488,22 +669,20 @@ function Window(props) {
 
 function DefaultMenu(props) {
   let options = [
-    { content: "Вход", link: "/login", className: "bold" },
-    { content: "Регистрация", link: "/signup", className: "bold" },
-    { content: "Pro акаунт", shake: true, lightning: true, link: "/pro", className: "bold" },
-    { content: "Уроци", link: "/lessons", className: "bold" },
-    { content: "Университети", link: "/universities", className: "bold" },
-    { content: "Правила и условия", link: "/terms-and-conditions", className: "light" },
-    { content: "Защита на данни", link: "/copyright", className: "light" },
-    { content: "Съобщете за проблема", link: "/raise-a-problem", className: "light" }
+    { content: "Вход", link: "/login", bold: true },
+    { content: "Регистрация", link: "/signup", bold: true },
+    { content: "Pro акаунт", link: "/pro", lightning: true, bold: true },
+    { content: "Уроци", link: "/lessons", typing: true, onHover: true, back: true, bold: true },
+    { content: "Университети", link: "/universities", bold: true },
+    { content: "Правила и условия", link: "/terms-and-conditions" },
+    { content: "Защита на данни", link: "/copyright" },
+    { content: "Съобщете за проблема", link: "/raise-a-problem" }
   ]
 
-  if (props.themeToggle) {
-    options.push(<ThemeToggle />);
-  }
-
   return (
-    <Dropdown right={props.right} offset={20} className="default-menu" content={<i className="fas fa-bars" />} options={options}>
+    <Dropdown right={props.right} offset={20} className="default-menu" content={<i className="fas fa-bars" />}>
+      {options.map((el, i) => <Link key={i} shake {...el} />)}
+      {props.themeToggle ? <ThemeToggle /> : null}
     </Dropdown>
   )
 }
@@ -575,7 +754,7 @@ export {
   Img,
   Textarea,
   Dropdown,
-  DropdownElement,
+  Section,
   SearchField,
   Title,
   Subtitle,

@@ -22,6 +22,11 @@
     margin-bottom: 20px;
 }
 
+.unis-page .uni:last-of-type
+{
+    margin: 0;
+}
+
 .unis-page .uni .title
 {
     color: var(--secondary);
@@ -39,7 +44,7 @@
 .unis-page .uni-general
 {
     align-items: center;
-    margin: 0 4vw;
+    margin: 0;
 }
 
 .unis-page .uni-general::after
@@ -49,9 +54,10 @@
     display: block;
 }
 
-.unis-page .unis-page .uni-general img
+.unis-page .uni-general img
 {
     width: 40%;
+    max-width: 300px;
     margin-right: 4vw;
     float: left;
 }
@@ -75,3 +81,10 @@
 {
     text-align: start;
 }
+
+/* @media screen and (min-width: 600px) {
+    .unis-page .uni-general
+    {
+        display: flex;
+    }
+} */

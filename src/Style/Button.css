@@ -1,0 +1,180 @@
+/* LINK */
+
+.link {
+    cursor: pointer;
+    color: var(--primary);
+    transition: opacity 0.25s;
+}
+
+/*BUTTON*/
+
+.button {
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    border: none;
+
+    cursor: pointer;
+    
+    text-align: center;
+    line-height: inherit;
+    color: var(--text-button-primary);
+    transition: color 1s, background-color 1s;
+    font-size: inherit;
+    text-decoration: none;
+}
+
+/* Modifiers */
+
+.button.bold {
+    font-weight: bolder;
+}
+
+.button.primary {
+    background-color: var(--button-primary);
+    color: var(--text-button-primary);
+}
+
+.button.secondary {
+    background-color: var(--button-secondary);
+    color: var(--text-button-secondary);
+}
+
+.button.shake:hover {
+    animation: shadows 0.5s infinite linear;
+    border-radius: 20px;
+    border: none;
+}
+
+
+.button .gate-wrapper
+{
+    position: relative;
+}
+
+.button .gate-wrapper>:first-child
+{
+    position: relative;
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+    transform-origin:left;
+}
+
+.button .gate-wrapper>:nth-child(2)
+{
+    position: absolute;
+    transform-origin:right;
+    top: 0;
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+
+.button .gate-wrapper:hover>*
+{
+    animation: rotate 1.5s;
+}
+
+@keyframes rotate
+{
+    from{
+        transform: rotateY(0deg);
+    }  
+
+    20%{
+        transform: rotateY(-50deg);
+    }  
+
+    40%{
+        transform: rotateY(30deg);
+    }
+    
+    60%{
+        transform: rotateY(-20deg);
+    }
+    
+    80%{
+        transform: rotateY(10deg);
+    }
+
+    to{
+        transform: rotateY(0deg);
+    }
+}
+
+
+.button .typing
+{
+    position: relative;
+}
+
+.button .typing>.full-text
+{
+    position: relative;
+    visibility: hidden;
+}
+
+.button .typing>.current-text
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+.button.lightning svg {
+    position: absolute;
+    left: 0;
+    transform-origin: left;
+    /* transform: scaleX(2); */
+    width: 100%;
+}
+
+.button.lightning svg polyline {
+    opacity: 0;
+    fill: transparent;
+    stroke: var(--very-light-cyan);
+    stroke-width: 1;
+}
+
+.button.lightning:hover polyline:nth-child(1) {
+    animation: lightning 1s 100ms infinite;
+}
+
+.button.lightning:hover polyline:nth-child(2) {
+    animation: lightning 1s 200ms infinite;
+}
+
+.button.lightning:hover polyline:nth-child(3) {
+    animation: lightning 1s 300ms infinite;
+}
+
+@keyframes lightning {
+    from {
+        opacity: 0;
+    }
+    3% {
+        opacity: 1;
+    }
+    6% {
+        opacity: 0;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes shadows {
+    from {
+        text-shadow: 2px 0px 2px var(--background), 0px 2px 4px var(--dark-green), 0px 0px 4px var(--very-dark-purple);
+    }
+    25% {
+        text-shadow: -2px 0px 2px var(--background), 0px 0px 4px var(--dark-green), 0px -2px 4px var(--very-dark-purple);
+    }
+    50% {
+        text-shadow: 2px 0px 2px var(--background), 0px -2px 4px var(--dark-green), 0px 0px 4px var(--very-dark-purple);
+    }
+    75% {
+        text-shadow: -2px 0px 2px var(--background), 0px 0px 4px var(--dark-green), 0px 2px 4px var(--very-dark-purple);
+    }
+    to {
+        text-shadow: 2px 0px 2px var(--background), 0px 5px 4px var(--dark-green), 0px 0px 4px var(--very-dark-purple);
+    }
+}
