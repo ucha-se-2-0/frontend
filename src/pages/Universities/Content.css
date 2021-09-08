@@ -35,10 +35,17 @@
     font-weight: bold;
 }
 
-.unis-page .uni a
+.unis-page .links
 {
-    display: block;
+    font-size: 12px;
+    margin-top: 40px;
+}
+
+.unis-page .links>a
+{
     color: var(--secondary);
+    margin-top: 10px;
+    display: block;
 }
 
 .unis-page .uni-general
@@ -77,8 +84,21 @@
     margin: 20px auto;
 }
 
-.unis-page .uni .spec li
+.unis-page .spec
 {
+    color:var(--secondary);
+}
+
+.unis-page .spec :first-child
+{
+    margin-top: 20px;
+}
+
+.unis-page .spec li
+{
+    color: var(--primary);
+    margin: 10px 0;
+    font-size: 0.8em;
     text-align: start;
 }
 

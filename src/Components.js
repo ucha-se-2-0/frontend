@@ -33,6 +33,11 @@ function Typing(props) {
   let [playing, ShouldPlay] = useState(false);
 
   useEffect(() => {
+    if(!props.onHover)
+    {
+      Play();
+    }
+
     return () => { timer !== null && clearTimeout(timer) }
   }, [])
 
@@ -75,7 +80,7 @@ function Typing(props) {
   }
 
   return (
-    <div className="typing" onMouseEnter={props.onHover && Play} onMouseLeave={props.onHover && Stop}>
+    <div className= {"typing" + (props.className ? " " + props.className : "")} onMouseEnter={props.onHover && Play} onMouseLeave={props.onHover && Stop}>
       <div className="full-text">
         {props.text}
       </div>
@@ -91,6 +96,7 @@ function StyledButtonOrLink(props) {
 
   className += props.className ? props.className : "";
   className += props.bold ? " bold" : "";
+  className += props.hoverable ? " hoverable" : "";
   className += props.secondary ? " secondary" : "";
   className += props.primary ? " primary" : "";
   className += props.shake ? " shake" : "";
@@ -223,6 +229,12 @@ function Input(props) {
     }} />
   }
 
+  let type = (props.password && hidden) ? "password" : (checkbox ? "checkbox" : "");
+  if(props.number)
+  {
+    type = "number";
+  }
+
 
   return (
     <div ref={ref} className={"input" + (empty ? " empty" : "")
@@ -232,10 +244,15 @@ function Input(props) {
       + (props.password ? " password" : "")}
       style={{ width: props.width }}>
 
-      <input type={(props.password && hidden) ? "password" : (checkbox ? "checkbox" : "")} onChange={e => {
-        props.OnInput && props.OnInput(e);
+      <input type={type} onChange={e => {
+        props.onInput && props.onInput(e);
         IsEmpty(!(e.target.value));
-      }} />
+        if(props.checkbox && (e.target.checked === false))
+        {
+          console.log("empty");
+          IsEmpty(true);
+        }
+      }} style = {{paddingLeft: (icon ? "" : "1em")}}/>
 
       {checkbox &&
         <div className="box">
@@ -259,7 +276,7 @@ function Input(props) {
 function Textarea(props) {
   return (
     <div className="textarea">
-      <textarea placeholder="Оставете коментар" onInput={e => {
+      <textarea placeholder={props.placeholder} onInput={e => {
         props.OnInput && props.OnInput(e.target.value);
         e.target.parentNode.dataset.value = e.target.value;
       }}></textarea>
@@ -313,7 +330,7 @@ function Section(props) {
       </div>
 
       <div className="content-wrapper" onClick={() => { AutoHeight(true) }} style={{ height: (expanded ? (autoHeight ? "auto" : height) : "0px") }}>
-        <div ref={content}>
+        <div ref={content} className = "section-content">
           {props.children}
         </div>
       </div>
@@ -748,6 +765,8 @@ function DefaultPage(props) {
 }
 
 export {
+  Typing,
+
   Link,
   Button,
   Input,

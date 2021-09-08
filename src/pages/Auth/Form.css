@@ -75,10 +75,9 @@
 }
 
 .auth-page .form .submit {
-    padding: calc(20px - 1vw) calc(50px - 2vw);
+    padding: 10px calc(30px - 1vw);
     margin: auto 0;
-    background-color: var(--primary);
-    border-radius: calc(25px - 1.5vw);
+    border-radius: calc(15px - 0.7vw);
 }
 
 .auth-page .form .loading

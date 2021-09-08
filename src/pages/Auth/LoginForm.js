@@ -102,7 +102,7 @@ function Form(props) {
 
                 {error && <div className="error">Грешно потребителско име или парола</div>}
 
-                <Button className="submit" content="Вход" onClick={() => { SetError(Login()) }} />
+                <Button primary className="submit" content="Вход" onClick={() => { SetError(Login()) }} />
 
                 <div className="redirect">
                     Още нямате акаунт? <Link secondary content="Регистрация" link="/signup" />

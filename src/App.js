@@ -1,5 +1,5 @@
 import { React, StrictMode, useEffect } from 'react';
-import { Route, Switch, BrowserRouter as Router, Redirect, useHistory } from "react-router-dom"
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom"
 import { useState } from "react"
 
 import HomePage from './pages/HomePage/HomePage'
@@ -48,7 +48,7 @@ function ThemeProvider(props) {
 
 export default function App() {
   useEffect(()=>{
-    //SetCookie("notFirstSiteVisit", true, 24 * 30);
+    SetCookie("notFirstSiteVisit", true, 24 * 30);
   }, [])
 
   return (

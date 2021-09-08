@@ -25,9 +25,10 @@
 
 .lesson-page #compose-comment .button {
     float: right;
-    padding: 2px 10px;
+    padding: 5px 10px;
     margin-top: 20px;
     width: auto;
+    border-radius: 5px;
 }
 
 .lesson-page #compose-comment>div {
@@ -48,27 +49,92 @@
     flex-direction: column;
 }
 
-.lesson-page #comments a:visited {
-    color: black;
-}
-
 .lesson-page #comments>* {
     margin-left: 0px;
 }
 
-.lesson-page .replies {
-    margin-left: 40px;
-}
-
-.lesson-page .replies .replies {
-    margin-left: 0px;
-}
 
 .lesson-page .comment {
     user-select: text;
+    display: grid;
+    grid-template-columns: 40px auto;
+    /* grid-template-rows: auto 20px; */
+    width: 100%;
+    flex-direction: row;
+    margin: 20px 0;
+    /* margin-bottom: 10px; */
+}
+
+.lesson-page .comment .text {
+    word-wrap: break-word;
+    font-size: 12px;
+    font-weight: 400;
+    max-width: 90%;
+}
+
+.lesson-page .comment .author-name {
+    display: block;
+    width: 100%;
+    font-weight: bold;
+}
+
+.lesson-page .comment .author-name,
+.lesson-page .comment .text {
+    margin: 5px 0;
+}
+
+.lesson-page .comment-actions
+{
+    grid-column: 2;
+    position: relative;
+}
+
+.lesson-page .comment-like-dislike
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.lesson-page .comment-actions
+{
+    font-size: 12px;
+}
+
+.lesson-page .reply
+{
     display: flex;
-    width: 90%;
     flex-direction: column;
+    align-items: flex-start;
+}
+
+.lesson-page .reply .button
+{
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.lesson-page .reply-actions
+{
+    align-self: flex-end;
+}
+
+.lesson-page .reply>*
+{
+    display: none;
+    margin: 5px 0;
+}
+
+.lesson-page .reply.active>*,
+.lesson-page .reply>.write-reply-button
+{
+    display:inline-block;
+    text-align: left;
+}
+
+.lesson-page .reply-actions .button
+{
+    margin-left: 10px;
 }
 
 .lesson-page .comment img, .lesson-page #compose-comment img {
@@ -77,69 +143,87 @@
     border-radius: 50%;
 }
 
-.lesson-page .comment .text {
-    display: inline-block;
-    margin: auto 0 auto 20px;
-    word-wrap: break-word;
-    font-weight: 100;
-    max-width: 90%;
-    user-select: text;
-}
 
-.lesson-page .comment .author-name {
-    display: block;
-    width: 100%;
-    font-weight: bold;
-    margin-left: 20px;
-    user-select: text;
-}
 
-.lesson-page .comment>div:first-of-type {
-    display: flex;
-    margin: 15px 0;
-}
-
-.lesson-page .comment>div:first-of-type>div {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
 
 .lesson-page .comment-like-dislike {
+    grid-column: 2;
+
     user-select: none;
     display: flex;
-    margin-left: 30px;
-    margin-top: 0;
-    color: grey;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
     font-size: 15px;
     cursor: default;
 }
 
+.lesson-page .comment-like-dislike>i
+{
+    opacity: 0.5;
+    user-select: none;
+}
+
+.lesson-page .comment-like-dislike>i:hover
+{
+    opacity: 1;
+}
+
+.lesson-page .comment-like-dislike>.active
+{
+    opacity: 0.9;
+}
+
 .lesson-page .dislike-comment, .lesson-page .like-comment {
-    font-size: 15px;
+    font-size: inherit;
     margin-right: 10px;
 }
 
 .lesson-page .like-comment:hover, .lesson-page .dislike-comment:hover {
     cursor: default;
-    color: black;
+}
+
+.lesson-page .dislike-comment
+{
+    margin-left: 10px;
 }
 
 .lesson-page .comment-likes {
     margin-right: 20px;
 }
 
-.lesson-page .comment-likes, .lesson-page .comment-dislikes {
-    min-width: 10px;
+
+
+.lesson-page .replies {
+    grid-column: 2/3;
+    border: none;
+    margin: 0;
+    margin-top: 10px;
 }
 
-.lesson-page .collapse-replies, .lesson-page .show-replies {
-    color: grey;
-    margin-top: -10px;
+.replies .replies 
+{
+    margin: 0;
+}
+
+.comment .section-content
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.replies .comment:first-child
+{
+    margin-top: 0;
+}
+
+.replies .comment:last-child
+{
+    margin-bottom: 0;
+}
+
+.lesson-page .replies .section-button {
     cursor: pointer;
-}
-
-.lesson-page .collapse-replies i, .lesson-page .show-replies i {
-    font-family: 'Font Awesome 5 Free';
-    margin-right: 10px;
+    font-size: 10px;
 }

@@ -11,14 +11,15 @@
 .button {
     position: relative;
     display: inline-block;
-    border-radius: 10px;
+    border-radius: 7px;
     border: none;
 
     cursor: pointer;
     
     text-align: center;
     line-height: inherit;
-    color: var(--text-button-primary);
+    color: var(--text-primary);
+    background-color: transparent;
     transition: color 1s, background-color 1s;
     font-size: inherit;
     text-decoration: none;
@@ -100,19 +101,20 @@
 }
 
 
-.button .typing
+.typing
 {
     position: relative;
 }
 
-.button .typing>.full-text
+.typing>.full-text
 {
     position: relative;
     visibility: hidden;
 }
 
-.button .typing>.current-text
+.typing>.current-text
 {
+    width: 100%;
     position: absolute;
     top: 0;
     left: 0;

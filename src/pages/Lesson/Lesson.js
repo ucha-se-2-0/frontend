@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Footer, LegalityBar, DefaultNavbar } from '../../Components'
+import { Footer, LegalityBar, DefaultNavbar, Typing } from '../../Components'
 import { GetLesson } from '../../Assets';
 import Content from './Content'
 
@@ -11,17 +11,18 @@ function Lesson() {
     let [lessonSt, SetLesson] = useState();
     let lesson = lessonSt;
 
-    if(lesson === undefined)
-    {
+    if (lesson === undefined) {
         lesson = GetLesson(window.location.pathname)
         SetLesson(lesson);
     }
 
     return (
         <div className="page lesson-page">
-            <DefaultNavbar/>
-            <div className = "header">{lesson.title}</div>
-            <Content lesson = {lesson} />
+            <DefaultNavbar />
+            <header className="header">
+                <Typing text={lesson.title} speed={5}>{lesson.title}</Typing>
+            </header>
+            <Content lesson={lesson} />
             <Footer />
             <LegalityBar />
         </div>

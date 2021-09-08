@@ -29,7 +29,7 @@ body
 
 
   --primary: var(--very-dark-purple);
-  --secondary: var(--dark-purple);
+  --secondary: var(--dark-cyan);
   --hidden: var(--light-cyan);
 
   --text-primary: var(--primary);
@@ -45,7 +45,7 @@ body
 
   --important: var(--dark-blue);
 
-  --dropdown: var(--secondary);
+  --dropdown: var(--primary);
   --text-dropdown: var(--very-light-cyan);
 
   --navbar: var(--light-cyan);

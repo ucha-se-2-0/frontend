@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, Video, Textarea, Link } from '../../Components'
+import { Button, Video, Textarea, Link, Section } from '../../Components'
 import { GetLesson } from '../../Assets'
 import { GetAPIUrl } from "../../Utilities";
 
@@ -10,57 +10,80 @@ class Comment extends React.Component {
         super(props)
         this.lesson = GetLesson(window.location.pathname);
 
-        this.state = { repliesCollapsed: true, liked: false, likes: this.props.comment.likes, disliked: false, dislikes: this.props.comment.dislikes }
+        this.state = {
+            repliesCollapsed: true,
+            liked: false,
+            likes: this.props.comment.likes,
+            disliked: false,
+            dislikes: this.props.comment.dislikes,
+            writingReply: false,
+            replyText: ""
+        }
     }
+
+    componentDidMount() {
+        document.addEventListener("click", () => {
+            this.StopReply();
+        })
+    }
+
 
     render() {
         let replies = []
         if (this.props.comment.replies) {
+
             let key = 0
             for (let r of this.props.comment.replies) {
+
                 replies.push(<Comment key={key} comment={r} reply />)
                 key++
             }
 
             if (!this.props.reply) {
                 replies =
-                    <div className="replies">
-                        <div className="collapse-replies"
-                            onClick={() => { this.setState({ repliesCollapsed: !this.state.repliesCollapsed }) }}>
-                            {this.state.repliesCollapsed ?
-                                <><i className="fas fa-caret-down"></i>Покажи отговорите</> :
-                                <><i className="fas fa-caret-up"></i>Скрий отговорите</>}
-                        </div>
+                    <Section className="replies" title={<div className="collapse-replies"
+                        onClick={() => { this.setState({ repliesCollapsed: !this.state.repliesCollapsed }) }}>
+                        {(this.state.repliesCollapsed ? "Покажи" : "Скрий") + " отговорите"}
+                    </div>}>
 
-                        {this.state.repliesCollapsed ? <></> : replies}
-                    </div>
+                        {replies}
+                    </Section>
             }
         }
 
         return (
-            <div className="comment" >
-                <div>
+            <>
+                <div className="comment" onClick={e => { e.stopPropagation() }}>
                     <img /*TO DO*/ alt="icon" src="/Images/LogoCyan.png"></img>
                     <div>
                         <div className="author-name">{this.props.comment.author.username}</div>
                         <div className="text"> {this.props.comment.content} </div>
+                    </div>
+
+                    <div className="comment-actions">
+                        <div className={"reply" + (this.state.writingReply ? " active" : "")}>
+                            <Button typing back onHover typingSpeed={5} onClick={this.WriteReply.bind(this)} content = "Напиши отговор" className="write-reply-button "/>
+                            <Textarea onInput={this.OnReplyInput.bind(this)} placeholder="Оставете коментар" />
+                            <div className = "reply-actions">
+                                <Button primary onClick={this.Reply.bind(this)}>Публикувай</Button>
+                                <Button secondary onClick={this.StopReply.bind(this)}>Отмяна</Button>
+                            </div>
+                        </div>
 
                         <div className="comment-like-dislike">
-                            <div>
-                                <i style={{ color: this.state.liked ? "black" : "grey" }} className="material-icons like-comment" onClick={this.Like.bind(this)}>thumb_up</i>
-                            </div>
-                            <div className="comment-likes">{this.state.likes}</div>
+                            <i className={"material-icons like-comment" + (this.state.liked ? " active" : "")} onClick={this.Like.bind(this)}>thumb_up</i>
+                            {this.state.likes}
 
-                            <div>
-                                <i style={{ color: this.state.disliked ? "black" : "grey" }} className="material-icons dislike-comment" onClick={this.Dislike.bind(this)}>thumb_down</i>
-                            </div>
-                            <div className="comment-dislikes">{this.state.dislikes}</div>
+                            <i className={"material-icons dislike-comment" + (this.state.disliked ? " active" : "")} onClick={this.Dislike.bind(this)}>thumb_down</i>
+                            {this.state.dislikes}
                         </div>
                     </div>
+
+                    {this.props.reply ? null : replies}
                 </div>
 
-                {replies}
-            </div>
+                {this.props.reply ? replies : null}
+            </>
         )
     }
 
@@ -100,6 +123,22 @@ class Comment extends React.Component {
 
         this.setState({ liked: false, likes: likes, disliked: !this.state.disliked, dislikes: dislikes })
     }
+
+    WriteReply() {
+        this.setState({ writingReply: true });
+    }
+
+    OnReplyInput(e) {
+        this.setState({ replyText: e.target.value });
+    }
+
+    Reply() {
+        this.StopReply();
+    }
+
+    StopReply() {
+        this.setState({ writingReply: false });
+    }
 }
 
 
@@ -115,8 +154,8 @@ class Content extends React.Component {
             <div className="content">
                 <Video src={"/julemy.mp4"} />
 
-                <div className = "actions">
-                    <Button content="Mind map" secondary onClick = {()=>{}} />
+                <div className="actions">
+                    <Button content="Mind map" secondary onClick={() => { }} />
                     <Link content="Тест" primary link={window.location.pathname.replace("lessons", "tests")} />
                 </div>
 
@@ -131,7 +170,7 @@ class Content extends React.Component {
                 <div id="compose-comment">
                     <div>
                         <img alt="icon" src="/Images/LogoCyan.png" />
-                        <Textarea />
+                        <Textarea placeholder="Оставете коментар" />
                     </div>
                     <Button content="Публикувай" onClick={this.PostComment.bind(this, null)} secondary />
                 </div>

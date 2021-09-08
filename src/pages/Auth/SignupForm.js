@@ -171,7 +171,7 @@ function Form() {
 
                 <Input checkbox fontSize="15px" label="Запомни ме" OnInput={e => { Remember(e.target.checked) }} />
 
-                <Button className="submit" content="Регистрация" onClick={() => { SetError(Signup()) }} />
+                <Button primary className="submit" content="Регистрация" onClick={() => { SetError(Signup()) }} />
 
                 <div className="redirect">
                     Вече имате акаунт? <Link secondary content="Вход" link="/login" />

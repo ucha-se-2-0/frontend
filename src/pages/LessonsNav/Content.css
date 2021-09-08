@@ -18,6 +18,12 @@
     color: var(--primary);
 }
 
+.lessons-navigation .section .button
+{
+    display: block;
+    margin: 15px;
+    margin-left: calc(5px + 2vw);
+}
 
 .lessons-page .content-title
 {

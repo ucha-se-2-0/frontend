@@ -10,7 +10,7 @@ const lessons = {
                                     { q: "Коя е най-малката структурна и функционална единица на многоклетъчните организми?", opt: ["атом", "молекула", "клетка", "тъкан"], ans: 2 },
                                     { q: "Органичните вещества, които влизат в състава на клетки-те са: ", opt: ["вода", "въглехидрати", "белтъци", "минерални соли", "мазнини", "нуклеинови киселини"], ans: [1, 2, 4, 5] },]
                             },
-                            { title: "Епителна и съединителна тъкан", url: "epitelna-i-saedinitelna-takan", test: [{ question: "aaa", ans: 1.5, precision: 3 }] },
+                            { title: "Епителна и съединителна тъкан", url: "epitelna-i-saedinitelna-takan", test: [{ q: "Колко?", ans: 1.5, prec: 3 }] },
                             { title: "Мускулна и нервна тъкан", url: "muskulna-i-nervna-takan", test: [{}, {}] },
                             { title: "Организмът - единно цяло", url: "organizmat-edinno-tsyalo", test: [{}, {}] },
                             { title: "Микроскопско наблюдение на човешки тъкани", url: "mikroskopsko-nablyudenie-na-choveshki-takani", test: [] }

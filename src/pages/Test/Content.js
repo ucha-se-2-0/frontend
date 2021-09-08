@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Link, Title } from '../../Components'
+import { Button, Link, Title, Input } from '../../Components'
 import { GetNextLesson, GetLesson } from '../../Assets'
 
 
@@ -95,37 +95,39 @@ class Question extends React.Component {
     }
 
     CalcPoints() {
-        let max_points = this.props.options.length / 4
+        let max_points = this.props.options.length * 0.25;
         let points = 0
         if (this.oneCorrectAnswer) {
             points = (this.state.selected === this.props.correct) ? this.props.options.length / 4 : 0
         }
         else {
+            let pointsForCorrect = this.props.options.length / this.props.correct.length * 0.25;
+
             for (let o in this.props.options) {
                 let option_correct = false
                 for (let c of this.props.correct) {
-                    if (c === o) {
-                        option_correct = true
-                        break
+                    if (c == o) {
+                        option_correct = true;
+                        break;
                     }
                 }
 
-                let selected = this.state.selected[o] ? true : false
-                if(option_correct === selected)
-                {
-                    points += 0.25
-                }
-                else
-                {
-                    points -= 0.25
+                if (Boolean(this.state.selected[o])) {
+                    if (option_correct) {
+                        points += pointsForCorrect;
+                    }
+                    else {
+                        points -= pointsForCorrect;
+                    }
                 }
             }
         }
 
-        if(points < 0)
+        if (points < 0)
             points = 0
 
-        return { max_points: max_points, points: points }
+        console.log(max_points, points);
+        return { max_points, points }
     }
 
     OnClick(id) {
@@ -167,11 +169,11 @@ class FreeAnswerQuestion extends React.Component {
         if (this.answerIsNumber) {
             max_points = this.props.points ? this.props.points : 2
             if (this.props.precision) {
-                if (parseInt(this.givenAnswer) - this.props.correct < Math.pow(0.1, this.props.precision))
+                if (Math.abs(parseFloat(this.givenAnswer) - this.props.correct) < Math.pow(0.1, this.props.precision))
                     points = max_points
             }
             else {
-                if (parseInt(this.givenAnswer) === this.props.correct)
+                if (Math.abs(parseFloat(this.givenAnswer) - this.props.correct) < 1e-6)
                     points = max_points
             }
         }
@@ -195,6 +197,7 @@ class FreeAnswerQuestion extends React.Component {
 
     render() {
         let placeholder = "Въведете отговора си"
+        console.log(this.props);
         if (this.props.precision) {
             placeholder += " с точност до " + this.props.precision + " знака след запетая"
         }
@@ -202,29 +205,14 @@ class FreeAnswerQuestion extends React.Component {
         return (
             <div className="question free-answer">
                 <p>{this.props.question}</p>
-                <input placeholder={placeholder} type="text" onKeyDown={e => {
-                    if (this.answerIsNumber) {
-                        if (e.key === "Backspace")
-                            return
-
-                        if ((e.target.value + e.key).match(/^(\d+(\.|,){1}\d*|\d+)$/)) {
-                            this.givenAnswer += e.key
-                            e.target.value += e.key
-                        }
-                        e.preventDefault()
-                    }
-                    else {
-                        this.givenAnswer += e.key
-                    }
-                }} />
+                <Input placeholder={placeholder} number/>
                 {this.props.turnedIn ? <div className="correctAnswer">{this.props.correct}</div> : <></>}
             </div>
         );
     }
 }
 
-function Actions(props)
-{
+function Actions(props) {
     if (props.turnedIn) {
         let next = GetNextLesson(window.location.pathname)
         let next_title, next_link, message
@@ -234,14 +222,12 @@ function Actions(props)
         }
         else {
             console.log(next)
-            if(next.subsection)
-            {
+            if (next.subsection) {
                 message = "Това беше последният урок от подраздела \"" + next.subsection.title + '"'
                 next_title = "Към раздел \"" + next.section.sectionName + '"'
                 next_link = "/lessons/sections/" + next.section.url
             }
-            else
-            {
+            else {
                 message = "Това беше последният урок от раздела \"" + next.section.sectionName + '"'
                 next_title = "Към уроците"
                 next_link = "/lessons"
@@ -250,17 +236,17 @@ function Actions(props)
         }
 
         if (message) {
-            message = <div style = {{textAlign: "center"}} className = "content-text">{message}</div>
+            message = <div style={{ textAlign: "center" }} className="content-text">{message}</div>
         }
 
         return (<>
-            <Title content = {"Резултат: " + props.result + "%"}/>
+            <Title title={"Резултат: " + props.result + "%"} />
             {message}
-            <Link content="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} primary/>
-            <Link content={next_title} height="50px" link={next_link} primary/>
+            <Link content="Назад към урока" height="50px" link={window.location.pathname.replace("tests", "lessons")} primary />
+            <Link content={next_title} height="50px" link={next_link} primary />
         </>)
     }
-    return <Button content="Провери отговорите" onClick={props.CheckAnswers} primary/>
+    return <Button content="Провери отговорите" onClick={props.CheckAnswers} primary />
 }
 
 class Content extends React.Component {
@@ -279,7 +265,7 @@ class Content extends React.Component {
 
                 {this.GetQuestions()}
 
-                {<Actions CheckAnswers = {this.CheckAnswers.bind(this)} {...this.state}/>}
+                {<Actions CheckAnswers={this.CheckAnswers.bind(this)} {...this.state} />}
             </div>
         );
     }
@@ -303,7 +289,8 @@ class Content extends React.Component {
                         turnedIn={this.state.turnedIn}
                         question={q.q}
                         options={q.opt}
-                        correct={q.ans} />)
+                        correct={q.ans}
+                        precision = {q.prec} />)
             }
             else {
                 questions.push(
@@ -318,24 +305,22 @@ class Content extends React.Component {
                 )
             }
 
-            key++
+            key++;
         }
 
-        return (
-            questions
-        )
+        return questions;
     }
 
 
     CheckAnswers() {
         this.setState({ turnedIn: true })
 
-        let points = 0
-        let max_points = 0
+        let points = 0;
+        let max_points = 0;
         for (let callback of this.turnInCallbacks) {
-            let res = callback()
-            points += res.points
-            max_points += res.max_points
+            let res = callback();
+            points += res.points;
+            max_points += res.max_points;
         }
 
         this.setState({ result: Math.round(points / max_points * 10000) / 100 })
