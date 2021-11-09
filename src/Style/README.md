@@ -3,37 +3,62 @@
 
 <br></br>
 ## "Colors.css"
-### Allows you to use defined colors in your css files.  
-Examples:  
+### Here are defined all colors. They must not be overwritten anywhere
+Colors are divided into constants and relative.
 
-`background-color: var(--cyan)`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/7dd1c1/000000?text=+)  
-`background-color: var(--dark)`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/3f4760/000000?text=+)  
-`background-color: var(--content-d)`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/3f4760/000000?text=+)  
-`background-color: var(--content-l)`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/ffffff/000000?text=+)  
-`background-color: var(--text-d)`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/000000/000000?text=+)  
-`background-color: var(--text-l)`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/ffffff/000000?text=+)  
+Constants don't change. Here are all constant colors:
 
-`-d` stands for "dark"  
-`-l` stands for "light"  
-### Two colors for components are needed to imlement dark and light theme (if there will be such)
+|Color name    |                    Color                                                                    |
+|--------------|--------------------------------------------------------------------------------------------:|
+| `--pink`|![](https://via.placeholder.com/15/E0B0FF?text=+) | 
+| `--very-light-purple`|![](https://via.placeholder.com/15/D0B0FF?text=+)  |
+| `--light-purple`|![](https://via.placeholder.com/15/AA95D1?text=+)  |
+| `--purple`|![](https://via.placeholder.com/15/A070B1?text=+)  |
+| `--dark-purple`|![](https://via.placeholder.com/15/402051?text=+)|
+| | |
+|`--very-light-cyan`|![](https://via.placeholder.com/15/E0B0FF?text=+) |
+| `--light-cyan`|![](https://via.placeholder.com/15/A8E8D5?text=+) |
+| `--cyan`|![](https://via.placeholder.com/15/7DD1C1?text=+) |
+| `--dark-cyan`|![](https://via.placeholder.com/15/70B1A1?text=+) |
+| | |
+| `--dark-green`|![](https://via.placeholder.com/15/335049?text=+) |
+| `--sea-wave`|![](https://via.placeholder.com/15/204050?text=+) |
+| `--dark-blue`|![](https://via.placeholder.com/15/102030?text=+) |
+| | |
+| `--blood-red`|![](https://via.placeholder.com/15/aa0000?text=+) |
+| `--light-red`|![](https://via.placeholder.com/15/ff7080?text=+) |
 
-See about "Colors.js" to learn how to use defined colors in your javascript code  
+Relative colors depend on current theme and describe color of a <ins>component</ins> or <ins>type of content (like text)</ins>. Here are all relative colors:
 
-<br></br>
-## "Colors.js"
-### Allows you to use defined colors in your css files.  
-### Use
-```js
-import { colors } from '../../Style/Colors'
-```
-### to import `colors`  
-### Examples:  
-`<div style = {{backgroundColor: colors.cyan}} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/7dd1c1/000000?text=+)  
-`<div style = {{backgroundColor: {colors.dark} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/3f4760/000000?text=+)  
-`<div style = {{backgroundColor: {colors.content.dark} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/3f4760/000000?text=+)  
-`<div style = {{backgroundColor: {colors.content.light} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/ffffff/000000?text=+)  
-`<div style = {{backgroundColor: {colors.text.dark} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/000000/000000?text=+)  
-`<div style = {{backgroundColor: {colors.text.light} />`&nbsp;&nbsp;&nbsp;\-&nbsp;&nbsp;&nbsp;![](https://via.placeholder.com/15/ffffff/000000?text=+)
+|Color name    |Light theme color |Dark theme color |
+|--------------|:----------------:|:---------------:|
+| `--background`|![](https://via.placeholder.com/15/E0FFE8?text=+) | ![](https://via.placeholder.com/15/102030?text=+)
+|
+| `--primary`|![](https://via.placeholder.com/15/402051?text=+)  |![](https://via.placeholder.com/15/E0FFE8?text=+)
+| `--secondary`|![](https://via.placeholder.com/15/70B1A1?text=+)  |![](https://via.placeholder.com/15/70B1A1?text=+)
+| `--hidden`|![](https://via.placeholder.com/15/A8E8D5?text=+)  |![](https://via.placeholder.com/15/70B1A1?text=+)
+| `--error`|![](https://via.placeholder.com/15/aa0000?text=+)  |![](https://via.placeholder.com/15/ff7080?text=+)
+| `--important`|![](https://via.placeholder.com/15/102030?text=+)  |![](https://via.placeholder.com/15/E0FFE8?text=+)
+||
+| `--text-primary`|![](https://via.placeholder.com/15/402051?text=+)  |![](https://via.placeholder.com/15/E0FFE8?text=+)
+| `--text-secondary`|![](https://via.placeholder.com/15/70B1A1?text=+)  |![](https://via.placeholder.com/15/70B1A1?text=+)
+||
+| `--button-primary`|![](https://via.placeholder.com/15/402051?text=+)  |![](https://via.placeholder.com/15/E0FFE8?text=+)
+| `--text-button-primary`|![](https://via.placeholder.com/15/E0FFE8?text=+)  |![](https://via.placeholder.com/15/335049?text=+)
+| `--button-secondary`|![](https://via.placeholder.com/15/70B1A1?text=+)  |![](https://via.placeholder.com/15/70B1A1?text=+)
+| `--text-button-secondary`|![](https://via.placeholder.com/15/402051?text=+)  |![](https://via.placeholder.com/15/E0FFE8?text=+)
+||
+| `--dropdown`|![](https://via.placeholder.com/15/402051?text=+)  |![](https://via.placeholder.com/15/E0FFE8?text=+)
+| `--text-dropdown`|![](https://via.placeholder.com/15/E0FFE8?text=+)  |![](https://via.placeholder.com/15/102030?text=+)
+||
+| `--navbar`|![](https://via.placeholder.com/15/A8E8D5?text=+)  |![](https://via.placeholder.com/15/102030?text=+)
+| `--text-navbar`|![](https://via.placeholder.com/15/402051?text=+)  |![](https://via.placeholder.com/15/E0FFE8?text=+)
+||
+| `--footer`|![](https://via.placeholder.com/15/A8E8D5?text=+)  |![](https://via.placeholder.com/15/102030?text=+)
+| `--footer-1`|![](https://via.placeholder.com/15/102030?text=+)  |![](https://via.placeholder.com/15/E0B0FF?text=+)
+| `--footer-2`|![](https://via.placeholder.com/15/402051?text=+)  |![](https://via.placeholder.com/15/E0FFE8?text=+)
+| `--footer-3`|![](https://via.placeholder.com/15/204050?text=+)  |![](https://via.placeholder.com/15/7DD1C1?text=+)
+
 
 
 <br></br>
@@ -42,27 +67,33 @@ import { colors } from '../../Style/Colors'
 ### Put here style for your general-purpose (not related to a specific page) component
 
 <br></br>
-## "Content.css"
-### Style for pages` content (body)  
-### CSS classes:  
+## "Button.css"
+### Style for button (implemented in "Components.js")  
+### It is isolated from other components to reduce size of "Components.css"
+
+<br></br>
+## "Page.css"
+### Default styles for pages 
+### CSS classes: 
+#### Content: 
 * `.content` - class for content wrapper
 * `.content-text` - you should apply it to div with reqular text
+#### Header:
+* `.header`
+
+<br></br>
+## "Style.css"
+### Style for very general stuff (html, body, #root)
+### Here sre included other css files from this folder
+##### You shouldn't care about this file
+
+<br></br>
+## "Utilities.css"
+### Useful css modifiers
+### CSS classes:
+* `.hoverable` - makes the element a little transparent at rest and opaque on hover
 * `.separator` - use `<span className = "separator"/>` to get a horizontal line
 
 <br></br>
-## "Navbar.css"
-### Style for very pages` navbar
-### CSS classes:  
-* `.navbar` - class for navbar wrapper
-* `.not-important` - when applied to navbar`s child it is hidden when page is less than 600px wide
-
-<br></br>
-## "Header.css"
-### Style for pages` header  
-#### You shouldn't care about this file, but if you do, the only class defined for header is `.header` - class for header wrapper
-
-
-<br></br>
-## "Index.css"
-### Style for very general stuff (html body, code)
-#### You shouldn't care about this file
+## "Icons.css"
+### Handles custom icons

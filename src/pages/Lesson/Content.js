@@ -62,9 +62,9 @@ class Comment extends React.Component {
 
                     <div className="comment-actions">
                         <div className={"reply" + (this.state.writingReply ? " active" : "")}>
-                            <Button typing back onHover typingSpeed={5} onClick={this.WriteReply.bind(this)} content = "Напиши отговор" className="write-reply-button "/>
+                            <Button typing back onHover typingSpeed={5} onClick={this.WriteReply.bind(this)} content="Напиши отговор" className="write-reply-button " />
                             <Textarea onInput={this.OnReplyInput.bind(this)} placeholder="Оставете коментар" />
-                            <div className = "reply-actions">
+                            <div className="reply-actions">
                                 <Button primary onClick={this.Reply.bind(this)}>Публикувай</Button>
                                 <Button secondary onClick={this.StopReply.bind(this)}>Отмяна</Button>
                             </div>
@@ -156,7 +156,7 @@ class Content extends React.Component {
 
                 <div className="actions">
                     <Button content="Mind map" secondary onClick={() => { }} />
-                    <Link content="Тест" primary link={window.location.pathname.replace("lessons", "tests")} />
+                    {this.props.lesson.test && this.props.lesson.test.length && <Link content="Тест" primary link={window.location.pathname.replace("lessons", "tests")} />}
                 </div>
 
                 <span className="separator" />

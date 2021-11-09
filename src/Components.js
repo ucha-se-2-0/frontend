@@ -33,8 +33,7 @@ function Typing(props) {
   let [playing, ShouldPlay] = useState(false);
 
   useEffect(() => {
-    if(!props.onHover)
-    {
+    if (!props.onHover) {
       Play();
     }
 
@@ -80,7 +79,7 @@ function Typing(props) {
   }
 
   return (
-    <div className= {"typing" + (props.className ? " " + props.className : "")} onMouseEnter={props.onHover && Play} onMouseLeave={props.onHover && Stop}>
+    <div className={"typing" + (props.className ? " " + props.className : "")} onMouseEnter={props.onHover && Play} onMouseLeave={props.onHover && Stop}>
       <div className="full-text">
         {props.text}
       </div>
@@ -230,8 +229,7 @@ function Input(props) {
   }
 
   let type = (props.password && hidden) ? "password" : (checkbox ? "checkbox" : "");
-  if(props.number)
-  {
+  if (props.number) {
     type = "number";
   }
 
@@ -247,12 +245,11 @@ function Input(props) {
       <input type={type} onChange={e => {
         props.onInput && props.onInput(e);
         IsEmpty(!(e.target.value));
-        if(props.checkbox && (e.target.checked === false))
-        {
+        if (props.checkbox && (e.target.checked === false)) {
           console.log("empty");
           IsEmpty(true);
         }
-      }} style = {{paddingLeft: (icon ? "" : "1em")}}/>
+      }} style={{ paddingLeft: (icon ? "" : "1em") }} />
 
       {checkbox &&
         <div className="box">
@@ -293,6 +290,7 @@ function Section(props) {
   let [timer, SetTimer] = useState(null);
 
   let content = createRef();
+  let button = createRef();
 
   useEffect(() => {
     if (expanded && shouldCollapse) {
@@ -308,7 +306,7 @@ function Section(props) {
     if (!expanded) {
       Expanded(true);
       // console.log(getComputedStyle(content.current))
-      SetHeight(parseFloat(getComputedStyle(content.current).height) + 10 + "px");
+      SetHeight(parseFloat(getComputedStyle(content.current).height) + parseFloat(getComputedStyle(button.current).height) + "px");
       SetTimer(setTimeout(() => { AutoHeight(true) }, 500));
     }
     else {
@@ -319,18 +317,14 @@ function Section(props) {
 
   return (
     <div className={"section" + (expanded ? " expanded" : "") + (props.className ? " " + props.className : "")}>
-      <div className="section-button" onClick={OnClick}>
-        <i className={"far fa-circle circle" + (expanded ? " up" : "")}>
-          <div className="arrow">
-            <i className="fa fa-angle-down" />
-          </div>
-        </i>
+      <div ref = {button} className="section-button" onClick={OnClick}>
+      <i className = {"material-icons" + (expanded ? " up" : "")}>&#xe5c6;</i>
 
         {props.title}
       </div>
 
       <div className="content-wrapper" onClick={() => { AutoHeight(true) }} style={{ height: (expanded ? (autoHeight ? "auto" : height) : "0px") }}>
-        <div ref={content} className = "section-content">
+        <div ref={content} className="section-content">
           {props.children}
         </div>
       </div>
@@ -350,7 +344,6 @@ function Dropdown(props) {
     if (React.isValidElement(el)) {
       return React.cloneElement(el, { key: i });
     }
-    console.log(React.isValidElement(el));
     return null;
   })
 
@@ -374,11 +367,11 @@ function ThemeToggle() {
 
   return (
     <div className="theme-toggle">
-      <div style={{ transform: `rotateZ(${rot}deg)` }} onClick={() => { setRot(rot + 180) }}>
-        <div className="dark" onClick={context.ToggleTheme}>
+      <div style={{ transform: `translateX(-100%) rotateZ(${rot}deg)` }}>
+        <div className="dark" onClick={()=>{context.ToggleTheme(); setRot(rot + 180)}}>
           <i className="fas fa-moon" />
         </div>
-        <i className="light fas fa-sun" onClick={context.ToggleTheme} />
+        <i className="light fas fa-sun" onClick={()=>{context.ToggleTheme(); setRot(rot + 180)}} />
       </div>
     </div>
   )
@@ -393,7 +386,7 @@ function DefaultSearchResultsDisplayer(props) {
       return (
         <Section className="hoverable" key={i} title={el.title}>{GetAllLessons(el).map((l, li) =>
           <React.Fragment key={li}>
-            <Link className="hoverable" link={"/lessons/" + l.url} content={l.title} />
+            <Link primary className="hoverable" link={"/lessons/" + l.url} content={l.title} />
           </React.Fragment>)}
         </Section>
       )
@@ -583,10 +576,10 @@ function SearchField(props) {
 
   function OnMouseLeave(e) {
     //console.log("mouse leaved")
-    if(mousePressed)
+    if (mousePressed)
       return;
     //console.log(mousePressed, e);
-    
+
     if (!keepExpanded) {
       Expand(false);
     }
@@ -600,8 +593,7 @@ function SearchField(props) {
     e.stopPropagation();
   }
 
-  function OnMouseUp(e)
-  {
+  function OnMouseUp(e) {
     console.log("Mouse up on search field");
 
     MouseIsPressed(false);
@@ -610,21 +602,26 @@ function SearchField(props) {
   }
 
   function OnSearch() {
-    if(!expanded || searchRequest.length === 0)
-    {
+    if (!expanded || searchRequest.length === 0) {
       return;
     }
-    
+
     let results = Search(searchRequest);
     console.log(results);
 
     props.onSearch && props.onSearch(results);
 
     if (props.SearchResultsDisplayer) {
-      SetSearchResult(<props.SearchResultsDisplayer OnClose={() => { SetSearchResult(null) }} results={results} />);
+      SetSearchResult(<props.SearchResultsDisplayer OnClose={() => {
+        SetSearchResult(null);
+      }} results={results} />);
     }
     else {
-      SetSearchResult(<DefaultSearchResultsDisplayer OnClose={() => { SetSearchResult(null) }} results={results} />);
+      document.body.classList.add("no-scroll");
+      SetSearchResult(<DefaultSearchResultsDisplayer OnClose={() => {
+        SetSearchResult(null);
+        document.body.classList.remove("no-scroll");
+      }} results={results} />);
     }
   }
 
@@ -633,7 +630,7 @@ function SearchField(props) {
       className={"search" + (searchRequest ? "" : " empty") + (expanded ? " expanded" : "")}
       onMouseEnter={OnHover} onMouseLeave={OnMouseLeave}
       onMouseDown={OnClick}
-      onMouseUp = {OnMouseUp}
+      onMouseUp={OnMouseUp}
       style={{ width: expanded ? props.width : "0px" }}>
 
       <i className="fas fa-search" onClick={OnSearch} />
@@ -676,9 +673,11 @@ function Window(props) {
   }
 
   return (
-    <div className="window">
-      <i className="fas fa-plus" onClick={() => { Close() }} />
-      {props.children}
+    <div className={"window-frame" + (props.className ? " " + props.className : "")}>
+      <div className="window">
+        {!props.noCloseIcon && <i className="fas fa-plus" onClick={() => { Close() }} />}
+        {props.children}
+      </div>
     </div>
   )
 }
@@ -705,6 +704,18 @@ function DefaultMenu(props) {
 }
 
 function Footer() {
+
+  function FLink(props) {
+    return (
+      <a target="_blank" rel="external noopener noreferrer" href="https://instagram.com/">
+        <div>
+          <i className={props.className} />
+        </div>
+        <p>{props.name}</p>
+      </a>
+    )
+  }
+
   return (
     <div className="footer" >
       <Link className="home" link="/">
@@ -713,9 +724,9 @@ function Footer() {
       </Link>
 
       <div className="social">
-        <a target="_blank" rel="external noopener noreferrer" href="https://instagram.com/"><i className="fab fa-instagram" /></a>
-        <a target="_blank" rel="external noopener noreferrer" href="https://web.telegram.org/"><i className="fa fa-telegram" /></a>
-        <a target="_blank" rel="external noopener noreferrer" href="https://facebook"><i className="fab fa-facebook" /></a>
+        <FLink className="fab fa-instagram" name="Инстаграм" />
+        <FLink className="fa fa-telegram" name="Телеграм" />
+        <FLink className="fab fa-facebook" name="Фейсбук" />
       </div>
 
       <div className="links">
@@ -731,8 +742,8 @@ function Footer() {
 function LegalityBar() {
   return (
     <div className="legality-bar">
-      <Link link="/terms-and-conditions">Правила и условия</Link>
-      <Link link="/privacy-policy">Запазване на данни</Link>
+      <Link className="hoverable" link="/terms-and-conditions">Правила и условия</Link>
+      <Link className="hoverable" link="/privacy-policy">Запазване на данни</Link>
       <span><i className="far fa-copyright" /> Julemy.bg</span>
     </div>
   )
@@ -778,8 +789,9 @@ export {
   Title,
   Subtitle,
   Video,
-  ThemeToggle,
+  Window,
 
+  ThemeToggle,
   Footer,
   LegalityBar,
   DefaultMenu,

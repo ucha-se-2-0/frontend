@@ -30,11 +30,12 @@ body
 
   --primary: var(--very-dark-purple);
   --secondary: var(--dark-cyan);
-  --hidden: var(--light-cyan);
+  --hidden: var(--purple);
+  --error: var(--blood-red);
+  --important: var(--dark-blue);
 
   --text-primary: var(--primary);
   --text-secondary: var(--secondary);
-  --error: var(--blood-red);
 
 
   --button-primary: var(--dark-purple);
@@ -43,7 +44,6 @@ body
   --button-secondary: var(--dark-cyan);
   --text-button-secondary: var(--text-primary);
 
-  --important: var(--dark-blue);
 
   --dropdown: var(--primary);
   --text-dropdown: var(--very-light-cyan);

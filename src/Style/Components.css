@@ -272,6 +272,18 @@
   color: var(--primary);
 }
 
+
+.search-results
+{
+  font-size: calc(1vw + 5px);
+}
+
+.search-results .button
+{
+  display: block;
+  margin: 10px 0;
+}
+
 /* TITLE */
 
 .content-title {
@@ -365,32 +377,16 @@
   text-align: left;
 }
 
-.section .circle {
+.section i
+{
+  font-size: inherit;
   float: left;
-  position: relative;
   margin-right: 10px;
   transition: transform 0.5s;
 }
 
-.section .arrow {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 1em;
-}
-
 .section .up {
   transform: rotateZ(-90deg);
-}
-
-.section .arrow i {
-  display: block;
-  position: relative;
-  /* So stupid */
-  --scale: 0.7;
-  font-size: calc(1em * var(--scale));
-  left: -50%;
-  top: calc(-50% * var(--scale));
 }
 
 .section .content-wrapper {
@@ -446,13 +442,11 @@
 .theme-toggle>div {
   font-size: 30px;
   position: relative;
-  cursor: pointer;
-  width: 2em;
+  width: 1em;
   height: 1em;
   display: block;
   justify-self: flex-end;
-  transform-origin: center;
-  left: -25%;
+  transform-origin: right;
   transition: transform 0.5s;
 }
 
@@ -468,11 +462,13 @@
 
 .theme-toggle .light {
   opacity: 0;
+  pointer-events: none;
   color: #ffee77;
   left: 0;
 }
 
 .theme-toggle .dark, .theme-toggle .light {
+  cursor: pointer;
   transition: opacity 0.5s;
   position: absolute;
   top: 0;
@@ -483,14 +479,18 @@
 .theme-toggle .dark i {
   text-align: center;
   font-size: 0.6em;
-  color: #ffeecc
+  color: #ffeecc;
+  pointer-events: none;
 }
 
 body.dark .theme-toggle .dark {
   opacity: 0;
+  pointer-events: none;
 }
 
 body.dark .theme-toggle .light {
+  pointer-events: auto;
+  display: block;
   opacity: 1;
 }
 
@@ -508,6 +508,18 @@ body.dark .theme-toggle .light {
 }
 
 /* WINDOW */
+
+.window-frame
+{
+  position: fixed;
+  /* inset: 0; */
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: #aaaaaac0;
+  z-index: 1000;
+}
 
 .window {
   position: fixed;

@@ -77,4 +77,4 @@ Functions:
 <br></br>
 ## "index.js"  
 File that renders pages depending on location (url)  
-To add a new page you must include include your page's component and add `Route`. To learn how to make your page's component see `"pages/README.md"`. To learn how to use React router visit https://reactrouter.com/web/guides/quick-start
+To add a new page you must include include your page's component and add `Route`. To learn how to make your page's component see `"pages/README.md"`.
