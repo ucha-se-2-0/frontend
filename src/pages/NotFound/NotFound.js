@@ -1,10 +1,10 @@
-import { ThemeToggle, Link } from "../../Components";
+import { ThemeToggle, Link, Page } from "../../Components";
 
 import './NotFound.css';
 
 export default function NotFound() {
     return (
-        <div className="page page-not-found">
+        <Page className="page-not-found">
             <div className="navbar">
                 <Link link="/" className="home">
                     <img alt="logo" src="/Images/LogoLightCyan.png" className="light"></img>
@@ -18,6 +18,6 @@ export default function NotFound() {
                 <div>404</div>
                 Страницата не съществува
             </div>
-        </div>
+        </Page>
     )
 }

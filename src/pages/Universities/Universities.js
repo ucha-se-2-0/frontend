@@ -4,7 +4,7 @@ import { unis } from "../../Assets"
 import Content from './Content'
 
 import "./Content.css"
-import { DefaultNavbar, Footer } from "../../Components"
+import { DefaultNavbar, Footer, Page } from "../../Components"
 
 import './Content.css';
 import './Universities.css';
@@ -73,13 +73,13 @@ class SideNavbar extends Component {
 
 function Universities() {
     return (
-        <div className="page unis-page">
+        <Page className="unis-page">
             <DefaultNavbar />
             <div className="header">Университети в България</div>
             <SideNavbar />
             <Content />
             <Footer />
-        </div>
+        </Page>
     );
 }
 

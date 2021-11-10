@@ -540,7 +540,7 @@ body.dark .theme-toggle .light {
 
 .window::-webkit-scrollbar
 {
-  visibility: hidden;
+  display: none;
 }
 
 @media screen and (min-width: 600px) {
@@ -560,4 +560,49 @@ body.dark .theme-toggle .light {
 .window>* {
   color: var(--background);
   margin: 10px 0;
+}
+
+/* COOKIES AGREEMENT WINDOW */
+
+.agree-cookies-window
+{
+  position: relative;
+}
+
+.agree-cookies-window p
+{
+  margin: 20px 0;
+  line-height: 1.5em;
+}
+
+.agree-cookies-window .background
+{
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.agree-cookies-window img
+{
+  position: absolute;
+  top: calc(40% + 300px);
+  transform: translateY(-50%);
+  
+  mix-blend-mode: multiply;
+  width: calc(50% - 20vw + 200px);
+  display: block;
+}
+
+.agree-cookies-window img:first-child
+{
+  top: calc(50% - 100px);
+  right: -20%;
+}
+
+.agree-cookies-window .button
+{
+  margin-top: auto;
 }

@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Navbar from './Navbar'
 import Content from './Content'
-import { Img, LegalityBar, Window } from '../../Components'
+import { Page, Img, LegalityBar, Window } from '../../Components'
 
 
 import "./Navbar.css";
@@ -11,16 +11,16 @@ import { GetCookie, SetCookie } from "../../Utilities";
 
 function HomePage() {
     let [shouldAnimate, ShouldAnimate] = useState(!GetCookie("notFirstSiteVisit"));
-    let [cookiesWindow, ShowCookiesWindow] = useState(true);
 
-    function CloseWindow()
-    {
-        SetCookie("agreedCookies", true, 24 * 365);
-        ShowCookiesWindow(false);
-    }
+    //document.cookie = "agreedCookies=;";
+    //console.log(document.cookie);
+
+    useEffect(() => {
+        SetCookie("notFirstSiteVisit", true, 24 * 30)
+    }, [])
 
     return (
-        <div className={"page home-page" + (shouldAnimate ? "" : " no-animation")}>
+        <Page className={"home-page" + (shouldAnimate ? "" : " no-animation")}>
             <div className="logo" onAnimationEnd={e => { shouldAnimate && ShouldAnimate(false) }}>
                 <img alt="logo" src="Images/GradientLogo.png" className="dark" />
                 <img alt="logo" src="Images/GradientLogoLight.png" className="light" />
@@ -32,12 +32,8 @@ function HomePage() {
             <Content />
             <LegalityBar />
 
-            {cookiesWindow &&
-                <Window noCloseIcon>
-                    <h1>Ние ползваме cookies(бисквитки)</h1>
-                    <button onClick = {CloseWindow}>Приемам</button>
-                </Window>}
-        </div>
+            
+        </Page>
     );
 }
 

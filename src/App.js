@@ -14,61 +14,45 @@ import Privacy from './pages/Legality/Privacy';
 
 import './Style/Style.css'
 
-import { GetCookie, SetCookie, ThemeContext } from './Utilities';
+import { CookiesAcceptedProvider, cookiesContext, ThemeProvider } from './Utilities';
+import { CookiesWindow } from './Components';
+import { useContext } from 'react/cjs/react.development';
 
 
-function ThemeProvider(props) {
-  let [theme, SetTheme] = useState("light");
+function CookiesWindowOrApp() {
+  const { accepted } = useContext(cookiesContext);
 
-  function ToggleTheme() {
-    let new_theme = (theme === "light" ? "dark" : "light");
-    SetTheme(new_theme);
-    SetCookie("theme", new_theme, 24 * 30);
-  }
-  
-  useEffect(() => {
-    let cookie = GetCookie("theme");
-    cookie && SetTheme(cookie);
-  }, [])
-
-  
-  if (theme === "light") {
-    document.body.classList.remove("dark");
-  }
-  else if (theme === "dark") {
-    document.body.classList.add("dark");
-  }
+  const showWindow = window.location
 
   return (
-    <ThemeContext.Provider value={{ theme: theme, ToggleTheme: ToggleTheme }}>
-      {props.children}
-    </ThemeContext.Provider>
+    accepted ?
+      <Router forceRefresh={false}>
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/universities" exact component={Universities} />
+          <Route path="/lessons" exact component={LessonsNav} />
+          <Route path="/lessons/*/" exact component={Lesson} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
+          <Route path="/tests/*/" exact component={Test} />
+          <Route path="/terms-and-conditions" exact component={Terms} />
+          <Route path="/privacy-policy" exact component={Privacy} />
+          <Route path="/*" component={NotFound} />
+        </Switch>
+      </Router>
+      :
+      <CookiesWindow />
   )
 }
 
 export default function App() {
-  useEffect(()=>{
-    SetCookie("notFirstSiteVisit", true, 24 * 30);
-  }, [])
-
   return (
     <StrictMode>
-      <ThemeProvider>
-        <Router forceRefresh={false}>
-            <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/universities" exact component={Universities} />
-              <Route path="/lessons" exact component={LessonsNav} />
-              <Route path="/lessons/*/" exact component={Lesson} />
-              <Route path="/login" exact component={Login} />
-              <Route path="/signup" exact component={Signup} />
-              <Route path="/tests/*/" exact component={Test} />
-              <Route path="/terms-and-conditions" exact component={Terms} />
-              <Route path="/privacy-policy" exact component={Privacy} />
-              <Route path="/*" component={NotFound} />
-            </Switch>
-        </Router>
-      </ThemeProvider>
+      <CookiesAcceptedProvider>
+        <ThemeProvider>
+          <CookiesWindowOrApp />
+        </ThemeProvider>
+      </CookiesAcceptedProvider>
     </StrictMode>
   )
 }

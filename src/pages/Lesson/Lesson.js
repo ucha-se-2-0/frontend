@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Footer, LegalityBar, DefaultNavbar, Typing } from '../../Components'
+import { Footer, LegalityBar, DefaultNavbar, Typing, Page } from '../../Components'
 import { GetLesson } from '../../Assets';
 import Content from './Content'
 
@@ -17,7 +17,7 @@ function Lesson() {
     }
 
     return (
-        <div className="page lesson-page">
+        <Page className="lesson-page">
             <DefaultNavbar />
             <header className="header">
                 <Typing text={lesson.title} speed={5}>{lesson.title}</Typing>
@@ -25,7 +25,7 @@ function Lesson() {
             <Content lesson={lesson} />
             <Footer />
             <LegalityBar />
-        </div>
+        </Page>
     );
 }
 

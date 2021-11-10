@@ -4,7 +4,7 @@
 import React, { useState, useContext, useEffect, createRef } from "react"
 import VideoPlayer from "react-video-js-player"
 import { GetAllLessons, GetFormattedLessons, lessons } from "./Assets"
-import { GetCookie, ThemeContext } from "./Utilities"
+import { cookiesContext, GetCookie, themeContext } from "./Utilities"
 import { NavLink } from "react-router-dom"
 
 function Lightning(props) {
@@ -121,7 +121,7 @@ function StyledButtonOrLink(props) {
 
 
   return (
-    <ButtonOrLink className={className} onClick={props.onClick} link={props.link}>
+    <ButtonOrLink style={{ width: props.width, height: props.height }} className={className} onClick={props.onClick} link={props.link}>
       {content}
     </ButtonOrLink>
   )
@@ -144,7 +144,6 @@ function ButtonOrLink(props) {
       <NavLink onClick={() => {
         if (url !== "/login" && url !== "/signup") {
           sessionStorage.setItem("lastPageBeforeAuth", url);
-          console.log(url)
         }
       }} to={props.link} className={className}>
         {props.children}
@@ -153,7 +152,7 @@ function ButtonOrLink(props) {
   else {
     if (props.onClick) {
       el =
-        <button className={className} onClick={e => { props.onClick(e) }}>
+        <button style={props.style} className={className} onClick={e => { props.onClick(e) }}>
           {props.children}
         </button>
     }
@@ -317,8 +316,8 @@ function Section(props) {
 
   return (
     <div className={"section" + (expanded ? " expanded" : "") + (props.className ? " " + props.className : "")}>
-      <div ref = {button} className="section-button" onClick={OnClick}>
-      <i className = {"material-icons" + (expanded ? " up" : "")}>&#xe5c6;</i>
+      <div ref={button} className="section-button" onClick={OnClick}>
+        <i className={"material-icons" + (expanded ? " up" : "")}>&#xe5c6;</i>
 
         {props.title}
       </div>
@@ -362,16 +361,16 @@ function Dropdown(props) {
 
 
 function ThemeToggle() {
-  let context = useContext(ThemeContext);
+  let context = useContext(themeContext);
   let [rot, setRot] = useState(GetCookie("theme") === "dark" ? 180 : 0);
 
   return (
     <div className="theme-toggle">
       <div style={{ transform: `translateX(-100%) rotateZ(${rot}deg)` }}>
-        <div className="dark" onClick={()=>{context.ToggleTheme(); setRot(rot + 180)}}>
+        <div className="dark" onClick={() => { context.ToggleTheme(); setRot(rot + 180) }}>
           <i className="fas fa-moon" />
         </div>
-        <i className="light fas fa-sun" onClick={()=>{context.ToggleTheme(); setRot(rot + 180)}} />
+        <i className="light fas fa-sun" onClick={() => { context.ToggleTheme(); setRot(rot + 180) }} />
       </div>
     </div>
   )
@@ -682,6 +681,29 @@ function Window(props) {
   )
 }
 
+function CookiesWindow(props) {
+  const { accepted, Accept } = useContext(cookiesContext);
+
+  if (accepted) {
+    return null;
+  }
+
+  return (
+    <Window className="agree-cookies-window" noCloseIcon>
+      <div className="background">
+        <img src="Images/cookie.jfif"></img>
+        <img src="Images/cookie.jfif"></img>
+      </div>
+      <h1>Ние ползваме cookies (бисквитки)</h1>
+      <p>
+        Julemy използва cookies (бисквитки) с цел подобряване на качеството на
+        нашите услуги и нормалното функциониране на уебсайта. За да използвате <strong style={{ color: "var(--secondary)" }}>julemy.bg</strong> моля приемете използването на cookies.
+        <br />
+        За повече информация за това как събираме и използваме вашите лични данни
+      </p>
+      <Button secondary hoverable height={"2em"} onClick={Accept}>Приемам</Button>
+    </Window>)
+}
 
 function DefaultMenu(props) {
   let options = [
@@ -762,17 +784,45 @@ function DefaultNavbar(props) {
   )
 }
 
+function Page({ children, ignoreCookiesPolicy, className }) {
+  let page = null;
+
+  const WrapPage = page => <div className={"page" + className ? (" " + className) : ""}>
+    {page}
+  </div>
+
+  const context = useContext(cookiesContext);
+
+  if (ignoreCookiesPolicy) {
+    return WrapPage(children);
+  }
+
+  if (context === undefined) {
+    console.warn("'Page' component must have access to 'cookiesContext' (must be inside 'CookiesAcceptedProvider' component)");
+    return null;
+  }
+
+  const { accepted } = context;
+
+  if (accepted) {
+    page = children
+  }
+  else {
+    page = <CookiesWindow />
+  }
+
+  return WrapPage(page);
+}
+
 function DefaultPage(props) {
-  return (
-    <div className={"page " + (props.className ? props.className : "")}>
-      <DefaultNavbar />
-      <div className="content">
-        {props.children}
-      </div>
-      <Footer />
-      <LegalityBar />
+  return <Page {...props}>
+    <DefaultNavbar />
+    <div className="content">
+      {props.children}
     </div>
-  )
+    <Footer />
+    <LegalityBar />
+  </Page>
 }
 
 export {
@@ -790,6 +840,8 @@ export {
   Subtitle,
   Video,
   Window,
+  CookiesWindow,
+  Page,
 
   ThemeToggle,
   Footer,
