@@ -28,7 +28,6 @@
     user-select: text;
     text-align: left;
     width: 95%;
-    margin-top: 40px;
     text-indent: 30px;
     font-size: calc(0.3vw + 12px);
     line-height: calc(0.5vw + 25px);
@@ -51,7 +50,7 @@
     display: block;
     text-align: center;
     margin: 0;
-    font-size: calc(15px + 2vw);
+    font-size: calc(17px + 1vw);
     word-wrap: break-word;
     font-weight: bold;
     padding: 50px;

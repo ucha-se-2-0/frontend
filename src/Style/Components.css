@@ -296,6 +296,7 @@
 
 .content-subtitle {
   font-size: calc(10px + 0.7vw);
+  color: var(--primary)
 }
 
 /* DROPDOWN */

@@ -1,8 +1,3 @@
-.legality-page
-{
-    font-size: 15px;
-}
-
 .legality-page .header
 {
     padding-bottom: 0;
@@ -12,6 +7,7 @@
 {
     text-align: right;
     margin-bottom: 30px;
+    margin-top: 15px;
 }
 
 .legality-page .last-update>*
@@ -41,4 +37,23 @@
 .legality-page .content
 {
     margin-bottom: 10vw;
+    font-size: 15px;
+    white-space:pre-wrap;
+    text-indent: 2em;
+}
+
+.legality-page .content table {
+    border-collapse: collapse;
+}
+
+.legality-page ul
+{
+    text-indent: 0;
+}
+
+.legality-page .content table td
+{
+    white-space: pre-wrap;
+    border: 1px solid var(--dark-cyan);
+    padding: 10px;
 }

@@ -691,7 +691,7 @@ function DefaultMenu(props) {
     { content: "Уроци", link: "/lessons", typing: true, onHover: true, back: true, bold: true },
     { content: "Университети", link: "/universities", bold: true },
     { content: "Правила и условия", link: "/terms-and-conditions" },
-    { content: "Защита на данни", link: "/copyright" },
+    { content: "Защита на данни", link: "/privacy-policy" },
     { content: "Съобщете за проблема", link: "/raise-a-problem" }
   ]
 

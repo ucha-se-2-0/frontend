@@ -22,6 +22,6 @@ transparent (relatively) only if the ancestor is opaque (i.e hovered) */
 .separator {
     background-color: #999999;
     width: 100%;
-    margin-top: 40px;
+    margin: 20px 0;
     height: 0.5px
 }
