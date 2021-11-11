@@ -112,15 +112,7 @@
 
 .dark .default-menu .theme-toggle i
 {
-    --toggle-background: var(--dark-cyan);
-}
-
-.default-menu .theme-toggle i {
-    --toggle-background: transparent;
-    border-radius: 50%;
-
-    /* box-shadow: 0px 0px 10px 10px var(--toggle-background);
-    background-color: var(--toggle-background); */
+    color: var(--dark-purple);
 }
 
 .dropdown.right .theme-toggle {

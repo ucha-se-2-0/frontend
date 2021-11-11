@@ -464,8 +464,7 @@
 .theme-toggle .light {
   opacity: 0;
   pointer-events: none;
-  /* color: #ffee77; */
-  color: var(--dark-purple);
+  color: #ffee77;
   left: 0;
 }
 
