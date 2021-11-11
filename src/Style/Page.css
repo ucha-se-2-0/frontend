@@ -119,8 +119,8 @@
     --toggle-background: transparent;
     border-radius: 50%;
 
-    box-shadow: 0px 0px 10px 10px var(--toggle-background);
-    background-color: var(--toggle-background);
+    /* box-shadow: 0px 0px 10px 10px var(--toggle-background);
+    background-color: var(--toggle-background); */
 }
 
 .dropdown.right .theme-toggle {

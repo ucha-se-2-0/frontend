@@ -179,6 +179,7 @@ function Link(props) {
   return (<StyledButtonOrLink {...props} />)
 }
 
+//Dynamicly loaded image
 function Img(props) {
   let [src, SetSource] = useState("");
 
@@ -787,7 +788,7 @@ function DefaultNavbar(props) {
 function Page({ children, ignoreCookiesPolicy, className }) {
   let page = null;
 
-  const WrapPage = page => <div className={"page" + className ? (" " + className) : ""}>
+  const WrapPage = page => <div className={"page" + (className ? (" " + className) : "")}>
     {page}
   </div>
 

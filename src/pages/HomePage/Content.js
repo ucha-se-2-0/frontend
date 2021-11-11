@@ -4,8 +4,8 @@ import React from "react"
 function Content() {
     return (
         <div className="content">
-            <Link bold link = "/universities" content = "Университети" secondary/>
-            <Link bold link = "/lessons" content = "Уроци" primary/>
+            <Link hoverable bold link = "/universities" content = "Университети" secondary/>
+            <Link hoverable bold link = "/lessons" content = "Уроци" primary/>
         </div>
     );
 }
