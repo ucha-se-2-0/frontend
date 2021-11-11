@@ -38,12 +38,6 @@
   display: block;
 }
 
-.home-page .default-menu,
-.home-page .theme-toggle-wrapper
-{
-  flex-basis: 20%;
-}
-
 .home-page .theme-toggle
 {
   float: right;

@@ -16,7 +16,9 @@ function HomePage() {
                 <img alt="logo" src="Images/GradientLogoLight.png" className="light" />
             </div>
 
-            <Img alt="background" src="Images/Waves-unsLight1.png" className="background" />
+            {/* <Img src="Images/Waves-unsLight.png" className="background" /> */}
+            <img src="Images/Waves-unsLight.png" className="background" />
+
             <Navbar />
 
             <Content />
