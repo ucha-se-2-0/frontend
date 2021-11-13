@@ -15,7 +15,7 @@ function Form(props) {
     let [loading, IsLoading] = useState(false);
     let [redirect, ShouldRedirect] = useState(false);
 
-    let [error, SetError] = useState();
+    let [error, SetError] = useState(false);
 
     function Login() {
 
@@ -26,6 +26,7 @@ function Form(props) {
             password.length < 8 ||
             password.length > 30 ||
             password.includes(' ')) {
+            console.log(password, username);
             return true;
         }
 
@@ -54,11 +55,11 @@ function Form(props) {
             }
         }
 
-        xhr.send({ username, password, remember });
+        xhr.send(JSON.stringify({ username, password, remember }));
     }
 
     let prevLocation = sessionStorage.getItem("lastPageBeforeAuth");
-    if(!prevLocation)
+    if (!prevLocation)
         prevLocation = "/";
 
     return (
@@ -77,7 +78,7 @@ function Form(props) {
                 <Input
                     placeholder="Имейл или потребителско име"
                     icon={<i className="material-icons">email</i>}
-                    OnInput={e => {
+                    onInput={e => {
                         SetUsername(e.target.value);
                         SetError(false);
                     }}
@@ -87,7 +88,7 @@ function Form(props) {
                     placeholder="Парола"
                     icon={<i className="material-icons">vpn_key</i>}
                     password
-                    OnInput={e => {
+                    onInput={e => {
                         SetPassword(e.target.value);
                         SetError(false);
                     }}
@@ -97,7 +98,7 @@ function Form(props) {
                     checkbox
                     fontSize="calc(18px - 0.3vw)"
                     label="Запомни ме"
-                    OnInput={e => { Remember(true && e.target.checked) }}
+                    onInput={e => { Remember(true && e.target.checked) }}
                 />
 
                 {error && <div className="error">Грешно потребителско име или парола</div>}

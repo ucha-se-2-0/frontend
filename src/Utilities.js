@@ -25,7 +25,7 @@ function GetCookie(name) {
 export { SetCookie, GetCookie, DeleteCookie };
 
 function GetAPIUrl(endpoint) {
-    return "" + endpoint
+    return "http://localhost:8080/" + endpoint
 }
 
 export { GetAPIUrl }

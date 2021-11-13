@@ -124,7 +124,7 @@ function Form() {
                 <Input
                     placeholder="Имейл"
                     icon={<i className="material-icons">email</i>}
-                    OnInput={e => {
+                    onInput={e => {
                         SetEmail(e.target.value);
                         error && error.email && SetError(null);
                     }}
@@ -135,7 +135,7 @@ function Form() {
                 <Input
                     placeholder="Потребителско име"
                     icon={<i className="fas fa-user-alt" />}
-                    OnInput={e => {
+                    onInput={e => {
                         SetUsername(e.target.value);
                         error && error.username && SetError(null);
                     }}
@@ -148,7 +148,7 @@ function Form() {
                     placeholder="Парола"
                     icon={<i className="material-icons">vpn_key</i>}
                     password
-                    OnInput={e => {
+                    onInput={e => {
                         SetPassword(e.target.value);
                         error && error.password && SetError(null);
                     }}
@@ -161,7 +161,7 @@ function Form() {
                     placeholder="Подтвърдете паролата"
                     icon={<i className="material-icons">vpn_key</i>}
                     password
-                    OnInput={e => {
+                    onInput={e => {
                         SetPasswordV(e.target.value);
                         error && error.passwordV && SetError(null);
                     }}
@@ -169,7 +169,7 @@ function Form() {
 
                 {error && error.passwordV && ErrorNode(error.passwordV)}
 
-                <Input checkbox fontSize="15px" label="Запомни ме" OnInput={e => { Remember(e.target.checked) }} />
+                <Input checkbox fontSize="15px" label="Запомни ме" onInput={e => { Remember(e.target.checked) }} />
 
                 <Button primary className="submit" content="Регистрация" onClick={() => { SetError(Signup()) }} />
 
