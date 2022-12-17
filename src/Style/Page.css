@@ -14,13 +14,14 @@
 
 .content {
     background-color: transparent;
-    color: var(--primary);
+    color: white;
     position: relative;
     margin: 0;
     padding: 0px calc(5px + 3vw);
+    flex-grow: 1;
+
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
     flex-direction: column;
 }
 
@@ -68,7 +69,6 @@
     border-bottom-right-radius: 10px;
     display: flex;
     flex-flow: row wrap;
-    justify-content: flex-end;
     align-items: center;
     font-weight: 550;
     padding: 10px;

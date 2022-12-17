@@ -13,19 +13,6 @@
   text-align: left;
 }
 
-
-.dark .home-page .logo .light,
-.home-page .logo .dark
-{
-  display: block;
-}
-
-.dark .home-page .logo .dark,
-.home-page .logo .light
-{
-  display: none;
-}
-
 .home-page .dropdown button {
   font-size: 30px;
   display: inline;

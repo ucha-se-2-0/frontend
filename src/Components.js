@@ -3,7 +3,6 @@
 
 import React, { useState, useContext, useEffect, createRef } from "react"
 import VideoPlayer from "react-video-js-player"
-import { GetAllLessons, GetFormattedLessons, lessons } from "./Assets"
 import { cookiesContext, GetCookie, themeContext } from "./Utilities"
 import { NavLink } from "react-router-dom"
 
@@ -378,34 +377,6 @@ function ThemeToggle() {
 }
 
 
-function DefaultSearchResultsDisplayer(props) {
-  let res = props.results.map((el, i) => {
-    el = el.section;
-
-    if (el.sections) {
-      return (
-        <Section className="hoverable" key={i} title={el.title}>{GetAllLessons(el).map((l, li) =>
-          <React.Fragment key={li}>
-            <Link primary className="hoverable" link={"/lessons/" + l.url} content={l.title} />
-          </React.Fragment>)}
-        </Section>
-      )
-    }
-
-    return (
-      <React.Fragment key={i}>
-        <Link className="hoverable" link={"/lessons/" + el.url} content={el.title} />
-      </React.Fragment>)
-  })
-
-  return (
-    <Window className="search-results" OnClose={() => { props.OnClose() }}>
-      <Subtitle title={"Резултати от търсенето"} />
-      {res.length ? res : "Няма намерени резултати"}
-    </Window>
-  )
-}
-
 function Search(request, constrictions) {
 
   const k = { order: 0, exact: 1000, lengthDif: 0.01, length: 5, wordTreshold: 3, relWordTreshold: 0.5, treshold: 0.0, mistakeCost: 0.5 }
@@ -528,18 +499,6 @@ function Search(request, constrictions) {
     }
   }
 
-
-
-  if (!constrictions) {
-    constrictions = {};
-  }
-
-  if (!constrictions.lessons) {
-    let grades = GetFormattedLessons(lessons.biology);
-
-    Match({ title: "Биология", sections: grades });
-  }
-
   results.sort((first, second) => second.points - first.points);
   results = results.filter(({ points }) => points > k.treshold);
 
@@ -614,13 +573,6 @@ function SearchField(props) {
     if (props.SearchResultsDisplayer) {
       SetSearchResult(<props.SearchResultsDisplayer OnClose={() => {
         SetSearchResult(null);
-      }} results={results} />);
-    }
-    else {
-      document.body.classList.add("no-scroll");
-      SetSearchResult(<DefaultSearchResultsDisplayer OnClose={() => {
-        SetSearchResult(null);
-        document.body.classList.remove("no-scroll");
       }} results={results} />);
     }
   }
@@ -708,20 +660,17 @@ function CookiesWindow(props) {
 
 function DefaultMenu(props) {
   let options = [
-    { content: "Вход", link: "/login", bold: true },
-    { content: "Регистрация", link: "/signup", bold: true },
-    { content: "Pro акаунт", link: "/pro", lightning: true, bold: true },
     { content: "Уроци", link: "/lessons", typing: true, onHover: true, back: true, bold: true },
-    { content: "Университети", link: "/universities", bold: true },
+    { content: "График", link: "/universities", bold: true },
+    { content: "Ценоразпис", link: "/prices", bold: true },
+    { content: "За нас", link: "/about" },
     { content: "Правила и условия", link: "/terms-and-conditions" },
-    { content: "Защита на данни", link: "/privacy-policy" },
-    { content: "Съобщете за проблема", link: "/raise-a-problem" }
+    { content: "Защита на данни", link: "/privacy-policy" }
   ]
 
   return (
     <Dropdown right={props.right} offset={20} className="default-menu" content={<i className="fas fa-bars" />}>
       {options.map((el, i) => <Link key={i} shake {...el} />)}
-      {props.themeToggle ? <ThemeToggle /> : null}
     </Dropdown>
   )
 }
@@ -785,34 +734,10 @@ function DefaultNavbar(props) {
   )
 }
 
-function Page({ children, ignoreCookiesPolicy, className }) {
-  let page = null;
-
-  const WrapPage = page => <div className={"page" + (className ? (" " + className) : "")}>
-    {page}
-  </div>
-
-  const context = useContext(cookiesContext);
-
-  if (ignoreCookiesPolicy) {
-    return WrapPage(children);
-  }
-
-  if (context === undefined) {
-    console.warn("'Page' component must have access to 'cookiesContext' (must be inside 'CookiesAcceptedProvider' component)");
-    return null;
-  }
-
-  const { accepted } = context;
-
-  if (accepted) {
-    page = children
-  }
-  else {
-    page = <CookiesWindow />
-  }
-
-  return WrapPage(page);
+function Page({ children, className }) {
+  return <div className={"page" + (className ? (" " + className) : "")}>
+    {children}
+  </div>;
 }
 
 function DefaultPage(props) {

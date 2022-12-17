@@ -16,8 +16,4 @@
     .home-page .content {
         flex-direction: row;
     }
-
-    .home-page .content .button:nth-child(2) {
-        margin-right: 10vw;
-    }
 }

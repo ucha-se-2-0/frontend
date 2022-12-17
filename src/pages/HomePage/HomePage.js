@@ -12,8 +12,10 @@ function HomePage() {
     return (
         <Page className="home-page">
             <div className="logo">
-                <img alt="logo" src="Images/GradientLogo.png" className="dark" />
-                <img alt="logo" src="Images/GradientLogoLight.png" className="light" />
+                
+            <img alt="logo" src="Images/usmivka_logo.png" className="dark" />
+            {/* <img alt="logo" src="Images/GradientLogo.png" className="dark" />
+                <img alt="logo" src="Images/GradientLogoLight.png" className="light" /> */}
             </div>
 
             {/* <Img src="Images/Waves-unsLight.png" className="background" /> */}
